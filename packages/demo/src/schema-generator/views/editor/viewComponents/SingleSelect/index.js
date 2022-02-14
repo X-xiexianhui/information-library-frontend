@@ -19,6 +19,11 @@ const selectOptionsSchema = {
         items: {
             title: '选项值',
             type: 'string'
+        },
+        'ui:options': {
+            addable: false,
+            removable: false,
+            sortable: false,
         }
     },
     enumNames: {
@@ -30,8 +35,13 @@ const selectOptionsSchema = {
         items: {
             title: '选项名称',
             type: 'string'
+        },
+        'ui:options': {
+            addable: false,
+            removable: false,
+            sortable: false,
         }
-    }
+    },
 };
 
 export {
@@ -44,11 +54,13 @@ export default {
         options: {
             type: 'object',
             title: '选项',
+            description: '请到选项管理修改选项值',
             required: [],
             properties: {
                 schemaOptions: {
                     type: 'object',
-                    properties: selectOptionsSchema
+                    properties: selectOptionsSchema,
+                    'ui:hidden': true
                 }
             },
         }
