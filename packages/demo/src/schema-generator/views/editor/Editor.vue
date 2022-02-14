@@ -2,7 +2,6 @@
     <div v-loading="loading">
         <EditorHeader default-active="4">
             <el-button @click="handleImportSchema">导入Schema</el-button>
-            <el-button plain @click="handleToDemo">Playground中验证</el-button>
             <el-button type="primary" plain @click="handlePreview">预览展示</el-button>
             <el-button type="primary" @click="handleExportSchema">导出Schema</el-button>
         </EditorHeader>

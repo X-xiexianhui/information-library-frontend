@@ -12,17 +12,11 @@ export default {
         formProps: {
             title: '表单配置',
             type: 'object',
-            description: '提示：如果使用inline布局（ElementUi form inline 配置），则多列布局不生效；另外 Footer inline 只支持一行表单项',
+            required: ['formName'],
             properties: {
-                inline: {
-                    type: 'boolean',
-                    title: 'Inline布局',
-                    default: false
-                },
-                inlineFooter: {
-                    type: 'boolean',
-                    title: 'Footer inline',
-                    default: false
+                formName: {
+                    title: '表单名称',
+                    type: 'string',
                 },
                 layoutColumn: {
                     title: '布局',
@@ -80,7 +74,7 @@ export default {
                 show: {
                     type: 'boolean',
                     title: '是否显示底部',
-                    default: false
+                    default: true
                 },
                 okBtn: {
                     type: 'string',

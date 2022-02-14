@@ -10,8 +10,6 @@
         "packages/demo"
     ],
     "scripts": {
-        "docs:dev": "yarn workspace docs dev",
-        "docs:build": "yarn workspace docs build",
         "lib:watch": "yarn workspace @lljj/vue-json-schema-form watch",
         "lib:build": "yarn workspace @lljj/vue-json-schema-form build",
         "demo:dev": "yarn workspace demo dev",
