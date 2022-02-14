@@ -100,7 +100,7 @@
 </template>
 
 <script>
-    import VueJsonFrom from '@vue-json-schema-form';
+    import VueJsonFrom from '@lljj/vue-json-schema-form';
     import componentWithDialog from '@/_common/components/component-with-dialog';
     import { openNewPage } from '@/_common/utils/url.js';
 

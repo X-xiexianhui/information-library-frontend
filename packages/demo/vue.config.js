@@ -58,7 +58,7 @@ module.exports = {
         };
         config.resolve.alias = {
             ...config.resolve.alias,
-            '@vue-json-schema-form': path.resolve(__dirname, '../lib/src/index.js')
+            '@lljj/vue-json-schema-form': path.resolve(__dirname, '../lib/src/index.js')
         };
     },
     chainWebpack: (config) => {
