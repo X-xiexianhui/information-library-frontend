@@ -1,7 +1,7 @@
 <template>
     <div v-loading="loading">
         <EditorHeader default-active="4">
-            <el-button @click="handleImportSchema">导入Schema</el-button>
+            <el-button @click="getFormSchema">导入Schema</el-button>
             <el-button type="primary" plain @click="handlePreview">预览展示</el-button>
             <el-button type="primary" @click="handleExportSchema">导出Schema</el-button>
         </EditorHeader>
@@ -106,8 +106,8 @@
     import EditorHeader from '@/_common/components/EditorHeader.vue';
     import FormConfSchema from './viewComponents/FormConf';
     import EditorToolBar from './EditorToolBar.vue';
-    import ExportSchemaView from './components/ExportSchemaView.vue';
-    import ImportSchemaView from './components/ImportSchemaView.vue';
+    // import ExportSchemaView from './components/ExportSchemaView.vue';
+    // import ImportSchemaView from './components/ImportSchemaView.vue';
 
 
     import { deepFreeze } from './common/utils';
@@ -240,66 +240,82 @@
                     }
                 });
             },
-            handleImportSchema() {
-                const instance = componentWithDialog({
-                    VueComponent: ImportSchemaView,
-                    dialogProps: {
-                        title: '导入Schema',
-                        width: '1000px'
-                    },
-                    componentListeners: {
-                        onImport: (code) => {
-                            try {
-                                const data = jsonSchema2ComponentList(code, this.configTools);
-                                if (!data) return this.$message.warning('请先输入导入Schema');
-
-                                const { errorNode, componentList, formConfig } = data;
-                                this.componentList = componentList;
-                                if (formConfig.formProps) Object.assign(this.formConfig.formProps, formConfig.formProps);
-                                if (formConfig.formFooter) Object.assign(this.formConfig.formFooter, formConfig.formFooter);
-
-                                instance.close();
-
-                                // 存在导入失败的部分节点
-                                if (errorNode.length > 0 && Array.isArray(errorNode)) {
-                                    return this.$msgbox({
-                                        title: '如下节点导入失败，请检查数据',
-                                        message: this.$createElement(
-                                            'div', {
-                                                style: {
-                                                    padding: '10px 0'
-                                                }
-                                            },
-                                            errorNode.map(item => this.$createElement('pre', null, JSON.stringify(item, null, 4)))
-                                        )
-                                    });
+            getFormSchema() {
+                const code = {
+                    schema: {
+                        type: 'object',
+                        required: [],
+                        properties: {
+                            string_1644815882941x0: {
+                                title: '输入框',
+                                type: 'string',
+                                'ui:options': {
+                                    placeholder: '请输入'
                                 }
-
-                                return undefined;
-                            } catch (e) {
-                                this.$alert(e.message, '导入失败，详细查看控制台');
-                                throw e;
+                            },
+                            string_1644815886599x0: {
+                                title: '单选(Radio)',
+                                type: 'string',
+                                'ui:widget': 'RadioWidget',
+                                enum: [
+                                    '1',
+                                    '2',
+                                    '3'
+                                ],
+                                enumNames: [
+                                    '一',
+                                    '二',
+                                    '三'
+                                ]
                             }
-                        }
+                        },
+                        'ui:order': [
+                            'string_1644815882941x0',
+                            'string_1644815886599x0'
+                        ]
+                    },
+                    uiSchema: {},
+                    formFooter: {},
+                    formProps: {
+                        labelWidth: '100px',
+                        labelSuffix: '：'
                     }
-                });
+                };
+                this.handleImportSchema(code);
+            },
+            handleImportSchema(code) {
+                try {
+                    const data = jsonSchema2ComponentList(code, this.configTools);
+                    if (!data) return this.$message.warning('请先输入导入Schema');
+
+                    const { errorNode, componentList, formConfig } = data;
+                    this.componentList = componentList;
+                    if (formConfig.formProps) Object.assign(this.formConfig.formProps, formConfig.formProps);
+                    if (formConfig.formFooter) Object.assign(this.formConfig.formFooter, formConfig.formFooter);
+
+
+                    // 存在导入失败的部分节点
+                    if (errorNode.length > 0 && Array.isArray(errorNode)) {
+                        return this.$msgbox({
+                            title: '如下节点导入失败，请检查数据',
+                            message: this.$createElement(
+                                'div', {
+                                    style: {
+                                        padding: '10px 0'
+                                    }
+                                },
+                                errorNode.map(item => this.$createElement('pre', null, JSON.stringify(item, null, 4)))
+                            )
+                        });
+                    }
+                    return undefined;
+                } catch (e) {
+                    this.$alert(e.message, '导入失败，详细查看控制台');
+                    throw e;
+                }
             },
             handleExportSchema() {
-                componentWithDialog({
-                    VueComponent: ExportSchemaView,
-                    dialogProps: {
-                        title: '导出Schema',
-                        width: '1000px'
-                    },
-                    componentProps: {
-                        genCode: this.getExportCode(),
-                    },
-                    componentListeners: {
-                        toDemo: () => {
-                            this.handleToDemo();
-                        }
-                    }
-                });
+                console.log(this.getExportCode());
             },
             handleToDemo() {
                 const codeObj = this.getExportCode();

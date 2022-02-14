@@ -130,7 +130,8 @@ export default function jsonSchema2ComponentList(code, toolItems) {
     if (String(code).trim() === '') return null;
 
     const toolConfigList = flatToolItems(toolItems);
-    const data = JSON.parse(code);
+    // const data = JSON.parse(code);
+    const data = code;
     const {
         schema, formFooter, formProps, /* uiSchema, */
     } = data;
