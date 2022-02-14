@@ -141,15 +141,15 @@ module.exports = {
         },
         publicPath: '/',
         proxy: {
-            '/api-dev': {
-                target: 'http://www.api.com',
+            '/api': {
+                target: 'http://127.0.0.1:8080',
                 hot: true,
                 open: true,
                 contentBase: false,
                 historyApiFallback: false,
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api-dev': ''
+                    '^/api': ''
                 }
             }
         }
