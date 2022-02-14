@@ -1,3 +1,7 @@
+/**
+ * Created by Liu.Jun on 2019/10/25 15:42.
+ */
+
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const chalk = require('chalk');
@@ -59,8 +63,12 @@ module.exports = {
         config.resolve.alias = {
             ...config.resolve.alias,
             '@lljj/vue-json-schema-form': path.resolve(__dirname, '../lib/src/index.js')
+            // '@lljj/vue-json-schema-form': path.resolve(__dirname, '../lib/dist/vueJsonSchemaForm.esm.js')
         };
     },
+
+    // webpack 链接 API，用于生成和修改 webpack 配置
+    // https://github.com/mozilla-neutrino/webpack-chain
     chainWebpack: (config) => {
         // 添加runtime
         config.optimization.runtimeChunk({
@@ -133,15 +141,15 @@ module.exports = {
         },
         publicPath: '/',
         proxy: {
-            '/api': {
-                target: 'http://w127.0.0.1:8080',
+            '/api-dev': {
+                target: 'http://www.api.com',
                 hot: true,
                 open: true,
                 contentBase: false,
                 historyApiFallback: false,
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': ''
+                    '^/api-dev': ''
                 }
             }
         }
