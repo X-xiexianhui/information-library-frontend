@@ -63,7 +63,7 @@ export default {
                 labelSuffix: {
                     title: '表单项后缀',
                     type: 'string',
-                    default: '：'
+                    default: ':'
                 }
             }
         },
