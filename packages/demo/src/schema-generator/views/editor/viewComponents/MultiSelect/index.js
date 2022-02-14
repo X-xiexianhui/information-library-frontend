@@ -20,6 +20,7 @@ export default {
         options: {
             type: 'object',
             title: '选项',
+            description: '请到选项管理修改选项值',
             required: [],
             properties: {
                 schemaOptions: {

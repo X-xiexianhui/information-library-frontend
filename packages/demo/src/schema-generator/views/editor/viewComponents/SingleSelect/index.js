@@ -24,7 +24,8 @@ const selectOptionsSchema = {
             addable: false,
             removable: false,
             sortable: false,
-        }
+        },
+        'ui:hidden': true
     },
     enumNames: {
         title: '配置选项名称',
@@ -40,7 +41,8 @@ const selectOptionsSchema = {
             addable: false,
             removable: false,
             sortable: false,
-        }
+        },
+        'ui:hidden': true
     },
 };
 
@@ -60,7 +62,6 @@ export default {
                 schemaOptions: {
                     type: 'object',
                     properties: selectOptionsSchema,
-                    'ui:hidden': true
                 }
             },
         }
