@@ -2,21 +2,6 @@
 * 基于 `Vue`、`ElementUi`、`JSON Schema` 动态生成一个带完整校验的Form表单
 * 支持通过 [可视化Schema编辑器](https://form.lljj.me/schema-generator.html "Vue JSON Schema Form 可视化编辑器") 快速生成表单对应Schema
 * :star2: :star2: :star2: 你的 `star` 就是最大的支持
-
-## 快速体验
-* [查看文档](https://vue-json-schema-form.lljj.me/ "Vue JSON Schema Docs")
-* [Playground 演示](https://form.lljj.me/ "Vue JSON Schema Form Demo") / [可视化表单Schema编辑器](https://form.lljj.me/schema-generator.html "Vue JSON Schema Form 可视化编辑器") / [可视化活动编辑器](https://form.lljj.me/vue-editor.html)
-
-> 查看如何启动 [Playground,表单Schema生成器,活动编辑器相关页面](#如何启动相关编辑器页面)
-
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-json-schema-form.gif)
-
-## 交流群
-
-QQ群：`146845780` ，欢迎入群讨论
-
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vjsf11.jpg)
-
 ## 如何启动相关编辑器页面
 
 ![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-editor.jpg)
