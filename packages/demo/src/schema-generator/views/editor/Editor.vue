@@ -119,6 +119,8 @@
     import NestedEditor from './components/NestedEditor';
     import { componentList2JsonSchema, formatFormLabelWidth } from './common/editorData';
     import jsonSchema2ComponentList from './common/jsonSchema2ComponentList';
+    // eslint-disable-next-line import/order
+    import axios from 'axios';
 
     deepFreeze(configTools);
 
@@ -240,48 +242,10 @@
                     }
                 });
             },
-            getFormSchema() {
-                const code = {
-                    schema: {
-                        type: 'object',
-                        required: [],
-                        properties: {
-                            string_1644815882941x0: {
-                                title: '输入框',
-                                type: 'string',
-                                'ui:options': {
-                                    placeholder: '请输入'
-                                }
-                            },
-                            string_1644815886599x0: {
-                                title: '单选(Radio)',
-                                type: 'string',
-                                'ui:widget': 'RadioWidget',
-                                enum: [
-                                    '1',
-                                    '2',
-                                    '3'
-                                ],
-                                enumNames: [
-                                    '一',
-                                    '二',
-                                    '三'
-                                ]
-                            }
-                        },
-                        'ui:order': [
-                            'string_1644815882941x0',
-                            'string_1644815886599x0'
-                        ]
-                    },
-                    uiSchema: {},
-                    formFooter: {},
-                    formProps: {
-                        labelWidth: '100px',
-                        labelSuffix: '：'
-                    }
-                };
-                this.handleImportSchema(code);
+            async getFormSchema() {
+                const res = await axios.get('/api/getformschema?formName=测试');
+                console.log(res);
+                this.handleImportSchema(res.data);
             },
             handleImportSchema(code) {
                 try {
@@ -314,8 +278,15 @@
                     throw e;
                 }
             },
-            handleExportSchema() {
-                console.log(this.getExportCode());
+            // eslint-disable-next-line consistent-return
+            async handleExportSchema() {
+                const data = this.getExportCode();
+                const fName = data.formProps.formName;
+                if (fName === undefined) {
+                    return this.$message.warning('请先输入表单名称');
+                }
+                const res = await axios.post('api/addformschema', data);
+                console.log(res.data);
             },
             handleToDemo() {
                 const codeObj = this.getExportCode();

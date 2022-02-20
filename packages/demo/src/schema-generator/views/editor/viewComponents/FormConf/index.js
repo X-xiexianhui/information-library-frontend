@@ -5,15 +5,21 @@
 import { formatFormLabelWidth } from '../../common/editorData';
 
 
-export default {
+const schema = {
     type: 'object',
     required: [],
     properties: {
         formProps: {
             title: '表单配置',
             type: 'object',
-            required: ['formName'],
+            required: ['formName', 'dataBase'],
             properties: {
+                dataBase: {
+                    title: '数据库',
+                    type: 'string',
+                    enum: [],
+                    enumNames: []
+                },
                 formName: {
                     title: '表单名称',
                     type: 'string',
@@ -90,3 +96,15 @@ export default {
         }
     }
 };
+
+async function helloAsync() {
+    const result = await new Promise(resolve => setTimeout(() => resolve(['1', '2', '3'])));
+    return result;
+}
+
+helloAsync().then((res) => {
+    schema.properties.formProps.properties.dataBase.enum = res;
+    schema.properties.formProps.properties.dataBase.enumNames = res;
+});
+
+export default schema;

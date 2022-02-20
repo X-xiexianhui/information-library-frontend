@@ -29,7 +29,9 @@
             "path": "./node_modules/cz-conventional-changelog"
         }
     },
-    "dependencies": {},
+    "dependencies": {
+        "axios": "^0.26.0"
+    },
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
@@ -39,8 +41,8 @@
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
         "commitizen": "^4.1.2",
-        "cz-conventional-changelog": "^3.2.0",
         "conventional-changelog-cli": "^2.0.34",
+        "cz-conventional-changelog": "^3.2.0",
         "husky": "^4.2.5",
         "lerna": "^3.22.1"
     }
