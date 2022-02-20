@@ -98,8 +98,8 @@ const schema = {
 };
 
 async function helloAsync() {
-    const result = await new Promise(resolve => setTimeout(() => resolve(['1', '2', '3'])));
-    return result;
+    // eslint-disable-next-line no-return-await
+    return await new Promise(resolve => setTimeout(() => resolve(['1', '2', '3'])));
 }
 
 helloAsync().then((res) => {
