@@ -79,8 +79,13 @@ export default {
         } = this.$props;
 
         const data = {
+            ref: 'upload',
+            'auto-upload': false,
             attrs: {
                 fileList: this.fileList,
+                'http-request': (fileList) => {
+                    console.log(fileList);
+                },
                 'on-exceed': () => {
                     if (this.$message) {
                         this.$message.warning('超出文件上传数');
@@ -101,6 +106,11 @@ export default {
                     if (attrs['on-success']) {
                         attrs['on-success'](response, file, fileList);
                     }
+                }
+            },
+            on: {
+                onUpload() {
+                    this.$refs.upload.submit();
                 }
             }
         };
