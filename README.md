@@ -2,24 +2,7 @@
 * 基于 `Vue`、`ElementUi`、`JSON Schema` 动态生成一个带完整校验的Form表单
 * 支持通过 [可视化Schema编辑器](https://form.lljj.me/schema-generator.html "Vue JSON Schema Form 可视化编辑器") 快速生成表单对应Schema
 * :star2: :star2: :star2: 你的 `star` 就是最大的支持
-
-## 快速体验
-* [查看文档](https://vue-json-schema-form.lljj.me/ "Vue JSON Schema Docs")
-* [Playground 演示](https://form.lljj.me/ "Vue JSON Schema Form Demo") / [可视化表单Schema编辑器](https://form.lljj.me/schema-generator.html "Vue JSON Schema Form 可视化编辑器") / [可视化活动编辑器](https://form.lljj.me/vue-editor.html)
-
-> 查看如何启动 [Playground,表单Schema生成器,活动编辑器相关页面](#如何启动相关编辑器页面)
-
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-json-schema-form.gif)
-
-## 交流群
-
-QQ群：`146845780` ，欢迎入群讨论
-
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vjsf11.jpg)
-
 ## 如何启动相关编辑器页面
-
-![](https://lljj-xxxx.oss-cn-hongkong.aliyuncs.com/vue-editor.jpg)
 
 1、 安装依赖
 ```ssh
@@ -35,18 +18,6 @@ yarn install
 yarn run demo:dev
 ```
 
-3、 单个运行（指定entry编译更快）
-```ssh
-# 只运行 Playground
-yarn run demo:dev --dir=index
-
-# 只运行 表单Schema生成器
-yarn run demo:dev --dir=schema-generator
-
-# 只运行（H5）活动编辑器
-yarn run demo:dev --dir=vue-editor
-```
-
 ### 说明
 * 遵循 `JSON Schema` 规范，只需要给定 `JSON Schema`，即可生成对应的form表单
 * 快速配置个性化ui视图和校验错误信息，可适配常用的ui库，目前的版本默认视图依赖 `elementUi`
@@ -59,15 +30,6 @@ yarn run demo:dev --dir=vue-editor
 [Element Ui](https://element.eleme.io/)
 
 ### 为何开发
-在做前端可视化编辑时，为了解决数据配置表单的通用性，所以使用 `JSON Schema` 描述数据结构，动态生成表单。
-
-这样做的好处除了解决在每个配置表单的重复工作，服务端也可以基于同一份schema保持和前端一致的校验规则，不过对于使用 vue elementUi并未找到合适库可以直接使用，所以在后面一段时间决定自己实现一个 。
-
-## 问题或建议
-* [标准 JSON Schema 不支持部分和更新计划](https://vue-json-schema-form.lljj.me/zh/guide/todo.html)
-
-有任何使用问题或者建议都可以通过 [Github issue](https://github.com/lljj-x/vue-json-schema-form/issues) 提交给我
-
-
+毕业设计，导师要求开发已经基于动态表单的通用信息管理系统，基于vue-json-schema-form进行二次开发
 ## License
 Apache-2.0
