@@ -2,8 +2,8 @@
  * Created by Liu.Jun on 2020/11/26 10:01 下午.
  */
 
-// mock
-// https://run.mocky.io/v3/518d7af7-204f-45ab-9628-a6e121dab8ca
+
+import bus from '../../../bus';
 
 export default {
     name: 'UploadWidget',
@@ -50,6 +50,11 @@ export default {
             fileList
         };
     },
+    created() {
+        bus.$on('on-upload', () => {
+            this.$refs.upload.submit();
+        });
+    },
     methods: {
         emitValue(fileList) {
             // v-model
@@ -79,10 +84,10 @@ export default {
         } = this.$props;
 
         const data = {
-            ref: 'upload',
-            'auto-upload': false,
             attrs: {
                 fileList: this.fileList,
+                'auto-upload': false,
+                action: '#',
                 'http-request': (fileList) => {
                     console.log(fileList);
                 },
@@ -108,11 +113,7 @@ export default {
                     }
                 }
             },
-            on: {
-                onUpload() {
-                    this.$refs.upload.submit();
-                }
-            }
+            ref: 'upload',
         };
 
         if (!this.isArrayValue) data.attrs.limit = 1;
