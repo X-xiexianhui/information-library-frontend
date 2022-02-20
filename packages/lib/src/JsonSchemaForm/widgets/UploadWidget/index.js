@@ -3,6 +3,7 @@
  */
 
 
+import axios from 'axios';
 import bus from '../../../bus';
 
 export default {
@@ -88,8 +89,12 @@ export default {
                 fileList: this.fileList,
                 'auto-upload': false,
                 action: '#',
-                'http-request': (fileList) => {
-                    console.log(fileList);
+                'http-request': async (fileList) => {
+                    const formData = new FormData();
+                    formData.append('file', fileList.file);
+                    formData.append('name', fileList.file.name);
+                    const res = await axios.post('/api/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+                    console.log(res);
                 },
                 'on-exceed': () => {
                     if (this.$message) {
@@ -106,6 +111,8 @@ export default {
                 },
                 'on-success': (response, file, fileList) => {
                     this.emitValue(fileList);
+                    // eslint-disable-next-line no-unused-expressions
+                    this.$refs.upload.clearFiles();
 
                     // 用户注册的 onSuccess
                     if (attrs['on-success']) {
