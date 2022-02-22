@@ -1,7 +1,5 @@
 # vue-json-schema-form
 * 基于 `Vue`、`ElementUi`、`JSON Schema` 动态生成一个带完整校验的Form表单
-* 支持通过 [可视化Schema编辑器](https://form.lljj.me/schema-generator.html "Vue JSON Schema Form 可视化编辑器") 快速生成表单对应Schema
-* :star2: :star2: :star2: 你的 `star` 就是最大的支持
 ## 如何启动相关编辑器页面
 
 1、 安装依赖
