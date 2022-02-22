@@ -172,6 +172,18 @@
                 };
             },
         },
+        watch: {
+            'curEditorItem.id': {
+                handler() {
+                    const obj = JSON.stringify(this.curEditorItem.componentPack);
+                    const objC = JSON.parse(obj);
+                    objC.propsSchema.properties.property.enum = ['1', '2', '3'];
+                    objC.propsSchema.properties.property.enumNames = ['1', '2', '3'];
+                    this.curEditorItem.componentPack = objC;
+                },
+                deep: false
+            }
+        },
         mounted() {
             window.document.body.classList.add('page-decorate-design');
         },
@@ -298,7 +310,7 @@
                 const link = `/index.html#/demo?type=Test&${urlQueryString}`;
                 openNewPage(link, '_specialViewForm');
             }
-        }
+        },
     };
 </script>
 

@@ -21,14 +21,16 @@
                     type: 'object',
                     required: [],
                     properties: {
-                        string_1645333413210x0: {
-                            title: '单文件',
+                        input: {
+                            title: '输入框',
                             type: 'string',
-                            'ui:widget': 'UploadWidget',
+                            'ui:options': {
+                                placeholder: '请输入'
+                            }
                         }
                     },
                     'ui:order': [
-                        'string_1645333413210x0'
+                        'input'
                     ]
                 },
                 uiSchema: {
@@ -44,8 +46,8 @@
         },
         methods: {
             handleSubmit() {
-                console.log('提交');
                 bus.$emit('on-upload');
+                this.$message.success('提交成功');
             }
         }
     };

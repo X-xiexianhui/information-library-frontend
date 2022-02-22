@@ -90,7 +90,10 @@ export default {
                 'auto-upload': false,
                 action: '#',
                 'http-request': async (fileList) => {
-                    if (fileList.length === 0) { return; }
+                    if (fileList.length === 0) {
+                        this.$message.warning('请选择文件');
+                        return;
+                    }
                     const formData = new FormData();
                     formData.append('file', fileList.file);
                     formData.append('name', fileList.file.name);

@@ -110,6 +110,8 @@ export default (schema, type, isMultiSelect) => ({
         property: {
             title: '属性名',
             type: 'string',
+            enum: [],
+            enumNames: [],
             'ui:placeholder': '请输入属性名',
             'err:required': '属性名必填'
         },
