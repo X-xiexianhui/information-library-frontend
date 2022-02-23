@@ -1,5 +1,4 @@
 /**
- * Created by Liu.Jun on 2019/12/30 16:53.
  * 通过api的形式弹出一个组件
  * 若需要响应式参数 componentProps、dialogProps 使用引用的形式传递
  * 例

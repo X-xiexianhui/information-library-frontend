@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/4/28 15:36.
- */
-
 export function vm2Api(vmData) {
     return vmData.map(item => ({
         name: item.componentPack.propsSchema.id,

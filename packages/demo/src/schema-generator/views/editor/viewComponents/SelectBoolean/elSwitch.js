@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/12/10 15:15.
- */
-
 import genSchema from '../genSchema.js';
 
 const viewSchema = {

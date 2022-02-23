@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/10/26 18:24.
- */
-
 import { formatFormLabelWidth } from '../common/editorData';
 
 function genBaseVal(type = 'string', isMultiSelect = false) {

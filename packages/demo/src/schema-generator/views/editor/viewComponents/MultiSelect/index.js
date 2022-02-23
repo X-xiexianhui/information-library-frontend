@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2019/9/29 19:01.
- */
-
 import genSchema from '../genSchema.js';
 import { selectOptionsSchema } from '../SingleSelect';
 

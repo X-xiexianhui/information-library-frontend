@@ -1,8 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/4/28 18:06.
- */
-
-
 // 只保证同时生成不重复
 export default function genIdFn() {
     let preKey = `${+new Date()}`;

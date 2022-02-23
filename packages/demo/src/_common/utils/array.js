@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/3/28 10:02 上午.
- */
-
 function merge(target, other) {
     target.push(...other);
 }

@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/10/24 9:21 下午.
- */
-
 import '@/_common/bootstrap.js';
 
 import Vue from 'vue';

@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2019/10/25 15:42.
- */
-
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const chalk = require('chalk');
@@ -63,7 +59,7 @@ module.exports = {
         config.resolve.alias = {
             ...config.resolve.alias,
             '@lljj/vue-json-schema-form': path.resolve(__dirname, '../lib/src/index.js'),
-            '@lljj/bus': path.resolve((__dirname,'../lib/src/bus.js'))
+            '@lljj/bus': path.resolve((__dirname, '../lib/src/bus.js'))
         };
     },
 

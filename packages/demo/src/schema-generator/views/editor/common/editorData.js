@@ -1,7 +1,3 @@
-/**
- * Created by Liu.Jun on 2020/3/31 11:30 上午.
- */
-
 import { getDefaultFormState } from '@lljj/vue-json-schema-form';
 import { genId } from '@/_common/utils/id';
 import { isObject, isEmptyObject } from './utils';
