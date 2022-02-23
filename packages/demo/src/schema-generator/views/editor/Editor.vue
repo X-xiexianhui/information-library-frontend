@@ -15,8 +15,8 @@
                 <div :class="$style.toolBarWrap">
                     <div :class="$style.toolsBar">
                         <EditorToolBar
-                            :drag-group="dragOptions.group"
                             :config-tools="configTools"
+                            :drag-group="dragOptions.group"
                             @onFilter="$message.error('该组件添加数目已达上限！')"
                         >
                         </EditorToolBar>
@@ -100,14 +100,12 @@
 
 <script>
     import VueJsonFrom from '@lljj/vue-json-schema-form';
+    import axios from 'axios';
     import componentWithDialog from '@/_common/components/component-with-dialog';
     import { openNewPage } from '@/_common/utils/url.js';
-
     import EditorHeader from '@/_common/components/EditorHeader.vue';
     import FormConfSchema from './viewComponents/FormConf';
     import EditorToolBar from './EditorToolBar.vue';
-    // import ExportSchemaView from './components/ExportSchemaView.vue';
-    // import ImportSchemaView from './components/ImportSchemaView.vue';
 
 
     import { deepFreeze } from './common/utils';
@@ -119,8 +117,7 @@
     import NestedEditor from './components/NestedEditor';
     import { componentList2JsonSchema, formatFormLabelWidth } from './common/editorData';
     import jsonSchema2ComponentList from './common/jsonSchema2ComponentList';
-    // eslint-disable-next-line import/order
-    import axios from 'axios';
+
 
     deepFreeze(configTools);
 
