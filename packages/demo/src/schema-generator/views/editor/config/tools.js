@@ -1,3 +1,7 @@
+/**
+ * Created by Liu.Jun on 2019/9/29 18:58.
+ */
+
 // 基础组件
 import componentPackInput from '../viewComponents/Input';
 import componentPackColor from '../viewComponents/Color';
@@ -40,6 +44,11 @@ import componentPackDateRangeString from '../viewComponents/DateRange/string';
 import componentPackDateTimeRange from '../viewComponents/DateTimeRange';
 import componentPackDateTimeRangeString from '../viewComponents/DateTimeRange/string';
 
+
+// 布局 Object Array
+import componentPackObject from '../viewComponents/Object';
+import componentPackArray from '../viewComponents/Array';
+
 /**
  * hidden 隐藏，不显示在工具栏
  * maxNum Number 最大可配置数
@@ -49,6 +58,19 @@ import componentPackDateTimeRangeString from '../viewComponents/DateTimeRange/st
  * @type {*[]}
  */
 const tools = [
+    {
+        groupName: '布局组件',
+        componentList: [{
+            title: 'Object',
+            btnClass: 'w100',
+            componentPack: componentPackObject,
+        }, {
+            title: 'Array',
+            btnClass: 'w100',
+            componentPack: componentPackArray
+        }],
+        hidden: true
+    },
     {
         groupName: '基础组件',
         componentList: [{

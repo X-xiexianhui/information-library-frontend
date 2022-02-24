@@ -1,3 +1,7 @@
+/**
+ * Created by Liu.Jun on 2020/12/9 16:59.
+ */
+
 import { formUtils, getDefaultFormState } from '@lljj/vue-json-schema-form';
 import { generateEditorItem, deFormatFormLabelWidth } from './editorData';
 import { isObject } from './utils';
@@ -196,7 +200,6 @@ export default function jsonSchema2ComponentList(code, toolItems) {
             } : {}
         };
     }
-
     return {
         componentList: componentList[0].childList,
         errorNode,

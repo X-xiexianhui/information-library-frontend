@@ -163,8 +163,6 @@
                     draggable: '.draggableItem',
                     tag: 'div',
                     swapThreshold: 0.3,
-                    // forceFallback: true
-                    // fallbackTolerance: 0
                 };
             },
         },
@@ -270,8 +268,8 @@
                 });
             },
             async getFormSchema() {
-                const res = await axios.get('/api/getformschema?formName=测试');
-                console.log(res);
+                const res = await axios.get('/api/getformschema?formName=test');
+                // console.log(res);
                 this.handleImportSchema(res.data);
             },
             handleImportSchema(code) {
@@ -312,7 +310,7 @@
                 if (fName === undefined) {
                     return this.$message.warning('请先输入表单名称');
                 }
-                const res = await axios.post('api/addformschema', data);
+                const res = await axios.post('api/addformschema', { name: fName, schema: JSON.stringify(data) });
                 console.log(res.data);
             },
             handleToDemo() {
