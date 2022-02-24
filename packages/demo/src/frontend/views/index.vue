@@ -3,6 +3,7 @@
         v-model="formData"
         :ui-schema="uiSchema"
         :schema="schema"
+        class="form"
         @on-submit="handleSubmit"
     ></VueForm>
 </template>
@@ -21,26 +22,23 @@
                     type: 'object',
                     required: [],
                     properties: {
-                        input: {
-                            title: '输入框',
+                        file: {
+                            title: '文件',
                             type: 'string',
-                            'ui:options': {
-                                placeholder: '请输入'
-                            }
+                            'ui:widget': 'UploadWidget',
                         }
                     },
                     'ui:order': [
-                        'input'
+                        'file'
                     ]
                 },
-                uiSchema: {
-                    bio: {
-                        'ui:options': {
-                            placeholder: '请输入你的签名',
-                            type: 'textarea',
-                            rows: 1
-                        }
-                    }
+                uiSchema: {},
+                formFooter: {
+                    show: false
+                },
+                formProps: {
+                    labelWidth: '100px',
+                    labelSuffix: '：'
                 }
             };
         },
@@ -53,6 +51,10 @@
     };
 </script>
 
-<style scoped>
-
+<style module>
+    form{
+        position: absolute;
+        left: 30%;
+        width: 40%;
+    }
 </style>
