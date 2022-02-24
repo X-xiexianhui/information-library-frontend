@@ -8,7 +8,6 @@ export function generateEditorItem(toolItem) {
 
     const ids = [currentComponentPack.viewSchema.format, currentComponentPack.viewSchema.type, genId()];
     const id = ids.filter(item => !!item).join('_');
-
     return {
         ...toolItem,
         isEdit: false,
@@ -24,7 +23,7 @@ export function generateEditorItem(toolItem) {
                 {}, // 初始值为空
                 currentComponentPack.propsSchema
             ) : toolItem.componentValue,
-            property: (toolItem.componentValue && toolItem.componentValue.property) || id
+            property: (toolItem.componentValue && toolItem.componentValue.property) || undefined
         },
         id,
         ...(currentComponentPack.viewSchema.properties || (currentComponentPack.viewSchema.items && currentComponentPack.viewSchema.items.properties))

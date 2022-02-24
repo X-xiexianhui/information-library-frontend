@@ -107,7 +107,6 @@
     import FormConfSchema from './viewComponents/FormConf';
     import EditorToolBar from './EditorToolBar.vue';
 
-
     import { deepFreeze } from './common/utils';
 
     import configTools from './config/tools';
@@ -172,13 +171,23 @@
         watch: {
             'curEditorItem.id': {
                 handler() {
-                    const obj = JSON.stringify(this.curEditorItem.componentPack);
-                    const objC = JSON.parse(obj);
-                    objC.propsSchema.properties.property.enum = ['1', '2', '3'];
-                    objC.propsSchema.properties.property.enumNames = ['1', '2', '3'];
-                    this.curEditorItem.componentPack = objC;
+                    this.setEnum();
                 },
                 deep: false
+            },
+            'formConfig.formProps.dataBase': {
+                handler(newValue) {
+                    if (newValue === '1') {
+                        this.$store.commit('setField', ['属性1', '属性2', '属性3']);
+                    }
+                    if (newValue === '2') {
+                        this.$store.commit('setField', ['属性一', '属性二', '属性三']);
+                    }
+                    if (newValue === '3') {
+                        this.$store.commit('setField', ['field1', 'field2', 'filed3']);
+                    }
+                    this.setEnum();
+                }
             }
         },
         mounted() {
@@ -194,6 +203,15 @@
             });
         },
         methods: {
+            setEnum() {
+                if (this.curEditorItem) {
+                    const obj = JSON.stringify(this.curEditorItem.componentPack);
+                    const objC = JSON.parse(obj);
+                    objC.propsSchema.properties.property.enum = this.$store.getters.getField;
+                    objC.propsSchema.properties.property.enumNames = this.$store.getters.getField;
+                    this.curEditorItem.componentPack = objC;
+                }
+            },
             getExportCode() {
                 const { formFooter, formProps } = this;
                 const defaultConfig = {
