@@ -25,9 +25,6 @@ import componentPackMultiCheckbox from '../viewComponents/MultiSelect/elCheckbox
 import componentPackUpload from '../viewComponents/Upload';
 import componentPackMultiUpload from '../viewComponents/MultiUpload';
 
-// 时间 日期
-import componentPackTime from '../viewComponents/Time';
-
 // 日期
 import componentPackDate from '../viewComponents/Date';
 import componentPackDateString from '../viewComponents/Date/string';
@@ -155,9 +152,6 @@ const tools = [
         }, {
             title: 'DateTime范围(字符串)',
             componentPack: componentPackDateTimeRangeString
-        }, {
-            title: 'Time(字符串)',
-            componentPack: componentPackTime
         }]
     }
 ];

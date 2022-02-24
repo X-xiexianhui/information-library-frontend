@@ -104,12 +104,12 @@ export default (schema, type, isMultiSelect) => ({
     required: ['property'],
     properties: {
         property: {
-            title: '属性名',
+            title: '表字段名称',
             type: 'string',
             enum: [],
             enumNames: [],
-            'ui:placeholder': '请输入属性名',
-            'err:required': '属性名必填'
+            'ui:placeholder': '请选择字段名称',
+            'err:required': '字段名称必填',
         },
         baseValue: genBaseVal(type, isMultiSelect),
         ...schema
