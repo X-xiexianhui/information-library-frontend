@@ -25,21 +25,14 @@ import componentPackMultiCheckbox from '../viewComponents/MultiSelect/elCheckbox
 import componentPackUpload from '../viewComponents/Upload';
 import componentPackMultiUpload from '../viewComponents/MultiUpload';
 
+// 时间 日期
+import componentPackTime from '../viewComponents/Time';
+
 // 日期
-import componentPackDate from '../viewComponents/Date';
 import componentPackDateString from '../viewComponents/Date/string';
 
 // 日期时间
-import componentPackDateTime from '../viewComponents/DateTime';
 import componentPackDateTimeString from '../viewComponents/DateTime/string';
-
-// 日期区间
-import componentPackDateRange from '../viewComponents/DateRange';
-import componentPackDateRangeString from '../viewComponents/DateRange/string';
-
-// 日期时间区间
-import componentPackDateTimeRange from '../viewComponents/DateTimeRange';
-import componentPackDateTimeRangeString from '../viewComponents/DateTimeRange/string';
 
 
 // 布局 Object Array
@@ -60,7 +53,7 @@ const tools = [
         componentList: [{
             title: 'Object',
             btnClass: 'w100',
-            componentPack: componentPackObject,
+            componentPack: componentPackObject
         }, {
             title: 'Array',
             btnClass: 'w100',
@@ -129,29 +122,14 @@ const tools = [
     {
         groupName: '时间日期',
         componentList: [{
-            title: 'Date(时间戳)',
-            componentPack: componentPackDate
-        }, {
             title: 'Date(字符串)',
             componentPack: componentPackDateString
-        }, {
-            title: 'DateTime(时间戳)',
-            componentPack: componentPackDateTime
         }, {
             title: 'DateTime(字符串)',
             componentPack: componentPackDateTimeString
         }, {
-            title: 'Date范围(时间戳)',
-            componentPack: componentPackDateRange
-        }, {
-            title: 'Date范围(字符串)',
-            componentPack: componentPackDateRangeString
-        }, {
-            title: 'DateTime范围(时间戳)',
-            componentPack: componentPackDateTimeRange
-        }, {
-            title: 'DateTime范围(字符串)',
-            componentPack: componentPackDateTimeRangeString
+            title: 'Time(字符串)',
+            componentPack: componentPackTime
         }]
     }
 ];
