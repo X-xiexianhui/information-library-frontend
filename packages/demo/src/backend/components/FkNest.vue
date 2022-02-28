@@ -17,48 +17,37 @@
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
-            @edit-actived="editActiveEvent"
         >
             <vxe-column type="checkbox" width="60"></vxe-column>
             <vxe-column type="seq" width="60"></vxe-column>
-            <vxe-column field="name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #edit="{ row }">
-                    <vxe-input v-model="row.name" type="text"></vxe-input>
-                </template>
-            </vxe-column>
-            <vxe-column field="type" title="字段类型" :edit-render="{}">
+            <vxe-column field="fk" title="建立外键字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
-                    <span>{{ formatType(row.type) }}</span>
+                    <span>{{ row.fk }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.type" transfer>
-                        <vxe-option v-for="item in options" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                    <vxe-select v-model="row.fk" transfer>
+                        <vxe-option v-for="item in fkList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="length" title="字段长度" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="type" title="被参照表" :edit-render="{}">
+                <template #default="{ row }">
+                    <span>{{ row.table }}</span>
+                </template>
                 <template #edit="{ row }">
-                    <vxe-input v-model.number="row.length" type="text"></vxe-input>
+                    <vxe-select v-model="row.table" transfer>
+                        <vxe-option v-for="item in tableList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                    </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="place" title="小数位数" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #edit="{ row }">
-                    <vxe-input v-model.number="row.place" type="text" :disabled="placeDisabled"></vxe-input>
+            <vxe-column field="field" title="被参照字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+                <template #default="{ row }">
+                    <span>{{ row.field }}</span>
                 </template>
-            </vxe-column>
-            <vxe-column field="pk" title="主键" :edit-render="{}">
                 <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.pk"></vxe-checkbox>
-                </template>
-            </vxe-column>
-            <vxe-column field="notNull" title="非空" :edit-render="{}">
-                <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.notNull"></vxe-checkbox>
-                </template>
-            </vxe-column>
-            <vxe-column field="unique" title="唯一" :edit-render="{}">
-                <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.unique"></vxe-checkbox>
+                    <vxe-select v-model="row.field" transfer>
+                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                    </vxe-select>
                 </template>
             </vxe-column>
         </vxe-table>
@@ -69,7 +58,7 @@
     import { VXETable } from 'vxe-table';
 
     export default {
-        name: 'EditNest',
+        name: 'FkNest',
         props: {
             saveType: {
                 type: String,
@@ -86,19 +75,10 @@
         },
         data() {
             return {
-                placeDisabled: true,
-                options: [
-                    { label: '整数', value: 'int' },
-                    { label: '小数', value: 'numeric' },
-                    { label: '字符串', value: 'varchar' },
-                    { label: '日期', value: 'date' },
-                    { label: '时间', value: 'time' },
-                    { label: '日期时间', value: 'datetime' },
-                    { label: '文件', value: 'char' },
-                ],
-                tableData: [{
-                    name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
-                }]
+                fkList: [],
+                tableList: [],
+                fieldList: [],
+                tableData: [{}]
             };
         },
         watch: {
@@ -107,32 +87,9 @@
             }
         },
         methods: {
-            formatType(value) {
-                switch (value) {
-                case 'int':
-                    return '整数';
-                case 'numeric':
-                    return '小数';
-                case 'varchar':
-                    return '字符串';
-                case 'date':
-                    return '日期';
-                case 'time':
-                    return '时间';
-                case 'datetime':
-                    return '日期时间';
-                default:
-                    return '';
-                }
-            },
-            editActiveEvent({ row }) {
-                this.placeDisabled = row.type !== 'numeric';
-            },
             insertEvent() {
                 const $table = this.$refs.xTable;
-                $table.insertAt({
-                    name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
-                }, -1);
+                $table.insertAt({ fk: '', table: '', field: '' }, -1);
             },
             async removeEvent() {
                 const $table = this.$refs.xTable;
@@ -172,7 +129,7 @@
                 default:
                     break;
                 }
-                this.$emit('setEditTableEvent', 'field');
+                this.$emit('setEditFkEvent', 'FK');
             }
         }
     };

@@ -6,6 +6,7 @@
                 <tree-list
                     :data="data"
                     class="tree-list"
+                    @setEditTableNameEvent="setEditTableName"
                 >
                 </tree-list>
             </el-aside>
@@ -15,13 +16,27 @@
                     tab-position="left"
                     style="margin-top: 20px"
                     :before-leave="checkSave"
-                    @tab-click="initIsSave"
                 >
-                    <el-tab-pane label="字段设置" name="createTable">
-                        <edit-nest @setCreateTableEvent="setCreateTable"></edit-nest>
+                    <el-tab-pane label="字段设置" name="field">
+                        <edit-nest
+                            :save-type="'edit'"
+                            :edit-table-name="editTableName"
+                            @setEditTableEvent="setIsSave"
+                        ></edit-nest>
                     </el-tab-pane>
-                    <el-tab-pane label="外键设置" name="FK">配置管理</el-tab-pane>
-                    <el-tab-pane label="索引设置" name="index">角色管理</el-tab-pane>
+                    <el-tab-pane label="外键设置" name="FK">
+                        <fk-nest
+                            :save-type="'edit'"
+                            :edit-table-name="editTableName"
+                            @setEditFkEvent="setIsSave"
+                        ></fk-nest>
+                    </el-tab-pane>
+                    <el-tab-pane label="索引设置" name="index">
+                        <index-nest
+                            :save-type="'edit'"
+                            :edit-table-name="editTableName"
+                        ></index-nest>
+                    </el-tab-pane>
                 </el-tabs>
             </el-main>
         </el-container>
@@ -32,18 +47,27 @@
     import TreeList from '../../components/treeList';
     import EditNest from '../../components/editNest';
     import EditorHeader from '@/_common/components/EditorHeader';
+    import FkNest from '../../components/FkNest';
+    import IndexNest from '../../components/indexNest';
 
     export default {
         name: 'AddTable',
-        components: { EditorHeader, EditNest, TreeList },
+        components: {
+            IndexNest,
+            FkNest,
+            EditorHeader,
+            EditNest,
+            TreeList
+        },
         data() {
             return {
-                activeName: 'createTable',
+                activeName: 'field',
                 isSave: {
-                    createTable: false,
+                    field: true,
                     FK: true,
                     index: true,
                 },
+                editTableName: '',
                 tableConfig: {
                     fields: [{
                         name: '',
@@ -68,20 +92,18 @@
                     // 存文件路径，文件存于文件夹
                     { label: '文件', value: 'char' },
                 ],
-                data: [
-                    {
-                        id: '1',
-                        label: '一级'
-                    },
-                    {
-                        id: '2',
-                        label: '二级'
-                    },
-                    {
-                        id: '3',
-                        label: '三级'
-                    },
-                ]
+                data: [{
+                           id: '2',
+                           label: '一级'
+                       },
+                       {
+                           id: '3',
+                           label: '二级'
+                       },
+                       {
+                           id: '4',
+                           label: '三级'
+                       }],
             };
         },
         methods: {
@@ -92,40 +114,15 @@
                 console.log(this.isSave[oldActiveName]);
                 return this.isSave[oldActiveName];
             },
-            initIsSave() {
-                this.isSave[this.activeName] = false;
+            setIsSave(key, value) {
+                this.isSave[key] = value;
             },
-            setCreateTable() {
-                this.isSave.createTable = true;
+            setEditTableName(value) {
+                this.editTableName = value;
             }
         },
     };
 </script>
 <style scoped>
-.nav{
-    top: 0;
-    height: 100px;
-    width: 100%;
-    position: fixed;
-}
-.tree-list{
-    width: 80%;
-    color: #8c939d;
-    margin-left: 10%;
-}
-.el-aside{
-    width: 200px;
-    height:calc(100vh);
-    overflow-y: scroll;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-}
-.el-container{
-    margin-top: 100px;
-    height: calc(100vh - 100px);
-}
-.el-main{
-    padding: 0;
-    overflow-y: scroll;
-    height: calc(100vh);
-}
+@import "backend.css";
 </style>
