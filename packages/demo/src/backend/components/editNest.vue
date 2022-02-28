@@ -66,24 +66,11 @@
 </template>
 
 <script>
-    import { VXETable } from 'vxe-table';
+    import Nest from '../mixin/nest';
 
     export default {
         name: 'EditNest',
-        props: {
-            saveType: {
-                type: String,
-                default: ''
-            },
-            createTableName: {
-                type: String,
-                default: ''
-            },
-            editTableName: {
-                type: String,
-                default: ''
-            }
-        },
+        mixins: [Nest],
         data() {
             return {
                 placeDisabled: true,
@@ -96,17 +83,13 @@
                     { label: '日期时间', value: 'datetime' },
                     { label: '文件', value: 'char' },
                 ],
-                tableData: [{
-                    name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
-                }]
+                tableData: []
             };
         },
-        watch: {
-            editTableName(newValue) {
-                console.log(newValue);
-            }
-        },
         methods: {
+            editActiveEvent({ row }) {
+                this.placeDisabled = row.type !== 'numeric';
+            },
             formatType(value) {
                 switch (value) {
                 case 'int':
@@ -125,55 +108,6 @@
                     return '';
                 }
             },
-            editActiveEvent({ row }) {
-                this.placeDisabled = row.type !== 'numeric';
-            },
-            insertEvent() {
-                const $table = this.$refs.xTable;
-                $table.insertAt({
-                    name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
-                }, -1);
-            },
-            async removeEvent() {
-                const $table = this.$refs.xTable;
-                const selectRecords = $table.getCheckboxRecords();
-                if (selectRecords.length) {
-                    const type = await VXETable.modal.confirm('您确定要删除选中的数据吗?');
-                    if (type === 'confirm') {
-                        await $table.removeCheckboxRow();
-                    }
-                } else {
-                    await VXETable.modal.message({ content: '请至少选择一条数据', status: 'error' });
-                }
-            },
-            async revertEvent() {
-                const type = await VXETable.modal.confirm('您确定要还原数据吗?');
-                const $table = this.$refs.xTable;
-                if (type === 'confirm') {
-                    $table.revertData();
-                }
-            },
-            saveCreate() {
-                console.log(this.tableData);
-            },
-            saveEdit() {
-                const $table = this.$refs.xTable;
-                const { insertRecords, removeRecords, updateRecords } = $table.getRecordset();
-                console.log(insertRecords, removeRecords, updateRecords);
-            },
-            saveEvent() {
-                switch (this.saveType) {
-                case 'create':
-                    this.saveCreate();
-                    break;
-                case 'edit':
-                    this.saveEdit();
-                    break;
-                default:
-                    break;
-                }
-                this.$emit('setEditTableEvent', 'field');
-            }
         }
     };
 </script>

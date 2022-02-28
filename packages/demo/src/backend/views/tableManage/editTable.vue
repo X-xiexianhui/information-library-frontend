@@ -19,20 +19,24 @@
                 >
                     <el-tab-pane label="字段设置" name="field">
                         <edit-nest
+                            ref="field"
+                            :new-line="fieldLine"
                             :save-type="'edit'"
                             :edit-table-name="editTableName"
-                            @setEditTableEvent="setIsSave"
                         ></edit-nest>
                     </el-tab-pane>
                     <el-tab-pane label="外键设置" name="FK">
                         <fk-nest
+                            ref="FK"
+                            :new-line="fkLine"
                             :save-type="'edit'"
                             :edit-table-name="editTableName"
-                            @setEditFkEvent="setIsSave"
                         ></fk-nest>
                     </el-tab-pane>
                     <el-tab-pane label="索引设置" name="index">
                         <index-nest
+                            ref="index"
+                            :new-line="indexLine"
                             :save-type="'edit'"
                             :edit-table-name="editTableName"
                         ></index-nest>
@@ -44,6 +48,10 @@
 </template>
 
 <script>
+    import bus from '@lljj/bus';
+    import fieldNewLine from '../../mixin/fieldNewLine';
+    import fkNewLine from '../../mixin/fkNewLine';
+    import indexNewLine from '../../mixin/indexNewLine';
     import TreeList from '../../components/treeList';
     import EditNest from '../../components/editNest';
     import EditorHeader from '@/_common/components/EditorHeader';
@@ -61,37 +69,12 @@
         },
         data() {
             return {
+                isSave: false,
+                fieldLine: fieldNewLine,
+                fkLine: fkNewLine,
+                indexLine: indexNewLine,
                 activeName: 'field',
-                isSave: {
-                    field: true,
-                    FK: true,
-                    index: true,
-                },
                 editTableName: '',
-                tableConfig: {
-                    fields: [{
-                        name: '',
-                        type: '',
-                        length: '',
-                        restriction: []
-                    }],
-                    primaryKey: [],
-                    foreignKeys: [{
-                        key: '',
-                        f_table: '',
-                        f_key: ''
-                    }],
-                },
-                options: [
-                    { label: '整数', value: 'int' },
-                    { label: '小数', value: 'numberic' },
-                    { label: '字符串', value: 'varchar' },
-                    { label: '日期', value: 'date' },
-                    { label: '时间', value: 'time' },
-                    { label: '日期时间', value: 'datetime' },
-                    // 存文件路径，文件存于文件夹
-                    { label: '文件', value: 'char' },
-                ],
                 data: [{
                            id: '2',
                            label: '一级'
@@ -106,16 +89,19 @@
                        }],
             };
         },
+        created() {
+            bus.$on('checkData', (value) => {
+                this.isSave = value;
+            });
+        },
         methods: {
             checkSave(activeName, oldActiveName) {
-                if (!this.isSave[oldActiveName]) {
+                this.$refs[oldActiveName].checkData();
+                console.log(this.isSave);
+                if (!this.isSave) {
                     this.$alert('请先保存', {});
                 }
-                console.log(this.isSave[oldActiveName]);
-                return this.isSave[oldActiveName];
-            },
-            setIsSave(key, value) {
-                this.isSave[key] = value;
+                return this.isSave;
             },
             setEditTableName(value) {
                 this.editTableName = value;

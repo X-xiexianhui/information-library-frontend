@@ -30,7 +30,7 @@
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="type" title="被参照表" :edit-render="{}">
+            <vxe-column field="table" title="被参照表" :edit-render="{}">
                 <template #default="{ row }">
                     <span>{{ row.table }}</span>
                 </template>
@@ -50,87 +50,47 @@
                     </vxe-select>
                 </template>
             </vxe-column>
+            <vxe-column field="type" title="类型" :edit-render="{autofocus: '.vxe-input--inner'}">
+                <template #default="{ row }">
+                    <span>{{ row.type }}</span>
+                </template>
+                <template #edit="{ row }">
+                    <vxe-select v-model="row.type" transfer>
+                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                    </vxe-select>
+                </template>
+            </vxe-column>
         </vxe-table>
     </div>
 </template>
 
 <script>
-    import { VXETable } from 'vxe-table';
+    import Nest from '../mixin/nest';
 
     export default {
         name: 'FkNest',
-        props: {
-            saveType: {
-                type: String,
-                default: ''
-            },
-            createTableName: {
-                type: String,
-                default: ''
-            },
-            editTableName: {
-                type: String,
-                default: ''
-            }
-        },
+        mixins: [Nest],
         data() {
             return {
                 fkList: [],
                 tableList: [],
                 fieldList: [],
-                tableData: [{}]
+                tableData: []
             };
         },
-        watch: {
-            editTableName(newValue) {
-                console.log(newValue);
-            }
-        },
         methods: {
-            insertEvent() {
-                const $table = this.$refs.xTable;
-                $table.insertAt({ fk: '', table: '', field: '' }, -1);
-            },
-            async removeEvent() {
-                const $table = this.$refs.xTable;
-                const selectRecords = $table.getCheckboxRecords();
-                if (selectRecords.length) {
-                    const type = await VXETable.modal.confirm('您确定要删除选中的数据吗?');
-                    if (type === 'confirm') {
-                        await $table.removeCheckboxRow();
-                    }
-                } else {
-                    await VXETable.modal.message({ content: '请至少选择一条数据', status: 'error' });
-                }
-            },
-            async revertEvent() {
-                const type = await VXETable.modal.confirm('您确定要还原数据吗?');
-                const $table = this.$refs.xTable;
-                if (type === 'confirm') {
-                    $table.revertData();
-                }
-            },
-            saveCreate() {
-                console.log(this.tableData);
-            },
-            saveEdit() {
-                const $table = this.$refs.xTable;
-                const { insertRecords, removeRecords, updateRecords } = $table.getRecordset();
-                console.log(insertRecords, removeRecords, updateRecords);
-            },
-            saveEvent() {
-                switch (this.saveType) {
-                case 'create':
-                    this.saveCreate();
-                    break;
-                case 'edit':
-                    this.saveEdit();
-                    break;
+            formatType(value) {
+                switch (value) {
+                case 'unique':
+                    return '唯一索引';
+                case 'numeric':
+                    return '小数';
+                case 'varchar':
+                    return '字符串';
                 default:
-                    break;
+                    return '';
                 }
-                this.$emit('setEditFkEvent', 'FK');
-            }
+            },
         }
     };
 </script>
