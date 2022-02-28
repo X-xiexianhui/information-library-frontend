@@ -7,8 +7,8 @@
                  active-text-color="#2b9939"
         >
             <el-menu-item index="1">
-                <a :class="$style.menuLink" href="/schema-generator.html#/index">
-                    <i class="el-icon-cold-drink" :class="$style.menuIcon"></i>Schema 生成器
+                <a :class="$style.menuLink" href="/schema-generator.html#/index" target="_blank">
+                    <i class="el-icon-cold-drink" :class="$style.menuIcon"></i>表单设计器
                 </a>
             </el-menu-item>
         </el-menu>

@@ -1,20 +1,27 @@
 <template>
-    <VueForm
-        v-model="formData"
-        :ui-schema="uiSchema"
-        :schema="schema"
-        class="form"
-        @on-submit="handleSubmit"
-    ></VueForm>
+    <div>
+        <Menu/>
+        <el-card class="box-card">
+            <div>
+                <VueForm
+                    v-model="formData"
+                    :ui-schema="uiSchema"
+                    :schema="schema"
+                    @on-submit="handleSubmit"
+                ></VueForm>
+            </div>
+        </el-card>
+    </div>
 </template>
 
 <script>
     import VueForm from '@lljj/vue-json-schema-form';
     import bus from '@lljj/bus';
+    import Menu from './components/Menu';
 
     export default {
         name: 'Index',
-        components: { VueForm },
+        components: { VueForm, Menu },
         data() {
             return {
                 formData: {},
@@ -37,24 +44,25 @@
                     show: false
                 },
                 formProps: {
+                    labelPosition: 'Left',
                     labelWidth: '100px',
-                    labelSuffix: '：'
+                    labelSuffix: '：',
                 }
             };
         },
         methods: {
             handleSubmit() {
                 bus.$emit('on-upload');
-                this.$message.success('提交成功');
             }
         }
     };
 </script>
 
-<style module>
-    form{
+<style>
+.box-card{
         position: absolute;
         left: 30%;
-        width: 40%;
+        width: 500px;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     }
 </style>

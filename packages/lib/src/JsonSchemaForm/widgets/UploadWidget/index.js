@@ -53,7 +53,12 @@ export default {
     },
     created() {
         bus.$on('on-upload', () => {
-            this.$refs.upload.submit();
+            try {
+                this.$refs.upload.submit();
+            } catch (e) {
+                // eslint-disable-next-line no-alert
+                alert('请选择文件');
+            }
         });
     },
     methods: {
@@ -89,7 +94,7 @@ export default {
                 fileList: this.fileList,
                 'auto-upload': false,
                 action: '#',
-                'http-request': async (fileList) => {
+                'http-request': (fileList) => {
                     if (fileList.length === 0) {
                         this.$message.warning('请选择文件');
                         return;
@@ -97,8 +102,13 @@ export default {
                     const formData = new FormData();
                     formData.append('file', fileList.file);
                     formData.append('name', fileList.file.name);
-                    const res = await axios.post('/api/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-                    console.log(res);
+                    axios.post('/api/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+                        .then((res) => {
+                            console.log(res);
+                        }).catch((e) => {
+                        // eslint-disable-next-line no-alert
+                            alert(e);
+                        });
                 },
                 'on-exceed': () => {
                     if (this.$message) {

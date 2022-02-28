@@ -13579,6 +13579,11 @@ vuex@3:
   resolved "https://registry.npmmirror.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
   integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
 
+vxe-table@3:
+  version "3.4.15"
+  resolved "https://registry.npmmirror.com/vxe-table/-/vxe-table-3.4.15.tgz#001a9084c155ae1c6c29b24c64a53b9595cc5301"
+  integrity sha512-F1ioMlpGWsW8gRXFk5R0JH3iDaOZgJY4SCfRU18Dp8hTT8I++h7TdqmbZ0yibmxUs3rOCf2xdJGA7EGIjZMtEA==
+
 watchpack-chokidar2@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/watchpack-chokidar2/-/watchpack-chokidar2-2.0.0.tgz#9948a1866cbbd6cb824dea13a7ed691f6c8ddff0"
@@ -13966,6 +13971,11 @@ ws@^6.0.0, ws@^6.2.1:
   integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
   dependencies:
     async-limiter "~1.0.0"
+
+xe-utils@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.npmmirror.com/xe-utils/-/xe-utils-3.5.4.tgz#d4335633fede280c68c1c0c9a4c8f3a533cfd831"
+  integrity sha512-oH7VOgvHv34pn198dhKPVKnuEHV22Q06YpCTVnAS3JuutylmZj/rtJGvn0BxxWQ37w2LgCknoebLA4uIGXwFtw==
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"

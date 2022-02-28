@@ -17,12 +17,6 @@ export default {
                     type: 'object',
                     required: ['action'],
                     properties: {
-                        action: {
-                            title: '上传接口',
-                            type: 'string',
-                            format: 'uri',
-                            default: 'https://run.mocky.io/v3/518d7af7-204f-45ab-9628-a6e121dab8ca'
-                        },
                         btnText: {
                             title: '上传按钮文案',
                             type: 'string'

@@ -1,8 +1,13 @@
 const route = [
     {
-        path: '/addtable',
+        path: '/edittable',
+        name: 'edittable',
+        component: () => import('../views/tableManage/editTable')
+    },
+    {
+        path: '/',
         name: 'index',
-        component: () => import('../views/addTable')
+        component: () => import('../views/index')
     }
 ];
 export default route;

@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'VueRouter';
 import VueForm from '@lljj/vue-json-schema-form';
+import VXETable from 'vxe-table';
 import elementUI from '@/_common/components/ElementUi/index.js';
 import routes from './router/router';
-
 import App from './App';
+import 'xe-utils';
+import 'vxe-table/lib/style.css';
 
+Vue.use(VXETable);
 Vue.use(VueRouter);
 Vue.component('VueForm', VueForm);
 // Ui
