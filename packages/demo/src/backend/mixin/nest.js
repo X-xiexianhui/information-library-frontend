@@ -56,10 +56,6 @@ export default {
             }
         },
         saveEvent() {
-            if (this.tableName === '') {
-                this.dialogVisible = true;
-                return;
-            }
             const $table = this.$refs.xTable;
             const { insertRecords, removeRecords, updateRecords } = $table.getRecordset();
             console.log({ insertRecords, removeRecords, updateRecords });

@@ -10,7 +10,9 @@
                 </tree-list>
             </el-aside>
             <el-main >
-                <p v-if="tableName === ''">请选择要修改的数据库</p>
+                <div v-if="tableName === ''" class="tipBox">
+                    <p>请选择要修改的数据库</p>
+                </div>
                 <el-tabs
                     v-else
                     v-model="activeName"
@@ -98,9 +100,7 @@
         },
         methods: {
             checkSave(activeName, oldActiveName) {
-                console.log(this.$refs.field.tableName);
                 this.$refs[oldActiveName].checkData();
-                console.log(this.isSave);
                 if (!this.isSave) {
                     this.$alert('请先保存', {});
                 }
@@ -111,4 +111,17 @@
 </script>
 <style scoped>
 @import "backend.css";
+.tipBox{
+    pointer-events: none;
+    top: 20px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 30vh 0;
+    p {
+    margin: 20px 0;
+    font-size: 16px;
+    }
+}
 </style>

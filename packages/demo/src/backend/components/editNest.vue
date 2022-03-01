@@ -62,17 +62,6 @@
                 </template>
             </vxe-column>
         </vxe-table>
-        <el-dialog
-            title="请输入表名"
-            :visible.sync="dialogVisible"
-            width="30%"
-        >
-            <el-input v-model="tableName"></el-input>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="reSave">确 定</el-button>
-            </span>
-        </el-dialog>
     </div>
 </template>
 
@@ -85,7 +74,6 @@
         data() {
             return {
                 tableData: [],
-                dialogVisible: false,
                 placeDisabled: true,
                 options: [
                     { label: '整数', value: 'int' },
@@ -122,11 +110,6 @@
                 default:
                     return '';
                 }
-            },
-            reSave() {
-                this.dialogVisible = false;
-                this.createTable();
-                this.saveEvent();
             },
         }
     };
