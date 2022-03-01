@@ -3,39 +3,33 @@ import bus from '@lljj/bus';
 
 export default {
     props: {
-        saveType: {
-            type: String,
-            default: ''
-        },
-        createTableName: {
-            type: String,
-            default: ''
-        },
-        editTableName: {
-            type: String,
-            default: ''
-        },
         newLine: {
             type: Object,
             default: () => ({})
+        },
+        tbName: {
+            type: String,
+            default: ''
         }
     },
     watch: {
-        editTableName(newValue) {
-            console.log(newValue);
+        tbName: {
+            handler(newValue, oldValue) {
+                console.log(newValue);
+                this.tableName = newValue;
+            },
         }
+    },
+    data() {
+        return {
+            tableName: ''
+        };
     },
     methods: {
         checkData() {
-            let value = false;
-            if (this.saveType === 'create') {
-                value = this.tableData === 0;
-            }
-            if (this.saveType === 'edit') {
-                const $table = this.$refs.xTable;
-                const { insertRecords, removeRecords, updateRecords } = $table.getRecordset();
-                value = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0;
-            }
+            const $table = this.$refs.xTable;
+            const { insertRecords, removeRecords, updateRecords } = $table.getRecordset();
+            const value = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0;
             bus.$emit('checkData', value);
         },
         insertEvent() {
@@ -61,25 +55,15 @@ export default {
                 $table.revertData();
             }
         },
-        saveCreate() {
-            console.log(this.tableData);
-        },
-        saveEdit() {
+        saveEvent() {
+            if (this.tableName === '') {
+                this.dialogVisible = true;
+                return;
+            }
             const $table = this.$refs.xTable;
             const { insertRecords, removeRecords, updateRecords } = $table.getRecordset();
-            console.log(insertRecords, removeRecords, updateRecords);
-        },
-        saveEvent() {
-            switch (this.saveType) {
-            case 'create':
-                this.saveCreate();
-                break;
-            case 'edit':
-                this.saveEdit();
-                break;
-            default:
-                break;
-            }
+            console.log({ insertRecords, removeRecords, updateRecords });
+            $table.reloadData(this.tableData);
         }
     }
 };

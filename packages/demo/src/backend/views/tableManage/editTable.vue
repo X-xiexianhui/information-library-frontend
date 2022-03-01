@@ -6,12 +6,13 @@
                 <tree-list
                     :data="data"
                     class="tree-list"
-                    @setEditTableNameEvent="setEditTableName"
                 >
                 </tree-list>
             </el-aside>
-            <el-main>
+            <el-main >
+                <p v-if="tableName === ''">请选择要修改的数据库</p>
                 <el-tabs
+                    v-else
                     v-model="activeName"
                     tab-position="left"
                     style="margin-top: 20px"
@@ -21,24 +22,21 @@
                         <edit-nest
                             ref="field"
                             :new-line="fieldLine"
-                            :save-type="'edit'"
-                            :edit-table-name="editTableName"
+                            :tb-name="tableName"
                         ></edit-nest>
                     </el-tab-pane>
                     <el-tab-pane label="外键设置" name="FK">
                         <fk-nest
                             ref="FK"
                             :new-line="fkLine"
-                            :save-type="'edit'"
-                            :edit-table-name="editTableName"
+                            :tb-name="tableName"
                         ></fk-nest>
                     </el-tab-pane>
                     <el-tab-pane label="索引设置" name="index">
                         <index-nest
                             ref="index"
                             :new-line="indexLine"
-                            :save-type="'edit'"
-                            :edit-table-name="editTableName"
+                            :tb-name="tableName"
                         ></index-nest>
                     </el-tab-pane>
                 </el-tabs>
@@ -69,7 +67,8 @@
         },
         data() {
             return {
-                isSave: false,
+                isSave: true,
+                tableName: '',
                 fieldLine: fieldNewLine,
                 fkLine: fkNewLine,
                 indexLine: indexNewLine,
@@ -93,9 +92,13 @@
             bus.$on('checkData', (value) => {
                 this.isSave = value;
             });
+            bus.$on('setTableName', (value) => {
+                this.tableName = value;
+            });
         },
         methods: {
             checkSave(activeName, oldActiveName) {
+                console.log(this.$refs.field.tableName);
                 this.$refs[oldActiveName].checkData();
                 console.log(this.isSave);
                 if (!this.isSave) {
@@ -103,9 +106,6 @@
                 }
                 return this.isSave;
             },
-            setEditTableName(value) {
-                this.editTableName = value;
-            }
         },
     };
 </script>

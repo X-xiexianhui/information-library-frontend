@@ -7,6 +7,7 @@ import routes from './router/router';
 import App from './App';
 import 'xe-utils';
 import 'vxe-table/lib/style.css';
+import store from '../_common/store/store';
 
 Vue.use(VXETable);
 Vue.use(VueRouter);
@@ -18,6 +19,7 @@ new Vue({
     router: new VueRouter({
         mode: 'hash',
         routes,
+        store,
         scrollBehavior() {
             return { x: 0, y: 0 };
         }

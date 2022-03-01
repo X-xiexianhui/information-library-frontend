@@ -29,6 +29,8 @@
 </template>
 
 <script>
+    import bus from '@lljj/bus';
+
     export default {
         name: 'TreeList',
         props: {
@@ -55,7 +57,7 @@
         methods: {
             getCheckedNodes(val) {
                 this.selectTable = val.label;
-                this.$emit('setEditTableNameEvent', this.selectTable);
+                bus.$emit('setTableName', this.selectTable);
             },
             filterNode(value, data) {
                 if (!value) return true;

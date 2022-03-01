@@ -72,6 +72,7 @@
         mixins: [Nest],
         data() {
             return {
+                Save: true,
                 fkList: [],
                 tableList: [],
                 fieldList: [],
