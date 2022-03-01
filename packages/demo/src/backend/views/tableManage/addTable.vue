@@ -20,21 +20,21 @@
                         <edit-field
                             ref="field"
                             :current-table="Name"
-                            :save-event="saveEdit"
+                            :save-event="saveAdd"
                         ></edit-field>
                     </el-tab-pane>
                     <el-tab-pane label="外键设置" name="FK">
                         <edit-fk
                             ref="FK"
                             :table-name="Name"
-                            :save-event="saveEdit"
+                            :save-event="saveAdd"
                         ></edit-fk>
                     </el-tab-pane>
                     <el-tab-pane label="索引设置" name="index">
                         <edit-index
                             ref="index"
                             :table-name="Name"
-                            :save-event="saveEdit"
+                            :save-event="saveAdd"
                         ></edit-index>
                     </el-tab-pane>
                 </el-tabs>
@@ -50,7 +50,7 @@
     import EditField from '../../components/editField';
     import EditFk from '../../components/editFK';
     import EditIndex from '../../components/editIndex';
-    import { saveEdit } from '../../commonFunction/saveEdit';
+    import { saveAdd } from '../../commonFunction/saveAdd';
 
     export default {
         name: 'AddTable',
@@ -89,7 +89,7 @@
             });
         },
         methods: {
-            saveEdit,
+            saveAdd,
             checkSave(activeName, oldActiveName) {
                 this.$refs[oldActiveName].checkSave();
                 if (!this.isSave) {

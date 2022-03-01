@@ -59,7 +59,7 @@ module.exports = {
         config.resolve.alias = {
             ...config.resolve.alias,
             '@lljj/vue-json-schema-form': path.resolve(__dirname, '../lib/src/index.js'),
-            '@lljj/bus': path.resolve((__dirname, '../lib/src/bus.js'))
+            '@lljj/bus': path.resolve((__dirname, '../lib/src/bus.js')),
         };
     },
 

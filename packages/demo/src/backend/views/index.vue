@@ -1,13 +1,13 @@
 <template>
-    <edit-table></edit-table>
+    <edit-index></edit-index>
 </template>
 
 <script>
-    import EditTable from '../components/editNest';
+    import EditIndex from '../components/editIndex';
 
     export default {
         name: 'Index',
-        components: { EditTable },
+        components: { EditIndex },
         data() {
             return {
 

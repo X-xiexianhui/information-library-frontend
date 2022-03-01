@@ -4,7 +4,7 @@ import Vue from 'vue';
 import elementUI from '@/_common/components/ElementUi/index.js';
 import router from './router';
 import App from './App';
-import store from '../_common/store/store';
+import store from './store/store';
 
 // Ui
 Vue.use(elementUI);

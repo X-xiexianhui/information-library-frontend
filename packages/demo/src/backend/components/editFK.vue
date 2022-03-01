@@ -2,14 +2,14 @@
     <div>
         <vxe-toolbar perfect>
             <template #buttons>
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent">保存</vxe-button>
-                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent">还原</vxe-button>
+                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFkTable)">新增</vxe-button>
+                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFkTable)">移除</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFkTable)">保存</vxe-button>
+                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFkTable)">还原</vxe-button>
             </template>
         </vxe-toolbar>
         <vxe-table
-            ref="xTable"
+            ref="editFkTable"
             border
             resizable
             keep-source
@@ -56,7 +56,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.type" transfer>
-                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                        <vxe-option v-for="item in typeList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
@@ -65,21 +65,44 @@
 </template>
 
 <script>
-    import Nest from '../mixin/nest';
+
+    import { insertEvent } from '../commonFunction/insertEvent';
+    import { removeEvent } from '../commonFunction/removeEvent';
+    import { revertEvent } from '../commonFunction/revertEvent';
+    import { saveEdit } from '../commonFunction/saveEdit';
+    import { checkData } from '../commonFunction/checkData';
 
     export default {
-        name: 'FkNest',
-        mixins: [Nest],
+        name: 'EditFk',
+        props: {
+            saveEvent: {
+                type: Function,
+                default: saveEdit
+            },
+            tableName: {
+                type: String,
+                default: ''
+            },
+        },
         data() {
             return {
                 Save: true,
+                newLine: {
+                    fk: '', table: '', field: '', type: ''
+                },
                 fkList: [],
                 tableList: [],
-                fieldList: [],
+                typeList: [],
                 tableData: []
             };
         },
         methods: {
+            insertEvent,
+            removeEvent,
+            revertEvent,
+            checkSave() {
+                checkData(this.$refs.editFkTable);
+            },
             formatType(value) {
                 switch (value) {
                 case 'unique':

@@ -29,6 +29,7 @@
 </template>
 
 <script>
+
     import bus from '@lljj/bus';
 
     export default {
@@ -57,7 +58,7 @@
         methods: {
             getCheckedNodes(val) {
                 this.selectTable = val.label;
-                bus.$emit('setTableName', this.selectTable);
+                bus.$emit('setTableNameEvent', val.label);
             },
             filterNode(value, data) {
                 if (!value) return true;

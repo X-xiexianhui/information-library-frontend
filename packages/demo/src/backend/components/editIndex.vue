@@ -2,14 +2,14 @@
     <div>
         <vxe-toolbar perfect>
             <template #buttons>
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent">保存</vxe-button>
-                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent">还原</vxe-button>
+                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editIndexTable)">新增</vxe-button>
+                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editIndexTable)">保存</vxe-button>
+                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editIndexTable)">还原</vxe-button>
             </template>
         </vxe-toolbar>
         <vxe-table
-            ref="xTable"
+            ref="editIndexTable"
             border
             resizable
             keep-source
@@ -32,7 +32,7 @@
             </vxe-column>
             <vxe-column field="type" title="索引类型" :edit-render="{}">
                 <template #default="{ row }">
-                    <span>{{ row.table }}</span>
+                    <span>{{ row.type }}</span>
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.type" transfer>
@@ -45,22 +45,40 @@
 </template>
 
 <script>
-
-    import Nest from '../mixin/nest';
+    import { insertEvent } from '../commonFunction/insertEvent';
+    import { removeEvent } from '../commonFunction/removeEvent';
+    import { revertEvent } from '../commonFunction/revertEvent';
+    import { saveEdit } from '../commonFunction/saveEdit';
+    import { checkData } from '../commonFunction/checkData';
 
     export default {
-        name: 'IndexNest',
-        mixins: [Nest],
+        name: 'EditIndex',
+        props: {
+            saveEvent: {
+                type: Function,
+                default: saveEdit
+            },
+            tableName: {
+                type: String,
+                default: ''
+            }
+        },
         data() {
             return {
                 Save: true,
+                newLine: { field: '', type: '' },
                 typeList: [],
                 fieldList: [],
                 tableData: []
             };
         },
         methods: {
-
+            insertEvent,
+            revertEvent,
+            removeEvent,
+            checkSave() {
+                checkData(this.$refs.editIndexTable);
+            },
         }
     };
 </script>

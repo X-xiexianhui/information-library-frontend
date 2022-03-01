@@ -2,14 +2,14 @@
     <div>
         <vxe-toolbar perfect>
             <template #buttons>
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent">保存</vxe-button>
-                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent">还原</vxe-button>
+                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable, tableName)">新增</vxe-button>
+                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable, tableName)">移除</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFieldTable, tableName)">保存</vxe-button>
+                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable, tableName)">还原</vxe-button>
             </template>
         </vxe-toolbar>
         <vxe-table
-            ref="xTable"
+            ref="editFieldTable"
             border
             resizable
             keep-source
@@ -66,13 +66,30 @@
 </template>
 
 <script>
-    import Nest from '../mixin/nest';
+
+    import { insertEvent } from '../commonFunction/insertEvent';
+    import { removeEvent } from '../commonFunction/removeEvent';
+    import { revertEvent } from '../commonFunction/revertEvent';
+    import { checkData } from '../commonFunction/checkData';
 
     export default {
-        name: 'EditNest',
-        mixins: [Nest],
+        name: 'EditField',
+        props: {
+            saveEvent: {
+                type: Function,
+                default() {}
+            },
+            currentTable: {
+                type: String,
+                default: ''
+            }
+        },
         data() {
             return {
+                newLine: {
+                    name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
+                },
+                tableName: '',
                 tableData: [],
                 placeDisabled: true,
                 options: [
@@ -86,12 +103,23 @@
                 ],
             };
         },
+        watch: {
+            currentTable: {
+                handler(newValue, oldValue) {
+                    this.tableName = newValue;
+                },
+                immediate: true
+            }
+        },
         methods: {
-            createTable() {
-                console.log(this.tableName);
-            },
+            insertEvent,
+            removeEvent,
+            revertEvent,
             editActiveEvent({ row }) {
                 this.placeDisabled = row.type !== 'numeric';
+            },
+            checkSave() {
+                checkData(this.$refs.editFieldTable);
             },
             formatType(value) {
                 switch (value) {
