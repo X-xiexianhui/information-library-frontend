@@ -1,0 +1,27 @@
+.nav{
+    top: 0;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+}
+.tree-list{
+    width: 80%;
+    color: #8c939d;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+.el-aside{
+    width: 200px;
+    height:calc(100vh);
+    overflow-y: scroll;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+.el-container{
+    margin-top: 80px;
+    height: calc(100vh);
+}
+.el-main{
+    padding: 0;
+    overflow-y: scroll;
+    height: calc(100vh);
+}
