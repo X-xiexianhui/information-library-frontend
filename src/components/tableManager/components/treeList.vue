@@ -30,48 +30,48 @@
 
 <script>
 
-    import bus from '@lljj/bus';
+import bus from '../../../common/bus'
 
-    export default {
-        name: 'TreeList',
-        props: {
-            data: {
-                type: Array,
-                default: () => ([])
-            }
-        },
-        data() {
-            return {
-                filterText: '',
-                defaultProps: {
-                    children: 'children',
-                    label: 'label'
-                },
-                selectTable: ''
-            };
-        },
-        watch: {
-            filterText(val) {
-                this.$refs.tree.filter(val);
-            }
-        },
-        methods: {
-            getCheckedNodes(val) {
-                this.selectTable = val.label;
-                bus.$emit('setTableNameEvent', val.label);
-            },
-            filterNode(value, data) {
-                if (!value) return true;
-                return data.label.indexOf(value) !== -1;
-            },
-            rename() {
-                console.log(this.selectTable);
-            },
-            deleteTable() {
-                console.log('delete');
-            },
-        },
-    };
+export default {
+  name: 'TreeList',
+  props: {
+    data: {
+      type: Array,
+      default: () => ([])
+    }
+  },
+  data () {
+    return {
+      filterText: '',
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      },
+      selectTable: ''
+    }
+  },
+  watch: {
+    filterText (val) {
+      this.$refs.tree.filter(val)
+    }
+  },
+  methods: {
+    getCheckedNodes (val) {
+      this.selectTable = val.label
+      bus.$emit('setTableNameEvent', val.label)
+    },
+    filterNode (value, data) {
+      if (!value) return true
+      return data.label.indexOf(value) !== -1
+    },
+    rename () {
+      console.log(this.selectTable)
+    },
+    deleteTable () {
+      console.log('delete')
+    }
+  }
+}
 </script>
 
 <style scoped>

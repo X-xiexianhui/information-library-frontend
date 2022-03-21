@@ -45,42 +45,39 @@
 </template>
 
 <script>
-    import { insertEvent } from '../commonFunction/insertEvent';
-    import { removeEvent } from '../commonFunction/removeEvent';
-    import { revertEvent } from '../commonFunction/revertEvent';
-    import { saveEdit } from '../commonFunction/saveEdit';
-    import { checkData } from '../commonFunction/checkData';
 
-    export default {
-        name: 'EditIndex',
-        props: {
-            saveEvent: {
-                type: Function,
-                default: saveEdit
-            },
-            tableName: {
-                type: String,
-                default: ''
-            }
-        },
-        data() {
-            return {
-                Save: true,
-                newLine: { field: '', type: '' },
-                typeList: [],
-                fieldList: [],
-                tableData: []
-            };
-        },
-        methods: {
-            insertEvent,
-            revertEvent,
-            removeEvent,
-            checkSave() {
-                checkData(this.$refs.editIndexTable);
-            },
-        }
-    };
+import {checkData, insertEvent, removeEvent, revertEvent, saveEdit} from '../../../api/tableManager/tableManager'
+
+export default {
+  name: 'EditIndex',
+  props: {
+    saveEvent: {
+      type: Function,
+      default: saveEdit
+    },
+    tableName: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      Save: true,
+      newLine: { field: '', type: '' },
+      typeList: [],
+      fieldList: [],
+      tableData: []
+    }
+  },
+  methods: {
+    insertEvent,
+    revertEvent,
+    removeEvent,
+    checkSave () {
+      checkData(this.$refs.editIndexTable)
+    }
+  }
+}
 </script>
 
 <style scoped>
