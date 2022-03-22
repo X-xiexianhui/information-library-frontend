@@ -106,5 +106,4 @@ export default {
 }
 </script>
 <style scoped>
-@import "src/assets/css/backend.css";
 </style>

@@ -9,11 +9,10 @@ import axios from 'axios'
 import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
-
+import './assets/css/backend.css'
 Vue.use(VXETable)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
-Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
