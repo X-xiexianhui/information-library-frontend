@@ -1,6 +1,6 @@
 <template>
     <div>
-        <editor-header class="nav"></editor-header>
+<!--        <editor-header class="nav"></editor-header>-->
         <el-container>
             <el-aside>
             </el-aside>

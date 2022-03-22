@@ -1,5 +1,13 @@
 <template>
   <div class="tableBody">
+      <el-form :inline="true" v-model="queryForm">
+        <el-form-item>
+          <el-input v-model="queryForm.query" :clearable="true"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onQuery">查询</el-button>
+        </el-form-item>
+      </el-form>
     <vxe-toolbar perfect>
       <template #buttons>
         <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent()">新增</vxe-button>
@@ -26,10 +34,13 @@
       <vxe-column field="dbName" title="数据库名称"></vxe-column>
       <vxe-column field="tables" title="表数量"></vxe-column>
     </vxe-table>
-    <el-dialog :visible.sync="isShow">
+    <el-dialog
+      @close="dispatch"
+      :close-on-click-modal = "false"
+      :visible.sync="isShow">
       <el-form :model="inputForm" :rules="rules" ref="ruleForm">
           <el-form-item label="数据库名称" prop="Name">
-            <el-input v-model="inputForm.Name" placement="数据库名称仅支持英文、下划线和数字"></el-input>
+            <el-input v-model="inputForm.Name" placeholder="数据库名称仅支持英文、下划线和数字"></el-input>
           </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -55,7 +66,13 @@ export default {
       isShow: false,
       row: [],
       rules: {
-        Name: [{required: true, message: '仅支持英文、数字和下划线', trigger: 'blur'}]
+        Name: [
+          {required: true, message: '请输入数据库名称', trigger: 'blur'},
+          {validator: this.checkName, trigger: 'blur'}
+        ]
+      },
+      queryForm: {
+        query: ''
       }
     }
   },
@@ -67,7 +84,7 @@ export default {
       try {
         const res = await this.$http.get('/api/db/all')
         if (res.data.code !== 200) {
-          error(res.data.message)
+          error(res.data.msg)
         } else {
           this.tableData = res.data.data
         }
@@ -78,13 +95,13 @@ export default {
     insertEvent () {
       this.isShow = true
     },
-    async removeEvent (url, config) {
+    async removeEvent () {
       try {
         const res = await this.$http.delete('/api/db/delete', {params: {dbName: this.row.dbName}})
         if (res.data.code !== 200) {
-          error(res.data.message)
+          error(res.data.msg)
         } else {
-          this.$message.success('移除成功')
+          this.$message.success(res.data.msg)
           await this.init()
         }
       } catch (e) {
@@ -96,16 +113,31 @@ export default {
         const res = await this.$http.post('/api/db/add', null, {params: {dbName: this.inputForm.Name}})
         this.isShow = false
         if (res.data.code !== 200) {
-          error(res.data.message)
+          error(res.data.msg)
         } else {
-          this.$message.success('新增成功')
+          this.$message.success(res.data.msg)
           await this.init()
+          this.inputForm.Name = ''
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    async onQuery () {
+      try {
+        const res = await this.$http.get('/api/db/get', {params: {dbName: this.queryForm.query}})
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.$message.success(res.data.msg)
+          this.tableData = res.data.data
         }
       } catch (e) {
         error(e.message)
       }
     },
     dispatch () {
+      this.$refs.ruleForm.resetFields()
       this.isShow = false
     },
     radioChangeEvent () {
@@ -114,6 +146,15 @@ export default {
     clearRadioRowEvent () {
       this.row = null
       this.$refs.xTable.clearRadioRow()
+    },
+    checkName (rule, value, callback) {
+      let res = /^[0-9a-zA-Z_]+$/
+      if (value === '' || value === undefined || value === null) {
+        callback(new Error('请输入数据库名称'))
+      }
+      if (!res.test(value)) {
+        callback(new Error('只支持英文、数字和下划线'))
+      }
     }
   }
 }
