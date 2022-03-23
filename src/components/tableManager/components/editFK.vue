@@ -75,9 +75,9 @@ export default {
       type: Function,
       default: saveEdit
     },
-    tableName: {
-      type: String,
-      default: ''
+    tableForm: {
+      type: Object,
+      default: () => ({})
     }
   },
   data () {

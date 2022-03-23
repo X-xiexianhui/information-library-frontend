@@ -1,6 +1,6 @@
 <template>
     <div>
-<!--        <editor-header class="nav"></editor-header>-->
+        <page-head class="nav"></page-head>
         <el-container>
             <el-aside>
                 <tree-list
@@ -50,10 +50,12 @@ import EditField from '../components/editField'
 import EditFk from '../components/editFK'
 import TreeList from '../components/treeList'
 import {saveEdit} from '../../../api/tableManager/tableManager'
+import PageHead from '../../common/head/pageHead'
 
 export default {
   name: 'AddTable',
   components: {
+    PageHead,
     EditIndex,
     EditFk,
     EditField,
@@ -81,9 +83,6 @@ export default {
   created () {
     bus.$on('checkDataEvent', (value) => {
       this.isSave = value
-    })
-    bus.$on('setTableNameEvent', (value) => {
-      this.Name = value
     })
   },
   methods: {

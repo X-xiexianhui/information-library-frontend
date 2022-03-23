@@ -1,9 +1,7 @@
 <template>
     <div>
-<!--        <editor-header class="nav"></editor-header>-->
+        <page-head class="nav"></page-head>
         <el-container>
-            <el-aside>
-            </el-aside>
             <el-main >
                 <el-tabs
                     v-model="activeName"
@@ -12,40 +10,57 @@
                     :before-leave="checkSave"
                 >
                     <el-tab-pane label="字段设置" name="field">
+                      <el-card >
+                        <div v-if="showTbForm">
+                          <el-form v-model="tableForm" ref="tableForm" :rules="rules" :inline="true" style="text-align: left">
+                            <el-form-item label="所属数据库" prop="dbName">
+                              <el-select v-model="tableForm.dbName" placeholder="请选择所属数据库">
+                                <el-option
+                                  v-for="item in dbSelect"
+                                  :key="item.value"
+                                  :label="item.label"
+                                  :value="item.value">
+                                </el-option>
+                              </el-select>
+                            </el-form-item>
+                            <el-form-item label="表名" prop="tbName">
+                              <el-input v-model="tableForm.tbName" placeholder="仅支持英文、数字和下划线"></el-input>
+                            </el-form-item>
+                          </el-form>
+                        </div>
+                        <div v-else>
+                          <el-descriptions title="数据表信息">
+                            <el-descriptions-item label="所属数据库">{{tableForm.dbName}}</el-descriptions-item>
+                            <el-descriptions-item label="表名称">{{tableForm.tbName}}</el-descriptions-item>
+                          </el-descriptions>
+                        </div>
                         <edit-field
                             ref="field"
-                            :current-table="Name"
+                            :table-form="tableForm"
                             :save-event="saveAdd"
+                            class="field"
                         ></edit-field>
+                      </el-card>
                     </el-tab-pane>
                     <el-tab-pane label="外键设置" name="FK">
                         <edit-fk
                             ref="FK"
-                            :table-name="Name"
+                            :table-form="tableForm"
                             :save-event="saveAdd"
+                            class="field"
                         ></edit-fk>
                     </el-tab-pane>
                     <el-tab-pane label="索引设置" name="index">
                         <edit-index
                             ref="index"
-                            :table-name="Name"
+                            :table-form="tableForm"
                             :save-event="saveAdd"
+                            class="field"
                         ></edit-index>
                     </el-tab-pane>
                 </el-tabs>
             </el-main>
         </el-container>
-        <el-dialog
-            title="请输入表名"
-            :visible.sync="dialogVisible"
-            width="30%"
-        >
-            <el-input v-model="Name" placeholder="请输入英文、下划线"></el-input>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
-        </el-dialog>
     </div>
 </template>
 
@@ -55,42 +70,37 @@ import EditField from '../components/editField'
 import EditFk from '../components/editFK'
 import bus from '../../../common/bus'
 import {saveAdd} from '../../../api/tableManager/tableManager'
+import PageHead from '../../common/head/pageHead'
 export default {
   name: 'AddTable',
   components: {
+    PageHead,
     EditIndex,
     EditFk,
     EditField
   },
   data () {
     return {
-      dialogVisible: false,
       isSave: true,
       activeName: 'field',
-      Name: '',
-      data: [{
-        id: '2',
-        label: '一级'
+      dbSelect: [],
+      showTbForm: true,
+      tableForm: {
+        dbName: '',
+        tbName: ''
       },
-      {
-        id: '3',
-        label: '二级'
-      },
-      {
-        id: '4',
-        label: '三级'
-      }]
+      rules: {
+        dbName: [{required: true, message: '请输入数据库名称', trigger: 'blur'}],
+        tbName: [
+          {required: true, message: '请输入表名', trigger: 'blur'},
+          {validator: this.checkName, trigger: 'blur'}
+        ]
+      }
     }
   },
   created () {
     bus.$on('checkDataEvent', (value) => {
       this.isSave = value
-    })
-    bus.$on('setTableNameEvent', (value) => {
-      this.Name = value
-    })
-    bus.$on('showDialogEvent', (value) => {
-      this.dialogVisible = value
     })
   },
   methods: {
@@ -101,9 +111,24 @@ export default {
         this.$alert('请先保存', {})
       }
       return this.isSave
+    },
+    checkName (rule, value, callback) {
+      let res = /^[0-9a-zA-Z_]+$/
+      if (value === '' || value === undefined || value === null) {
+        callback(new Error('请输入表名称'))
+      }
+      if (!res.test(value)) {
+        callback(new Error('只支持英文、数字和下划线'))
+      }
     }
   }
 }
 </script>
 <style scoped>
+.field{
+  margin: auto;
+}
+.el-card{
+  margin: auto;
+}
 </style>

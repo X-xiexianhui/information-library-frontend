@@ -8,7 +8,7 @@ export function checkData (ref) {
 }
 // 插入新行
 export function insertEvent (ref) {
-  ref.insertAt(ref.newLine, -1)
+  ref.insertAt(ref.newLine, -1).then(r => {})
 }
 // 移除数据
 export async function removeEvent (ref) {
@@ -30,25 +30,23 @@ export async function revertEvent (ref) {
   }
 }
 // 创建新表
-export function saveAdd (ref, tableName) {
-  if (tableName === '') {
-    bus.$emit('showDialogEvent', true)
-    return
+export function saveAdd (ref, tableForm) {
+  if (tableForm.dbName === '' || tableForm.tbName === '') {
+    return this.$alert('请输入表名和所属数据库', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
-    this.$alert('请输入数据', {})
+    return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
-  ref.reloadData(this.tableData)
+  console.log(tableForm)
 }
 // 修改表
-export function saveEdit (ref, tableName) {
+export function saveEdit (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
-  console.log(tableName)
   if (Saved) {
-    this.$alert('请输入数据', {})
+    return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
   ref.reloadData(this.tableData)
 }

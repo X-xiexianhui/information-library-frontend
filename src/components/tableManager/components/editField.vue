@@ -2,10 +2,10 @@
     <div>
         <vxe-toolbar perfect>
             <template #buttons>
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable, tableName)">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable, tableName)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFieldTable, tableName)">保存</vxe-button>
-                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable, tableName)">还原</vxe-button>
+                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable)">新增</vxe-button>
+                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFieldTable, tableForm)">保存</vxe-button>
+                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable)">还原</vxe-button>
             </template>
         </vxe-toolbar>
         <vxe-table
@@ -76,9 +76,9 @@ export default {
       type: Function,
       default () {}
     },
-    currentTable: {
-      type: String,
-      default: ''
+    tableForm: {
+      type: Object,
+      default: () => ({})
     }
   },
   data () {
@@ -86,7 +86,6 @@ export default {
       newLine: {
         name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
       },
-      tableName: '',
       tableData: [],
       placeDisabled: true,
       options: [
@@ -95,17 +94,8 @@ export default {
         { label: '字符串', value: 'varchar' },
         { label: '日期', value: 'date' },
         { label: '时间', value: 'time' },
-        { label: '日期时间', value: 'datetime' },
-        { label: '文件', value: 'char' }
+        { label: '日期时间', value: 'datetime' }
       ]
-    }
-  },
-  watch: {
-    currentTable: {
-      handler (newValue, oldValue) {
-        this.tableName = newValue
-      },
-      immediate: true
     }
   },
   methods: {

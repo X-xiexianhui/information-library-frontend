@@ -4,7 +4,7 @@
             <template #buttons>
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editIndexTable)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editIndexTable)">保存</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editIndexTable, tableForm)">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editIndexTable)">还原</vxe-button>
             </template>
         </vxe-toolbar>
@@ -55,9 +55,9 @@ export default {
       type: Function,
       default: saveEdit
     },
-    tableName: {
-      type: String,
-      default: ''
+    tableForm: {
+      type: Object,
+      default: () => ({})
     }
   },
   data () {
