@@ -8,15 +8,19 @@
           <el-button type="primary" @click="onQuery">查询</el-button>
         </el-form-item>
       </el-form>
-    <vxe-toolbar perfect>
-      <template #buttons>
-        <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent()" style="text-align: left">新增</vxe-button>
-        <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent()">移除</vxe-button>
-      </template>
+    <vxe-toolbar perfect print export>
+        <template #buttons>
+          <div style="text-align: left">
+            <vxe-button icon="el-icon-plus" status="perfect" content="新增" @click="insertEvent()"></vxe-button>
+            <vxe-button icon="el-icon-delete" status="perfect" content="删除" @click="removeEvent()"></vxe-button>
+          </div>
+        </template>
     </vxe-toolbar>
     <vxe-table
       border
       ref="xTable"
+      :print-config="{}"
+      :export-config="{}"
       show-header-overflow
       show-overflow
       :align="allAlign"
