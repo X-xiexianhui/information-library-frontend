@@ -17,9 +17,9 @@
                               <el-select v-model="tableForm.dbName" placeholder="请选择所属数据库">
                                 <el-option
                                   v-for="item in dbSelect"
-                                  :key="item.value"
-                                  :label="item.label"
-                                  :value="item.value">
+                                  :key="item.dbName"
+                                  :label="item.dbName"
+                                  :value="item.dbName">
                                 </el-option>
                               </el-select>
                             </el-form-item>
@@ -46,6 +46,7 @@
                         <edit-fk
                             ref="FK"
                             :table-form="tableForm"
+                            :db-list="dbSelect"
                             :save-event="saveAdd"
                             class="field"
                         ></edit-fk>
@@ -71,6 +72,7 @@ import EditFk from '../components/editFK'
 import bus from '../../../common/bus'
 import {saveAdd} from '../../../api/tableManager/tableManager'
 import PageHead from '../../common/head/pageHead'
+import {error} from '../../../api/error'
 export default {
   name: 'AddTable',
   components: {
@@ -102,9 +104,22 @@ export default {
     bus.$on('checkDataEvent', (value) => {
       this.isSave = value
     })
+    this.getDbList()
   },
   methods: {
     saveAdd,
+    async getDbList () {
+      try {
+        const res = await this.$http.get('/api/db/all')
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.dbSelect = res.data.data
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
     checkSave (activeName, oldActiveName) {
       this.$refs[oldActiveName].checkSave()
       if (!this.isSave) {
