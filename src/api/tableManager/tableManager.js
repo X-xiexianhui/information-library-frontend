@@ -31,7 +31,7 @@ export async function revertEvent (ref) {
 }
 // 创建新表
 export function saveAdd (ref, tableForm) {
-  if (tableForm.dbNmae === '' || tableForm.tbName === '') {
+  if (tableForm.dbName === '' || tableForm.tbName === '') {
     return this.$alert('请输入数据库和表名', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
