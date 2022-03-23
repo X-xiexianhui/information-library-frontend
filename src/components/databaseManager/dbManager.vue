@@ -34,24 +34,6 @@
       <vxe-column field="dbName" title="数据库名称"></vxe-column>
       <vxe-column field="tables" title="表数量"></vxe-column>
     </vxe-table>
-<!--    <vxe-grid-->
-<!--      border-->
-<!--      resizable-->
-<!--      height="530"-->
-<!--      :loading="loading"-->
-<!--      :seq-config="{startIndex: (tablePage.currentPage - 1) * tablePage.pageSize}"-->
-<!--      :columns="tableColumn"-->
-<!--      :data="tableData">-->
-<!--      <template #pager>-->
-<!--        <vxe-pager-->
-<!--          :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"-->
-<!--          :current-page.sync="tablePage.currentPage"-->
-<!--          :page-size.sync="tablePage.pageSize"-->
-<!--          :total="tablePage.total"-->
-<!--          @page-change="handlePageChange">-->
-<!--        </vxe-pager>-->
-<!--      </template>-->
-<!--    </vxe-grid>-->
     <el-dialog
       @close="dispatch"
       :close-on-click-modal = "false"
