@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       path: '/db',
-      component: () => import('../components/databaseManager/dbManager')
+      component: () => import('../components/databaseManager/dbPage')
     }
   ]
 })

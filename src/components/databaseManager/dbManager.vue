@@ -1,8 +1,8 @@
 <template>
   <div class="tableBody">
-      <el-form :inline="true" v-model="queryForm">
+      <el-form :inline="true" v-model="queryForm" style="text-align: right">
         <el-form-item>
-          <el-input v-model="queryForm.query" :clearable="true"></el-input>
+          <el-input v-model="queryForm.query" :clearable="true" placeholder="请输入数据库名称"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onQuery">查询</el-button>
@@ -10,7 +10,7 @@
       </el-form>
     <vxe-toolbar perfect>
       <template #buttons>
-        <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent()">新增</vxe-button>
+        <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent()" style="text-align: left">新增</vxe-button>
         <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent()">移除</vxe-button>
       </template>
     </vxe-toolbar>
@@ -34,6 +34,24 @@
       <vxe-column field="dbName" title="数据库名称"></vxe-column>
       <vxe-column field="tables" title="表数量"></vxe-column>
     </vxe-table>
+<!--    <vxe-grid-->
+<!--      border-->
+<!--      resizable-->
+<!--      height="530"-->
+<!--      :loading="loading"-->
+<!--      :seq-config="{startIndex: (tablePage.currentPage - 1) * tablePage.pageSize}"-->
+<!--      :columns="tableColumn"-->
+<!--      :data="tableData">-->
+<!--      <template #pager>-->
+<!--        <vxe-pager-->
+<!--          :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"-->
+<!--          :current-page.sync="tablePage.currentPage"-->
+<!--          :page-size.sync="tablePage.pageSize"-->
+<!--          :total="tablePage.total"-->
+<!--          @page-change="handlePageChange">-->
+<!--        </vxe-pager>-->
+<!--      </template>-->
+<!--    </vxe-grid>-->
     <el-dialog
       @close="dispatch"
       :close-on-click-modal = "false"
@@ -162,7 +180,7 @@ export default {
 
 <style scoped>
   .tableBody{
-    width: 60%;
-    margin-left: 20%;
+    width: 100%;
+    margin-left: auto;
   }
 </style>
