@@ -159,6 +159,7 @@ export default {
       if (!res.test(value)) {
         callback(new Error('只支持英文、数字和下划线'))
       }
+      callback()
     }
   }
 }

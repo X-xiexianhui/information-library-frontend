@@ -12,7 +12,7 @@
                     <el-tab-pane label="字段设置" name="field">
                       <el-card >
                         <div v-if="showTbForm">
-                          <el-form v-model="tableForm" ref="tableForm" :rules="rules" :inline="true" style="text-align: left">
+                          <el-form :model="tableForm" ref="tableForm" :rules="rules" :inline="true" style="text-align: left">
                             <el-form-item label="所属数据库" prop="dbName">
                               <el-select v-model="tableForm.dbName" placeholder="请选择所属数据库">
                                 <el-option
@@ -94,8 +94,8 @@ export default {
       rules: {
         dbName: [{required: true, message: '请输入数据库名称', trigger: 'blur'}],
         tbName: [
-          {required: true, message: '请输入表名', trigger: 'blur'},
-          {validator: this.checkTbName, trigger: 'blur'}
+          {validator: this.checkTbName, trigger: 'blur'},
+          {required: true, message: '请输入表名', trigger: 'blur'}
         ]
       }
     }
@@ -128,10 +128,12 @@ export default {
       return this.isSave
     },
     checkTbName (rule, value, callback) {
+      console.log(value)
       let res = /^[0-9a-zA-Z_]+$/
       if (!res.test(value)) {
         callback(new Error('只支持英文、数字和下划线'))
       }
+      callback()
     }
   }
 }
