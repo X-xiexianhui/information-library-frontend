@@ -93,7 +93,7 @@ export default {
         dbName: [{required: true, message: '请输入数据库名称', trigger: 'blur'}],
         tbName: [
           {required: true, message: '请输入表名', trigger: 'blur'},
-          {validator: this.checkName, trigger: 'blur'}
+          {validator: this.checkTbName, trigger: 'blur'}
         ]
       }
     }
@@ -112,11 +112,8 @@ export default {
       }
       return this.isSave
     },
-    checkName (rule, value, callback) {
+    checkTbName (rule, value, callback) {
       let res = /^[0-9a-zA-Z_]+$/
-      if (value === '' || value === undefined || value === null) {
-        callback(new Error('请输入表名称'))
-      }
       if (!res.test(value)) {
         callback(new Error('只支持英文、数字和下划线'))
       }

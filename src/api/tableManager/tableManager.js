@@ -31,15 +31,12 @@ export async function revertEvent (ref) {
 }
 // 创建新表
 export function saveAdd (ref, tableForm) {
-  if (tableForm.dbName === '' || tableForm.tbName === '') {
-    return this.$alert('请输入表名和所属数据库', '警告', {confirmButtonText: '确定', callback: () => {}})
-  }
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
     return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
-  console.log(tableForm)
+  ref.reloadData()
 }
 // 修改表
 export function saveEdit (ref, tableForm) {

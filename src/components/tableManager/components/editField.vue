@@ -1,11 +1,13 @@
 <template>
     <div>
-        <vxe-toolbar perfect>
+        <vxe-toolbar perfect print export>
             <template #buttons>
+              <div style="text-align: left">
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFieldTable, tableForm)">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable)">还原</vxe-button>
+              </div>
             </template>
         </vxe-toolbar>
         <vxe-table
@@ -14,6 +16,8 @@
             resizable
             keep-source
             show-overflow
+            :print-config="{}"
+            :export-config="{}"
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
@@ -32,7 +36,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.type" transfer>
-                        <vxe-option v-for="item in options" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                        <vxe-option v-for="item in options" :key="item.key" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>

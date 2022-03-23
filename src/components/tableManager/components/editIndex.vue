@@ -1,11 +1,13 @@
 <template>
     <div>
-        <vxe-toolbar perfect>
+        <vxe-toolbar perfect print export>
             <template #buttons>
+              <div style="text-align: left">
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editIndexTable)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editIndexTable, tableForm)">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editIndexTable)">还原</vxe-button>
+              </div>
             </template>
         </vxe-toolbar>
         <vxe-table
@@ -14,6 +16,8 @@
             resizable
             keep-source
             show-overflow
+            :print-config="{}"
+            :export-config="{}"
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
@@ -25,7 +29,7 @@
                     <span>{{ row.field }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.fk" transfer>
+                    <vxe-select v-model="row.fk" transfer :multiple="row.type==='union'">
                         <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
@@ -64,7 +68,12 @@ export default {
     return {
       Save: true,
       newLine: { field: '', type: '' },
-      typeList: [],
+      typeList: [
+        {key: 1, value: '普通索引', label: '普通索引'},
+        {key: 2, value: '联合索引', label: '联合索引'},
+        {key: 3, value: '唯一索引', label: '唯一索引'},
+        {key: 4, value: '全文索引', label: '全文索引'}
+      ],
       fieldList: [],
       tableData: []
     }
