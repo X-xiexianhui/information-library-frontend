@@ -91,7 +91,7 @@ export default {
       validRules: {
         name: [
           {required: true, message: '字段名称必填'},
-          {validator: this.nameValid()}
+          {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线'}
         ],
         type: [{required: true, message: '字段类型必填'}]
       },
@@ -137,10 +137,6 @@ export default {
         default:
           return ''
       }
-    },
-    nameValid (cellValue) {
-      let res = /^[0-9a-zA-Z_]+$/
-      if (!res.test(cellValue)) return new Error('格式不正确，只支持字母、数字和下划线')
     }
   }
 }
