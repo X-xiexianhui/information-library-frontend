@@ -94,7 +94,7 @@ export default {
       rules: {
         dbName: [{required: true, message: '请输入数据库名称', trigger: 'blur'}],
         tbName: [
-          {validator: this.checkTbName, trigger: 'blur'},
+          {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线', trigger: 'blur'},
           {required: true, message: '请输入表名', trigger: 'blur'}
         ]
       }
@@ -126,14 +126,6 @@ export default {
         this.$alert('请先保存', {})
       }
       return this.isSave
-    },
-    checkTbName (rule, value, callback) {
-      console.log(value)
-      let res = /^[0-9a-zA-Z_]+$/
-      if (!res.test(value)) {
-        callback(new Error('只支持英文、数字和下划线'))
-      }
-      callback()
     }
   }
 }
