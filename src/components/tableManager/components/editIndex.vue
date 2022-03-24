@@ -25,7 +25,7 @@
         >
             <vxe-column type="checkbox" width="60"></vxe-column>
             <vxe-column type="seq" width="60"></vxe-column>
-            <vxe-column field="" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="field" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
                     <span>{{ row.field }}</span>
                 </template>
