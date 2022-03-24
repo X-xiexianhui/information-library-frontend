@@ -18,6 +18,7 @@
             show-overflow
             :print-config="{}"
             :export-config="{}"
+            :edit-rules="validRules"
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
@@ -87,6 +88,13 @@ export default {
   },
   data () {
     return {
+      validRules: {
+        name: [
+          {required: true, message: '字段名称必填'},
+          {validator: this.nameValid()}
+        ],
+        type: [{required: true, message: '字段类型必填'}]
+      },
       newLine: {
         name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
       },
@@ -129,6 +137,10 @@ export default {
         default:
           return ''
       }
+    },
+    nameValid (cellValue) {
+      let res = /^[0-9a-zA-Z_]+$/
+      if (!res.test(cellValue)) return new Error('格式不正确，只支持字母、数字和下划线')
     }
   }
 }
