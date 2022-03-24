@@ -18,6 +18,7 @@
             show-overflow
             :print-config="{}"
             :export-config="{}"
+            :edit-rules="validRules"
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
@@ -54,16 +55,6 @@
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="type" title="类型" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #default="{ row }">
-                    <span>{{ row.type }}</span>
-                </template>
-                <template #edit="{ row }">
-                    <vxe-select v-model="row.type" transfer>
-                        <vxe-option v-for="item in typeList" :key="item.dbName" :value="item.dbName" :label="item.dbName"></vxe-option>
-                    </vxe-select>
-                </template>
-            </vxe-column>
         </vxe-table>
     </div>
 </template>
@@ -92,12 +83,17 @@ export default {
     return {
       Save: true,
       newLine: {
-        fk: '', table: '', field: '', type: ''
+        fk: '', table: '', field: ''
       },
       fkList: [],
       fieldList: [],
       typeList: [],
-      tableData: []
+      tableData: [],
+      validRules: {
+        fk: [{required: true, message: '外键字段必填'}],
+        table: [{required: true, message: '参照表必填'}],
+        field: [{required: true, message: '参照字段必填'}]
+      }
     }
   },
   methods: {
@@ -106,18 +102,6 @@ export default {
     revertEvent,
     checkSave () {
       checkData(this.$refs.editFkTable)
-    },
-    formatType (value) {
-      switch (value) {
-        case 'unique':
-          return '唯一索引'
-        case 'numeric':
-          return '小数'
-        case 'varchar':
-          return '字符串'
-        default:
-          return ''
-      }
     }
   }
 }

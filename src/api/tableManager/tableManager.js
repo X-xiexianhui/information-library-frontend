@@ -30,7 +30,7 @@ export async function revertEvent (ref) {
     ref.revertData()
   }
 }
-
+// 校验数据
 async function fullValidEvent (ref) {
   const errMap = await ref.fullValidate().catch(errMap => errMap)
   if (errMap) {

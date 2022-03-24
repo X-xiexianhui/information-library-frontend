@@ -18,6 +18,7 @@
             show-overflow
             :print-config="{}"
             :export-config="{}"
+            :edit-rules="validRules"
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
@@ -68,6 +69,10 @@ export default {
     return {
       Save: true,
       newLine: { field: '', type: '' },
+      validRules: {
+        field: [{required: true, message: '索引字段必填'}],
+        type: [{required: true, message: '索引类型必填'}]
+      },
       typeList: [
         {key: 1, value: '普通索引', label: '普通索引'},
         {key: 2, value: '联合索引', label: '联合索引'},
