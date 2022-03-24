@@ -8,8 +8,8 @@ export function checkData (ref) {
   bus.$emit('checkDataEvent', value)
 }
 // 插入新行
-export function insertEvent (ref) {
-  ref.insertAt(ref.newLine, -1).then(r => {})
+export function insertEvent (ref, record) {
+  ref.insertAt(record, -1).then(() => {})
 }
 // 移除数据
 export async function removeEvent (ref) {
@@ -76,10 +76,10 @@ export async function saveAdd (ref, tableForm) {
   let data = {
     dbName: tableForm.dbName,
     tbName: tableForm.tbName,
-    tbConfig: insertRecords
+    column: insertRecords
   }
   try {
-    const res = await this.$http.post('table/add', data)
+    const res = await this.$http.post('/api/tb/add', data)
     if (res.data.code !== 200) {
       error(res.data.msg)
     } else {

@@ -3,7 +3,7 @@
         <vxe-toolbar perfect print export>
             <template #buttons>
               <div style="text-align: left">
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable)">新增</vxe-button>
+                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable,newLine)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFieldTable, tableForm)">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable)">还原</vxe-button>
@@ -26,17 +26,17 @@
         >
             <vxe-column type="checkbox" width="60"></vxe-column>
             <vxe-column type="seq" width="60"></vxe-column>
-            <vxe-column field="name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="colName" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #edit="{ row }">
-                    <vxe-input v-model="row.name" type="text"></vxe-input>
+                    <vxe-input v-model="row.colName" type="text"></vxe-input>
                 </template>
             </vxe-column>
-            <vxe-column field="type" title="字段类型" :edit-render="{}">
+            <vxe-column field="datatype" title="字段类型" :edit-render="{}">
                 <template #default="{ row }">
-                    <span>{{ formatType(row.type) }}</span>
+                    <span>{{ formatType(row.datatype) }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.type" transfer>
+                    <vxe-select v-model="row.datatype" transfer>
                         <vxe-option v-for="item in options" :key="item.key" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
@@ -51,14 +51,14 @@
                     <vxe-input v-model.number="row.place" type="text" :disabled="placeDisabled"></vxe-input>
                 </template>
             </vxe-column>
-            <vxe-column field="pk" title="主键" :edit-render="{}">
+            <vxe-column field="PK" title="主键" :edit-render="{}">
                 <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.pk"></vxe-checkbox>
+                    <vxe-checkbox v-model="row.PK"></vxe-checkbox>
                 </template>
             </vxe-column>
-            <vxe-column field="notNull" title="非空" :edit-render="{}">
+            <vxe-column field="not_null" title="非空" :edit-render="{}">
                 <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.notNull"></vxe-checkbox>
+                    <vxe-checkbox v-model="row.not_null"></vxe-checkbox>
                 </template>
             </vxe-column>
             <vxe-column field="unique" title="唯一" :edit-render="{}">
@@ -89,21 +89,21 @@ export default {
   data () {
     return {
       validRules: {
-        name: [
+        colName: [
           {required: true, message: '字段名称必填'},
           {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线'}
         ],
-        type: [
+        datatype: [
           {required: true, message: '字段类型必填'}
         ],
         length: [
           {required: true, message: '字段长度必填'},
           {type: 'number', min: 1, max: 127, message: '请输入1-127之间的数字'}
         ],
-        place: [{type: 'number', min: 1, max: 65, message: '请输入1-65之间的数字'}]
+        place: [{type: 'number', min: 0, max: 65, message: '请输入0-65之间的数字'}]
       },
       newLine: {
-        name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
+        colName: '', datatype: '', length: '', place: 0, PK: false, not_null: false, unique: false
       },
       tableData: [],
       placeDisabled: true,
