@@ -93,7 +93,14 @@ export default {
           {required: true, message: '字段名称必填'},
           {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线'}
         ],
-        type: [{required: true, message: '字段类型必填'}]
+        type: [
+          {required: true, message: '字段类型必填'}
+        ],
+        length: [
+          {required: true, message: '字段长度必填'},
+          {type: 'number', min: 1, max: 127, message: '请输入1-127之间的数字'}
+        ],
+        place: [{type: 'number', min: 1, max: 65, message: '请输入1-65之间的数字'}]
       },
       newLine: {
         name: '', type: '', length: '', place: '', pk: false, notNull: false, unique: false
