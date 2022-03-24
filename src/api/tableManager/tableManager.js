@@ -1,5 +1,6 @@
 import bus from '../../common/bus'
 import { VXETable } from 'vxe-table'
+import {error} from '../error'
 // 检查数据
 export function checkData (ref) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -30,7 +31,7 @@ export async function revertEvent (ref) {
   }
 }
 // 创建新表
-export function saveAdd (ref, tableForm) {
+export async function saveAdd (ref, tableForm) {
   if (tableForm.dbName === '' || tableForm.tbName === '') {
     return this.$alert('请输入数据库和表名', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
@@ -39,7 +40,22 @@ export function saveAdd (ref, tableForm) {
   if (Saved) {
     return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
-  ref.reloadData()
+  let data = {
+    dbName: tableForm.dbName,
+    tbName: tableForm.tbName,
+    tbConfig: insertRecords
+  }
+  try {
+    const res = await this.$http.post('table/add', data)
+    if (res.data.code !== 200) {
+      error(res.data.msg)
+    } else {
+      this.$message.success(res.data.msg)
+      ref.reloadData(res.data.data)
+    }
+  } catch (e) {
+    error(e.message)
+  }
 }
 // 修改表
 export function saveEdit (ref, tableForm) {
