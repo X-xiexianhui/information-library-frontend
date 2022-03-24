@@ -150,7 +150,7 @@ export default {
     clearRadioRowEvent () {
       this.row = null
       this.$refs.xTable.clearRadioRow()
-    },
+    }
   }
 }
 </script>
