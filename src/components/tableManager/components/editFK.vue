@@ -3,7 +3,7 @@
         <vxe-toolbar perfect print export>
             <template #buttons>
               <div style="text-align: left">
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFkTable)">新增</vxe-button>
+                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFkTable, newLine)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFkTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFkTable)">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFkTable)">还原</vxe-button>

@@ -104,6 +104,9 @@ export default {
     bus.$on('checkDataEvent', (value) => {
       this.isSave = value
     })
+    bus.$on('setShowTbFormEvent', (value) => {
+      this.showTbForm = value
+    })
     this.getDbList()
   },
   methods: {
