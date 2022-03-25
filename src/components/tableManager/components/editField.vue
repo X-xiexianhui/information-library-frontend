@@ -41,9 +41,9 @@
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="length" title="字段长度" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="len" title="字段长度" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #edit="{ row }">
-                    <vxe-input v-model.number="row.length" type="text"></vxe-input>
+                    <vxe-input v-model.number="row.len" type="text"></vxe-input>
                 </template>
             </vxe-column>
             <vxe-column field="place" title="小数位数" :edit-render="{autofocus: '.vxe-input--inner'}">
@@ -61,9 +61,9 @@
                     <vxe-checkbox v-model="row.not_null"></vxe-checkbox>
                 </template>
             </vxe-column>
-            <vxe-column field="unique" title="唯一" :edit-render="{}">
+            <vxe-column field="uni" title="唯一" :edit-render="{}">
                 <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.unique"></vxe-checkbox>
+                    <vxe-checkbox v-model="row.uni"></vxe-checkbox>
                 </template>
             </vxe-column>
         </vxe-table>
@@ -96,14 +96,14 @@ export default {
         datatype: [
           {required: true, message: '字段类型必填'}
         ],
-        length: [
+        len: [
           {required: true, message: '字段长度必填'},
           {type: 'number', min: 1, max: 127, message: '请输入1-127之间的数字'}
         ],
         place: [{type: 'number', min: 0, max: 65, message: '请输入0-65之间的数字'}]
       },
       newLine: {
-        colName: '', datatype: '', length: '', place: 0, PK: false, not_null: false, unique: false
+        colName: '', datatype: '', len: '', place: 0, PK: false, not_null: false, uni: false
       },
       tableData: [],
       placeDisabled: true,

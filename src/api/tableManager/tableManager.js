@@ -84,7 +84,7 @@ export async function saveAdd (ref, tableForm) {
       error(res.data.msg)
     } else {
       this.$message.success(res.data.msg)
-      bus.$emit('setTbFormEvent', false)
+      bus.$emit('setShowTbFormEvent', false)
       ref.reloadData(res.data.data)
     }
   } catch (e) {
