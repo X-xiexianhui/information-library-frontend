@@ -25,24 +25,22 @@
         >
             <vxe-column type="checkbox" width="60"></vxe-column>
             <vxe-column type="seq" width="60"></vxe-column>
-            <vxe-column field="field" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
-                    <span>{{ row.field }}</span>
+                  <span>{{formatMultiSelect(row.columns)}}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.fk" transfer :multiple="row.type==='union'">
-                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                    <vxe-select v-model="row.columns" transfer :multiple="true">
+                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.value"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="type" title="索引类型" :edit-render="{}">
+            <vxe-column field="unique" title="唯一索引" :edit-render="{}">
                 <template #default="{ row }">
-                    <span>{{ row.type }}</span>
+                    <span>{{ row.unique }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.type" transfer>
-                        <vxe-option v-for="item in typeList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
-                    </vxe-select>
+
                 </template>
             </vxe-column>
         </vxe-table>
@@ -52,6 +50,7 @@
 <script>
 
 import {checkData, insertEvent, removeEvent, revertEvent, saveEdit} from '../../../api/tableManager/tableManager'
+import {error} from '../../../api/error'
 
 export default {
   name: 'EditIndex',
@@ -68,10 +67,8 @@ export default {
   data () {
     return {
       Save: true,
-      newLine: { field: '', type: '' },
-      validRules: {
-        field: [{required: true, message: '索引字段必填'}],
-        type: [{required: true, message: '索引类型必填'}]
+      newLine: { columns: [], unique: false },
+      validRules: {column1s: [{required: true, message: '索引字段必填'}]
       },
       typeList: [
         {key: 1, value: '普通索引', label: '普通索引'},
@@ -83,12 +80,38 @@ export default {
       tableData: []
     }
   },
+  watch: {
+    tableForm: {
+      handler (newValue) {
+        this.getFieldList(newValue)
+      }
+    }
+  },
   methods: {
     insertEvent,
     revertEvent,
     removeEvent,
     checkSave () {
       checkData(this.$refs.editIndexTable)
+    },
+    formatMultiSelect (values) {
+      if (values) {
+        return values.join(',')
+      }
+      return ''
+    },
+    async getFieldList (val) {
+      try {
+        const res = await this.$http.get('tb/column/get', {params: {dbName: val.dbName, tbName: val.tbName}})
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.$message.success(res.data.msg)
+          this.fieldList = res.data.data
+        }
+      } catch (e) {
+        error(e.message)
+      }
     }
   }
 }

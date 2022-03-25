@@ -86,7 +86,7 @@ export default {
   methods: {
     async init () {
       try {
-        const res = await this.$http.get('/api/db/all')
+        const res = await this.$http.get('/api/db/search', {params: {dbName: ''}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -114,7 +114,7 @@ export default {
     },
     async onSubmit () {
       try {
-        const res = await this.$http.post('/api/db/add', null, {params: {dbName: this.inputForm.Name}})
+        const res = await this.$http.post('/api/db/create', null, {params: {dbName: this.inputForm.Name}})
         this.isShow = false
         if (res.data.code !== 200) {
           error(res.data.msg)
