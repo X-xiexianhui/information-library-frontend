@@ -26,17 +26,17 @@
         >
             <vxe-column type="checkbox" width="60"></vxe-column>
             <vxe-column type="seq" width="60"></vxe-column>
-            <vxe-column field="colName" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #edit="{ row }">
-                    <vxe-input v-model="row.colName" type="text"></vxe-input>
+                    <vxe-input v-model="row.col_name" type="text"></vxe-input>
                 </template>
             </vxe-column>
-            <vxe-column field="datatype" title="字段类型" :edit-render="{}">
+            <vxe-column field="data_type" title="字段类型" :edit-render="{}">
                 <template #default="{ row }">
-                    <span>{{ formatType(row.datatype) }}</span>
+                    <span>{{ formatType(row.data_type) }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.datatype" transfer>
+                    <vxe-select v-model="row.data_type" transfer>
                         <vxe-option v-for="item in options" :key="item.key" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
@@ -89,11 +89,11 @@ export default {
   data () {
     return {
       validRules: {
-        colName: [
+        col_name: [
           {required: true, message: '字段名称必填'},
           {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线'}
         ],
-        datatype: [
+        data_type: [
           {required: true, message: '字段类型必填'}
         ],
         len: [
@@ -103,7 +103,7 @@ export default {
         place: [{type: 'number', min: 0, max: 65, message: '请输入0-65之间的数字'}]
       },
       newLine: {
-        colName: '', datatype: '', len: '', place: 0, PK: false, not_null: false, uni: false
+        col_name: '', data_type: '', len: '', place: 0, PK: false, not_null: false, uni: false
       },
       tableData: [],
       placeDisabled: true,
