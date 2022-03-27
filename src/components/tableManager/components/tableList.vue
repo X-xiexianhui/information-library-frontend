@@ -1,0 +1,150 @@
+<template>
+  <div class="tableBody">
+    <el-form :inline="true" v-model="queryForm" style="text-align: right">
+      <el-form-item>
+        <el-input v-model="queryForm.query" :clearable="true" placeholder="请输入表名称"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onQuery">查询</el-button>
+      </el-form-item>
+    </el-form>
+    <vxe-toolbar perfect print export>
+      <template #buttons>
+        <div style="text-align: left">
+          <vxe-button icon="el-icon-plus" status="perfect" content="新增"
+                      @click="window.open('/table/add', '_blank')"></vxe-button>
+          <vxe-button icon="el-icon-delete" status="perfect" content="删除" @click="deleteTable()"></vxe-button>
+          <vxe-button icon="el-icon-delete" status="perfect" content="重命名" @click="renameTable()"></vxe-button>
+        </div>
+      </template>
+    </vxe-toolbar>
+    <vxe-table
+      border
+      ref="xTable"
+      :print-config="{}"
+      :export-config="{}"
+      show-header-overflow
+      show-overflow
+      :align="allAlign"
+      :row-config="{isHover: true}"
+      :radio-config="{highlight: true}"
+      :data="tableData"
+      resizable
+      keep-source
+      :edit-rules="validRules"
+      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+      @radio-change="radioChangeEvent">
+      >
+      <vxe-column type="radio" width="60">
+        <template #header>
+          <vxe-button type="text" @click="clearRadioRowEvent" :disabled="!row">取消</vxe-button>
+        </template>
+      </vxe-column>
+      <vxe-column type="seq" title="序号" width="60"></vxe-column>
+      <vxe-column field="db_name" title="所属数据库"></vxe-column>
+      <vxe-column field="tb_name" title="表名">
+
+      </vxe-column>
+    </vxe-table>
+  </div>
+</template>
+
+<script>
+import {error} from '../../../api/error'
+
+export default {
+  name: 'tableList',
+  data () {
+    return {
+      rules: {
+        new_name: [
+          {required: true, message: '请输入表名称', trigger: 'blur'},
+          {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线', trigger: 'blur'}]
+      },
+      isVisible: false,
+      inputForm: {
+        new_name: ''
+      },
+      allAlign: null,
+      tableData: [],
+      row: [],
+      queryForm: {
+        query: ''
+      }
+    }
+  },
+  created () {
+    this.getTables('')
+  },
+  methods: {
+    // 查询数据表
+    async getTables (param) {
+      try {
+        const res = await this.$http.get('/api/tb/search', {params: {query_name: param}})
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.tableData = res.data.data
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    // 删除数据表
+    async deleteTable () {
+      try {
+        const res = await this.$http.delete('/api/tb/delete', {
+          params: {
+            db_name: this.row.db_name,
+            tb_name: this.row.tb_name
+          }
+        })
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.$message.success(res.data.msg)
+          await this.init()
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    onQuery () {
+      this.getTables(this.queryForm.query)
+    },
+    async renameTable () {
+      try {
+        const res = await this.$http.post('/db/rename', null, {
+          params: {
+            db_name: this.row.db_name,
+            tb_name: this.row.tb_name,
+            new_name: this.inputForm.new_name
+          }
+        })
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.$message.success(res.data.msg)
+          await this.getTables('')
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    radioChangeEvent () {
+      this.row = this.$refs.xTable.getRadioRecord()
+    },
+    clearRadioRowEvent () {
+      this.row = null
+      this.$refs.xTable.clearRadioRow()
+    }
+  }
+}
+</script>
+
+<style scoped>
+.tableBody {
+  width: 100%;
+  margin-left: auto;
+}
+</style>

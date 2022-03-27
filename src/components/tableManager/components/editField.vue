@@ -109,7 +109,7 @@ export default {
       newLine: {
         col_name: '', data_type: '', len: '', place: 0, PK: false, not_null: false, uni: false
       },
-      tableDat: [],
+      tableData: [],
       placeDisabled: true,
       options: [
         { label: '整数', value: 'int' },
