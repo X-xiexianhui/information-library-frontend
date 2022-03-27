@@ -90,7 +90,6 @@ export default {
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          this.tableData = res.data.data
           console.log(this.tableData)
         }
       } catch (e) {
