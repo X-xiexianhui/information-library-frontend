@@ -89,6 +89,7 @@ export default {
     async getTables (param) {
       try {
         const res = await this.$http.get('/api/tb/search', {params: {query_name: param}})
+        console.log(res.data.data)
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -100,6 +101,9 @@ export default {
     },
     // 删除数据表
     async deleteTable () {
+      if (this.row.length === 0) {
+        return error('请先选择一行数据')
+      }
       try {
         const res = await this.$http.delete('/api/tb/delete', {
           params: {
@@ -128,7 +132,7 @@ export default {
     },
     async onSubmit () {
       try {
-        const res = await this.$http.post('/db/rename', {
+        const res = await this.$http.post('api/tb/rename', {
           db_name: this.row.db_name,
           tb_name: this.row.tb_name,
           new_name: this.inputForm.new_name
@@ -137,6 +141,7 @@ export default {
           error(res.data.msg)
         } else {
           this.$message.success(res.data.msg)
+          this.isVisible = false
           await this.getTables('')
         }
       } catch (e) {

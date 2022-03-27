@@ -11,9 +11,10 @@
 
 <script>
 import TableList from '../components/tableList'
+import pageHead from '../../common/head/pageHead'
 export default {
   name: 'tablePage',
-  components: {TableList}
+  components: {TableList, pageHead}
 }
 </script>
 
