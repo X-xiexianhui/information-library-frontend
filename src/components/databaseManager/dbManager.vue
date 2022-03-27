@@ -86,11 +86,12 @@ export default {
   methods: {
     async init () {
       try {
-        const res = await this.$http.get('/api/db/search', {params: {db_name: ''}})
+        const res = await this.$http.get('/api/db/search', {params: {query_name: ''}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
           this.tableData = res.data.data
+          console.log(this.tableData)
         }
       } catch (e) {
         error(e.message)
