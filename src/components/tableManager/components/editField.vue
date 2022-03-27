@@ -5,7 +5,7 @@
               <div style="text-align: left">
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable,newLine)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFieldTable, tableForm)">保存</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable)">还原</vxe-button>
               </div>
             </template>
@@ -72,15 +72,18 @@
 
 <script>
 
-import {checkData, insertEvent, removeEvent, revertEvent} from '../../../api/tableManager/tableManager'
+import {
+  checkData,
+  insertEvent,
+  removeEvent,
+  revertEvent,
+  saveAdd,
+  saveEdit
+} from '../../../api/tableManager/tableManager'
 
 export default {
   name: 'EditField',
   props: {
-    saveEvent: {
-      type: Function,
-      default () {}
-    },
     tableForm: {
       type: Object,
       default: () => ({})
@@ -121,6 +124,13 @@ export default {
     insertEvent,
     removeEvent,
     revertEvent,
+    saveEvent () {
+      if (this.tableData.length === 0) {
+        saveAdd(this.$refs.editFieldTable, this.tableForm)
+      } else {
+        saveEdit(this.$refs.editFieldTable, this.tableForm)
+      }
+    },
     editActiveEvent ({ row }) {
       this.placeDisabled = row.type !== 'numeric'
     },

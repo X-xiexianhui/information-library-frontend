@@ -5,7 +5,7 @@
               <div style="text-align: left">
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFkTable, newLine)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFkTable)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent($refs.editFkTable)">保存</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFkTable)">还原</vxe-button>
               </div>
             </template>
@@ -61,15 +61,11 @@
 
 <script>
 
-import {checkData, insertEvent, removeEvent, revertEvent, saveEdit} from '../../../api/tableManager/tableManager'
+import {checkData, insertEvent, removeEvent, revertEvent} from '../../../api/tableManager/tableManager'
 
 export default {
   name: 'EditFk',
   props: {
-    saveEvent: {
-      type: Function,
-      default: saveEdit
-    },
     tableForm: {
       type: Object,
       default: () => ({})
@@ -100,6 +96,8 @@ export default {
     insertEvent,
     removeEvent,
     revertEvent,
+    saveEvent () {
+    },
     checkSave () {
       checkData(this.$refs.editFkTable)
     }

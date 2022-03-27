@@ -37,7 +37,6 @@
                         <edit-field
                             ref="field"
                             :table-form="tableForm"
-                            :save-event="saveAdd"
                             class="field"
                         ></edit-field>
                       </el-card>
@@ -47,7 +46,6 @@
                             ref="FK"
                             :table-form="tableForm"
                             :db-list="dbSelect"
-                            :save-event="saveAdd"
                             class="field"
                         ></edit-fk>
                     </el-tab-pane>
@@ -55,7 +53,6 @@
                         <edit-index
                             ref="index"
                             :table-form="tableForm"
-                            :save-event="saveAdd"
                             class="field"
                         ></edit-index>
                     </el-tab-pane>
@@ -70,7 +67,6 @@ import EditIndex from '../components/editIndex'
 import EditField from '../components/editField'
 import EditFk from '../components/editFK'
 import bus from '../../../common/bus'
-import {saveAdd} from '../../../api/tableManager/tableManager'
 import PageHead from '../../common/head/pageHead'
 import {error} from '../../../api/error'
 export default {
@@ -110,7 +106,6 @@ export default {
     this.getDbList()
   },
   methods: {
-    saveAdd,
     async getDbList () {
       try {
         const res = await this.$http.get('/api/db/search', {params: {query_name: ''}})
