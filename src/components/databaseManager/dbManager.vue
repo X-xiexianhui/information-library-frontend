@@ -114,7 +114,7 @@ export default {
     },
     async onSubmit () {
       try {
-        const res = await this.$http.post('/api/db/create', null, {params: {db_name: this.inputForm.Name}})
+        const res = await this.$http.post('/api/db/add', null, {params: {db_name: this.inputForm.Name}})
         this.isShow = false
         if (res.data.code !== 200) {
           error(res.data.msg)

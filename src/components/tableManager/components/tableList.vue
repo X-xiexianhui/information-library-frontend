@@ -128,12 +128,10 @@ export default {
     },
     async onSubmit () {
       try {
-        const res = await this.$http.post('/db/rename', null, {
-          params: {
-            db_name: this.row.db_name,
-            tb_name: this.row.tb_name,
-            new_name: this.inputForm.new_name
-          }
+        const res = await this.$http.post('/db/rename', {
+          db_name: this.row.db_name,
+          tb_name: this.row.tb_name,
+          new_name: this.inputForm.new_name
         })
         if (res.data.code !== 200) {
           error(res.data.msg)
