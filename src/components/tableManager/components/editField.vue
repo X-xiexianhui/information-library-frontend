@@ -6,6 +6,7 @@
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable,newLine)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
+                <vxe-button icon="fa fa-save" status="perfect" @click="getInsert()">获取新增</vxe-button>
                 <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable)">还原</vxe-button>
               </div>
             </template>
@@ -108,7 +109,7 @@ export default {
       newLine: {
         col_name: '', data_type: '', len: '', place: 0, PK: false, not_null: false, uni: false
       },
-      tableData: [],
+      tableDat: [],
       placeDisabled: true,
       options: [
         { label: '整数', value: 'int' },
@@ -130,6 +131,10 @@ export default {
       } else {
         saveEdit(this.$refs.editFieldTable, this.tableForm)
       }
+    },
+    getInsert () {
+      const { updateRecords } = this.$refs.editFieldTable.getRecordset()
+      console.log(updateRecords)
     },
     editActiveEvent ({ row }) {
       this.placeDisabled = row.type !== 'numeric'
