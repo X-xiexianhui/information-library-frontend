@@ -113,7 +113,7 @@ export default {
     saveAdd,
     async getDbList () {
       try {
-        const res = await this.$http.get('/api/db/search', {params: {db_name: ''}})
+        const res = await this.$http.get('/api/db/search', {params: {query_name: ''}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
