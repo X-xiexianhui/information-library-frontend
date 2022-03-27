@@ -62,7 +62,7 @@ async function fullValidEvent (ref) {
 }
 // 创建新表
 export async function saveAdd (ref, tableForm) {
-  if (tableForm.dbName === '' || tableForm.tbName === '') {
+  if (tableForm.db_name === '' || tableForm.tb_name === '') {
     return this.$alert('请输入数据库和表名', '警告', {confirmButtonText: '确定', callback: () => {}})
   }
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -74,8 +74,8 @@ export async function saveAdd (ref, tableForm) {
     return
   }
   let data = {
-    dbName: tableForm.dbName,
-    tbName: tableForm.tbName,
+    db_name: tableForm.db_name,
+    tb_name: tableForm.tb_name,
     column: insertRecords
   }
   try {
