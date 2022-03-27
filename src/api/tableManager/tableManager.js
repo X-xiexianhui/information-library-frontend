@@ -80,7 +80,6 @@ export async function saveAdd (ref, tableForm) {
   }
   try {
     const res = await this.$http.post('/api/tb/add', data)
-    console.log(res.data.data)
     if (res.data.code !== 200) {
       error(res.data.msg)
     } else {
