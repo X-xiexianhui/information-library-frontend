@@ -15,6 +15,10 @@ export default new Router({
       component: () => import('../components/tableManager/page/addTable')
     },
     {
+      path: '/table',
+      component: () => import('../components/tableManager/page/tablePage')
+    },
+    {
       path: '/db',
       component: () => import('../components/databaseManager/dbPage')
     }

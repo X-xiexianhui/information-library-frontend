@@ -14,7 +14,7 @@
           <vxe-button icon="el-icon-plus" status="perfect" content="新增"
                       @click="window.open('/table/add', '_blank')"></vxe-button>
           <vxe-button icon="el-icon-delete" status="perfect" content="删除" @click="deleteTable()"></vxe-button>
-          <vxe-button icon="el-icon-delete" status="perfect" content="重命名" @click="isVisible=true"></vxe-button>
+          <vxe-button icon="el-icon-delete" status="perfect" content="重命名" @click="renameTable"></vxe-button>
         </div>
       </template>
     </vxe-toolbar>
@@ -49,7 +49,7 @@
           <el-input v-model="inputForm.new_name" placeholder="表名称仅支持英文、下划线和数字"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="renameTable">保存</el-button>
+          <el-button type="primary" @click="onSubmit">保存</el-button>
           <el-button @click="dispatch">取消</el-button>
         </el-form-item>
       </el-form>
@@ -111,7 +111,7 @@ export default {
           error(res.data.msg)
         } else {
           this.$message.success(res.data.msg)
-          await this.init()
+          await this.getTables()
         }
       } catch (e) {
         error(e.message)
@@ -120,10 +120,13 @@ export default {
     onQuery () {
       this.getTables(this.queryForm.query)
     },
-    async renameTable () {
+    renameTable () {
       if (this.row.length === 0) {
-        error('请先选择一行数据')
+        return error('请先选择一行数据')
       }
+      this.isVisible = true
+    },
+    async onSubmit () {
       try {
         const res = await this.$http.post('/db/rename', null, {
           params: {
