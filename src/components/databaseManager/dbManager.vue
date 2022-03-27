@@ -35,7 +35,7 @@
         </template>
       </vxe-column>
       <vxe-column type="seq" title="序号" width="60"></vxe-column>
-      <vxe-column field="dbName" title="数据库名称"></vxe-column>
+      <vxe-column field="db_name" title="数据库名称"></vxe-column>
       <vxe-column field="tables" title="表数量"></vxe-column>
     </vxe-table>
     <el-dialog
@@ -86,7 +86,7 @@ export default {
   methods: {
     async init () {
       try {
-        const res = await this.$http.get('/api/db/search', {params: {dbName: ''}})
+        const res = await this.$http.get('/api/db/search', {params: {db_name: ''}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -101,7 +101,7 @@ export default {
     },
     async removeEvent () {
       try {
-        const res = await this.$http.delete('/api/db/delete', {params: {dbName: this.row.dbName}})
+        const res = await this.$http.delete('/api/db/delete', {params: {db_name: this.row.db_name}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -114,7 +114,7 @@ export default {
     },
     async onSubmit () {
       try {
-        const res = await this.$http.post('/api/db/create', null, {params: {dbName: this.inputForm.Name}})
+        const res = await this.$http.post('/api/db/create', null, {params: {db_name: this.inputForm.Name}})
         this.isShow = false
         if (res.data.code !== 200) {
           error(res.data.msg)
@@ -129,7 +129,7 @@ export default {
     },
     async onQuery () {
       try {
-        const res = await this.$http.get('/api/db/get', {params: {dbName: this.queryForm.query}})
+        const res = await this.$http.get('/api/db/get', {params: {db_name: this.queryForm.query}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
