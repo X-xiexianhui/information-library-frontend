@@ -14,7 +14,7 @@
           <vxe-button icon="el-icon-plus" status="perfect" content="新增"
                       @click="window.open('/table/add', '_blank')"></vxe-button>
           <vxe-button icon="el-icon-delete" status="perfect" content="删除" @click="deleteTable()"></vxe-button>
-          <vxe-button icon="el-icon-delete" status="perfect" content="重命名" @click="renameTable()"></vxe-button>
+          <vxe-button icon="el-icon-delete" status="perfect" content="重命名" @click="isVisible=true"></vxe-button>
         </div>
       </template>
     </vxe-toolbar>
@@ -29,10 +29,6 @@
       :row-config="{isHover: true}"
       :radio-config="{highlight: true}"
       :data="tableData"
-      resizable
-      keep-source
-      :edit-rules="validRules"
-      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
       @radio-change="radioChangeEvent">
       >
       <vxe-column type="radio" width="60">
@@ -42,10 +38,22 @@
       </vxe-column>
       <vxe-column type="seq" title="序号" width="60"></vxe-column>
       <vxe-column field="db_name" title="所属数据库"></vxe-column>
-      <vxe-column field="tb_name" title="表名">
-
-      </vxe-column>
+      <vxe-column field="tb_name" title="表名"></vxe-column>
     </vxe-table>
+    <el-dialog
+      @close="dispatch"
+      :close-on-click-modal = "false"
+      :visible.sync="isVisible">
+      <el-form :model="inputForm" :rules="rules" ref="ruleForm">
+        <el-form-item label="表名称" prop="new_name">
+          <el-input v-model="inputForm.new_name" placeholder="表名称仅支持英文、下划线和数字"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="renameTable">保存</el-button>
+          <el-button @click="dispatch">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -113,6 +121,9 @@ export default {
       this.getTables(this.queryForm.query)
     },
     async renameTable () {
+      if (this.row.length === 0) {
+        error('请先选择一行数据')
+      }
       try {
         const res = await this.$http.post('/db/rename', null, {
           params: {
@@ -137,6 +148,10 @@ export default {
     clearRadioRowEvent () {
       this.row = null
       this.$refs.xTable.clearRadioRow()
+    },
+    dispatch () {
+      this.$refs.ruleForm.resetFields()
+      this.isVisible = false
     }
   }
 }
