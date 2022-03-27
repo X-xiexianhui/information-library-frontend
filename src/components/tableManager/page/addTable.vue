@@ -13,25 +13,25 @@
                       <el-card >
                         <div v-if="showTbForm">
                           <el-form :model="tableForm" ref="tableForm" :rules="rules" :inline="true" style="text-align: left">
-                            <el-form-item label="所属数据库" prop="dbName">
-                              <el-select v-model="tableForm.dbName" placeholder="请选择所属数据库">
+                            <el-form-item label="所属数据库" prop="db_name">
+                              <el-select v-model="tableForm.db_name" placeholder="请选择所属数据库">
                                 <el-option
                                   v-for="item in dbSelect"
-                                  :key="item.dbName"
-                                  :label="item.dbName"
-                                  :value="item.dbName">
+                                  :key="item.db_name"
+                                  :label="item.db_name"
+                                  :value="item.db_name">
                                 </el-option>
                               </el-select>
                             </el-form-item>
-                            <el-form-item label="表名" prop="tbName">
-                              <el-input v-model="tableForm.tbName" placeholder="仅支持英文、数字和下划线"></el-input>
+                            <el-form-item label="表名" prop="tb_name">
+                              <el-input v-model="tableForm.tb_name" placeholder="仅支持英文、数字和下划线"></el-input>
                             </el-form-item>
                           </el-form>
                         </div>
                         <div v-else>
                           <el-descriptions title="数据表信息">
-                            <el-descriptions-item label="所属数据库">{{tableForm.dbName}}</el-descriptions-item>
-                            <el-descriptions-item label="表名称">{{tableForm.tbName}}</el-descriptions-item>
+                            <el-descriptions-item label="所属数据库">{{ tableForm.db_name }}</el-descriptions-item>
+                            <el-descriptions-item label="表名称">{{ tableForm.tb_name }}</el-descriptions-item>
                           </el-descriptions>
                         </div>
                         <edit-field
@@ -88,12 +88,12 @@ export default {
       dbSelect: [],
       showTbForm: true,
       tableForm: {
-        dbName: '',
-        tbName: ''
+        db_name: '',
+        tb_name: ''
       },
       rules: {
-        dbName: [{required: true, message: '请输入数据库名称', trigger: 'blur'}],
-        tbName: [
+        db_name: [{required: true, message: '请输入数据库名称', trigger: 'blur'}],
+        tb_name: [
           {pattern: /^[0-9a-zA-Z_]+$/, message: '只支持英文、数字和下划线', trigger: 'blur'},
           {required: true, message: '请输入表名', trigger: 'blur'}
         ]
