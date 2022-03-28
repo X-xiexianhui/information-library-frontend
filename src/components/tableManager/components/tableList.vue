@@ -11,10 +11,9 @@
     <vxe-toolbar perfect print export>
       <template #buttons>
         <div style="text-align: left">
-          <vxe-button icon="el-icon-plus" status="perfect" content="新增"
-                      @click="window.open('/table/add', '_blank')"></vxe-button>
+          <vxe-button icon="el-icon-plus" status="perfect" content="新增" @click="goToAdd"></vxe-button>
           <vxe-button icon="el-icon-delete" status="perfect" content="删除" @click="deleteTable()"></vxe-button>
-          <vxe-button icon="el-icon-delete" status="perfect" content="重命名" @click="renameTable"></vxe-button>
+          <vxe-button icon="el-icon-edit" status="perfect" content="重命名" @click="renameTable"></vxe-button>
         </div>
       </template>
     </vxe-toolbar>
@@ -85,6 +84,9 @@ export default {
     this.getTables('')
   },
   methods: {
+    goToAdd () {
+      window.open('/table/add', '_blank')
+    },
     // 查询数据表
     async getTables (param) {
       try {
