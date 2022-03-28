@@ -1,6 +1,9 @@
 import bus from '../../common/bus'
 import { VXETable } from 'vxe-table'
 import {error} from '../error'
+import axios from 'axios'
+import { Message } from 'element-ui'
+
 // 检查数据
 export function checkData (ref) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -63,12 +66,12 @@ async function fullValidEvent (ref) {
 // 创建新表
 export async function saveAdd (ref, tableForm) {
   if (tableForm.db_name === '' || tableForm.tb_name === '') {
-    return this.$alert('请输入数据库和表名', '警告', {confirmButtonText: '确定', callback: () => {}})
+    return error('请输入数据库名称和表名')
   }
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
-    return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
+    return error('请输入数据')
   }
   if (await fullValidEvent(ref)) {
     return
@@ -79,11 +82,11 @@ export async function saveAdd (ref, tableForm) {
     column: insertRecords
   }
   try {
-    const res = await this.$http.post('/api/tb/add', data)
+    const res = await axios.post('/api/tb/add', data)
     if (res.data.code !== 200) {
       error(res.data.msg)
     } else {
-      this.$message.success(res.data.msg)
+      Message.success(res.data.msg)
       bus.$emit('setShowTbFormEvent', false)
       ref.reloadData(res.data.data)
     }
@@ -96,7 +99,7 @@ export function saveEdit (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
-    return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
+    return error('请输入数据')
   }
   ref.reloadData(this.tableData)
 }
