@@ -137,7 +137,7 @@ export default {
       console.log(updateRecords)
     },
     editActiveEvent ({ row }) {
-      this.placeDisabled = row.type !== 'numeric'
+      this.placeDisabled = row.data_type !== 'numeric'
     },
     checkSave () {
       checkData(this.$refs.editFieldTable)
