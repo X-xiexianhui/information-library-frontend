@@ -52,6 +52,11 @@
                     <vxe-input v-model.number="row.place" type="text" :disabled="placeDisabled"></vxe-input>
                 </template>
             </vxe-column>
+          <vxe-column field="PK" title="主键" :edit-render="{}">
+            <template #edit="{ row }">
+              <vxe-checkbox v-model="row.PK"></vxe-checkbox>
+            </template>
+          </vxe-column>
             <vxe-column field="not_null" title="非空" :edit-render="{}">
                 <template #edit="{ row }">
                     <vxe-checkbox v-model="row.not_null"></vxe-checkbox>
@@ -102,7 +107,7 @@ export default {
         place: [{type: 'number', min: 0, max: 65, message: '请输入0-65之间的数字'}]
       },
       newLine: {
-        col_name: '', data_type: '', len: '', place: 0, not_null: false, uni: false
+        col_name: '', data_type: '', len: '', PK: false, place: 0, not_null: false, uni: false
       },
       tableData: [],
       placeDisabled: true,
