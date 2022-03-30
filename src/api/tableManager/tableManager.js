@@ -98,7 +98,7 @@ export function saveEdit (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
-    return this.$alert('请输入数据', '警告', {confirmButtonText: '确定', callback: () => {}})
+    return error('请输入数据')
   }
   ref.reloadData(this.tableData)
 }
