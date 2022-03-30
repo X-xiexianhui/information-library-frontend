@@ -1,8 +1,6 @@
 import bus from '../../common/bus'
 import { VXETable } from 'vxe-table'
 import {error} from '../error'
-import {Message} from 'element-ui'
-
 // 检查数据
 export function checkData (ref) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -85,7 +83,7 @@ export async function saveAdd (ref, tableForm) {
     if (res.data.code !== 200) {
       error(res.data.msg)
     } else {
-      Message.success(res.data.msg)
+      this.$message.success(res.data.msg)
       bus.$emit('setShowTbFormEvent', false)
       ref.reloadData(res.data.data)
     }
