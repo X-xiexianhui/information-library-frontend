@@ -22,6 +22,7 @@
             :data="tableData"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
+            :row-config="{isCurrent: true}"
             @edit-actived="editActiveEvent"
         >
             <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
