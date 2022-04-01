@@ -7,7 +7,6 @@
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="getInsert()">获取新增</vxe-button>
-                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFieldTable)">还原</vxe-button>
               </div>
             </template>
         </vxe-toolbar>
@@ -25,8 +24,6 @@
             size="mini"
             @edit-actived="editActiveEvent"
         >
-            <vxe-column type="checkbox" width="60"></vxe-column>
-            <vxe-column type="seq" width="60"></vxe-column>
             <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #edit="{ row }">
                     <vxe-input v-model="row.col_name" type="text"></vxe-input>
@@ -77,7 +74,6 @@ import {
   checkData,
   insertEvent,
   removeEvent,
-  revertEvent,
   saveAdd,
   saveEdit
 } from '../../../api/tableManager/tableManager'
@@ -124,7 +120,6 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
-    revertEvent,
     saveEvent () {
       if (this.tableData.length === 0) {
         saveAdd(this.$refs.editFieldTable, this.tableForm)

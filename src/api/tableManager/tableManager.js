@@ -25,13 +25,6 @@ export async function removeEvent (ref) {
     await VXETable.modal.message({ content: '请至少选择一条数据', status: 'error' })
   }
 }
-// 还原数据
-export async function revertEvent (ref) {
-  const type = await VXETable.modal.confirm('您确定要还原数据吗?')
-  if (type === 'confirm') {
-    ref.revertData()
-  }
-}
 // 校验数据
 async function fullValidEvent (ref) {
   const errMap = await ref.fullValidate().catch(errMap => errMap)

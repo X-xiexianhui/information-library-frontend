@@ -6,7 +6,6 @@
                 <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFkTable, newLine)">新增</vxe-button>
                 <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFkTable)">移除</vxe-button>
                 <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
-                <vxe-button icon="fa fa-mail-reply" status="perfect" @click="revertEvent($refs.editFkTable)">还原</vxe-button>
               </div>
             </template>
         </vxe-toolbar>
@@ -61,7 +60,7 @@
 
 <script>
 
-import {checkData, insertEvent, removeEvent, revertEvent} from '../../../api/tableManager/tableManager'
+import {checkData, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
 
 export default {
   name: 'EditFk',
@@ -95,7 +94,6 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
-    revertEvent,
     saveEvent () {
     },
     checkSave () {
