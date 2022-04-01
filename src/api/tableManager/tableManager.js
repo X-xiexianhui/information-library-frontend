@@ -20,7 +20,7 @@ export async function removeEvent (ref) {
   if (selectRecords.length) {
     const type = await VXETable.modal.confirm('您确定要删除选中的数据吗?')
     if (type === 'confirm') {
-      await ref.removeCheckboxRow()
+      await ref.removeCurrentRow()
     }
   } else {
     await VXETable.modal.message({ content: '请至少选择一条数据', status: 'error' })
