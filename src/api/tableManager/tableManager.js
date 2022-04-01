@@ -16,6 +16,7 @@ export function insertEvent (ref, record) {
 // 移除数据
 export async function removeEvent (ref) {
   const selectRecords = ref.getCurrentRecord()
+  // console.log(selectRecords)
   if (selectRecords.length) {
     const type = await VXETable.modal.confirm('您确定要删除选中的数据吗?')
     if (type === 'confirm') {
