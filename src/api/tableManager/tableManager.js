@@ -56,13 +56,13 @@ async function fullValidEvent (ref) {
   }
   return errMap
 }
-function beforeSave (ref) {
+async function beforeSave (ref) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
     return error('请输入数据')
   }
-  if (fullValidEvent(ref)) {
+  if (await fullValidEvent(ref)) {
     return
   }
   return { insertRecords, removeRecords, updateRecords }
