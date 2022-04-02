@@ -57,7 +57,7 @@ async function fullValidEvent (ref) {
   return errMap
 }
 // 创建新表
-export async function saveAdd (ref, tableForm) {
+export async function createTable (ref, tableForm) {
   if (tableForm.db_name === '' || tableForm.tb_name === '') {
     return error('请输入数据库和表名')
   }
@@ -88,11 +88,14 @@ export async function saveAdd (ref, tableForm) {
   }
 }
 // 修改表
-export function saveEdit (ref, tableForm) {
+export async function editTable (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
   if (Saved) {
     return error('请输入数据')
+  }
+  if (await fullValidEvent(ref)) {
+    return
   }
   ref.reloadData(this.tableData)
 }

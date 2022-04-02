@@ -76,8 +76,8 @@ import {
   checkData, checkEdit,
   insertEvent,
   removeEvent,
-  saveAdd,
-  saveEdit
+  createTable,
+  editTable
 } from '../../../api/tableManager/tableManager'
 
 export default {
@@ -125,9 +125,9 @@ export default {
     checkEdit,
     saveEvent () {
       if (this.tableData.length === 0) {
-        saveAdd(this.$refs.editFieldTable, this.tableForm)
+        createTable(this.$refs.editFieldTable, this.tableForm)
       } else {
-        saveEdit(this.$refs.editFieldTable, this.tableForm)
+        editTable(this.$refs.editFieldTable, this.tableForm)
       }
     },
     getInsert () {
