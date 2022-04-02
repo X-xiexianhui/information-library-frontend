@@ -72,14 +72,6 @@ export async function createTable (ref, tableForm) {
   if (tableForm.db_name === '' || tableForm.tb_name === '') {
     return error('请输入数据库和表名')
   }
-  // const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-  // const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
-  // if (Saved) {
-  //   return error('请输入数据')
-  // }
-  // if (await fullValidEvent(ref)) {
-  //   return
-  // }
   const insertRecords = beforeSave(ref)
   let data = {
     db_name: tableForm.db_name,
@@ -101,9 +93,6 @@ export async function createTable (ref, tableForm) {
 }
 // 修改表
 export async function editTable (ref, tableForm) {
-  // if (await fullValidEvent(ref)) {
-  //   return
-  // }
   const { insertRecords, removeRecords, updateRecords } = beforeSave(ref)
   let data = {
     db_name: tableForm.db_name,
