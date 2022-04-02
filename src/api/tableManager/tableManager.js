@@ -96,3 +96,9 @@ export function saveEdit (ref, tableForm) {
   }
   ref.reloadData(this.tableData)
 }
+export function checkEdit (ref) {
+  const updateRecords = ref.getRecordset()
+  if (updateRecords.length >= 1) {
+    return error('每次只能修改一个字段，请先保存当前修改')
+  }
+}

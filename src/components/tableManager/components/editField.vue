@@ -24,7 +24,7 @@
             size="mini"
             :row-config="{isCurrent: true}"
             @edit-actived="editActiveEvent"
-            @cell-click="checkEdit"
+            @cell-click="checkEdit($refs.editFieldTable)"
         >
             <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #edit="{ row }">
@@ -73,13 +73,12 @@
 <script>
 
 import {
-  checkData,
+  checkData, checkEdit,
   insertEvent,
   removeEvent,
   saveAdd,
   saveEdit
 } from '../../../api/tableManager/tableManager'
-import {error} from '../../../api/error'
 
 export default {
   name: 'EditField',
@@ -123,6 +122,7 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
+    checkEdit,
     saveEvent () {
       if (this.tableData.length === 0) {
         saveAdd(this.$refs.editFieldTable, this.tableForm)
@@ -139,12 +139,6 @@ export default {
     },
     checkSave () {
       checkData(this.$refs.editFieldTable)
-    },
-    checkEdit () {
-      const updateRecords = this.$refs.editFieldTable.getRecordset()
-      if (updateRecords.length >= 1) {
-        return error('每次只能修改一个字段，请先保存当前修改')
-      }
     },
     formatType (value) {
       switch (value) {

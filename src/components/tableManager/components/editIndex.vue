@@ -19,11 +19,11 @@
             :export-config="{}"
             :edit-rules="validRules"
             :data="tableData"
+            :row-config="{isCurrent: true}"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
+            @cell-click="checkEdit($refs.editFieldTable)"
         >
-            <vxe-column type="checkbox" width="60"></vxe-column>
-            <vxe-column type="seq" width="60"></vxe-column>
             <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
                   <span>{{formatMultiSelect(row.columns)}}</span>
@@ -48,7 +48,7 @@
 
 <script>
 
-import {checkData, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
+import {checkData, checkEdit, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
 import {error} from '../../../api/error'
 
 export default {
@@ -85,6 +85,7 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
+    checkEdit,
     saveEvent () {
 
     },
