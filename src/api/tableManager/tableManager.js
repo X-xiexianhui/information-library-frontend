@@ -62,6 +62,9 @@ function beforeSave (ref) {
   if (Saved) {
     return error('请输入数据')
   }
+  if (fullValidEvent(ref)) {
+    return
+  }
   return { insertRecords, removeRecords, updateRecords }
 }
 // 创建新表
@@ -74,10 +77,10 @@ export async function createTable (ref, tableForm) {
   // if (Saved) {
   //   return error('请输入数据')
   // }
+  // if (await fullValidEvent(ref)) {
+  //   return
+  // }
   const insertRecords = beforeSave(ref)
-  if (await fullValidEvent(ref)) {
-    return
-  }
   let data = {
     db_name: tableForm.db_name,
     tb_name: tableForm.tb_name,
@@ -98,10 +101,10 @@ export async function createTable (ref, tableForm) {
 }
 // 修改表
 export async function editTable (ref, tableForm) {
+  // if (await fullValidEvent(ref)) {
+  //   return
+  // }
   const { insertRecords, removeRecords, updateRecords } = beforeSave(ref)
-  if (await fullValidEvent(ref)) {
-    return
-  }
   let data = {
     db_name: tableForm.db_name,
     tb_name: tableForm.tb_name,
