@@ -98,11 +98,6 @@ export async function createTable (ref, tableForm) {
 }
 // 修改表
 export async function editTable (ref, tableForm) {
-  // const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-  // const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
-  // if (Saved) {
-  //   return error('请输入数据')
-  // }
   const { insertRecords, removeRecords, updateRecords } = beforeSave(ref)
   if (await fullValidEvent(ref)) {
     return
