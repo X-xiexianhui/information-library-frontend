@@ -25,17 +25,10 @@
       show-header-overflow
       show-overflow
       :align="allAlign"
-      :row-config="{isHover: true}"
-      :radio-config="{highlight: true}"
+      :row-config="{isCurrent: true}"
       :data="tableData"
-      @radio-change="radioChangeEvent">
+      @current-change="rowChangeEvent"
       >
-      <vxe-column type="radio" width="60">
-        <template #header>
-          <vxe-button type="text" @click="clearRadioRowEvent" :disabled="!row">取消</vxe-button>
-        </template>
-      </vxe-column>
-      <vxe-column type="seq" title="序号" width="60"></vxe-column>
       <vxe-column field="db_name" title="所属数据库"></vxe-column>
       <vxe-column field="tb_name" title="表名"></vxe-column>
     </vxe-table>
@@ -150,8 +143,8 @@ export default {
         error(e.message)
       }
     },
-    radioChangeEvent () {
-      this.row = this.$refs.xTable.getRadioRecord()
+    rowChangeEvent () {
+      this.row = this.$refs.xTable.getCurrentRecord()
     },
     clearRadioRowEvent () {
       this.row = null
