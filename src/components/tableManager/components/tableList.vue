@@ -82,7 +82,8 @@ export default {
       window.open('/table/add', '_blank')
     },
     goToEdit () {
-      this.$router.push({path: '/table/edit', query: {tb_id: this.row.tb_id.toString()}})
+      const routeData = this.$router.resolve({path: '/table/edit', query: {tb_id: this.row.tb_id.toString()}})
+      window.open(routeData.href, '_blank')
     },
     // 查询数据表
     async getTables (param) {
