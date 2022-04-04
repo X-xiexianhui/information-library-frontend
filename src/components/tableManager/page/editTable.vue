@@ -2,13 +2,6 @@
     <div>
         <page-head class="nav"></page-head>
         <el-container>
-            <el-aside>
-                <tree-list
-                    :data="data"
-                    class="tree-list"
-                >
-                </tree-list>
-            </el-aside>
             <el-main >
                 <el-tabs
                     v-model="activeName"
@@ -45,7 +38,6 @@ import bus from '../../../common/bus'
 import EditIndex from '../components/editIndex'
 import EditField from '../components/editField'
 import EditFk from '../components/editFK'
-import TreeList from '../components/treeList'
 import PageHead from '../../common/head/pageHead'
 
 export default {
@@ -54,26 +46,13 @@ export default {
     PageHead,
     EditIndex,
     EditFk,
-    EditField,
-    TreeList
+    EditField
   },
   data () {
     return {
       isSave: true,
       activeName: 'field',
-      Name: '',
-      data: [{
-        id: '2',
-        label: '一级'
-      },
-      {
-        id: '3',
-        label: '二级'
-      },
-      {
-        id: '4',
-        label: '三级'
-      }]
+      Name: ''
     }
   },
   created () {
