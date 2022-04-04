@@ -82,7 +82,6 @@ import {
 } from '../../../api/tableManager/tableManager'
 import axios from 'axios'
 import {error} from '../../../api/error'
-import {Message} from 'element-ui'
 
 export default {
   name: 'EditField',
@@ -123,6 +122,9 @@ export default {
       ]
     }
   },
+  created () {
+    this.getTbCol()
+  },
   methods: {
     insertEvent,
     removeEvent,
@@ -139,7 +141,8 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            Message.success(res.data.msg)
+            this.tableData = res.data.data
+            console.log(res.data.data)
           }
         } catch (e) {
           error(e.message)

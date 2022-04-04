@@ -82,7 +82,7 @@ export default {
       window.open('/table/add', '_blank')
     },
     goToEdit () {
-      const routeData = this.$router.resolve({path: '/table/edit', query: {tb_name: this.row.tb_name, db_name: this.row.db}})
+      const routeData = this.$router.resolve({path: '/table/edit', query: {tb_name: this.row.tb_name, db_name: this.row.db_name}})
       window.open(routeData.href, '_blank')
     },
     // 查询数据表
