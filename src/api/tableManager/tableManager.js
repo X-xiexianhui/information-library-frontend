@@ -87,6 +87,8 @@ export async function createTable (ref, tableForm) {
     error(e.message)
   }
 }
+let oldColumn = null
+let oldRow = null
 // 修改表
 export async function editTable (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -111,14 +113,21 @@ export async function editTable (ref, tableForm) {
     } else {
       Message.success(res.data.msg)
       ref.reloadData(res.data.data)
+      oldColumn = null
+      oldRow = null
     }
   } catch (e) {
     error(e)
   }
 }
-export function checkEdit (ref) {
-  const updateRecords = ref.getRecordset()
-  if (updateRecords.length >= 1) {
+export function checkEdit (parma) {
+  if (oldRow === null) {
+    oldRow = parma.rowIndex
+  }
+  if (oldColumn === null) {
+    oldColumn = parma.columnIndex
+  }
+  if (oldColumn !== parma.columnIndex || oldRow !== parma.rowIndex) {
     return error('每次只能修改一个字段，请先保存当前修改')
   }
 }

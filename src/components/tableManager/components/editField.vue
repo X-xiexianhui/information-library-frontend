@@ -25,7 +25,7 @@
       size="mini"
       :row-config="{isCurrent: true}"
       @edit-actived="editActiveEvent"
-      @cell-click="checkEdit($refs.editFieldTable)"
+      @cell-click="checkEdit"
     >
       <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
         <template #edit="{ row }">
@@ -142,7 +142,6 @@ export default {
             error(res.data.msg)
           } else {
             this.tableData = res.data.data
-            console.log(res.data.data)
           }
         } catch (e) {
           error(e.message)
