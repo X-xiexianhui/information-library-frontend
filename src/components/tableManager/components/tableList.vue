@@ -67,7 +67,7 @@ export default {
       },
       allAlign: null,
       tableData: [],
-      row: [],
+      row: {},
       queryForm: {
         query: ''
       }
