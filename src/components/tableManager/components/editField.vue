@@ -1,73 +1,74 @@
 <template>
-    <div>
-        <vxe-toolbar perfect print export>
-            <template #buttons>
-              <div style="text-align: left">
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable,newLine)">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="getInsert()">获取新增</vxe-button>
-              </div>
-            </template>
-        </vxe-toolbar>
-        <vxe-table
-            ref="editFieldTable"
-            border
-            resizable
-            keep-source
-            show-overflow
-            :print-config="{}"
-            :export-config="{}"
-            :edit-rules="validRules"
-            :data="tableData"
-            :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
-            size="mini"
-            :row-config="{isCurrent: true}"
-            @edit-actived="editActiveEvent"
-            @cell-click="checkEdit($refs.editFieldTable)"
-        >
-            <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #edit="{ row }">
-                    <vxe-input v-model="row.col_name" type="text"></vxe-input>
-                </template>
-            </vxe-column>
-            <vxe-column field="data_type" title="字段类型" :edit-render="{}">
-                <template #default="{ row }">
-                    <span>{{ formatType(row.data_type) }}</span>
-                </template>
-                <template #edit="{ row }">
-                    <vxe-select v-model="row.data_type" transfer>
-                        <vxe-option v-for="item in options" :key="item.key" :value="item.value" :label="item.label"></vxe-option>
-                    </vxe-select>
-                </template>
-            </vxe-column>
-            <vxe-column field="len" title="字段长度" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #edit="{ row }">
-                    <vxe-input v-model.number="row.len" type="text"></vxe-input>
-                </template>
-            </vxe-column>
-            <vxe-column field="place" title="小数位数" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #edit="{ row }">
-                    <vxe-input v-model.number="row.place" type="text" :disabled="placeDisabled"></vxe-input>
-                </template>
-            </vxe-column>
-          <vxe-column field="PK" title="主键" :edit-render="{}">
-            <template #edit="{ row }">
-              <vxe-checkbox v-model="row.PK"></vxe-checkbox>
-            </template>
-          </vxe-column>
-            <vxe-column field="not_null" title="非空" :edit-render="{}">
-                <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.not_null"></vxe-checkbox>
-                </template>
-            </vxe-column>
-            <vxe-column field="uni" title="唯一" :edit-render="{}">
-                <template #edit="{ row }">
-                    <vxe-checkbox v-model="row.uni"></vxe-checkbox>
-                </template>
-            </vxe-column>
-        </vxe-table>
-    </div>
+  <div>
+    <vxe-toolbar perfect print export>
+      <template #buttons>
+        <div style="text-align: left">
+          <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editFieldTable,newLine)">新增
+          </vxe-button>
+          <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
+          <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
+          <vxe-button icon="fa fa-save" status="perfect" @click="getInsert()">获取新增</vxe-button>
+        </div>
+      </template>
+    </vxe-toolbar>
+    <vxe-table
+      ref="editFieldTable"
+      border
+      resizable
+      keep-source
+      show-overflow
+      :print-config="{}"
+      :export-config="{}"
+      :edit-rules="validRules"
+      :data="tableData"
+      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+      size="mini"
+      :row-config="{isCurrent: true}"
+      @edit-actived="editActiveEvent"
+      @cell-click="checkEdit($refs.editFieldTable)"
+    >
+      <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
+        <template #edit="{ row }">
+          <vxe-input v-model="row.col_name" type="text"></vxe-input>
+        </template>
+      </vxe-column>
+      <vxe-column field="data_type" title="字段类型" :edit-render="{}">
+        <template #default="{ row }">
+          <span>{{ formatType(row.data_type) }}</span>
+        </template>
+        <template #edit="{ row }">
+          <vxe-select v-model="row.data_type" transfer>
+            <vxe-option v-for="item in options" :key="item.key" :value="item.value" :label="item.label"></vxe-option>
+          </vxe-select>
+        </template>
+      </vxe-column>
+      <vxe-column field="len" title="字段长度" :edit-render="{autofocus: '.vxe-input--inner'}">
+        <template #edit="{ row }">
+          <vxe-input v-model.number="row.len" type="text"></vxe-input>
+        </template>
+      </vxe-column>
+      <vxe-column field="place" title="小数位数" :edit-render="{autofocus: '.vxe-input--inner'}">
+        <template #edit="{ row }">
+          <vxe-input v-model.number="row.place" type="text" :disabled="placeDisabled"></vxe-input>
+        </template>
+      </vxe-column>
+      <vxe-column field="PK" title="主键" :edit-render="{}">
+        <template #edit="{ row }">
+          <vxe-checkbox v-model="row.PK"></vxe-checkbox>
+        </template>
+      </vxe-column>
+      <vxe-column field="not_null" title="非空" :edit-render="{}">
+        <template #edit="{ row }">
+          <vxe-checkbox v-model="row.not_null"></vxe-checkbox>
+        </template>
+      </vxe-column>
+      <vxe-column field="uni" title="唯一" :edit-render="{}">
+        <template #edit="{ row }">
+          <vxe-checkbox v-model="row.uni"></vxe-checkbox>
+        </template>
+      </vxe-column>
+    </vxe-table>
+  </div>
 </template>
 
 <script>
@@ -79,6 +80,9 @@ import {
   createTable,
   editTable
 } from '../../../api/tableManager/tableManager'
+import axios from 'axios'
+import {error} from '../../../api/error'
+import {Message} from 'element-ui'
 
 export default {
   name: 'EditField',
@@ -110,12 +114,12 @@ export default {
       tableData: [],
       placeDisabled: true,
       options: [
-        { label: '整数', value: 'int' },
-        { label: '小数', value: 'numeric' },
-        { label: '字符串', value: 'varchar' },
-        { label: '日期', value: 'date' },
-        { label: '时间', value: 'time' },
-        { label: '日期时间', value: 'datetime' }
+        {label: '整数', value: 'int'},
+        {label: '小数', value: 'numeric'},
+        {label: '字符串', value: 'varchar'},
+        {label: '日期', value: 'date'},
+        {label: '时间', value: 'time'},
+        {label: '日期时间', value: 'datetime'}
       ]
     }
   },
@@ -123,6 +127,25 @@ export default {
     insertEvent,
     removeEvent,
     checkEdit,
+    async getTbCol () {
+      if (this.tableForm !== {}) {
+        try {
+          const res = await axios.get('/api/tb/column', {
+            params: {
+              db_name: this.tableForm.db_name,
+              tb_name: this.tableForm.tb_name
+            }
+          })
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            Message.success(res.data.msg)
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      }
+    },
     saveEvent () {
       if (this.tableData.length === 0) {
         createTable(this.$refs.editFieldTable, this.tableForm)
@@ -131,10 +154,10 @@ export default {
       }
     },
     getInsert () {
-      const { updateRecords } = this.$refs.editFieldTable.getRecordset()
+      const {updateRecords} = this.$refs.editFieldTable.getRecordset()
       console.log(updateRecords)
     },
-    editActiveEvent ({ row }) {
+    editActiveEvent ({row}) {
       this.placeDisabled = row.data_type !== 'numeric'
     },
     checkSave () {
