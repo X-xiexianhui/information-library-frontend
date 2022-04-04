@@ -153,6 +153,7 @@ export default {
       if (this.tableData.length === 0) {
         createTable(this.$refs.editFieldTable, this.tableForm)
       } else {
+        console.log('edit')
         editTable(this.$refs.editFieldTable, this.tableForm)
       }
     },
