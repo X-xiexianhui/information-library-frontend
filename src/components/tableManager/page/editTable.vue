@@ -12,19 +12,19 @@
                     <el-tab-pane label="字段设置" name="field">
                         <edit-field
                             ref="field"
-                            :current-table="Name"
+                            :table-form="tbForm"
                         ></edit-field>
                     </el-tab-pane>
                     <el-tab-pane label="外键设置" name="FK">
                         <edit-fk
                             ref="FK"
-                            :table-name="Name"
+                            :table-form="tbForm"
                         ></edit-fk>
                     </el-tab-pane>
                     <el-tab-pane label="索引设置" name="index">
                         <edit-index
                             ref="index"
-                            :table-name="Name"
+                            :table-form="tbForm"
                         ></edit-index>
                     </el-tab-pane>
                 </el-tabs>
@@ -52,13 +52,17 @@ export default {
     return {
       isSave: true,
       activeName: 'field',
-      Name: ''
+      tbForm: {
+        db_name: '',
+        tb_name: ''
+      }
     }
   },
   created () {
     bus.$on('checkDataEvent', (value) => {
       this.isSave = value
     })
+    this.getTable()
   },
   methods: {
     checkSave (activeName, oldActiveName) {
@@ -67,6 +71,10 @@ export default {
         this.$alert('请先保存', {})
       }
       return this.isSave
+    },
+    getTable () {
+      this.tbForm.db_name = this.$route.query.db_name
+      this.tbForm.tb_name = this.$route.query.tb_name
     }
   }
 }
