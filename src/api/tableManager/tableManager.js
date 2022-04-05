@@ -112,6 +112,7 @@ export async function editTable (ref, tableForm) {
     } else {
       Message.success(res.data.msg)
       ref.reloadData(res.data.data)
+      oldRecord = null
     }
   } catch (e) {
     error(e)
