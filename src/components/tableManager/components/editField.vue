@@ -158,8 +158,10 @@ export default {
       }
     },
     getInsert () {
-      const {updateRecords} = this.$refs.editFieldTable.getRecordset()
-      console.log(updateRecords)
+      const { insertRecords, removeRecords, updateRecords } = this.$refs.editFieldTable.getRecordset()
+      console.log('insert:', insertRecords)
+      console.log('remove:', removeRecords)
+      console.log('update:', updateRecords)
     },
     editActiveEvent ({row}) {
       this.placeDisabled = row.data_type !== 'numeric'
