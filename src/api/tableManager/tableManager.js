@@ -1,8 +1,6 @@
 import bus from '../../common/bus'
 import { VXETable } from 'vxe-table'
-import {error} from '../error'
-import {Message} from 'element-ui'
-import axios from 'axios'
+
 // 检查数据
 export function checkData (ref) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -27,7 +25,7 @@ export async function removeEvent (ref) {
   }
 }
 // 校验数据
-async function fullValidEvent (ref) {
+export async function fullValidEvent (ref) {
   const errMap = await ref.fullValidate().catch(errMap => errMap)
   if (errMap) {
     const msgList = []
@@ -55,79 +53,4 @@ async function fullValidEvent (ref) {
     }).then(() => {})
   }
   return errMap
-}
-// 创建新表
-export async function createTable (ref, tableForm) {
-  if (tableForm.db_name === '' || tableForm.tb_name === '') {
-    return error('请输入数据库和表名')
-  }
-  const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-  const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
-  if (Saved) {
-    return error('请输入数据')
-  }
-  if (await fullValidEvent(ref)) {
-    return
-  }
-  let data = {
-    db_name: tableForm.db_name,
-    tb_name: tableForm.tb_name,
-    column: insertRecords
-  }
-  try {
-    const res = await axios.post('/api/tb/add', data)
-    if (res.data.code !== 200) {
-      error(res.data.msg)
-    } else {
-      Message.success(res.data.msg)
-      bus.$emit('setShowTbFormEvent', false)
-      ref.reloadData(res.data.data)
-    }
-  } catch (e) {
-    error(e.message)
-  }
-}
-let oldRecord = null
-// 修改表
-export async function editTable (ref, tableForm) {
-  const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-  const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
-  if (Saved) {
-    return error('请输入数据')
-  }
-  if (await fullValidEvent(ref)) {
-    return
-  }
-  let data = {
-    db_name: tableForm.db_name,
-    tb_name: tableForm.tb_name,
-    insert: insertRecords,
-    remove: removeRecords,
-    update: updateRecords
-  }
-  try {
-    const res = await axios.post('/api/tb/alter', data)
-    if (res.data.code !== 200) {
-      error(res.data.msg)
-    } else {
-      Message.success(res.data.msg)
-      ref.reloadData(res.data.data)
-      oldRecord = null
-    }
-  } catch (e) {
-    error(e)
-  }
-}
-export function checkEdit (ref, row) {
-  const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-  if (updateRecords.length === 1) {
-    oldRecord = JSON.parse(JSON.stringify(updateRecords))
-  }
-  console.log(insertRecords)
-  console.log(removeRecords)
-  for (const key of Object.keys(row)) {
-    if (updateRecords.length >= 1 && oldRecord[key] !== row[key]) {
-      return error('每次只运行修改一个字段的属性，请先保存当前修改')
-    }
-  }
 }

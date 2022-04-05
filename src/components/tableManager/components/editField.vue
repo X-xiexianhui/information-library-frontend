@@ -7,7 +7,6 @@
           </vxe-button>
           <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
           <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
-          <vxe-button icon="fa fa-save" status="perfect" @click="getInsert()">获取新增</vxe-button>
         </div>
       </template>
     </vxe-toolbar>
@@ -23,9 +22,10 @@
       :data="tableData"
       :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
       size="mini"
-      :row-config="{isCurrent: true}"
+      :row-config="{isCurrent: true, useKey: true}"
+      :column-config="{isCurrent: true, useKey: true}"
       @edit-actived="editActiveEvent"
-      @cell-click="checkEdit($refs.editFieldTable,$refs.editFieldTable.getCurrentRecord())"
+      @cell-click="checkEdit"
     >
       <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
         <template #edit="{ row }">
@@ -59,12 +59,12 @@
       </vxe-column>
       <vxe-column field="not_null" title="非空" :edit-render="{}">
         <template #edit="{ row }">
-          <vxe-checkbox v-model="row.not_null"></vxe-checkbox>
+          <vxe-switch v-model="row.not_null"></vxe-switch>
         </template>
       </vxe-column>
       <vxe-column field="uni" title="唯一" :edit-render="{}">
         <template #edit="{ row }">
-          <vxe-checkbox v-model="row.uni"></vxe-checkbox>
+          <vxe-switch v-model="row.uni"></vxe-switch>
         </template>
       </vxe-column>
     </vxe-table>
@@ -74,14 +74,14 @@
 <script>
 
 import {
-  checkData, checkEdit,
+  checkData, fullValidEvent,
   insertEvent,
-  removeEvent,
-  createTable,
-  editTable
+  removeEvent
 } from '../../../api/tableManager/tableManager'
 import axios from 'axios'
 import {error} from '../../../api/error'
+import {Message} from 'element-ui'
+import bus from '../../../common/bus'
 
 export default {
   name: 'EditField',
@@ -129,7 +129,9 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
-    checkEdit,
+    checkEdit () {
+
+    },
     async getTbCol () {
       if (this.tableForm !== {}) {
         try {
@@ -151,16 +153,10 @@ export default {
     },
     saveEvent () {
       if (this.tableData.length === 0) {
-        createTable(this.$refs.editFieldTable, this.tableForm)
+        this.createTable()
       } else {
-        editTable(this.$refs.editFieldTable, this.tableForm)
+        this.editTable()
       }
-    },
-    getInsert () {
-      const { insertRecords, removeRecords, updateRecords } = this.$refs.editFieldTable.getRecordset()
-      console.log('insert:', insertRecords)
-      console.log('remove:', removeRecords)
-      console.log('update:', updateRecords)
     },
     editActiveEvent ({row}) {
       this.placeDisabled = row.data_type !== 'numeric'
@@ -184,6 +180,66 @@ export default {
           return '日期时间'
         default:
           return ''
+      }
+    },
+    async createTable () {
+      const ref = this.$refs.editFieldTable
+      if (this.tableForm.db_name === '' || this.tableForm.tb_name === '') {
+        return error('请输入数据库和表名')
+      }
+      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
+      if (Saved) {
+        return error('请输入数据')
+      }
+      if (await fullValidEvent(this.$refs.editFieldTable)) {
+        return
+      }
+      let data = {
+        db_name: this.tableForm.db_name,
+        tb_name: this.tableForm.tb_name,
+        column: insertRecords
+      }
+      try {
+        const res = await axios.post('/api/tb/add', data)
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          Message.success(res.data.msg)
+          bus.$emit('setShowTbFormEvent', false)
+          ref.reloadData(res.data.data)
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    async editTable () {
+      const ref = this.$refs.editFieldTable
+      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
+      if (Saved) {
+        return error('请输入数据')
+      }
+      if (await fullValidEvent(ref)) {
+        return
+      }
+      let data = {
+        db_name: this.tableForm.db_name,
+        tb_name: this.tableForm.tb_name,
+        insert: insertRecords,
+        remove: removeRecords,
+        update: updateRecords
+      }
+      try {
+        const res = await axios.post('/api/tb/alter', data)
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          Message.success(res.data.msg)
+          ref.reloadData(res.data.data)
+        }
+      } catch (e) {
+        error(e)
       }
     }
   }
