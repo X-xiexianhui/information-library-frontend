@@ -89,6 +89,7 @@ export async function createTable (ref, tableForm) {
 }
 let oldColumn = null
 let oldRow = null
+let record = null
 // 修改表
 export async function editTable (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -115,6 +116,7 @@ export async function editTable (ref, tableForm) {
       ref.reloadData(res.data.data)
       oldColumn = null
       oldRow = null
+      record = null
     }
   } catch (e) {
     error(e)
@@ -128,6 +130,13 @@ export function checkEdit (parma) {
     oldColumn = parma.columnIndex
   }
   if (oldColumn !== parma.columnIndex || oldRow !== parma.rowIndex) {
-    return error('每次只能修改一个字段，请先保存当前修改')
+    if (record === null) {
+      record = JSON.parse(JSON.stringify(parma.row))
+    }
+    for (const Key of Object.keys(parma.row)) {
+      if (record[Key] !== parma.row[Key]) {
+        return error('每次只能修改一个字段，请先保存当前修改')
+      }
+    }
   }
 }
