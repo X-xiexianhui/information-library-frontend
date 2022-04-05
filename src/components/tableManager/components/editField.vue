@@ -54,7 +54,7 @@
       </vxe-column>
       <vxe-column field="PK" title="主键" :edit-render="{}">
         <template #edit="{ row }">
-          <vxe-checkbox v-model="row.PK"></vxe-checkbox>
+          <vxe-switch v-model="row.PK"></vxe-switch>
         </template>
       </vxe-column>
       <vxe-column field="not_null" title="非空" :edit-render="{}">
