@@ -135,7 +135,7 @@ export default {
       console.log(insertRecords)
       console.log(removeRecords)
       if (updateRecords.length === 1) {
-
+        return error('每次只能修改一个字段，请先保存当前修改')
       }
     },
     async getTbCol () {
