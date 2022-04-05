@@ -118,7 +118,8 @@ export default {
         {label: '字符串', value: 'varchar'},
         {label: '日期', value: 'date'},
         {label: '时间', value: 'time'},
-        {label: '日期时间', value: 'datetime'}
+        {label: '日期时间', value: 'datetime'},
+        {label: '布尔类型', value: 'bool'}
       ]
     }
   },
