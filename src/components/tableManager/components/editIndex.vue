@@ -22,7 +22,7 @@
             :row-config="{isCurrent: true}"
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
-            @cell-click="checkEdit($refs.editFieldTable)"
+            @cell-click="checkEdit"
         >
             <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
