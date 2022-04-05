@@ -87,9 +87,6 @@ export async function createTable (ref, tableForm) {
     error(e.message)
   }
 }
-let oldColumn = null
-let oldRow = null
-let record = null
 // 修改表
 export async function editTable (ref, tableForm) {
   const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
@@ -114,29 +111,17 @@ export async function editTable (ref, tableForm) {
     } else {
       Message.success(res.data.msg)
       ref.reloadData(res.data.data)
-      oldColumn = null
-      oldRow = null
-      record = null
     }
   } catch (e) {
     error(e)
   }
 }
-export function checkEdit (parma) {
-  if (oldRow === null) {
-    oldRow = parma.rowIndex
-  }
-  if (oldColumn === null) {
-    oldColumn = parma.columnIndex
-  }
-  if (oldColumn !== parma.columnIndex || oldRow !== parma.rowIndex) {
-    if (record === null) {
-      record = JSON.parse(JSON.stringify(parma.row))
-    }
-    for (const Key of Object.keys(parma.row)) {
-      if (record[Key] !== parma.row[Key]) {
-        return error('每次只能修改一个字段，请先保存当前修改')
-      }
-    }
+export function checkEdit (parma, row) {
+  const { insertRecords, removeRecords, updateRecords } = parma.getRecordset()
+  console.log(insertRecords)
+  console.log(removeRecords)
+  console.log(row)
+  if (updateRecords.length >= 1) {
+    return error('每次只运行修改一个字段的属性，请先保存当前修改')
   }
 }
