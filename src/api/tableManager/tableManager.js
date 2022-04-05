@@ -54,3 +54,27 @@ export async function fullValidEvent (ref) {
   }
   return errMap
 }
+export function getUpdate (update, tableData) {
+  let res = []
+  for (const updateElement of update) {
+    let oldValue = {}
+    for (const oldValueElement of tableData) {
+      if (updateElement.col_id === oldValueElement.col_id) {
+        oldValue = oldValueElement
+      }
+    }
+    for (const key of Object.keys(updateElement)) {
+      if (updateElement[key] !== oldValue[key]) {
+        const temp = {
+          col_id: updateElement.col_id,
+          db_name: updateElement.db_name,
+          tb_name: updateElement.tb_name,
+          col_name: key,
+          new_value: updateElement.key
+        }
+        res.push(temp)
+      }
+    }
+  }
+  return res
+}
