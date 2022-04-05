@@ -118,8 +118,8 @@ export async function editTable (ref, tableForm) {
     error(e)
   }
 }
-export function checkEdit (parma, row) {
-  const { insertRecords, removeRecords, updateRecords } = parma.getRecordset()
+export function checkEdit (ref, row) {
+  const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
   if (updateRecords.length === 1) {
     oldRecord = JSON.parse(JSON.stringify(updateRecords))
   }
