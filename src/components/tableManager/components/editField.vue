@@ -74,7 +74,7 @@
 <script>
 
 import {
-  checkData, fullValidEvent,
+  checkData, fullValidEvent, getUpdate,
   insertEvent,
   removeEvent
 } from '../../../api/tableManager/tableManager'
@@ -113,6 +113,7 @@ export default {
         col_name: '', data_type: '', len: '', PK: false, place: 0, not_null: false, uni: false
       },
       tableData: [],
+      oldData: [],
       placeDisabled: true,
       options: [
         {label: '整数', value: 'int'},
@@ -157,6 +158,7 @@ export default {
             error(res.data.msg)
           } else {
             this.tableData = res.data.data
+            this.oldData = JSON.parse(JSON.stringify(this.tableData))
           }
         } catch (e) {
           error(e.message)
@@ -240,19 +242,20 @@ export default {
         tb_name: this.tableForm.tb_name,
         insert: insertRecords,
         remove: removeRecords,
-        update: updateRecords
+        update: getUpdate(updateRecords, this.oldData)
       }
-      try {
-        const res = await axios.post('/api/tb/alter', data)
-        if (res.data.code !== 200) {
-          error(res.data.msg)
-        } else {
-          Message.success(res.data.msg)
-          ref.reloadData(res.data.data)
-        }
-      } catch (e) {
-        error(e)
-      }
+      console.log(data)
+      // try {
+      //   const res = await axios.post('/api/tb/alter', data)
+      //   if (res.data.code !== 200) {
+      //     error(res.data.msg)
+      //   } else {
+      //     Message.success(res.data.msg)
+      //     ref.reloadData(res.data.data)
+      //   }
+      // } catch (e) {
+      //   error(e)
+      // }
     }
   }
 }

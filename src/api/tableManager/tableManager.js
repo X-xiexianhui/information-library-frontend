@@ -56,25 +56,28 @@ export async function fullValidEvent (ref) {
 }
 export function getUpdate (update, tableData) {
   let res = []
-  for (const updateElement of update) {
-    let oldValue = {}
-    for (const oldValueElement of tableData) {
-      if (updateElement.col_id === oldValueElement.col_id) {
-        oldValue = oldValueElement
-      }
-    }
-    for (const key of Object.keys(updateElement)) {
-      if (updateElement[key] !== oldValue[key]) {
-        const temp = {
-          col_id: updateElement.col_id,
-          db_name: updateElement.db_name,
-          tb_name: updateElement.tb_name,
-          col_name: key,
-          new_value: updateElement.key
-        }
-        res.push(temp)
+  let oldData = []
+  for (const updateValue of update) {
+    for (const oldValue of tableData) {
+      if (oldValue.col_id === updateValue.col_id) {
+        oldData.push(oldValue)
       }
     }
   }
+  for (let i = 0; i < update.length; i++) {
+    const temp = {
+      col_id: update[i].col_id,
+      col_name: '',
+      new_value: null
+    }
+    for (const key of Object.keys(update[i])) {
+      if (update[i][key] !== oldData[i][key] && key !== '_X_ROW_KEY') {
+        temp.col_name = key
+        temp.new_value = update[i][key]
+        res.push(JSON.parse(JSON.stringify(temp)))
+      }
+    }
+  }
+  console.log(res)
   return res
 }
