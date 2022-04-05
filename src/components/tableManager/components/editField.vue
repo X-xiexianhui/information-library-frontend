@@ -25,7 +25,7 @@
       size="mini"
       :row-config="{isCurrent: true}"
       @edit-actived="editActiveEvent"
-      @cell-click="checkEdit($refs.editFieldTable,$refs.row)"
+      @cell-click="checkEdit($refs.editFieldTable,$refs.editFieldTable.getCurrentRecord())"
     >
       <vxe-column field="col_name" title="字段名称" :edit-render="{autofocus: '.vxe-input--inner'}">
         <template #edit="{ row }">
