@@ -107,6 +107,8 @@ export default {
         ],
         place: [{type: 'number', min: 0, max: 65, message: '请输入0-65之间的数字'}]
       },
+      lastRow: 1,
+      lastColumn: 1,
       newLine: {
         col_name: '', data_type: '', len: '', PK: false, place: 0, not_null: false, uni: false
       },
@@ -129,12 +131,16 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
-    checkEdit () {
+    checkEdit (parma) {
       const ref = this.$refs.editFieldTable
       const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
       console.log(insertRecords)
       console.log(removeRecords)
-      if (updateRecords.length === 1) {
+      if (updateRecords.length === 0) {
+        this.lastRow = parma.rowIndex
+        this.lastColumn = parma.columnIndex
+      }
+      if (updateRecords.length >= 1 && (this.lastRow !== parma.rowIndex || this.lastColumn !== parma.columnIndex)) {
         return error('每次只能修改一个字段，请先保存当前修改')
       }
     },
