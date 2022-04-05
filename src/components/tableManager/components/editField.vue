@@ -130,7 +130,13 @@ export default {
     insertEvent,
     removeEvent,
     checkEdit () {
+      const ref = this.$refs.editFieldTable
+      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      console.log(insertRecords)
+      console.log(removeRecords)
+      if (updateRecords.length === 1) {
 
+      }
     },
     async getTbCol () {
       if (this.tableForm !== {}) {
