@@ -222,7 +222,7 @@ export default {
         } else {
           Message.success(res.data.msg)
           bus.$emit('setShowTbFormEvent', false)
-          ref.reloadData(res.data.data)
+          ref.reloadData(res.data.data.reverse())
         }
       } catch (e) {
         error(e.message)
