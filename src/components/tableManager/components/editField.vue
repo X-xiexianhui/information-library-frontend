@@ -158,7 +158,7 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            this.tableData = res.data.data
+            this.tableData = res.data.data.reverse()
             this.oldData = JSON.parse(JSON.stringify(this.tableData))
           }
         } catch (e) {
