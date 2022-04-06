@@ -252,7 +252,7 @@ export default {
           error(res.data.msg)
         } else {
           Message.success(res.data.msg)
-          ref.reloadData(res.data.data)
+          ref.reloadData(res.data.data.reverse())
         }
       } catch (e) {
         error(e)
