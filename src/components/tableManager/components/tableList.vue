@@ -12,7 +12,7 @@
       <template #buttons>
         <div style="text-align: left">
           <vxe-button icon="el-icon-plus" status="perfect" content="新增表" @click="goToAdd"></vxe-button>
-          <vxe-button icon="el-icon-delete" status="perfect" content="删除表" @click="deleteTable()"></vxe-button>
+          <vxe-button icon="el-icon-delete" status="perfect" content="删除表" @click="deleteSubmit"></vxe-button>
           <vxe-button icon="el-icon-edit" status="perfect" content="重命名" @click="renameTable"></vxe-button>
           <vxe-button icon="el-icon-edit" status="perfect" content="修改表结构" @click="goToEdit"></vxe-button>
         </div>
@@ -28,7 +28,6 @@
       :align="allAlign"
       :row-config="{isCurrent: true}"
       :data="tableData"
-      @current-change="rowChangeEvent"
       >
       <vxe-column field="db_name" title="所属数据库"></vxe-column>
       <vxe-column field="tb_name" title="表名"></vxe-column>
@@ -52,6 +51,7 @@
 
 <script>
 import {error} from '../../../api/error'
+import {VXETable} from 'vxe-table'
 
 export default {
   name: 'tableList',
@@ -68,7 +68,6 @@ export default {
       },
       allAlign: null,
       tableData: [],
-      row: {},
       queryForm: {
         query: ''
       }
@@ -100,15 +99,23 @@ export default {
       }
     },
     // 删除数据表
-    async deleteTable () {
-      if (this.row.length === 0) {
-        return error('请先选择一行数据')
+    async deleteSubmit () {
+      const selectRecords = this.$refs.xTable.getCurrentRecord()
+      if (selectRecords) {
+        const type = await VXETable.modal.confirm('您确定要删除选中的数据吗?')
+        if (type === 'confirm') {
+          await this.deleteTable(selectRecords)
+        }
+      } else {
+        await VXETable.modal.message({content: '请至少选择一条数据', status: 'error'})
       }
+    },
+    async deleteTable (data) {
       try {
         const res = await this.$http.delete('/api/tb/delete', {
           params: {
-            db_name: this.row.db_name,
-            tb_name: this.row.tb_name
+            db_name: data.db_name,
+            tb_name: data.row.tb_name
           }
         })
         if (res.data.code !== 200) {
@@ -147,13 +154,6 @@ export default {
       } catch (e) {
         error(e.message)
       }
-    },
-    rowChangeEvent () {
-      this.row = this.$refs.xTable.getCurrentRecord()
-    },
-    clearRadioRowEvent () {
-      this.row = null
-      this.$refs.xTable.clearRadioRow()
     },
     dispatch () {
       this.$refs.ruleForm.resetFields()
