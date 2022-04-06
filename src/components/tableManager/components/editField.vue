@@ -20,7 +20,7 @@
       :export-config="{}"
       :edit-rules="validRules"
       :data="tableData"
-      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+      :edit-config="{trigger: 'dblclick', mode: 'cell',showStatus: true}"
       size="mini"
       :row-config="{isCurrent: true, useKey: true}"
       :column-config="{isCurrent: true, useKey: true}"
@@ -53,17 +53,17 @@
         </template>
       </vxe-column>
       <vxe-column field="PK" title="主键" :edit-render="{}">
-        <template #edit="{ row }">
+        <template #default="{ row }">
           <vxe-switch v-model="row.PK"></vxe-switch>
         </template>
       </vxe-column>
       <vxe-column field="not_null" title="非空" :edit-render="{}">
-        <template #edit="{ row }">
+        <template #default="{ row }">
           <vxe-switch v-model="row.not_null"></vxe-switch>
         </template>
       </vxe-column>
       <vxe-column field="uni" title="唯一" :edit-render="{}">
-        <template #edit="{ row }">
+        <template #default="{ row }">
           <vxe-switch v-model="row.uni"></vxe-switch>
         </template>
       </vxe-column>
