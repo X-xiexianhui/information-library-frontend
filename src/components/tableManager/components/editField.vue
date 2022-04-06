@@ -68,6 +68,15 @@
         </template>
       </vxe-column>
     </vxe-table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="tableData.length">
+    </el-pagination>
   </div>
 </template>
 
@@ -107,11 +116,14 @@ export default {
         ],
         place: [{type: 'number', min: 0, max: 65, message: '请输入0-65之间的数字'}]
       },
+      currentPage: 1,
+      page_size: 10,
       lastRow: 1,
       lastColumn: 1,
       newLine: {
         col_name: '', data_type: '', len: '', PK: false, place: 0, not_null: false, uni: false
       },
+      currentData: [],
       tableData: [],
       oldData: [],
       placeDisabled: true,
@@ -132,6 +144,14 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
+    handleSizeChange (val) {
+      this.page_size = val
+      this.currentData = this.tableData.slice((this.currentPage - 1) * this.page_size, this.currentPage * this.page_size)
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val
+      this.currentData = this.tableData.slice((this.currentPage - 1) * this.page_size, this.currentPage * this.page_size)
+    },
     checkEdit (parma) {
       const ref = this.$refs.editFieldTable
       const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
