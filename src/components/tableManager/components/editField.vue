@@ -245,17 +245,17 @@ export default {
         update: getUpdate(updateRecords, this.oldData)
       }
       console.log(data)
-      // try {
-      //   const res = await axios.post('/api/tb/alter', data)
-      //   if (res.data.code !== 200) {
-      //     error(res.data.msg)
-      //   } else {
-      //     Message.success(res.data.msg)
-      //     ref.reloadData(res.data.data)
-      //   }
-      // } catch (e) {
-      //   error(e)
-      // }
+      try {
+        const res = await axios.post('/api/tb/alter', data)
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          Message.success(res.data.msg)
+          ref.reloadData(res.data.data)
+        }
+      } catch (e) {
+        error(e)
+      }
     }
   }
 }
