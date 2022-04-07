@@ -72,12 +72,8 @@ export default {
       tableData: []
     }
   },
-  watch: {
-    tableForm: {
-      handler (newValue) {
-        this.getFieldList(newValue)
-      }
-    }
+  created () {
+    this.getFieldList(this.tableForm)
   },
   methods: {
     insertEvent,
