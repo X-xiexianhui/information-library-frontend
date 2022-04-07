@@ -45,8 +45,10 @@
 
 <script>
 
-import {checkData, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
+import {checkData, fullValidEvent, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
 import {error} from '../../../api/error'
+import axios from 'axios'
+import {Message} from 'element-ui'
 
 export default {
   name: 'EditIndex',
@@ -78,8 +80,34 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
-    saveEvent () {
-
+    async saveEvent () {
+      const ref = this.$refs.editIndexTable
+      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
+      if (Saved) {
+        return error('请输入数据')
+      }
+      if (await fullValidEvent(ref)) {
+        return
+      }
+      let data = {
+        db_name: this.tableForm.dbName,
+        tb_name: this.tb_name.tbName,
+        insert: insertRecords,
+        remove: removeRecords,
+        update: updateRecords
+      }
+      try {
+        const res = await axios.post('/api/index/alter', data)
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          Message.success(res.data.msg)
+          ref.reloadData(res.data.data.reverse())
+        }
+      } catch (e) {
+        error(e)
+      }
     },
     checkSave () {
       checkData(this.$refs.editIndexTable)
@@ -92,7 +120,7 @@ export default {
     },
     async getFieldList (val) {
       try {
-        const res = await this.$http.get('tb/filed/get', {params: {dbName: val.dbName, tbName: val.tbName}})
+        const res = await this.$http.get('/api/index/fields', {params: {dbName: val.dbName, tbName: val.tbName}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {

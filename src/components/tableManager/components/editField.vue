@@ -245,7 +245,6 @@ export default {
         remove: removeRecords,
         update: getUpdate(updateRecords, this.oldData)
       }
-      console.log(data)
       try {
         const res = await axios.post('/api/tb/alter', data)
         if (res.data.code !== 200) {
