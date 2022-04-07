@@ -20,7 +20,7 @@
       :export-config="{}"
       :edit-rules="validRules"
       :data="tableData"
-      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+      :edit-config="{trigger: 'dblclick', mode: 'cell',showStatus: true}"
       size="mini"
       :row-config="{isCurrent: true, useKey: true}"
       :column-config="{isCurrent: true, useKey: true}"
