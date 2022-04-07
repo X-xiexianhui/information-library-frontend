@@ -19,9 +19,10 @@
             :export-config="{}"
             :edit-rules="validRules"
             :data="tableData"
-            :row-config="{isCurrent: true}"
-            :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+            :edit-config="{trigger: 'dblclick', mode: 'cell',showStatus: true}"
             size="mini"
+            :row-config="{isCurrent: true, useKey: true}"
+            :column-config="{isCurrent: true, useKey: true}"
         >
             <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
@@ -33,13 +34,10 @@
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="unique" title="唯一索引" :edit-render="{}">
-                <template #default="{ row }">
-                    <span>{{ row.unique }}</span>
-                </template>
-                <template #edit="{ row }">
-
-                </template>
+            <vxe-column field="uni" title="唯一索引" :edit-render="{autofocus: '.vxe-input--inner'}">
+              <template #default="{ row }">
+                <vxe-switch v-model="row.uni"></vxe-switch>
+              </template>
             </vxe-column>
         </vxe-table>
     </div>
@@ -98,7 +96,7 @@ export default {
     },
     async getFieldList (val) {
       try {
-        const res = await this.$http.get('tb/column/get', {params: {dbName: val.dbName, tbName: val.tbName}})
+        const res = await this.$http.get('tb/filed/get', {params: {dbName: val.dbName, tbName: val.tbName}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
