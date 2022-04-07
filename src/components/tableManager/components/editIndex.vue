@@ -3,9 +3,9 @@
         <vxe-toolbar perfect print export>
             <template #buttons>
               <div style="text-align: left">
-                <vxe-button icon="fa fa-plus" status="perfect" @click="insertEvent($refs.editIndexTable, newLine)">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="perfect" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="perfect" @click="saveEvent()">保存</vxe-button>
+                <vxe-button icon="fa fa-plus" status="success" @click="insertEvent($refs.editIndexTable, newLine)">新增</vxe-button>
+                <vxe-button icon="fa fa-trash-o" status="success" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
+                <vxe-button icon="fa fa-save" status="success" @click="saveEvent()">保存</vxe-button>
               </div>
             </template>
         </vxe-toolbar>
