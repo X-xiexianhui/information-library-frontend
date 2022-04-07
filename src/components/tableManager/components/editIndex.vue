@@ -29,7 +29,7 @@
                   <span>{{formatMultiSelect(row.columns)}}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.columns" transfer :multiple="true">
+                    <vxe-select v-model="row.columns" transfer :multiple="true" :clearable="true">
                         <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.value"></vxe-option>
                     </vxe-select>
                 </template>
