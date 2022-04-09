@@ -38,6 +38,9 @@
               <template #default="{ row }">
                 <vxe-switch v-model="row.uni"></vxe-switch>
               </template>
+              <template #edit="{ row }">
+                <vxe-switch v-model="row.uni"></vxe-switch>
+              </template>
             </vxe-column>
         </vxe-table>
     </div>
@@ -120,7 +123,7 @@ export default {
     },
     async getFieldList (val) {
       try {
-        const res = await this.$http.get('/api/index/fields', {params: {dbName: val.dbName, tbName: val.tbName}})
+        const res = await this.$http.get('/api/index/column', {params: {dbName: val.dbName, tbName: val.tbName}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
