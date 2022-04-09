@@ -19,7 +19,7 @@
             :export-config="{}"
             :edit-rules="validRules"
             :data="tableData"
-            :edit-config="{trigger: 'dblclick', mode: 'cell',showStatus: true}"
+            :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
             :row-config="{isCurrent: true, useKey: true}"
             :column-config="{isCurrent: true, useKey: true}"
@@ -52,14 +52,12 @@ import {checkData, fullValidEvent, insertEvent, removeEvent} from '../../../api/
 import {error} from '../../../api/error'
 import axios from 'axios'
 import {Message} from 'element-ui'
+import bus from '../../../common/bus'
 
 export default {
   name: 'EditIndex',
   props: {
-    tableForm: {
-      type: Object,
-      default: () => ({})
-    }
+    tableForm: Object
   },
   data () {
     return {
@@ -78,7 +76,7 @@ export default {
     }
   },
   created () {
-    this.getFieldList(this.tableForm)
+    bus.$on('getFieldsEvent', () => { this.getFieldList(this.tableForm) })
   },
   methods: {
     insertEvent,
@@ -123,11 +121,10 @@ export default {
     },
     async getFieldList (val) {
       try {
-        const res = await this.$http.get('/api/index/column', {params: {dbName: val.dbName, tbName: val.tbName}})
+        const res = await this.$http.get('/api/index/column', {params: {dbName: val.db_name, tbName: val.tb_name}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          this.$message.success(res.data.msg)
           this.fieldList = res.data.data
         }
       } catch (e) {

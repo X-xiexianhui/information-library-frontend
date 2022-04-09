@@ -20,7 +20,7 @@
       :export-config="{}"
       :edit-rules="validRules"
       :data="tableData"
-      :edit-config="{trigger: 'dblclick', mode: 'cell',showStatus: true}"
+      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
       size="mini"
       :row-config="{isCurrent: true, useKey: true}"
       :column-config="{isCurrent: true, useKey: true}"
@@ -56,14 +56,23 @@
         <template #default="{ row }">
           <vxe-switch v-model="row.PK"></vxe-switch>
         </template>
+        <template #edit="{ row }">
+          <vxe-switch v-model="row.PK"></vxe-switch>
+        </template>
       </vxe-column>
       <vxe-column field="not_null" title="非空" :edit-render="{}">
         <template #default="{ row }">
           <vxe-switch v-model="row.not_null"></vxe-switch>
         </template>
+        <template #edit="{ row }">
+          <vxe-switch v-model="row.not_null"></vxe-switch>
+        </template>
       </vxe-column>
       <vxe-column field="uni" title="唯一" :edit-render="{}">
         <template #default="{ row }">
+          <vxe-switch v-model="row.uni"></vxe-switch>
+        </template>
+        <template #edit="{ row }">
           <vxe-switch v-model="row.uni"></vxe-switch>
         </template>
       </vxe-column>
@@ -222,6 +231,7 @@ export default {
         } else {
           Message.success(res.data.msg)
           bus.$emit('setShowTbFormEvent', false)
+          bus.$emit('getFieldsEvent')
           ref.reloadData(res.data.data.reverse())
         }
       } catch (e) {
@@ -251,6 +261,7 @@ export default {
           error(res.data.msg)
         } else {
           Message.success(res.data.msg)
+          bus.$emit('getFieldsEvent')
           ref.reloadData(res.data.data.reverse())
         }
       } catch (e) {
