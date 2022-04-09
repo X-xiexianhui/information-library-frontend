@@ -1,49 +1,51 @@
 <template>
-    <div>
-        <vxe-toolbar perfect print export>
-            <template #buttons>
-              <div style="text-align: left">
-                <vxe-button icon="fa fa-plus" status="success" @click="insertEvent($refs.editIndexTable, newLine)">新增</vxe-button>
-                <vxe-button icon="fa fa-trash-o" status="success" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
-                <vxe-button icon="fa fa-save" status="success" @click="saveEvent()">保存</vxe-button>
-              </div>
-            </template>
-        </vxe-toolbar>
-        <vxe-table
-            ref="editIndexTable"
-            border
-            resizable
-            keep-source
-            show-overflow
-            :print-config="{}"
-            :export-config="{}"
-            :edit-rules="validRules"
-            :data="tableData"
-            :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
-            size="mini"
-            :row-config="{isCurrent: true, useKey: true}"
-            :column-config="{isCurrent: true, useKey: true}"
-        >
-            <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
-                <template #default="{ row }">
-                  <span>{{formatMultiSelect(row.columns)}}</span>
-                </template>
-                <template #edit="{ row }">
-                    <vxe-select v-model="row.columns" transfer :multiple="true" :clearable="true">
-                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.value"></vxe-option>
-                    </vxe-select>
-                </template>
-            </vxe-column>
-            <vxe-column field="uni" title="唯一索引" :edit-render="{autofocus: '.vxe-input--inner'}">
-              <template #default="{ row }">
-                <vxe-switch v-model="row.uni"></vxe-switch>
-              </template>
-              <template #edit="{ row }">
-                <vxe-switch v-model="row.uni"></vxe-switch>
-              </template>
-            </vxe-column>
-        </vxe-table>
-    </div>
+  <div>
+    <vxe-toolbar perfect print export>
+      <template #buttons>
+        <div style="text-align: left">
+          <vxe-button icon="fa fa-plus" status="success" @click="insertEvent($refs.editIndexTable, newLine)">新增
+          </vxe-button>
+          <vxe-button icon="fa fa-trash-o" status="success" @click="removeEvent($refs.editIndexTable)">移除</vxe-button>
+          <vxe-button icon="fa fa-save" status="success" @click="saveEvent()">保存</vxe-button>
+        </div>
+      </template>
+    </vxe-toolbar>
+    <vxe-table
+      ref="editIndexTable"
+      border
+      resizable
+      keep-source
+      show-overflow
+      :print-config="{}"
+      :export-config="{}"
+      :edit-rules="validRules"
+      :data="tableData"
+      :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+      size="mini"
+      :row-config="{isCurrent: true, useKey: true}"
+      :column-config="{isCurrent: true, useKey: true}"
+    >
+      <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+        <template #default="{ row }">
+          <span>{{ formatMultiSelect(row.columns) }}</span>
+        </template>
+        <template #edit="{ row }">
+          <vxe-select v-model="row.columns" transfer :multiple="true" :clearable="true">
+            <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value"
+                        :label="item.value"></vxe-option>
+          </vxe-select>
+        </template>
+      </vxe-column>
+      <vxe-column field="uni" title="唯一索引" :edit-render="{autofocus: '.vxe-input--inner'}">
+        <template #default="{ row }">
+          <vxe-switch v-model="row.uni"></vxe-switch>
+        </template>
+        <template #edit="{ row }">
+          <vxe-switch v-model="row.uni"></vxe-switch>
+        </template>
+      </vxe-column>
+    </vxe-table>
+  </div>
 </template>
 
 <script>
@@ -62,8 +64,9 @@ export default {
   data () {
     return {
       Save: true,
-      newLine: { columns: [], unique: false },
-      validRules: {column1s: [{required: true, message: '索引字段必填'}]
+      newLine: {columns: [], unique: false},
+      validRules: {
+        column1s: [{required: true, message: '索引字段必填'}]
       },
       typeList: [
         {key: 1, value: '普通索引', label: '普通索引'},
@@ -76,14 +79,17 @@ export default {
     }
   },
   created () {
-    bus.$on('getFieldsEvent', () => { this.getFieldList(this.tableForm) })
+    bus.$on('getFieldsEvent', () => {
+      this.getFieldList(this.tableForm)
+      console.log(this.tableForm)
+    })
   },
   methods: {
     insertEvent,
     removeEvent,
     async saveEvent () {
       const ref = this.$refs.editIndexTable
-      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      const {insertRecords, removeRecords, updateRecords} = ref.getRecordset()
       const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
       if (Saved) {
         return error('请输入数据')
