@@ -59,7 +59,10 @@ import bus from '../../../common/bus'
 export default {
   name: 'EditIndex',
   props: {
-    tableForm: Object
+    tableForm: {
+      type: Object,
+      default: () => ({})
+    }
   },
   data () {
     return {
