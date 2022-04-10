@@ -129,15 +129,37 @@ export default {
       return ''
     },
     async getFieldList (val) {
-      try {
-        const res = await this.$http.get('/api/index/column', {params: {db_name: val.db_name, tb_name: val.tb_name}})
-        if (res.data.code !== 200) {
-          error(res.data.msg)
-        } else {
-          this.fieldList = res.data.data.reverse()
+      if (val !== {}) {
+        try {
+          const res = await this.$http.get('/api/index/column', {params: {db_name: val.db_name, tb_name: val.tb_name}})
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.fieldList = res.data.data.reverse()
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
+      }
+    },
+    async getIndex () {
+      if (this.tableForm !== {}) {
+        try {
+          const res = await axios.get('/api/index/get', {
+            params: {
+              db_name: this.tableForm.db_name,
+              tb_name: this.tableForm.tb_name
+            }
+          })
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.tableData = res.data.data.reverse()
+            this.oldData = JSON.parse(JSON.stringify(this.tableData))
+          }
+        } catch (e) {
+          error(e.message)
+        }
       }
     }
   }
