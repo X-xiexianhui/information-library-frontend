@@ -86,6 +86,8 @@ export default {
       this.getFieldList(this.tableForm)
       console.log(this.tableForm)
     })
+    this.getFieldList(this.tableForm)
+    this.getIndex()
   },
   methods: {
     insertEvent,
