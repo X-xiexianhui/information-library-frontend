@@ -9,7 +9,7 @@ export function checkData (ref) {
 }
 // 插入新行
 export function insertEvent (ref, record) {
-  ref.insertAt(record, -1).then(() => {})
+  ref.insertAt(record, -1)
 }
 // 移除数据
 export async function removeEvent (ref) {

@@ -145,8 +145,8 @@ export default {
     checkEdit (parma) {
       const ref = this.$refs.editFieldTable
       const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-      console.log(insertRecords)
-      console.log(removeRecords)
+      insertRecords.reverse()
+      removeRecords.reverse()
       if (updateRecords.length === 0) {
         this.lastRow = parma.rowIndex
         this.lastColumn = parma.columnIndex

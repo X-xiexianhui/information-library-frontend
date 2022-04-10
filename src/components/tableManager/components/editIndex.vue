@@ -127,11 +127,11 @@ export default {
     },
     async getFieldList (val) {
       try {
-        const res = await this.$http.get('/api/index/column', {params: {dbName: val.db_name, tbName: val.tb_name}})
+        const res = await this.$http.get('/api/index/column', {params: {db_name: val.db_name, tb_name: val.tb_name}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          this.fieldList = res.data.data
+          this.fieldList = res.data.data.reverse()
         }
       } catch (e) {
         error(e.message)
