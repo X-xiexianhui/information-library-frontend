@@ -25,18 +25,18 @@
       :row-config="{isCurrent: true, useKey: true}"
       :column-config="{isCurrent: true, useKey: true}"
     >
-      <vxe-column field="columns" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+      <vxe-column field="fields" title="建立索引字段" :edit-render="{autofocus: '.vxe-input--inner'}">
         <template #default="{ row }">
-          <span>{{ formatMultiSelect(row.columns) }}</span>
+          <span>{{ formatMultiSelect(row.fields) }}</span>
         </template>
         <template #edit="{ row }">
-          <vxe-select v-model="row.columns" transfer :multiple="true" :clearable="true">
-            <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value"
-                        :label="item.value"></vxe-option>
+          <vxe-select v-model="row.fields" transfer :multiple="true" :clearable="true">
+            <vxe-option v-for="item in fieldList" :key="item" :value="item"
+                        :label="item"></vxe-option>
           </vxe-select>
         </template>
       </vxe-column>
-      <vxe-column field="uni" title="唯一索引" :edit-render="{autofocus: '.vxe-input--inner'}">
+      <vxe-column field="uni" title="唯一性" :edit-render="{autofocus: '.vxe-input--inner'}">
         <template #default="{ row }">
           <vxe-switch v-model="row.uni"></vxe-switch>
         </template>
@@ -67,7 +67,7 @@ export default {
   data () {
     return {
       Save: true,
-      newLine: {columns: [], unique: false},
+      newLine: {fields: [], uni: false},
       validRules: {
         column1s: [{required: true, message: '索引字段必填'}]
       },
@@ -103,8 +103,8 @@ export default {
         return
       }
       let data = {
-        db_name: this.tableForm.dbName,
-        tb_name: this.tb_name.tbName,
+        db_name: this.tableForm.db_name,
+        tb_name: this.tableForm.tb_name,
         insert: insertRecords,
         remove: removeRecords,
         update: updateRecords
