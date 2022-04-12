@@ -29,7 +29,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.fk_column" transfer>
-                        <vxe-option v-for="item in columnList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                        <vxe-option v-for="(item, index) in columnList" :key="index" :value="item" :label="item"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
@@ -94,6 +94,7 @@ export default {
     bus.$on('getFkColumnEvent', () => {
       this.getFkColumn()
     })
+    this.getFkColumn()
     this.getRefInfo()
     this.getFk()
   },
