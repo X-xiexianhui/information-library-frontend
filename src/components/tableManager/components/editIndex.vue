@@ -84,7 +84,6 @@ export default {
   created () {
     bus.$on('getFieldsEvent', () => {
       this.getFieldList(this.tableForm)
-      console.log(this.tableForm)
     })
     this.getFieldList(this.tableForm)
     this.getIndex()
