@@ -23,8 +23,6 @@
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
         >
-            <vxe-column type="checkbox" width="60"></vxe-column>
-            <vxe-column type="seq" width="60"></vxe-column>
             <vxe-column field="fk" title="建立外键字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
                     <span>{{ row.fk }}</span>
@@ -41,7 +39,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.table" transfer>
-                        <vxe-option v-for="item in dbList" :key="item.dbName" :value="item.dbName" :label="item.dbName"></vxe-option>
+                        <vxe-option v-for="(item,index) in dbList" :key="index" :value="item" :label="item"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>

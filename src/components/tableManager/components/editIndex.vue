@@ -31,7 +31,7 @@
         </template>
         <template #edit="{ row }">
           <vxe-select v-model="row.fields" transfer :multiple="true" :clearable="true">
-            <vxe-option v-for="item in fieldList" :key="item" :value="item"
+            <vxe-option v-for="(item,index) in fieldList" :key="index" :value="item"
                         :label="item"></vxe-option>
           </vxe-select>
         </template>
