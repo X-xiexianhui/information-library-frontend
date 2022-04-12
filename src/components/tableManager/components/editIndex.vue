@@ -156,7 +156,6 @@ export default {
             error(res.data.msg)
           } else {
             this.tableData = res.data.data.reverse()
-            this.oldData = JSON.parse(JSON.stringify(this.tableData))
           }
         } catch (e) {
           error(e.message)

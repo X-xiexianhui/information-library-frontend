@@ -63,6 +63,7 @@ import {checkData, fullValidEvent, insertEvent, removeEvent} from '../../../api/
 import {error} from '../../../api/error'
 import axios from 'axios'
 import {Message} from 'element-ui'
+import bus from '../../../common/bus'
 
 export default {
   name: 'EditFk',
@@ -88,6 +89,13 @@ export default {
         field: [{required: true, message: '参照字段必填'}]
       }
     }
+  },
+  created () {
+    bus.$on('getFkColumnEvent', () => {
+      this.getFkColumn()
+    })
+    this.getRefInfo()
+    this.getFk()
   },
   methods: {
     insertEvent,
@@ -123,6 +131,57 @@ export default {
     },
     checkSave () {
       checkData(this.$refs.editFkTable)
+    },
+    async getFkColumn () {
+      if (this.tableForm !== {}) {
+        try {
+          const res = await axios.get('/api/fk/column', {
+            params: {
+              db_name: this.tableForm.db_name,
+              tb_name: this.tableForm.tb_name
+            }
+          })
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.columnList = res.data.data.reverse()
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      }
+    },
+    async getRefInfo () {
+      try {
+        const res = await this.$http.get('/api/fk/ref')
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.refTableList = res.data.data.ref_table
+          this.refColumnList = res.data.data.ref_column
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    async getFk () {
+      if (this.tableForm !== {}) {
+        try {
+          const res = await axios.get('/api/fk/get', {
+            params: {
+              db_name: this.tableForm.db_name,
+              tb_name: this.tableForm.tb_name
+            }
+          })
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.tableData = res.data.data.reverse()
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      }
     }
   }
 }
