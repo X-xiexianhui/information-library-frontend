@@ -23,32 +23,32 @@
             :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
             size="mini"
         >
-            <vxe-column field="fk" title="建立外键字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="fk_column" title="建立外键字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
-                    <span>{{ row.fk }}</span>
+                    <span>{{ row.fk_column }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.fk" transfer>
+                    <vxe-select v-model="row.fk_column" transfer>
                         <vxe-option v-for="item in fkList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="table" title="被参照表" :edit-render="{}">
+            <vxe-column field="ref_table" title="被参照表" :edit-render="{}">
                 <template #default="{ row }">
-                    <span>{{ row.table }}</span>
+                    <span>{{ row.ref_table }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.table" transfer>
+                    <vxe-select v-model="row.ref_table" transfer>
                         <vxe-option v-for="(item,index) in dbList" :key="index" :value="item" :label="item"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
-            <vxe-column field="field" title="被参照字段" :edit-render="{autofocus: '.vxe-input--inner'}">
+            <vxe-column field="ref_column" title="被参照字段" :edit-render="{autofocus: '.vxe-input--inner'}">
                 <template #default="{ row }">
-                    <span>{{ row.field }}</span>
+                    <span>{{ row.ref_column }}</span>
                 </template>
                 <template #edit="{ row }">
-                    <vxe-select v-model="row.field" transfer>
+                    <vxe-select v-model="row.ref_column" transfer>
                         <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
@@ -77,7 +77,7 @@ export default {
     return {
       Save: true,
       newLine: {
-        fk: '', table: '', field: ''
+        fk_name: '', fk_column: '', ref_table: '', ref_column: ''
       },
       fkList: [],
       fieldList: [],
