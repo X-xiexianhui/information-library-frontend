@@ -29,7 +29,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.fk_column" transfer>
-                        <vxe-option v-for="item in fkList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                        <vxe-option v-for="item in columnList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
@@ -39,7 +39,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.ref_table" transfer>
-                        <vxe-option v-for="(item,index) in dbList" :key="index" :value="item" :label="item"></vxe-option>
+                        <vxe-option v-for="(item,index) in refTableList" :key="index" :value="item" :label="item"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
@@ -49,7 +49,7 @@
                 </template>
                 <template #edit="{ row }">
                     <vxe-select v-model="row.ref_column" transfer>
-                        <vxe-option v-for="item in fieldList" :key="item.value" :value="item.value" :label="item.label"></vxe-option>
+                        <vxe-option v-for="(item, index) in refColumnList[row.ref_table]" :key="index" :value="item" :label="item"></vxe-option>
                     </vxe-select>
                 </template>
             </vxe-column>
@@ -59,7 +59,10 @@
 
 <script>
 
-import {checkData, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
+import {checkData, fullValidEvent, insertEvent, removeEvent} from '../../../api/tableManager/tableManager'
+import {error} from '../../../api/error'
+import axios from 'axios'
+import {Message} from 'element-ui'
 
 export default {
   name: 'EditFk',
@@ -67,10 +70,6 @@ export default {
     tableForm: {
       type: Object,
       default: () => ({})
-    },
-    dbList: {
-      type: Array,
-      default: () => ([])
     }
   },
   data () {
@@ -79,9 +78,9 @@ export default {
       newLine: {
         fk_name: '', fk_column: '', ref_table: '', ref_column: ''
       },
-      fkList: [],
-      fieldList: [],
-      typeList: [],
+      refTableList: [],
+      columnList: [],
+      refColumnList: {},
       tableData: [],
       validRules: {
         fk: [{required: true, message: '外键字段必填'}],
@@ -93,7 +92,34 @@ export default {
   methods: {
     insertEvent,
     removeEvent,
-    saveEvent () {
+    async saveEvent () {
+      const ref = this.$refs.editFkTable
+      const {insertRecords, removeRecords, updateRecords} = ref.getRecordset()
+      const Saved = insertRecords.length === 0 && removeRecords.length === 0 && updateRecords.length === 0
+      if (Saved) {
+        return error('请输入数据')
+      }
+      if (await fullValidEvent(ref)) {
+        return
+      }
+      let data = {
+        db_name: this.tableForm.db_name,
+        tb_name: this.tableForm.tb_name,
+        insert: insertRecords,
+        remove: removeRecords,
+        update: updateRecords
+      }
+      try {
+        const res = await axios.post('/api/fk/alter', data)
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          Message.success(res.data.msg)
+          ref.reloadData(res.data.data.reverse())
+        }
+      } catch (e) {
+        error(e)
+      }
     },
     checkSave () {
       checkData(this.$refs.editFkTable)
