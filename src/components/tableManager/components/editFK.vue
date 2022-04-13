@@ -154,7 +154,10 @@ export default {
     },
     async getRefInfo () {
       try {
-        const res = await this.$http.get('/api/fk/ref')
+        const res = await this.$http.get('/api/fk/ref', {params: {
+          db_name: this.tableForm.db_name,
+          tb_name: this.tableForm.tb_name
+        }})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -177,6 +180,7 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
+            console.log(res.data)
             this.tableData = res.data.data.reverse()
           }
         } catch (e) {
