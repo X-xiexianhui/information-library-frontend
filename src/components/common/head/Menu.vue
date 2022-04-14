@@ -9,6 +9,11 @@
           <i class="el-icon-folder" :class="$style.menuIcon"></i>数据库管理
         </a>
       </el-menu-item>
+      <el-menu-item index="2">
+        <a :class="$style.menuLink" href="/table" target="_blank">
+          <i class="el-icon-s-data" :class="$style.menuIcon"></i>数据表管理
+        </a>
+      </el-menu-item>
     </el-menu>
 </template>
 
