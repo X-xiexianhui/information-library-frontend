@@ -1,10 +1,9 @@
 <template>
   <div>
-    <vxe-toolbar perfect print export>
+    <vxe-toolbar perfect>
       <template #buttons>
         <div style="text-align: left; margin-left: 10px">
-          <vxe-button icon="fa fa-plus" status="success" @click="insertEvent($refs.editFieldTable,newLine)">新增
-          </vxe-button>
+          <vxe-button icon="fa fa-plus" status="success" @click="insertEvent($refs.editFieldTable,newLine)">新增</vxe-button>
           <vxe-button icon="fa fa-trash-o" status="success" @click="removeEvent($refs.editFieldTable)">移除</vxe-button>
           <vxe-button icon="fa fa-save" status="success" @click="saveEvent()">保存</vxe-button>
         </div>
