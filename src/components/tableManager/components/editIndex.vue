@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vxe-toolbar perfect print export>
+    <vxe-toolbar perfect>
       <template #buttons>
         <div style="text-align: left">
           <vxe-button icon="fa fa-plus" status="success" @click="insertEvent($refs.editIndexTable, newLine)">新增
