@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <vxe-grid
       border
       resizable
