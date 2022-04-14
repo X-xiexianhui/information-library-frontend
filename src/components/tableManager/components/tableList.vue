@@ -8,13 +8,14 @@
         <el-button type="primary" @click="onQuery">查询</el-button>
       </el-form-item>
     </el-form>
-    <vxe-toolbar perfect print export>
+    <vxe-toolbar perfect>
       <template #buttons>
         <div style="text-align: left">
-          <vxe-button icon="el-icon-plus" status="perfect" content="新增表" @click="goToAdd"></vxe-button>
-          <vxe-button icon="el-icon-delete" status="perfect" content="删除表" @click="deleteSubmit"></vxe-button>
-          <vxe-button icon="el-icon-edit" status="perfect" content="重命名" @click="renameTable"></vxe-button>
-          <vxe-button icon="el-icon-edit" status="perfect" content="修改表结构" @click="goToEdit"></vxe-button>
+          <vxe-button size="mini" icon="el-icon-plus" status="success" content="新增表" @click="goToAdd"></vxe-button>
+          <vxe-button size="mini" icon="el-icon-delete" status="success" content="删除表" @click="deleteSubmit"></vxe-button>
+          <vxe-button size="mini" icon="el-icon-edit" status="success" content="重命名" @click="renameTable"></vxe-button>
+          <vxe-button size="mini" icon="el-icon-edit" status="success" content="修改表结构" @click="goToEdit"></vxe-button>
+          <vxe-button size="mini" icon="el-icon-download" content="导出" @click="$refs.xTable.exportData"></vxe-button>
         </div>
       </template>
     </vxe-toolbar>
