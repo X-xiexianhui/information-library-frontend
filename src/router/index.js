@@ -21,6 +21,10 @@ export default new Router({
     {
       path: '/db',
       component: () => import('../components/databaseManager/dbPage')
+    },
+    {
+      path: '/form',
+      component: () => import('../components/formManager/page/formList')
     }
   ]
 })
