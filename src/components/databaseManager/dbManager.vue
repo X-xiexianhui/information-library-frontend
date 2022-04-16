@@ -11,8 +11,8 @@
     <vxe-toolbar perfect print export>
         <template #buttons>
           <div style="text-align: left">
-            <vxe-button icon="el-icon-plus" status="success" content="新增" @click="insertEvent()"></vxe-button>
-            <vxe-button icon="el-icon-delete" status="success" content="删除" @click="removeEvent()"></vxe-button>
+            <vxe-button size="mini" icon="el-icon-plus" status="success" content="新增" @click="insertEvent()"></vxe-button>
+            <vxe-button size="mini" icon="el-icon-delete" status="success" content="删除" @click="removeEvent()"></vxe-button>
           </div>
         </template>
     </vxe-toolbar>
