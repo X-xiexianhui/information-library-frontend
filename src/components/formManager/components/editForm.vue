@@ -10,9 +10,9 @@
     :edit-config="{trigger: 'click', mode: 'row', showStatus: true}"
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
-    :data="tableData">
+    :data="currentData">
     <template #colName_edit="{ row }">
-      {{row.col_name}}
+      {{ row.col_name }}
     </template>
     <template #formLabel_edit="{ row }">
       <vxe-input v-model="row.label_name" type="text"></vxe-input>
@@ -55,9 +55,10 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {field: 'col_name', title: '数据表字段', editRender: {}, slots: { edit: 'colName_edit' }},
-        {field: 'label_name', title: '字段标签', editRender: {}, slots: { edit: 'formLabel_edit' }}
+        {field: 'col_name', title: '数据表字段', editRender: {}, slots: {edit: 'colName_edit'}},
+        {field: 'label_name', title: '字段标签', editRender: {}, slots: {edit: 'formLabel_edit'}}
       ],
+      currentData: [],
       tableData: [],
       update: [],
       validRules: {
@@ -73,7 +74,7 @@ export default {
   methods: {
     handlePageChange ({currentPage, pageSize}) {
       const ref = this.$refs.formStruct
-      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      const {insertRecords, removeRecords, updateRecords} = ref.getRecordset()
       insertRecords.reverse()
       removeRecords.reverse()
       if (updateRecords.length > 0) {
@@ -81,6 +82,7 @@ export default {
       }
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
+      this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
     async query (val) {
       try {
@@ -89,6 +91,9 @@ export default {
           error(res.data.msg)
         } else {
           this.tableData = res.data.data.reverse()
+          const currentPage = this.tablePage.currentPage
+          const pageSize = this.tablePage.pageSize
+          this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
         }
       } catch (e) {
         error(e.message)
