@@ -100,6 +100,13 @@ export default {
       }
     },
     async save () {
+      const ref = this.$refs.formStruct
+      const {insertRecords, removeRecords, updateRecords} = ref.getRecordset()
+      insertRecords.reverse()
+      removeRecords.reverse()
+      if (updateRecords.length > 0) {
+        this.update.push(...updateRecords)
+      }
       console.log(this.update)
     }
   }
