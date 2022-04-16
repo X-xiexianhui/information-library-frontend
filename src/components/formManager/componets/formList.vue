@@ -5,6 +5,7 @@
       resizable
       ref="formTable"
       height="530"
+      :toolbar-config="toolBarConfig"
       :row-config="{isCurrent: true}"
       :columns="tableColumn"
       :data="tableData">
@@ -47,6 +48,11 @@ export default {
   name: 'formList',
   data () {
     return {
+      toolBarConfig: {
+        slots: {
+          buttons: 'toolbar_buttons'
+        }
+      },
       form_name: '',
       dialogVisible: false,
       searchName: '',
@@ -55,7 +61,6 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {field: 'db_name', title: '所属数据库'},
         {field: 'tb_name', title: '数据表'},
         {field: 'form_name', title: '表单名称'}
       ],
@@ -123,5 +128,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

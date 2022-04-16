@@ -4,6 +4,7 @@
     resizable
     ref="formStruct"
     height="530"
+    :toolbar-config="toolBarConfig"
     :edit-rules="validRules"
     :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
     :row-config="{isCurrent: true}"
@@ -39,6 +40,11 @@ export default {
   name: 'editForm',
   data () {
     return {
+      toolBarConfig: {
+        slots: {
+          buttons: 'toolbar_buttons'
+        }
+      },
       searchName: '',
       tablePage: {
         currentPage: 1,

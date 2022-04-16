@@ -24,11 +24,11 @@ export default new Router({
     },
     {
       path: '/form',
-      component: () => import('../components/formManager/page/formList')
+      component: () => import('../components/formManager/componets/formList')
     },
     {
       path: '/form/edit',
-      component: () => import('../components/formManager/page/editForm')
+      component: () => import('../components/formManager/componets/editForm')
     }
   ]
 })
