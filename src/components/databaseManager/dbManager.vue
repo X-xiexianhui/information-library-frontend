@@ -24,16 +24,9 @@
       show-header-overflow
       show-overflow
       :align="allAlign"
-      :row-config="{isHover: true}"
+      :row-config="{isCurrent: true,isHover: true}"
       :radio-config="{highlight: true}"
-      :data="tableData"
-      @radio-change="radioChangeEvent">
-    >
-      <vxe-column type="radio" width="60">
-        <template #header>
-          <vxe-button type="text" @click="clearRadioRowEvent" :disabled="!row">取消</vxe-button>
-        </template>
-      </vxe-column>
+      :data="tableData">
       <vxe-column type="seq" title="序号" width="60"></vxe-column>
       <vxe-column field="db_name" title="数据库名称"></vxe-column>
       <vxe-column field="tables" title="表数量"></vxe-column>
@@ -101,7 +94,8 @@ export default {
     },
     async removeEvent () {
       try {
-        const res = await this.$http.delete('/api/db/delete', {params: {db_name: this.row.db_name}})
+        const selectRecord = this.$refs.xTable.getCurrentRecord()
+        const res = await this.$http.delete('/api/db/delete', {params: {db_name: selectRecord.db_name}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -143,13 +137,6 @@ export default {
     dispatch () {
       this.$refs.ruleForm.resetFields()
       this.isShow = false
-    },
-    radioChangeEvent () {
-      this.row = this.$refs.xTable.getRadioRecord()
-    },
-    clearRadioRowEvent () {
-      this.row = null
-      this.$refs.xTable.clearRadioRow()
     }
   }
 }
