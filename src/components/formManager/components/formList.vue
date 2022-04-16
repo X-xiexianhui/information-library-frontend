@@ -4,7 +4,6 @@
       border
       resizable
       ref="formTable"
-      height="530"
       :toolbar-config="toolBarConfig"
       :row-config="{isCurrent: true}"
       :columns="tableColumn"
