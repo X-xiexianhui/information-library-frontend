@@ -6,7 +6,7 @@
     ref="formStruct"
     :toolbar-config="toolBarConfig"
     :edit-rules="validRules"
-    :edit-config="{trigger: 'click', mode: 'row', showStatus: true}"
+    :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
     :data="currentData">
@@ -110,10 +110,11 @@ export default {
         return error('请先修改，再保存')
       }
       try {
-        const res = await axios.post('/api/form/edit', {update: this.update})
+        const res = await axios.post('/api/form/edit', {update: this.update, form_id: this.$route.query.form_id})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
+          this.$message.success('修改成功')
           this.tableData = res.data.data.reverse()
           const currentPage = this.tablePage.currentPage
           const pageSize = this.tablePage.pageSize
