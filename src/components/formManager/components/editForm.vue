@@ -106,7 +106,22 @@ export default {
       if (updateRecords.length > 0) {
         this.update.push(...updateRecords)
       }
-      console.log(this.update)
+      if (this.update.length === 0) {
+        return error('请先修改，再保存')
+      }
+      try {
+        const res = await axios.post('/api/form/struct', {update: this.update})
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.tableData = res.data.data.reverse()
+          const currentPage = this.tablePage.currentPage
+          const pageSize = this.tablePage.pageSize
+          this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
+        }
+      } catch (e) {
+        error(e)
+      }
     }
   }
 }
