@@ -2,7 +2,7 @@
   <vxe-grid
     border
     resizable
-    ref="formTable"
+    ref="formStruct"
     height="530"
     :edit-rules="validRules"
     :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
@@ -19,7 +19,7 @@
       <vxe-input v-model="searchName" placeholder="请输入数据表名称"></vxe-input>
       <vxe-button status="primary" @click="query">搜索</vxe-button>
       <vxe-button status="success" @click="save">保存</vxe-button>
-      <vxe-button @click="$refs.formTable.exportData()">导出</vxe-button>
+      <vxe-button @click="$refs.formStruct.exportData()">导出</vxe-button>
     </template>
 
     <template #pager>
@@ -60,6 +60,16 @@ export default {
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
+    },
+    async query (val) {
+      console.log(val)
+    },
+    async save () {
+      const ref = this.$refs.formStruct
+      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      insertRecords.reverse()
+      removeRecords.reverse()
+      console.log(updateRecords)
     }
   }
 }
