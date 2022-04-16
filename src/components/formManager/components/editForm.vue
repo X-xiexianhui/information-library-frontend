@@ -18,7 +18,7 @@
       <vxe-input v-model="row.label_name" type="text"></vxe-input>
     </template>
     <template #toolbar_buttons>
-      <vxe-input v-model="searchName" placeholder="请输入数据表名称"></vxe-input>
+      <vxe-input v-model="searchName" placeholder="请输入字段名称"></vxe-input>
       <vxe-button status="primary" @click="query">搜索</vxe-button>
       <vxe-button status="success" @click="save">保存</vxe-button>
       <vxe-button @click="$refs.formStruct.exportData()">导出</vxe-button>
