@@ -6,7 +6,6 @@
       ref="formTable"
       height="530"
       :row-config="{isCurrent: true}"
-      :seq-config="{startIndex: (tablePage.currentPage - 1) * tablePage.pageSize}"
       :columns="tableColumn"
       :data="tableData">
       <template #toolbar_buttons>
@@ -26,16 +25,30 @@
         </vxe-pager>
       </template>
     </vxe-grid>
+    <el-dialog
+      title="请输入表单新名称"
+      :visible.sync="dialogVisible"
+      :before-close="closeEvent"
+    >
+      <el-input v-model="form_name" placeholder="请输入表单名称，支持中英文"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="closeEvent">取 消</el-button>
+        <el-button type="primary" @click="save">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import {error} from '../../../api/error'
+import axios from 'axios'
 
 export default {
   name: 'formList',
   data () {
     return {
+      form_name: '',
+      dialogVisible: false,
       searchName: '',
       tablePage: {
         currentPage: 1,
@@ -65,6 +78,44 @@ export default {
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
+    },
+    renameEvent () {
+      const selectRecords = this.$refs.formTable.getCurrentRecord()
+      console.log(selectRecords)
+      if (!selectRecords) {
+        return error('请先选择需要重命名的表单')
+      }
+      this.dialogVisible = true
+    },
+    closeEvent () {
+      this.dialogVisible = false
+      this.form_name = ''
+    },
+    async save () {
+      if (this.new_name === '') {
+        return error('请输入表单名称')
+      }
+      try {
+        const selectRecords = this.$refs.formTable.getCurrentRecord()
+        const res = await axios.get('/api/form/rename', {
+          params: {
+            old_name: selectRecords.form_name,
+            new_name: this.form_name
+          }
+        })
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.tableData = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    goToEdit () {
+      const selectRecords = this.$refs.formTable.getCurrentRecord()
+      const routeData = this.$router.resolve({path: '/form/edit', params: {current: selectRecords}})
+      window.open(routeData.href, '_blank')
     }
   }
 }
