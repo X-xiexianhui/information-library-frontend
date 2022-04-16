@@ -11,8 +11,8 @@
     <vxe-toolbar perfect print export>
         <template #buttons>
           <div style="text-align: left">
-            <vxe-button icon="el-icon-plus" status="perfect" content="新增" @click="insertEvent()"></vxe-button>
-            <vxe-button icon="el-icon-delete" status="perfect" content="删除" @click="removeEvent()"></vxe-button>
+            <vxe-button icon="el-icon-plus" status="success" content="新增" @click="insertEvent()"></vxe-button>
+            <vxe-button icon="el-icon-delete" status="success" content="删除" @click="removeEvent()"></vxe-button>
           </div>
         </template>
     </vxe-toolbar>
@@ -27,7 +27,6 @@
       :row-config="{isCurrent: true,isHover: true}"
       :radio-config="{highlight: true}"
       :data="tableData">
-      <vxe-column type="seq" title="序号" width="60"></vxe-column>
       <vxe-column field="db_name" title="数据库名称"></vxe-column>
       <vxe-column field="tables" title="表数量"></vxe-column>
     </vxe-table>
