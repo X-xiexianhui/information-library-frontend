@@ -8,11 +8,12 @@
           <el-button type="primary" @click="onQuery">查询</el-button>
         </el-form-item>
       </el-form>
-    <vxe-toolbar perfect print export>
+    <vxe-toolbar perfect>
         <template #buttons>
           <div style="text-align: left">
             <vxe-button size="mini" icon="el-icon-plus" status="success" content="新增" @click="insertEvent()"></vxe-button>
             <vxe-button size="mini" icon="el-icon-delete" status="success" content="删除" @click="removeEvent()"></vxe-button>
+            <vxe-button size="mini" content="导出" @click="$refs.xTable.exportData()"></vxe-button>
           </div>
         </template>
     </vxe-toolbar>
