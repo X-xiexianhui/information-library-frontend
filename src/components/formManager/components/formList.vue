@@ -126,7 +126,8 @@ export default {
     },
     goToEdit () {
       const selectRecords = this.$refs.formTable.getCurrentRecord()
-      const routeData = this.$router.resolve({path: '/form/edit', params: {current: selectRecords}})
+      console.log(selectRecords)
+      const routeData = this.$router.resolve({path: '/form/edit', query: {form_id: selectRecords.form_id}})
       window.open(routeData.href, '_blank')
     }
   }

@@ -2,18 +2,19 @@
   <vxe-grid
     border
     resizable
+    keep-source
     ref="formStruct"
     height="530"
     :toolbar-config="toolBarConfig"
     :edit-rules="validRules"
-    :edit-config="{trigger: 'click', mode: 'cell',showStatus: true}"
+    :edit-config="{trigger: 'click', mode: 'row', showStatus: true}"
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
     :data="tableData">
-    <template #form_lable_edit="{ row }">
+    <template #colName_edit="{ row }">
       {{row.col_name}}
     </template>
-    <template #form_lable_edit="{ row }">
+    <template #formLabel_edit="{ row }">
       <vxe-input v-model="row.form_label" type="text"></vxe-input>
     </template>
     <template #toolbar_buttons>
@@ -36,6 +37,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import {error} from '../../../api/error'
+
 export default {
   name: 'editForm',
   data () {
@@ -51,8 +55,8 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {field: 'col_name', title: '数据表字段', editRender: {}, slots: { edit: 'col_name_edit' }},
-        {field: 'form_label', title: '字段标签', editRender: {}, slots: { edit: 'form_label_edit' }}
+        {field: 'col_name', title: '数据表字段', editRender: {}, slots: { edit: 'colName_edit' }},
+        {field: 'form_label', title: '字段标签', editRender: {}, slots: { edit: 'formLabel_edit' }}
       ],
       tableData: [],
       validRules: {
@@ -62,13 +66,25 @@ export default {
       }
     }
   },
+  created () {
+    this.query(this.$route.query.form_id)
+  },
   methods: {
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
     },
     async query (val) {
-      console.log(val)
+      try {
+        const res = await axios.get('/api/form/struct', {params: {form_id: val}})
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.tableData = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e.message)
+      }
     },
     async save () {
       const ref = this.$refs.formStruct

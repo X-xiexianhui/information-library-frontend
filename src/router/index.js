@@ -28,7 +28,7 @@ export default new Router({
     },
     {
       path: '/form/edit',
-      component: () => import('../components/formManager/components/editForm')
+      component: () => import('../components/formManager/page/editFormPage')
     }
   ]
 })
