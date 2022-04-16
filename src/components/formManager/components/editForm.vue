@@ -15,7 +15,7 @@
       {{row.col_name}}
     </template>
     <template #formLabel_edit="{ row }">
-      <vxe-input v-model="row.form_label" type="text"></vxe-input>
+      <vxe-input v-model="row.label_name" type="text"></vxe-input>
     </template>
     <template #toolbar_buttons>
       <vxe-input v-model="searchName" placeholder="请输入数据表名称"></vxe-input>
@@ -56,11 +56,11 @@ export default {
       },
       tableColumn: [
         {field: 'col_name', title: '数据表字段', editRender: {}, slots: { edit: 'colName_edit' }},
-        {field: 'form_label', title: '字段标签', editRender: {}, slots: { edit: 'formLabel_edit' }}
+        {field: 'label_name', title: '字段标签', editRender: {}, slots: { edit: 'formLabel_edit' }}
       ],
       tableData: [],
       validRules: {
-        form_label: [
+        label_name: [
           {required: true, message: '字段标签必填'}
         ]
       }
