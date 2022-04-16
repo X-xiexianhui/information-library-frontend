@@ -15,7 +15,7 @@
           <vxe-button size="mini" icon="el-icon-delete" status="success" content="删除表" @click="deleteSubmit"></vxe-button>
           <vxe-button size="mini" icon="el-icon-edit" status="success" content="重命名" @click="renameTable"></vxe-button>
           <vxe-button size="mini" icon="el-icon-edit" status="success" content="修改表结构" @click="goToEdit"></vxe-button>
-          <vxe-button size="mini" icon="el-icon-download" content="导出" @click="$refs.xTable.exportData"></vxe-button>
+          <vxe-button size="mini"  content="导出" @click="$refs.xTable.exportData()"></vxe-button>
         </div>
       </template>
     </vxe-toolbar>
@@ -90,7 +90,6 @@ export default {
     async getTables (param) {
       try {
         const res = await this.$http.get('/api/tb/search', {params: {query_name: param}})
-        console.log(res.data.data)
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -117,14 +116,14 @@ export default {
         const res = await this.$http.delete('/api/tb/delete', {
           params: {
             db_name: data.db_name,
-            tb_name: data.row.tb_name
+            tb_name: data.tb_name
           }
         })
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
           this.$message.success(res.data.msg)
-          await this.getTables()
+          await this.getTables('')
         }
       } catch (e) {
         error(e.message)
