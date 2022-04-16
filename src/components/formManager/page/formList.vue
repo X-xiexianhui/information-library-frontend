@@ -62,6 +62,9 @@ export default {
       tableData: []
     }
   },
+  created () {
+    this.query('')
+  },
   methods: {
     async query (val) {
       try {
@@ -97,11 +100,9 @@ export default {
       }
       try {
         const selectRecords = this.$refs.formTable.getCurrentRecord()
-        const res = await axios.get('/api/form/rename', {
-          params: {
-            old_name: selectRecords.form_name,
-            new_name: this.form_name
-          }
+        const res = await axios.post('/api/form/rename', {
+          old_name: selectRecords.form_name,
+          new_name: this.form_name
         })
         if (res.data.code !== 200) {
           error(res.data.msg)
