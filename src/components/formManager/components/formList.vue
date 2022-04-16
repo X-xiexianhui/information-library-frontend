@@ -107,12 +107,14 @@ export default {
         const selectRecords = this.$refs.formTable.getCurrentRecord()
         const res = await axios.post('/api/form/rename', {
           old_name: selectRecords.form_name,
-          new_name: this.form_name
+          new_name: this.form_name,
+          form_id: selectRecords.form_id
         })
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
           this.tableData = res.data.data.reverse()
+          this.closeEvent()
         }
       } catch (e) {
         error(e.message)

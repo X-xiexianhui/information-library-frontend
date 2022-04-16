@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FormList from '../componets/formList'
+import FormList from '../components/formList'
 import PageHead from '../../common/head/pageHead'
 export default {
   name: 'formPage',
