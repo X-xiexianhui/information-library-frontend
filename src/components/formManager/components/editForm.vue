@@ -59,6 +59,7 @@ export default {
         {field: 'label_name', title: '字段标签', editRender: {}, slots: { edit: 'formLabel_edit' }}
       ],
       tableData: [],
+      update: [],
       validRules: {
         label_name: [
           {required: true, message: '字段标签必填'}
@@ -71,6 +72,13 @@ export default {
   },
   methods: {
     handlePageChange ({currentPage, pageSize}) {
+      const ref = this.$refs.formStruct
+      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
+      insertRecords.reverse()
+      removeRecords.reverse()
+      if (updateRecords.length > 0) {
+        this.update.push(...updateRecords)
+      }
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
     },
@@ -87,11 +95,7 @@ export default {
       }
     },
     async save () {
-      const ref = this.$refs.formStruct
-      const { insertRecords, removeRecords, updateRecords } = ref.getRecordset()
-      insertRecords.reverse()
-      removeRecords.reverse()
-      console.log(updateRecords)
+      console.log(this.update)
     }
   }
 }
