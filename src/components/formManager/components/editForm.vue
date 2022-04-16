@@ -110,7 +110,7 @@ export default {
         return error('请先修改，再保存')
       }
       try {
-        const res = await axios.post('/api/form/struct', {update: this.update})
+        const res = await axios.post('/api/form/edit', {update: this.update})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
