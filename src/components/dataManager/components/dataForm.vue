@@ -1,25 +1,30 @@
 <template>
-  <vxe-grid
+  <vxe-table
     border
     resizable
     keep-source
     ref="formStruct"
-    :toolbar-config="toolBarConfig"
     :edit-rules="validRules"
     :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
     :row-config="{isCurrent: true}"
-    :columns="tableColumn"
     :data="tableData">
-    <template #labelName_edit="{ row }">
-      <p>{{ row.label_name }}</p>
-    </template>
-    <template #data_edit="{ row }">
-      <vxe-input v-model="row.data" type="text"></vxe-input>
-    </template>
-    <template #toolbar_buttons>
-      <vxe-button status="success" @click="save">保存</vxe-button>
-    </template>
-  </vxe-grid>
+    <vxe-column field="label_name" title="数据表字段名称">
+      <template #default="{ row }">
+        <p>{{ row.label_name }}</p>
+      </template>
+      <template #edit="{ row }">
+        <p>{{ row.label_name }}</p>
+      </template>
+    </vxe-column>
+    <vxe-column>
+      <template #default="{ row }">
+        <p>{{row.data}}}</p>
+      </template>
+      <template #edit="{ row }">
+        <vxe-input v-model="row.data" type="text"></vxe-input>
+      </template>
+    </vxe-column>
+  </vxe-table>
 </template>
 
 <script>
