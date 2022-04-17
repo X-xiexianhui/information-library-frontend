@@ -115,6 +115,7 @@ export default {
           error(res.data.msg)
         } else {
           this.$message.success('修改成功')
+          this.update = []
           this.tableData = res.data.data.reverse()
           const currentPage = this.tablePage.currentPage
           const pageSize = this.tablePage.pageSize
