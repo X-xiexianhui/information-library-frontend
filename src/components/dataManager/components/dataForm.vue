@@ -3,7 +3,7 @@
     border
     resizable
     keep-source
-    ref="formStruct"
+    ref="dataForm"
     :edit-rules="validRules"
     :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
     :row-config="{isCurrent: true}"
