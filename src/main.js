@@ -13,7 +13,7 @@ import './assets/css/backend.css'
 Vue.use(VXETable)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
-
+axios.defaults.baseURL = 'http://localhost:8080'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
