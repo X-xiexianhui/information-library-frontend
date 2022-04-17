@@ -18,10 +18,10 @@
     </vxe-column>
     <vxe-column>
       <template #default="{ row }">
-        <span>{{row.data}}}</span>
+        <span>{{row.value}}}</span>
       </template>
       <template #edit="{ row }">
-        <vxe-input v-model="row.data" type="text"></vxe-input>
+        <vxe-input v-model="row.value" type="text"></vxe-input>
       </template>
     </vxe-column>
   </vxe-table>
@@ -49,7 +49,7 @@ export default {
       ],
       tableData: [],
       validRules: {
-        label_name: [
+        value: [
           {required: true, message: '数据必填'}
         ]
       }
