@@ -30,6 +30,12 @@
 <script>
 export default {
   name: 'dataForm',
+  props: {
+    record_id: {
+      type: Number,
+      default: -1
+    }
+  },
   data () {
     return {
       toolBarConfig: {
