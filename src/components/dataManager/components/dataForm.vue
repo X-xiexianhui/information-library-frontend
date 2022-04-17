@@ -10,15 +10,15 @@
     :data="tableData">
     <vxe-column field="label_name" title="数据表字段名称">
       <template #default="{ row }">
-        <p>{{ row.label_name }}</p>
+        <span>{{ row.label_name }}</span>
       </template>
       <template #edit="{ row }">
-        <p>{{ row.label_name }}</p>
+        <span>{{ row.label_name }}</span>
       </template>
     </vxe-column>
     <vxe-column>
       <template #default="{ row }">
-        <p>{{row.data}}}</p>
+        <span>{{row.data}}}</span>
       </template>
       <template #edit="{ row }">
         <vxe-input v-model="row.data" type="text"></vxe-input>
