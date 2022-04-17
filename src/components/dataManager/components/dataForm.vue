@@ -10,8 +10,8 @@
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
     :data="tableData">
-    <template #colName_edit="{ row }">
-      <p>{{ row.col_name }}</p>
+    <template #labelName_edit="{ row }">
+      <p>{{ row.label_name }}</p>
     </template>
     <template #data_edit="{ row }">
       <vxe-input v-model="row.data" type="text"></vxe-input>
@@ -33,7 +33,7 @@ export default {
         }
       },
       tableColumn: [
-        {field: 'col_name', title: '数据表字段', editRender: {}, slots: {edit: 'colName_edit'}},
+        {field: 'col_name', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
         {field: 'data', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
       ],
       tableData: [],
