@@ -10,7 +10,7 @@
       :data="tableData">
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入菜单名称" clearable></vxe-input>
-        <vxe-button status="primary" @click="search">搜索</vxe-button>
+        <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改菜单</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
@@ -71,7 +71,7 @@ export default {
   methods: {
     async query (val) {
       try {
-        const res = await this.$http.get('/api/menu/query', {params: {form_id: val}})
+        const res = await this.$http.get('/api/menu/query', {params: {menu_name: val}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -80,9 +80,6 @@ export default {
       } catch (e) {
         error(e)
       }
-    },
-    search () {
-      this.query(this.searchName)
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
