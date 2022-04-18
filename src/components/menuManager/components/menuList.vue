@@ -3,7 +3,7 @@
     <vxe-grid
       border
       resizable
-      ref="formTable"
+      ref="menuTable"
       :toolbar-config="toolBarConfig"
       :row-config="{isCurrent: true}"
       :columns="tableColumn"
@@ -14,7 +14,7 @@
         <vxe-button status="success" @click="addEvent">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改菜单</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
-        <vxe-button @click="$refs.formTable.exportData()">导出</vxe-button>
+        <vxe-button @click="$refs.menuTable.exportData()">导出</vxe-button>
       </template>
       <template #pager>
         <vxe-pager
@@ -92,11 +92,6 @@ export default {
       this.tablePage.pageSize = pageSize
     },
     removeEvent () {
-      const selectRecords = this.$refs.formTable.getCurrentRecord()
-      console.log(selectRecords)
-      if (!selectRecords) {
-        return error('请先选择需要重命名的表单')
-      }
       this.dialogVisible = true
     },
     closeEvent () {
@@ -108,7 +103,7 @@ export default {
         return error('请输入表单名称')
       }
       try {
-        const selectRecords = this.$refs.formTable.getCurrentRecord()
+        const selectRecords = this.$refs.menuTable.getCurrentRecord()
         const res = await axios.post('/api/form/rename', {
           old_name: selectRecords.form_name,
           new_name: this.form_name,
@@ -125,7 +120,7 @@ export default {
       }
     },
     editEvent () {
-      const selectRecords = this.$refs.formTable.getCurrentRecord()
+      const selectRecords = this.$refs.menuTable.getCurrentRecord()
       console.log(selectRecords)
       const routeData = this.$router.resolve({path: '/form/edit', query: {form_id: selectRecords.form_id}})
       window.open(routeData.href, '_blank')
