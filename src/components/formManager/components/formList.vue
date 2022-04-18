@@ -10,7 +10,7 @@
       :data="tableData">
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入数据表名称" clearable></vxe-input>
-        <vxe-button status="primary" @click="search">搜索</vxe-button>
+        <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="renameEvent">重命名</vxe-button>
         <vxe-button status="success" @click="goToEdit">修改表单</vxe-button>
         <vxe-button @click="$refs.formTable.exportData()">导出</vxe-button>
@@ -81,9 +81,6 @@ export default {
       } catch (e) {
         error(e)
       }
-    },
-    search () {
-      this.query(this.searchName)
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage

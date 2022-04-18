@@ -56,11 +56,15 @@ export default {
       type: Boolean,
       default: false
     },
-    menu_id: -1
+    menu_id: {
+      type: Number,
+      default: -1
+    }
   },
   created () {
     this.getFormSelect()
     this.getMenuSelect()
+    this.getMenu()
   },
   data () {
     return {
@@ -81,6 +85,20 @@ export default {
     }
   },
   methods: {
+    async getMenu () {
+      try {
+        if (this.menu_id !== -1) {
+          const res = await this.$http.get('/api/menu/id', {params: {menu_id: this.menu_id}})
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.form = res.data.data[0]
+          }
+        }
+      } catch (e) {
+        error(e)
+      }
+    },
     async getMenuSelect () {
       try {
         const res = await this.$http.get('/api/menu/select')

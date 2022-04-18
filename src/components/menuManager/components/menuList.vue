@@ -71,7 +71,7 @@ export default {
   methods: {
     async query (val) {
       try {
-        const res = await this.$http.get('/api/form/list', {params: {tb_name: val}})
+        const res = await this.$http.get('/api/menu/query', {params: {form_id: val}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -96,7 +96,7 @@ export default {
       }).then(async () => {
         try {
           const selectRecords = this.$refs.menuTable.getCurrentRecord()
-          const res = await axios.post('/api/menu/remove', {
+          const res = await axios.post('/api/menu/delete', {
             menu_id: selectRecords.menu_id
           })
           if (res.data.code !== 200) {
@@ -119,7 +119,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.form = selectRecords
+      this.form_id = selectRecords.form_id
       this.dialogVisible = true
     }
   }
