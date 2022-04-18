@@ -11,7 +11,7 @@
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入菜单名称" clearable></vxe-input>
         <vxe-button status="primary" @click="search">搜索</vxe-button>
-        <vxe-button status="success" @click="addEvent">新增</vxe-button>
+        <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改菜单</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.menuTable.exportData()">导出</vxe-button>
@@ -38,6 +38,26 @@
           <el-select v-model="form.menu_level" placeholder="请选择">
             <el-option
               v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="父菜单" prop="father_menu">
+          <el-select v-model="form.menu_level" placeholder="请选择">
+            <el-option
+              v-for="item in menuList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="关联表单" prop="context_form">
+          <el-select v-model="form.menu_level" placeholder="请选择">
+            <el-option
+              v-for="item in formList"
               :key="item.value"
               :label="item.label"
               :value="item.value">
@@ -71,6 +91,8 @@ export default {
         {label: '一级菜单', value: '一级菜单'},
         {label: '二级菜单', value: '二级菜单'}
       ],
+      menuList: [],
+      formList: [],
       toolBarConfig: {
         slots: {
           buttons: 'toolbar_buttons'
@@ -94,6 +116,8 @@ export default {
   },
   created () {
     this.query('')
+    this.getFormSelect()
+    this.getMenuSelect()
   },
   methods: {
     async query (val) {
@@ -108,6 +132,30 @@ export default {
         error(e)
       }
     },
+    async getMenuSelect () {
+      try {
+        const res = await this.$http.get('/api/menu/select')
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.menuList = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e)
+      }
+    },
+    async getFormSelect () {
+      try {
+        const res = await this.$http.get('/api/menu/form')
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.formList = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e)
+      }
+    },
     search () {
       this.query(this.searchName)
     },
@@ -116,40 +164,63 @@ export default {
       this.tablePage.pageSize = pageSize
     },
     removeEvent () {
-      this.dialogVisible = true
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          const selectRecords = this.$refs.menuTable.getCurrentRecord()
+          const res = await axios.post('/api/menu/remove', {
+            menu_id: selectRecords.menu_id
+          })
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.tableData = res.data.data.reverse()
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     closeEvent () {
       this.dialogVisible = false
-      this.form_name = ''
+      this.$refs.form.resetFields()
     },
     async save () {
-      if (this.new_name === '') {
-        return error('请输入表单名称')
-      }
-      try {
-        const selectRecords = this.$refs.menuTable.getCurrentRecord()
-        const res = await axios.post('/api/form/rename', {
-          old_name: selectRecords.form_name,
-          new_name: this.form_name,
-          form_id: selectRecords.form_id
-        })
-        if (res.data.code !== 200) {
-          error(res.data.msg)
-        } else {
-          this.tableData = res.data.data.reverse()
-          this.closeEvent()
+      await this.$refs.form.validate(async valid => {
+        if (!valid) return
+        try {
+          const selectRecords = this.$refs.menuTable.getCurrentRecord()
+          const res = await axios.post('/api/menu/edit', {
+            old_name: selectRecords.form_name,
+            new_name: this.form_name,
+            form_id: selectRecords.form_id
+          })
+          if (res.data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.tableData = res.data.data.reverse()
+            this.closeEvent()
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
     editEvent () {
       const selectRecords = this.$refs.menuTable.getCurrentRecord()
-      console.log(selectRecords)
-      const routeData = this.$router.resolve({path: '/form/edit', query: {form_id: selectRecords.form_id}})
-      window.open(routeData.href, '_blank')
-    },
-    addEvent () {
+      if (!selectRecords) {
+        return error('请先选择需要修改的数据')
+      }
+      this.form = selectRecords
+      this.dialogVisible = true
     }
   }
 }
