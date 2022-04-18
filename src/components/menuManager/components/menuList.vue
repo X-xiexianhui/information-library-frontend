@@ -60,8 +60,10 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {field: 'tb_name', title: '数据表'},
-        {field: 'form_name', title: '表单名称'}
+        {field: 'menu_name', title: '菜单名称'},
+        {field: 'menu_level', title: '菜单级别'},
+        {field: 'father_menu', title: '父菜单'},
+        {field: 'context_form', title: '关联表单'}
       ],
       tableData: []
     }
