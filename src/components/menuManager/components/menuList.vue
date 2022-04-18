@@ -197,12 +197,7 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
-          const selectRecords = this.$refs.menuTable.getCurrentRecord()
-          const res = await axios.post('/api/menu/edit', {
-            old_name: selectRecords.form_name,
-            new_name: this.form_name,
-            form_id: selectRecords.form_id
-          })
+          const res = await axios.post('/api/menu/edit', this.form)
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
