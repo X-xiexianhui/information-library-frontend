@@ -30,7 +30,21 @@
       :visible.sync="dialogVisible"
       :before-close="closeEvent"
     >
-      <el-input v-model="form_name" placeholder="请输入表单名称，支持中英文"></el-input>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="菜单名称" prop="menu_name">
+          <el-input v-model="form.menu_name" placeholder="请输入菜单名称"></el-input>
+        </el-form-item>
+        <el-form-item label="菜单级别" prop="menu_level">
+          <el-select v-model="form.menu_level" placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
@@ -47,6 +61,16 @@ export default {
   name: 'menuList',
   data () {
     return {
+      form: {
+        menu_name: '',
+        menu_level: '',
+        father_menu: Number,
+        context_form: Number
+      },
+      options: [
+        {label: '一级菜单', value: '一级菜单'},
+        {label: '二级菜单', value: '二级菜单'}
+      ],
       toolBarConfig: {
         slots: {
           buttons: 'toolbar_buttons'
