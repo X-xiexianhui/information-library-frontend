@@ -14,6 +14,11 @@
           <i class="el-icon-s-data" :class="$style.menuIcon"></i>数据表管理
         </a>
       </el-menu-item>
+      <el-menu-item index="3">
+        <a :class="$style.menuLink" href="/form" target="_blank">
+          <i class="el-icon-s-data" :class="$style.menuIcon"></i>表单管理
+        </a>
+      </el-menu-item>
     </el-menu>
 </template>
 
