@@ -1,20 +1,20 @@
 <template>
   <div>
-    <page-head class="nav"></page-head>
+   <page-head class="nav"></page-head>
     <el-container>
       <el-card>
-        <role-list></role-list>
+        <user-list></user-list>
       </el-card>
     </el-container>
   </div>
 </template>
 
 <script>
-import RoleList from '../components/roleList'
+import UserList from '../components/userList'
 import PageHead from '../../common/head/pageHead'
 export default {
-  name: 'rolePage',
-  components: {PageHead, RoleList}
+  name: 'userPage',
+  components: {PageHead, UserList}
 }
 </script>
 

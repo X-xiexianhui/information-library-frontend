@@ -45,6 +45,10 @@ export default new Router({
     {
       path: '/auth',
       component: () => import('../components/authManager/page/authPage')
+    },
+    {
+      path: '/user',
+      component: () => import('../components/userManager/page/userPage')
     }
   ]
 })
