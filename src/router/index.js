@@ -37,6 +37,10 @@ export default new Router({
     {
       path: '/menu',
       component: () => import('../components/menuManager/page/menuPage')
+    },
+    {
+      path: '/role',
+      component: () => import('../components/roleManager/components/roleList')
     }
   ]
 })
