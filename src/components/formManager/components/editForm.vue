@@ -18,7 +18,7 @@
     </template>
     <template #toolbar_buttons>
       <vxe-input v-model="searchName" placeholder="请输入字段名称"></vxe-input>
-      <vxe-button status="primary" @click="queryByColumn">搜索</vxe-button>
+      <vxe-button status="primary" @click="queryByColumn(searchName)">搜索</vxe-button>
       <vxe-button status="success" @click="save">保存</vxe-button>
       <vxe-button @click="$refs.formStruct.exportData()">导出</vxe-button>
     </template>
@@ -93,6 +93,20 @@ export default {
           const pageSize = this.tablePage.pageSize
           this.currentData = this.tableData.slice(0, pageSize)
         }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    async queryByColumn (val) {
+      try {
+        // const res = await axios.get('/api/form/struct', {params: {form_id: val}})
+        // if (res.data.code !== 200) {
+        //   error(res.data.msg)
+        // } else {
+        //   this.tableData = res.data.data.reverse()
+        //   const pageSize = this.tablePage.pageSize
+        //   this.currentData = this.tableData.slice(0, pageSize)
+        // }
       } catch (e) {
         error(e.message)
       }
