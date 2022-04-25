@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav">
     <div :class="$style.box">
       <div></div>
       <div :class="$style.btn">
@@ -10,7 +10,7 @@
       <el-aside>
       </el-aside>
       <el-main>
-        <router-view/>
+          <router-view/>
       </el-main>
     </el-container>
   </div>
