@@ -3,7 +3,7 @@
     <vxe-grid
       border
       resizable
-      ref="menuTable"
+      ref="roleTable"
       :toolbar-config="toolBarConfig"
       :row-config="{isCurrent: true}"
       :columns="tableColumn"
@@ -14,7 +14,7 @@
         <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
-        <vxe-button @click="$refs.menuTable.exportData()">导出</vxe-button>
+        <vxe-button @click="$refs.roleTable.exportData()">导出</vxe-button>
       </template>
       <template #pager>
         <vxe-pager
@@ -42,19 +42,16 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      form_name: '',
       dialogVisible: false,
-      form_id: -1,
+      role_id: -1,
       searchName: '',
       tablePage: {
         currentPage: 1,
         pageSize: 10
       },
       tableColumn: [
-        {field: 'menu_name', title: '菜单名称'},
-        {field: 'menu_level', title: '菜单级别'},
-        {field: 'father_menu', title: '父菜单'},
-        {field: 'context_form', title: '关联表单'}
+        {field: 'role_name', title: '菜单名称'},
+        {field: 'role_description', title: '菜单级别'}
       ],
       tableData: []
     }
@@ -86,7 +83,7 @@ export default {
         type: 'warning'
       }).then(async () => {
         try {
-          const selectRecords = this.$refs.menuTable.getCurrentRecord()
+          const selectRecords = this.$refs.roleTable.getCurrentRecord()
           const res = await axios.post('/api/role/delete', {
             menu_id: selectRecords.menu_id
           })
@@ -106,11 +103,11 @@ export default {
       })
     },
     editEvent () {
-      const selectRecords = this.$refs.menuTable.getCurrentRecord()
+      const selectRecords = this.$refs.roleTable.getCurrentRecord()
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.form_id = selectRecords.form_id
+      this.role_id = selectRecords.role_id
       this.dialogVisible = true
     }
   }
