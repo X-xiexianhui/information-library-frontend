@@ -27,7 +27,7 @@
       </template>
     </vxe-grid>
     <role-edit-form
-      :visible="dialogVisible"
+      :visible.sync="dialogVisible"
       :role_id="role_id"
     ></role-edit-form>
   </div>
