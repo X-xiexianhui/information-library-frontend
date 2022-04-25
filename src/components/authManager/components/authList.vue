@@ -15,7 +15,7 @@
         <vxe-button @click="$refs.roleTable.exportData()">导出</vxe-button>
       </template>
       <template #add_default="{row}">
-        <span>{{formatAuth(row.add)}}</span>
+        <span>{{formatAuth(row.addAuth)}}</span>
       </template>
       <template #del_default="{row}">
         <span>{{formatAuth(row.del)}}</span>
@@ -72,8 +72,8 @@ export default {
         {field: 'editAuth', title: '修改权限', slots: {default: 'update_default'}}
       ],
       authList: {
-        'a0': '不允许新增',
-        'a1': '允许新增',
+        'w0': '不允许新增',
+        'w1': '允许新增',
         'd0': '不允许删除',
         'd1': '仅允许删除所填数据',
         'd2': '允许删除全部数据',
