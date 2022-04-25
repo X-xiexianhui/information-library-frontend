@@ -85,7 +85,7 @@ export default {
     },
     async query (val) {
       try {
-        const res = await axios.get('/api/form/query', {params: {form_id: val}})
+        const res = await axios.get('/api/form/struct', {params: {form_id: val}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
