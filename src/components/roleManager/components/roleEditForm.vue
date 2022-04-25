@@ -49,7 +49,7 @@ export default {
         role_name: '',
         role_description: ''
       },
-      dialogVisible: this.Visible.valueOf(),
+      dialogVisible: this.visible,
       formRule: {
         role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
       }
