@@ -31,10 +31,6 @@ export default new Router({
       component: () => import('../components/formManager/page/editFormPage')
     },
     {
-      path: '/data',
-      component: () => import('../components/dataManager/components/dataForm')
-    },
-    {
       path: '/menu',
       component: () => import('../components/menuManager/page/menuPage')
     },
@@ -54,6 +50,8 @@ export default new Router({
       path: '/home',
       component: () => import('../components/dataManager/page/home'),
       children: [{
+        path: 'data',
+        component: () => import('../components/dataManager/components/dataForm')
       }]
     }
   ]
