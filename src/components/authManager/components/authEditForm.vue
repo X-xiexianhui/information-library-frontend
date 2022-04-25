@@ -15,7 +15,44 @@
         </template>
       </el-form-item>
       <el-form-item label="新增权限" prop="add">
-
+        <el-select v-model="form.add" placeholder="请选择新增权限">
+          <el-option
+            v-for="item in addList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="删除权限" prop="del">
+        <el-select v-model="form.del" placeholder="请选择删除权限">
+          <el-option
+            v-for="item in delList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="查询权限" prop="search">
+        <el-select v-model="form.search" placeholder="请选择查询权限">
+          <el-option
+            v-for="item in searchList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="修改权限" prop="edit">
+        <el-select v-model="form.edit" placeholder="请选择修改权限">
+          <el-option
+            v-for="item in editList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -46,8 +83,26 @@ export default {
       form: this.form_data,
       dialogVisible: this.Visible.valueOf(),
       formRule: {
-        role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
-      }
+      },
+      addList: [
+        {label: '不允许新增', value: 'a0'},
+        {label: '允许新增', value: 'a1'}
+      ],
+      delList: [
+        {label: '不允许删除', value: 'd0'},
+        {label: '仅允许删除所填数据', value: 'd1'},
+        {label: '允许删除全部数据', value: 'd2'}
+      ],
+      searchList: [
+        {label: '不允许查询', value: 's0'},
+        {label: '仅允许查询所填数据', value: 's1'},
+        {label: '允许查询全部数据', value: 's2'}
+      ],
+      editList: [
+        {label: '不允许修改', value: 'u0'},
+        {label: '仅允许修改所填数据', value: 'u1'},
+        {label: '允许修改全部数据', value: 'u2'}
+      ]
     }
   },
   methods: {
