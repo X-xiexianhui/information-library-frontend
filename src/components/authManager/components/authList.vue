@@ -66,10 +66,10 @@ export default {
       tableColumn: [
         {field: 'role_name', title: '角色名称'},
         {field: 'form_name', title: '表单名称'},
-        {field: 'addAuth', title: '新增权限', slot: {default: 'add_default'}},
-        {field: 'del', title: '删除权限', slot: {default: 'del_default'}},
-        {field: 'search', title: '查询权限', slot: {default: 'search_default'}},
-        {field: 'editAuth', title: '修改权限', slot: {default: 'update_default'}}
+        {field: 'addAuth', title: '新增权限', slots: {default: 'add_default'}},
+        {field: 'del', title: '删除权限', slots: {default: 'del_default'}},
+        {field: 'search', title: '查询权限', slots: {default: 'search_default'}},
+        {field: 'editAuth', title: '修改权限', slots: {default: 'update_default'}}
       ],
       authList: {
         'a0': '不允许新增',
