@@ -63,7 +63,7 @@ export default {
     async queryById () {
       if (this.role_id !== -1) {
         try {
-          const res = await this.$http.get('/api/role/id', {params: {role_id: this.role_id}})
+          const res = await this.$http.get('/api/user/id', {params: {role_id: this.role_id}})
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
