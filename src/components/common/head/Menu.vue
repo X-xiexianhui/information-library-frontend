@@ -16,27 +16,27 @@
       </el-menu-item>
       <el-menu-item index="3">
         <a :class="$style.menuLink" href="/form" target="_blank">
-          <i class="el-icon-s-data" :class="$style.menuIcon"></i>表单管理
+          <i class="el-icon-s-order" :class="$style.menuIcon"></i>表单管理
         </a>
       </el-menu-item>
       <el-menu-item index="4">
         <a :class="$style.menuLink" href="/menu" target="_blank">
-          <i class="el-icon-s-data" :class="$style.menuIcon"></i>菜单管理
+          <i class="el-icon-menu" :class="$style.menuIcon"></i>菜单管理
         </a>
       </el-menu-item>
       <el-menu-item index="5">
         <a :class="$style.menuLink" href="/role" target="_blank">
-          <i class="el-icon-s-data" :class="$style.menuIcon"></i>角色管理
+          <i class="el-icon-s-custom" :class="$style.menuIcon"></i>角色管理
         </a>
       </el-menu-item>
       <el-menu-item index="6">
         <a :class="$style.menuLink" href="/user" target="_blank">
-          <i class="el-icon-s-data" :class="$style.menuIcon"></i>用户管理
+          <i class="el-icon-user" :class="$style.menuIcon"></i>用户管理
         </a>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="7">
         <a :class="$style.menuLink" href="/auth" target="_blank">
-          <i class="el-icon-s-data" :class="$style.menuIcon"></i>权限管理
+          <i class="el-icon-setting" :class="$style.menuIcon"></i>权限管理
         </a>
       </el-menu-item>
     </el-menu>
