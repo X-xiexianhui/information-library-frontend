@@ -16,6 +16,9 @@
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.roleTable.exportData()">导出</vxe-button>
       </template>
+      <template #default="{row}">
+        <span>{{formatAuth(row.add)}}</span>
+      </template>
       <template #pager>
         <vxe-pager
           :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
@@ -51,11 +54,24 @@ export default {
       tableColumn: [
         {field: 'role_name', title: '角色名称'},
         {field: 'form_name', title: '表单名称'},
-        {field: 'add', title: '新增权限'},
-        {field: 'del', title: '删除权限'},
-        {field: 'search', title: '查询权限'},
-        {field: 'edit', title: '修改权限'}
+        {field: 'add', title: '新增权限', slot: {edit: 'add_default'}},
+        {field: 'del', title: '删除权限', slot: {edit: 'del_default'}},
+        {field: 'search', title: '查询权限', slot: {edit: 'search_default'}},
+        {field: 'edit', title: '修改权限', slot: {edit: 'update_default'}}
       ],
+      authList: {
+        'a0': '不允许新增',
+        'a1': '允许新增',
+        'd0': '不允许删除',
+        'd1': '',
+        'd2': '',
+        's0': '',
+        's1': '',
+        's2': '',
+        'u0': '',
+        'u1': '',
+        'u2': ''
+      },
       tableData: []
     }
   },
@@ -75,6 +91,9 @@ export default {
       } catch (e) {
         error(e)
       }
+    },
+    formatAuth (value) {
+      return this.authList[value]
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage

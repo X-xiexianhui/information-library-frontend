@@ -45,7 +45,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="修改权限" prop="edit">
-        <el-select v-model="form.edit" placeholder="请选择修改权限">
+        <el-select v-model="form.editAuth" placeholder="请选择修改权限">
           <el-option
             v-for="item in editList"
             :key="item.value"
