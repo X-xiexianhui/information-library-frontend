@@ -13,7 +13,8 @@ export default {
   name: 'home'
 }
 </script>
-
 <style scoped>
-
+/deep/.el-container{
+  margin-top: 0px;
+}
 </style>

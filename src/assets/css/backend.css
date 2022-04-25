@@ -9,12 +9,6 @@ body {
     width: 100%;
     position: fixed;
 }
-.tree-list{
-    width: 80%;
-    color: #8c939d;
-    margin-left: 10%;
-    margin-top: 10px;
-}
 .el-aside{
     width: 200px;
     height:calc(100vh);
