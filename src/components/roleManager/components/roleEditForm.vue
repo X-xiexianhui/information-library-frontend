@@ -27,6 +27,7 @@
 import {error} from '../../../api/error'
 import axios from 'axios'
 import bus from '../../../common/bus'
+import {getUpdate} from '../../../common/getUpdate'
 
 export default {
   name: 'roleEditForm',
@@ -44,6 +45,7 @@ export default {
     bus.$on('showEditForm', () => {
       this.dialogVisible = true
     })
+    console.log(this.role_data)
   },
   data () {
     return {
@@ -64,10 +66,12 @@ export default {
         if (!valid) return
         try {
           let res
-          if (this.role_id === -1) {
+          if (this.role_data.role_id === -1) {
             res = await axios.post('/api/role/add', this.form)
           } else {
-            res = await axios.post('/api/role/edit', this.form)
+            const data = getUpdate(this.role_data, this.form)
+            console.log(data)
+            res = await axios.post('/api/role/edit', data)
           }
           if (res.data.code !== 200) {
             error(res.data.msg)

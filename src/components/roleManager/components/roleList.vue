@@ -81,7 +81,6 @@ export default {
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          console.log(res.data.data)
           this.tableData = res.data.data.reverse()
           this.page()
         }
