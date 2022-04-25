@@ -20,7 +20,6 @@
       <vxe-button status="success" @click="save">保存</vxe-button>
       <vxe-button @click="$refs.formStruct.exportData()">导出</vxe-button>
     </template>
-
     <template #pager>
       <vxe-pager
         :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
