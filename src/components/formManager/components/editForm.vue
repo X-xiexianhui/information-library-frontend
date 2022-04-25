@@ -11,7 +11,7 @@
     :columns="tableColumn"
     :data="currentData">
     <template #colName_edit="{ row }">
-      <p>{{ row.col_name }}</p>
+      <span>{{ row.col_name }}</span>
     </template>
     <template #formLabel_edit="{ row }">
       <vxe-input v-model="row.label_name" type="text"></vxe-input>
