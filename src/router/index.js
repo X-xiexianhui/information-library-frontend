@@ -40,7 +40,7 @@ export default new Router({
     },
     {
       path: '/role',
-      component: () => import('../components/roleManager/components/roleList')
+      component: () => import('../components/roleManager/page/rolePage')
     },
     {
       path: '/auth',
