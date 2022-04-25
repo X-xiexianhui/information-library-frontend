@@ -16,8 +16,17 @@
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.roleTable.exportData()">导出</vxe-button>
       </template>
-      <template #default="{row}">
+      <template #add_default="{row}">
         <span>{{formatAuth(row.add)}}</span>
+      </template>
+      <template #del_default="{row}">
+        <span>{{formatAuth(row.del)}}</span>
+      </template>
+      <template #search_default="{row}">
+        <span>{{formatAuth(row.search)}}</span>
+      </template>
+      <template #update_default="{row}">
+        <span>{{formatAuth(row.editAuth)}}</span>
       </template>
       <template #pager>
         <vxe-pager
@@ -29,15 +38,21 @@
         </vxe-pager>
       </template>
     </vxe-grid>
+    <auth-edit-form
+      :visible="dialogVisible"
+      :form_data="form_data"
+    ></auth-edit-form>
   </div>
 </template>
 
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import AuthEditForm from './authEditForm'
 
 export default {
   name: 'authList',
+  components: {AuthEditForm},
   data () {
     return {
       toolBarConfig: {
@@ -54,10 +69,10 @@ export default {
       tableColumn: [
         {field: 'role_name', title: '角色名称'},
         {field: 'form_name', title: '表单名称'},
-        {field: 'add', title: '新增权限', slot: {edit: 'add_default'}},
-        {field: 'del', title: '删除权限', slot: {edit: 'del_default'}},
-        {field: 'search', title: '查询权限', slot: {edit: 'search_default'}},
-        {field: 'edit', title: '修改权限', slot: {edit: 'update_default'}}
+        {field: 'add', title: '新增权限', slot: {default: 'add_default'}},
+        {field: 'del', title: '删除权限', slot: {default: 'del_default'}},
+        {field: 'search', title: '查询权限', slot: {default: 'search_default'}},
+        {field: 'editAuth', title: '修改权限', slot: {default: 'update_default'}}
       ],
       authList: {
         'a0': '不允许新增',
@@ -72,7 +87,8 @@ export default {
         'u1': '',
         'u2': ''
       },
-      tableData: []
+      tableData: [],
+      form_data: {}
     }
   },
   created () {
@@ -132,6 +148,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
+      this.form_data = selectRecords
       this.dialogVisible = true
     },
     page () {
