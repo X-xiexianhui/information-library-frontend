@@ -1,7 +1,7 @@
 <template>
 <el-container>
-  <el-slider>
-  </el-slider>
+  <el-aside>
+  </el-aside>
   <el-main>
     <router-view/>
   </el-main>
