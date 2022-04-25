@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .el-card{
-  width: 60%;
-  margin-left: 20%;
+  width: 64%;
+  margin-left: 18%;
 }
 </style>
