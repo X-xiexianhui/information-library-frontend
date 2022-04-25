@@ -48,7 +48,7 @@ export default {
   },
   data () {
     return {
-      form: this.role_data,
+      form: JSON.parse(JSON.stringify(this.role_data)),
       dialogVisible: false,
       formRule: {
         role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]

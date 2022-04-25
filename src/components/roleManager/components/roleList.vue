@@ -127,7 +127,7 @@ export default {
         return error('请先选择需要修改的数据')
       }
       this.role_data = selectRecords
-      this.dialogVisible = true
+      bus.$emit('showEditForm')
     },
     page () {
       const currentPage = this.tablePage.currentPage
