@@ -97,7 +97,7 @@ export default {
   methods: {
     async query (val) {
       try {
-        const res = await this.$http.get('/api/auth/query', {params: {role_name: val}})
+        const res = await this.$http.get('/api/auth/get', {params: {role_name: val}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
