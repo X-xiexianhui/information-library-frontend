@@ -41,6 +41,10 @@ export default new Router({
     {
       path: '/role',
       component: () => import('../components/roleManager/components/roleList')
+    },
+    {
+      path: '/auth',
+      component: () => import('../components/authManager/page/authPage')
     }
   ]
 })
