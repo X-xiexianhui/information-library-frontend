@@ -26,14 +26,11 @@
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import bus from '../../../common/bus'
 
 export default {
   name: 'roleEditForm',
   props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
     role_id: {
       type: Number,
       default: -1
@@ -41,6 +38,9 @@ export default {
   },
   created () {
     this.queryById()
+    bus.$on('showEditForm', () => {
+      this.dialogVisible = true
+    })
   },
   data () {
     return {

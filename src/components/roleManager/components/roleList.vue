@@ -11,7 +11,7 @@
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入角色名称" clearable></vxe-input>
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
-        <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
+        <vxe-button status="success" @click="addEvent">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.roleTable.exportData()">导出</vxe-button>
@@ -27,7 +27,6 @@
       </template>
     </vxe-grid>
     <role-edit-form
-      :visible.sync="dialogVisible"
       :role_id="role_id"
     ></role-edit-form>
   </div>
@@ -37,6 +36,7 @@
 import {error} from '../../../api/error'
 import axios from 'axios'
 import RoleEditForm from './roleEditForm'
+import bus from '../../../common/bus'
 
 export default {
   name: 'roleList',
@@ -48,7 +48,6 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      dialogVisible: false,
       role_id: -1,
       searchName: '',
       tablePage: {
@@ -66,6 +65,9 @@ export default {
     this.query('')
   },
   methods: {
+    addEvent () {
+      bus.$emit('showEditForm')
+    },
     async query (val) {
       try {
         const res = await this.$http.get('/api/role/query', {params: {role_name: val}})
