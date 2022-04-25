@@ -49,6 +49,12 @@ export default new Router({
     {
       path: '/user',
       component: () => import('../components/userManager/page/userPage')
+    },
+    {
+      path: '/home',
+      component: () => import('../components/dataManager/page/home'),
+      children: [{
+      }]
     }
   ]
 })
