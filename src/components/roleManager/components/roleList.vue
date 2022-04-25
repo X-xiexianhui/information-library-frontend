@@ -63,6 +63,9 @@ export default {
   },
   created () {
     this.query('')
+    bus.$on('refreshData', (value) => {
+      this.tableData = value
+    })
   },
   methods: {
     addEvent () {
