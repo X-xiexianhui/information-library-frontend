@@ -4,7 +4,7 @@
     <div :class="$style.headerMenuBox">
       <Menu :class="$style.menu" v-bind="$attrs"></Menu>
     </div>
-    <div :class="$style.btns">
+    <div :class="$style.btn">
       <slot></slot>
     </div>
   </div>
@@ -57,5 +57,7 @@ h1 {
 .menu {
   margin-left: auto;
   background: #ffffff;
+}
+.btn{
 }
 </style>

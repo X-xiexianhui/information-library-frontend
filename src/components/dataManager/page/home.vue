@@ -2,7 +2,7 @@
   <div>
     <div :class="$style.box">
       <div></div>
-      <div :class="$style.btns">
+      <div :class="$style.btn">
         <slot></slot>
       </div>
     </div>
@@ -36,5 +36,7 @@ export default {
   align-items: center;
   box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
   z-index: 3;
+}
+.btn{
 }
 </style>
