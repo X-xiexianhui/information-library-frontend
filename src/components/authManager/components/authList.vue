@@ -11,9 +11,7 @@
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入角色名称" clearable></vxe-input>
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
-        <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改</vxe-button>
-        <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.roleTable.exportData()">导出</vxe-button>
       </template>
       <template #add_default="{row}">
@@ -47,7 +45,6 @@
 
 <script>
 import {error} from '../../../api/error'
-import axios from 'axios'
 import AuthEditForm from './authEditForm'
 
 export default {
@@ -97,7 +94,7 @@ export default {
   methods: {
     async query (val) {
       try {
-        const res = await this.$http.get('/api/auth/get', {params: {role_name: val}})
+        const res = await this.$http.get('api/auth/query', {params: {role_name: val}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
@@ -115,33 +112,6 @@ export default {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
-    },
-    removeEvent () {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async () => {
-        try {
-          const selectRecords = this.$refs.roleTable.getCurrentRecord()
-          const res = await axios.post('/api/auth/delete', {
-            role_id: selectRecords.role_id
-          })
-          if (res.data.code !== 200) {
-            error(res.data.msg)
-          } else {
-            this.tableData = res.data.data.reverse()
-            this.page()
-          }
-        } catch (e) {
-          error(e.message)
-        }
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
-      })
     },
     editEvent () {
       const selectRecords = this.$refs.roleTable.getCurrentRecord()

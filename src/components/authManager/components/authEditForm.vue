@@ -114,7 +114,7 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
-          let res = await axios.post('/api/auth/edit', this.form)
+          let res = await axios.post('/api/authority/edit', this.form)
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
