@@ -40,6 +40,7 @@ export default {
     }
   },
   created () {
+    this.queryById()
   },
   data () {
     return {

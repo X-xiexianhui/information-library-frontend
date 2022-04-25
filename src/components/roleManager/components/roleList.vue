@@ -26,15 +26,21 @@
         </vxe-pager>
       </template>
     </vxe-grid>
+    <role-edit-form
+      :visible="dialogVisible"
+      :role_id="role_id"
+    ></role-edit-form>
   </div>
 </template>
 
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import RoleEditForm from './roleEditForm'
 
 export default {
   name: 'roleList',
+  components: {RoleEditForm},
   data () {
     return {
       toolBarConfig: {
