@@ -26,15 +26,25 @@
         </vxe-pager>
       </template>
     </vxe-grid>
+    <user-add-form
+      :visible="dialogVisible"
+    ></user-add-form>
+    <user-edit-form
+      :visible="editVisible"
+      :user_data="user_data"
+    ></user-edit-form>
   </div>
 </template>
 
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import UserEditForm from './userEditForm'
+import UserAddForm from './userAddForm'
 
 export default {
   name: 'userList',
+  components: {UserAddForm, UserEditForm},
   data () {
     return {
       toolBarConfig: {
@@ -43,7 +53,8 @@ export default {
         }
       },
       dialogVisible: false,
-      role_id: -1,
+      editVisible: false,
+      user_data: {},
       searchName: '',
       tablePage: {
         currentPage: 1,
@@ -113,8 +124,8 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.role_id = selectRecords.role_id
-      this.dialogVisible = true
+      this.user_data = selectRecords
+      this.editVisible = true
     },
     page () {
       const currentPage = this.tablePage.currentPage
