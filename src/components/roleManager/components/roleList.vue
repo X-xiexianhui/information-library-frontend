@@ -92,6 +92,7 @@ export default {
             error(res.data.msg)
           } else {
             this.tableData = res.data.data.reverse()
+            this.page()
           }
         } catch (e) {
           error(e.message)
@@ -110,6 +111,11 @@ export default {
       }
       this.role_id = selectRecords.role_id
       this.dialogVisible = true
+    },
+    page () {
+      const currentPage = this.tablePage.currentPage
+      const pageSize = this.tablePage.pageSize
+      this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     }
   }
 }
