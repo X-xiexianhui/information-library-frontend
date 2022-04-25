@@ -67,6 +67,7 @@ export default {
           error(res.data.msg)
         } else {
           this.tableData = res.data.data.reverse()
+          this.page()
         }
       } catch (e) {
         error(e)
@@ -86,7 +87,7 @@ export default {
         try {
           const selectRecords = this.$refs.roleTable.getCurrentRecord()
           const res = await axios.post('/api/role/delete', {
-            menu_id: selectRecords.menu_id
+            role_id: selectRecords.role_id
           })
           if (res.data.code !== 200) {
             error(res.data.msg)
