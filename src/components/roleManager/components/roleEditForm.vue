@@ -30,7 +30,7 @@ import axios from 'axios'
 export default {
   name: 'roleEditForm',
   props: {
-    Visible: {
+    visible: {
       type: Boolean,
       default: false
     },
