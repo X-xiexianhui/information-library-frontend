@@ -50,8 +50,8 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {field: 'role_name', title: '菜单名称'},
-        {field: 'role_description', title: '菜单级别'}
+        {field: 'role_name', title: '角色名称'},
+        {field: 'role_description', title: '角色描述'}
       ],
       tableData: []
     }
@@ -75,6 +75,7 @@ export default {
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
+      this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
     removeEvent () {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
