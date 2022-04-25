@@ -27,7 +27,7 @@
       </template>
     </vxe-grid>
     <role-edit-form
-      :role_id="role_id"
+      :role_data="role_data"
     ></role-edit-form>
   </div>
 </template>
@@ -48,7 +48,11 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      role_id: -1,
+      role_data: {
+        role_id: -1,
+        role_name: '',
+        role_description: ''
+      },
       searchName: '',
       tablePage: {
         currentPage: 1,
@@ -122,7 +126,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.role_id = selectRecords.role_id
+      this.role_data = selectRecords
       this.dialogVisible = true
     },
     page () {

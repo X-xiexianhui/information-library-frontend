@@ -31,9 +31,13 @@ import bus from '../../../common/bus'
 export default {
   name: 'roleEditForm',
   props: {
-    role_id: {
-      type: Number,
-      default: -1
+    role_data: {
+      type: Object,
+      default: () => ({
+        role_id: -1,
+        role_name: '',
+        role_description: ''
+      })
     }
   },
   created () {
@@ -44,11 +48,7 @@ export default {
   },
   data () {
     return {
-      form: {
-        role_id: this.role_id,
-        role_name: '',
-        role_description: ''
-      },
+      form: this.role_data,
       dialogVisible: false,
       formRule: {
         role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
