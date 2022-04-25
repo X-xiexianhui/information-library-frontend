@@ -41,7 +41,6 @@ export default {
     }
   },
   created () {
-    this.queryById()
     bus.$on('showEditForm', () => {
       this.dialogVisible = true
     })
@@ -59,20 +58,6 @@ export default {
     closeEvent () {
       this.dialogVisible = false
       this.$refs.form.resetFields()
-    },
-    async queryById () {
-      if (this.role_id !== -1) {
-        try {
-          const res = await this.$http.get('/api/role/id', {params: {role_id: this.role_id}})
-          if (res.data.code !== 200) {
-            error(res.data.msg)
-          } else {
-            this.form = res.data.data
-          }
-        } catch (e) {
-          error(e)
-        }
-      }
     },
     async save () {
       await this.$refs.form.validate(async valid => {
