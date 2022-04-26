@@ -15,7 +15,7 @@
         </template>
       </el-form-item>
       <el-form-item label="新增权限" prop="add">
-        <el-select v-model="form.add" placeholder="请选择新增权限">
+        <el-select v-model="form.addAuth" placeholder="请选择新增权限">
           <el-option
             v-for="item in addList"
             :key="item.value"
@@ -73,7 +73,14 @@ export default {
   props: {
     form_data: {
       type: Object,
-      default: () => ({})
+      default: () => ({
+        role_name: '',
+        form_name: '',
+        addAuth: '',
+        del: '',
+        search: '',
+        editAuth: ''
+      })
     }
   },
   data () {
