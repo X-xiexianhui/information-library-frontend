@@ -27,9 +27,7 @@
       </template>
     </vxe-grid>
     <add-menu-form></add-menu-form>
-    <edit-menu-form
-      :menu_id="this.form_id"
-    ></edit-menu-form>
+    <edit-menu-form></edit-menu-form>
   </div>
 </template>
 
