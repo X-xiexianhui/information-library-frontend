@@ -66,7 +66,12 @@ export default {
   },
   methods: {
     addEvent () {
-      bus.$emit('showEditForm')
+      const value = {
+        role_id: -1,
+        role_name: '',
+        role_description: ''
+      }
+      bus.$emit('showEditForm', value)
     },
     async query (val) {
       try {
