@@ -97,9 +97,11 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
+          const update = getUpdate(this.user_data, this.form)
           let res = await axios.post('/api/user/edit', {
             user_id: this.form.user_id,
-            update: getUpdate(this.user_data, this.form)
+            col_name: update['col_name'],
+            value: update['value']
           })
           if (res.data.code !== 200) {
             error(res.data.msg)
