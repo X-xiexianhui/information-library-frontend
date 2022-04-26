@@ -105,9 +105,7 @@ export default {
       }).then(async () => {
         try {
           const selectRecords = this.$refs.userTable.getCurrentRecord()
-          const res = await axios.post('/api/user/delete', {
-            user_id: selectRecords.user_id
-          })
+          const res = await axios.post('/api/user/delete', {}, {params: {user_id: selectRecords.user_id}})
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
