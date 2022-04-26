@@ -63,8 +63,7 @@ export default {
         {field: 'user_id', title: '用户账号'},
         {field: 'user_name', title: '用户名称'},
         {field: 'user_email', title: '用户邮箱'},
-        {field: 'user_role', title: '用户角色'},
-        {field: 'is_use', title: '是否禁用'}
+        {field: 'user_role', title: '用户角色'}
       ],
       tableData: [],
       currentData: []
