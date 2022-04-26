@@ -121,7 +121,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.form_id = selectRecords.form_id
+      bus.$emit('showEditMenuForm', selectRecords)
     }
   }
 }
