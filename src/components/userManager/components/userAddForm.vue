@@ -4,7 +4,7 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="authForm" :model="form" :rules="formRule" label-width="80px">
+    <el-form ref="authForm" :model="form" :rules="formRule" label-width="80px" style="margin: auto;width: 60%">
       <el-form-item label="用户账号" prop="user_id">
         <el-input v-model="form.user_id" placeholder="请输入用户账号"></el-input>
       </el-form-item>
@@ -23,7 +23,7 @@
             v-for="item in roleList"
             :key="item.value"
             :label="item.label"
-            :value="item.value">
+            :value="item.label">
           </el-option>
           </el-select>
       </el-form-item>
@@ -35,7 +35,7 @@
         </el-switch>
       </el-form-item>
     </el-form>
-    <span slot="footer" class="dialog-footer">
+    <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
