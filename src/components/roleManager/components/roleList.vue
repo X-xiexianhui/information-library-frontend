@@ -26,9 +26,7 @@
         </vxe-pager>
       </template>
     </vxe-grid>
-    <role-edit-form
-      :role_data="role_data"
-    ></role-edit-form>
+    <role-edit-form></role-edit-form>
   </div>
 </template>
 
@@ -47,11 +45,6 @@ export default {
         slots: {
           buttons: 'toolbar_buttons'
         }
-      },
-      role_data: {
-        role_id: -1,
-        role_name: '',
-        role_description: ''
       },
       searchName: '',
       tablePage: {
@@ -125,8 +118,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.role_data = selectRecords
-      bus.$emit('showEditForm')
+      bus.$emit('showEditForm', selectRecords)
     },
     page () {
       const currentPage = this.tablePage.currentPage

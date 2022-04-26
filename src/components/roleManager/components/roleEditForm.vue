@@ -32,25 +32,21 @@ import {getUpdate} from '../../../common/getUpdate'
 
 export default {
   name: 'roleEditForm',
-  props: {
-    role_data: {
-      type: Object,
-      default: () => ({
-        role_id: -1,
-        role_name: '',
-        role_description: ''
-      })
-    }
-  },
   created () {
-    bus.$on('showEditForm', () => {
+    bus.$on('showEditForm', (value) => {
       this.dialogVisible = true
+      this.form = value
+      this.old = JSON.parse(JSON.stringify(value))
     })
   },
   data () {
     return {
-      old: JSON.parse(JSON.stringify(this.role_data)),
-      form: this.role_data,
+      old: {},
+      form: {
+        role_id: -1,
+        role_name: '',
+        role_description: ''
+      },
       dialogVisible: false,
       formRule: {
         role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
