@@ -56,6 +56,7 @@ export default {
       form: JSON.parse(JSON.stringify(this.user_data)),
       dialogVisible: false,
       formRule: {
+        user_name: [ {required: true, message: '请输入用户名称', trigger: 'blur'}],
         user_email: [
           {required: true, message: '请输入用户邮箱', trigger: 'blur'},
           {pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/, message: '邮箱格式错误', trigger: 'blur'}
