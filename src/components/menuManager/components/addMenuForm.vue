@@ -18,7 +18,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="父菜单" prop="father_menu">
-        <el-select v-model="form.father_menu" placeholder="请选择">
+        <el-select v-model="form.father_menu" placeholder="请选择" :disabled="form.menu_level === '一级菜单'">
           <el-option
             v-for="item in menuList"
             :key="item.value"
@@ -27,7 +27,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="关联表单" prop="context_form">
+      <el-form-item label="关联表单" prop="context_form" :disabled="form.menu_level === '一级菜单'">
         <el-select v-model="form.context_form" placeholder="请选择">
           <el-option
             v-for="item in formList"
