@@ -75,7 +75,6 @@ export default {
             res = await axios.post('/api/role/add', this.form)
           } else {
             const data = getUpdate(this.role_data, this.form)
-            console.log(data)
             res = await axios.post('/api/role/edit', data)
           }
           if (res.data.code !== 200) {
