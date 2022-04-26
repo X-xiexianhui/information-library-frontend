@@ -134,7 +134,7 @@ export default {
         if (!valid) return
         try {
           const data = getUpdate(this.form_data, this.form)
-          let res = await axios.post('/api/authority/edit', data)
+          let res = await axios.post('/api/auth/edit', data)
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
