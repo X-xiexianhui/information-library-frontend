@@ -56,7 +56,7 @@ export default {
     this.getFormSelect()
     this.getMenuSelect()
     bus.$on('showEditMenuForm', (value) => {
-      this.form = value
+      this.form = JSON.parse(JSON.stringify(value))
       this.old = JSON.parse(JSON.stringify(value))
       this.dialogVisible = true
     })
