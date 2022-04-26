@@ -48,6 +48,7 @@
 <script>
 import axios from 'axios'
 import {error} from '../../../api/error'
+import bus from '../../../common/bus'
 
 export default {
   name: 'editMenuForm',
@@ -55,9 +56,15 @@ export default {
     this.getFormSelect()
     this.getMenuSelect()
     this.getMenu()
+    bus.$on('showEditMenuForm', (value) => {
+      this.form = value
+      this.old = JSON.parse(JSON.stringify(value))
+      this.dialogVisible = true
+    })
   },
   data () {
     return {
+      old: {},
       form: {
         menu_id: -1,
         menu_name: '',

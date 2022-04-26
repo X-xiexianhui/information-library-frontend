@@ -48,13 +48,17 @@
 <script>
 import axios from 'axios'
 import {error} from '../../../api/error'
+import bus from '../../../common/bus'
 
 export default {
-  name: 'editMenuForm',
+  name: 'addMenuForm',
   created () {
     this.getFormSelect()
     this.getMenuSelect()
     this.getMenu()
+    bus.$on('showMenuAddForm', () => {
+      this.dialogVisible = true
+    })
   },
   data () {
     return {

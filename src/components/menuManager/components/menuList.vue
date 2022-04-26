@@ -11,7 +11,7 @@
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入菜单名称" clearable></vxe-input>
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
-        <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
+        <vxe-button status="success" @click="addEvent">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改菜单</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.menuTable.exportData()">导出</vxe-button>
@@ -26,6 +26,7 @@
         </vxe-pager>
       </template>
     </vxe-grid>
+    <add-menu-form></add-menu-form>
     <edit-menu-form
       :menu_id="this.form_id"
     ></edit-menu-form>
@@ -36,10 +37,12 @@
 import {error} from '../../../api/error'
 import axios from 'axios'
 import EditMenuForm from './editMenuForm'
+import bus from '../../../common/bus'
+import AddMenuForm from './addMenuForm'
 
 export default {
   name: 'menuList',
-  components: {EditMenuForm},
+  components: {AddMenuForm, EditMenuForm},
   data () {
     return {
       toolBarConfig: {
@@ -65,6 +68,9 @@ export default {
   },
   created () {
     this.query('')
+    bus.$on('refresh', () => {
+      this.query('')
+    })
   },
   methods: {
     async query (val) {
@@ -78,6 +84,9 @@ export default {
       } catch (e) {
         error(e)
       }
+    },
+    addEvent () {
+      bus.$emit('showAddMenuForm')
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
