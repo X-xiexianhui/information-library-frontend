@@ -65,14 +65,12 @@
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import {getUpdate} from '../../../common/getUpdate'
+import bus from '../../../common/bus'
 
 export default {
   name: 'authEditForm',
   props: {
-    Visible: {
-      type: Boolean,
-      default: false
-    },
     form_data: {
       type: Object,
       default: () => ({})
@@ -80,13 +78,13 @@ export default {
   },
   data () {
     return {
-      form: this.form_data,
-      dialogVisible: this.Visible.valueOf(),
+      form: JSON.parse(JSON.stringify(this.form_data)),
+      dialogVisible: false,
       formRule: {
       },
       addList: [
-        {label: '不允许新增', value: 'a0'},
-        {label: '允许新增', value: 'a1'}
+        {label: '不允许新增', value: 'w0'},
+        {label: '允许新增', value: 'w1'}
       ],
       delList: [
         {label: '不允许删除', value: 'd0'},
@@ -105,6 +103,16 @@ export default {
       ]
     }
   },
+  watch: {
+    form_data (newValue) {
+      this.form = JSON.parse(JSON.stringify(newValue))
+    }
+  },
+  created () {
+    bus.$on('showAuthEditForm', () => {
+      this.dialogVisible = true
+    })
+  },
   methods: {
     closeEvent () {
       this.dialogVisible = false
@@ -114,7 +122,8 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
-          let res = await axios.post('/api/authority/edit', this.form)
+          const data = getUpdate(this.form_data, this.form)
+          let res = await axios.post('/api/authority/edit', data)
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
