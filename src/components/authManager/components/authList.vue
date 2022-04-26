@@ -85,7 +85,14 @@ export default {
         'u2': '允许修改全部数据'
       },
       tableData: [],
-      form_data: {}
+      form_data: {
+        role_name: '',
+        form_name: '',
+        addAuth: '',
+        del: '',
+        search: '',
+        editAuth: ''
+      }
     }
   },
   created () {
@@ -122,9 +129,8 @@ export default {
       this.dialogVisible = true
     },
     page () {
-      const currentPage = this.tablePage.currentPage
       const pageSize = this.tablePage.pageSize
-      this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
+      this.currentData = this.tableData.slice(0, pageSize)
     }
   }
 }
