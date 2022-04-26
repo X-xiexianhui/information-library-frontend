@@ -93,7 +93,7 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            this.tableData = res.data.data.reverse()
+            bus.$emit('refreshUser', res.data.data.reverse())
             this.closeEvent()
           }
         } catch (e) {
