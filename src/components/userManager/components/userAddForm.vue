@@ -1,14 +1,15 @@
 <template>
   <el-dialog
+    :close-on-click-modal = "false"
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="form" :model="form" :rules="formRule" label-width="80px">
+    <el-form ref="authForm" :model="form" :rules="formRule" label-width="80px">
       <el-form-item label="用户账号" prop="user_id">
         <el-input v-model="form.user_id" placeholder="请输入用户账号"></el-input>
       </el-form-item>
       <el-form-item label="用户名称" prop="user_name">
-        <el-input placeholder="请输入角色描述" v-model="form.user_name">
+        <el-input placeholder="请输入角色名称" v-model="form.user_name">
         </el-input>
       </el-form-item>
       <el-form-item label="用户邮箱" prop="user_email">
@@ -42,15 +43,10 @@
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import bus from '../../../common/bus'
 
 export default {
   name: 'userAddForm',
-  props: {
-    Visible: {
-      type: Boolean,
-      default: false
-    }
-  },
   data () {
     return {
       form: {
@@ -61,20 +57,42 @@ export default {
         disabled: false
       },
       roleList: [],
-      dialogVisible: this.Visible.valueOf(),
+      dialogVisible: false,
       formRule: {
-        user_email: [{required: true, message: '请输入用户邮箱', trigger: 'blur'}],
-        user_role: [{required: true, message: '请选择', trigger: 'blur'}]
+        user_id: [{required: true, message: '请输入用户账号', trigger: 'blur', length: 4}],
+        user_email: [
+          {required: true, message: '请输入用户邮箱', trigger: 'blur'},
+          {pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/, message: '邮箱格式错误'}
+        ],
+        user_role: [{required: true, message: '请选择用户角色', trigger: 'blur'}]
       }
     }
+  },
+  created () {
+    this.getRoleList()
+    bus.$on('showAddUserForm', () => {
+      this.dialogVisible = true
+    })
   },
   methods: {
     closeEvent () {
       this.dialogVisible = false
-      this.$refs.form.resetFields()
+      this.$refs.authForm.resetFields()
+    },
+    async getRoleList () {
+      try {
+        let res = await axios.get('/api/role/select')
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.roleList = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e.message)
+      }
     },
     async save () {
-      await this.$refs.form.validate(async valid => {
+      await this.$refs.authForm.validate(async valid => {
         if (!valid) return
         try {
           let res = await axios.post('/api/user/add', this.form)

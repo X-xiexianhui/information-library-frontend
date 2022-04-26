@@ -11,7 +11,7 @@
       <template #toolbar_buttons>
         <vxe-input v-model="searchName" placeholder="请输入角色名称" clearable></vxe-input>
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
-        <vxe-button status="success" @click="dialogVisible = true">新增</vxe-button>
+        <vxe-button status="success" @click="addEvent">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.userTable.exportData()">导出</vxe-button>
@@ -27,10 +27,8 @@
       </template>
     </vxe-grid>
     <user-add-form
-      :visible="dialogVisible"
     ></user-add-form>
     <user-edit-form
-      :visible="editVisible"
       :user_data="user_data"
     ></user-edit-form>
   </div>
@@ -41,6 +39,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import UserEditForm from './userEditForm'
 import UserAddForm from './userAddForm'
+import bus from '../../../common/bus'
 
 export default {
   name: 'userList',
@@ -74,9 +73,12 @@ export default {
     this.query('')
   },
   methods: {
+    addEvent () {
+      bus.$emit('showAddUserForm')
+    },
     async query (val) {
       try {
-        const res = await this.$http.get('/api/user/query', {params: {user_name: val}})
+        const res = await this.$http.get('/api/user/get', {params: {user_name: val}})
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
