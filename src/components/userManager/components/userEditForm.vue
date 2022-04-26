@@ -3,7 +3,7 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="form" :model="form" :rules="formRule" label-width="80px">
+    <el-form ref="form" :model="form" :rules="formRule" label-width="80px" style="margin: auto;width: 60%">
       <el-form-item label="用户账号" prop="user_id">
         <span>{{form.user_id}}</span>
       </el-form-item>
