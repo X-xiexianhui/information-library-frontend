@@ -51,8 +51,6 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      dialogVisible: false,
-      editVisible: false,
       user_data: {},
       searchName: '',
       tablePage: {
