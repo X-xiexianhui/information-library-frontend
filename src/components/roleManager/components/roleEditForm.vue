@@ -49,16 +49,12 @@ export default {
   },
   data () {
     return {
-      form: JSON.parse(JSON.stringify(this.role_data)),
+      old: JSON.parse(JSON.parse(this.role_data)),
+      form: this.role_data,
       dialogVisible: false,
       formRule: {
         role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
       }
-    }
-  },
-  watch: {
-    role_data (newValue) {
-      this.form = JSON.parse(JSON.stringify(newValue))
     }
   },
   methods: {
