@@ -9,7 +9,7 @@
       :columns="tableColumn"
       :data="currentData">
       <template #toolbar_buttons>
-        <vxe-input v-model="searchName" placeholder="请输入角色名称" clearable></vxe-input>
+        <vxe-input v-model="searchName" placeholder="请输入用户名称" clearable></vxe-input>
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="addEvent">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改</vxe-button>
