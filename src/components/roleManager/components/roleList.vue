@@ -126,9 +126,8 @@ export default {
       bus.$emit('showEditForm', selectRecords)
     },
     page () {
-      const currentPage = this.tablePage.currentPage
       const pageSize = this.tablePage.pageSize
-      this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
+      this.currentData = this.tableData.slice(0, pageSize)
     }
   }
 }
