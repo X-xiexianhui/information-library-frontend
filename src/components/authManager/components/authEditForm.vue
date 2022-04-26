@@ -88,6 +88,10 @@ export default {
       form: JSON.parse(JSON.stringify(this.form_data)),
       dialogVisible: false,
       formRule: {
+        addAuth: [{required: true, message: '请选择新增权限', trigger: 'blur'}],
+        del: [{required: true, message: '请选择删除权限', trigger: 'blur'}],
+        search: [{required: true, message: '请选择查询权限', trigger: 'blur'}],
+        editAuth: [{required: true, message: '请选择修改权限', trigger: 'blur'}]
       },
       addList: [
         {label: '不允许新增', value: 'w0'},
