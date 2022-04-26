@@ -27,13 +27,6 @@
           </el-option>
           </el-select>
       </el-form-item>
-      <el-form-item label="是否禁用" prop="disabled">
-        <el-switch
-          v-model="form.disabled"
-          active-text="禁用"
-          inactive-text="启用">
-        </el-switch>
-      </el-form-item>
     </el-form>
     <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
@@ -55,8 +48,7 @@ export default {
         user_id: '',
         user_name: '',
         user_email: '',
-        user_role: '',
-        disabled: false
+        user_role: ''
       },
       roleList: [],
       dialogVisible: false,
