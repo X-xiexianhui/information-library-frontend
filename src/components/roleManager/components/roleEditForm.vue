@@ -49,7 +49,7 @@ export default {
   },
   data () {
     return {
-      old: JSON.parse(JSON.parse(this.role_data)),
+      old: JSON.parse(JSON.stringify(this.role_data)),
       form: this.role_data,
       dialogVisible: false,
       formRule: {
