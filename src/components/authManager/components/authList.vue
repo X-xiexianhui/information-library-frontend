@@ -37,7 +37,6 @@
       </template>
     </vxe-grid>
     <auth-edit-form
-      :visible="dialogVisible"
       :form_data="form_data"
     ></auth-edit-form>
   </div>
@@ -46,6 +45,7 @@
 <script>
 import {error} from '../../../api/error'
 import AuthEditForm from './authEditForm'
+import bus from '../../../common/bus'
 
 export default {
   name: 'authList',
@@ -57,7 +57,6 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      dialogVisible: false,
       searchName: '',
       tablePage: {
         currentPage: 1,
@@ -126,7 +125,7 @@ export default {
         return error('请先选择需要修改的数据')
       }
       this.form_data = selectRecords
-      this.dialogVisible = true
+      bus.$emit('showAuthEditForm')
     },
     page () {
       const pageSize = this.tablePage.pageSize
