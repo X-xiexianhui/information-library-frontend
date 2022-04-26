@@ -4,7 +4,7 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="form" :model="form" :rules="formRule" label-width="80px" style="width: 50%;margin: auto">
+    <el-form ref="form" :model="form" :rules="formRule" label-width="100px" style="width: 50%;margin: auto">
       <el-form-item label="角色名称：" prop="role_name">
         <template>
           <div style="text-align: left">{{ form.role_name }}</div>
