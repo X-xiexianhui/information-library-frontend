@@ -8,7 +8,7 @@
         <span>{{form.user_id}}</span>
       </el-form-item>
       <el-form-item label="用户名称" prop="user_name">
-        <el-input placeholder="请输入角色描述" v-model="form.user_name">
+        <el-input placeholder="请输入角色名称" v-model="form.user_name">
         </el-input>
       </el-form-item>
       <el-form-item label="用户邮箱" prop="user_email">
