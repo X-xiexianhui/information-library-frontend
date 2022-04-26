@@ -4,15 +4,15 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="form" :model="form" :rules="formRule" label-width="80px">
+    <el-form ref="form" :model="form" :rules="formRule" label-width="80px" style="width: 50%;margin: auto">
       <el-form-item label="角色名称" prop="role_name">
         <template>
-          <span>{{ form.role_name }}</span>
+          <div style="text-align: left">{{ form.role_name }}</div>
         </template>
       </el-form-item>
       <el-form-item label="表单名称" prop="form_name">
         <template>
-          <span>{{ form.form_name }}</span>
+          <div style="text-align: left">{{ form.form_name }}</div>
         </template>
       </el-form-item>
       <el-form-item label="新增权限" prop="addAuth">
@@ -56,7 +56,7 @@
         </el-select>
       </el-form-item>
     </el-form>
-    <span slot="footer" class="dialog-footer">
+    <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
