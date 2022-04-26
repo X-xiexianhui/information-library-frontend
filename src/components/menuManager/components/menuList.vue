@@ -12,7 +12,7 @@
         <vxe-input v-model="searchName" placeholder="请输入菜单名称" clearable></vxe-input>
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="addEvent">新增</vxe-button>
-        <vxe-button status="success" @click="editEvent">修改菜单</vxe-button>
+        <vxe-button status="success" @click="editEvent">修改</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.menuTable.exportData()">导出</vxe-button>
       </template>
