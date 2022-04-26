@@ -55,7 +55,7 @@ export default {
   created () {
     this.getFormSelect()
     this.getMenuSelect()
-    bus.$on('showMenuAddForm', () => {
+    bus.$on('showAddMenuForm', () => {
       this.dialogVisible = true
     })
   },
