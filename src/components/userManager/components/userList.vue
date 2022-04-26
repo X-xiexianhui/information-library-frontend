@@ -130,7 +130,7 @@ export default {
         return error('请先选择需要修改的数据')
       }
       this.user_data = selectRecords
-      this.editVisible = true
+      bus.$emit('showEditUserForm')
     },
     page () {
       const currentPage = this.tablePage.currentPage
