@@ -42,39 +42,63 @@
 <script>
 import {error} from '../../../api/error'
 import axios from 'axios'
+import bus from '../../../common/bus'
 
 export default {
   name: 'userEditForm',
   props: {
-    Visible: {
-      type: Boolean,
-      default: false
-    },
     user_data: {
       type: Object,
       default: () => ({
         user_id: '',
         user_name: '',
         user_email: '',
-        user_role: '',
-        disabled: false
+        user_role: ''
       })
     }
   },
   data () {
     return {
-      form: this.user_data,
-      dialogVisible: this.Visible.valueOf(),
+      form: JSON.parse(JSON.stringify(this.user_data)),
+      dialogVisible: false,
       formRule: {
-        role_name: [{required: true, message: '请输入角色名称', trigger: 'blur'}]
+        user_id: [{required: true, message: '请输入用户账号', trigger: 'blur', length: 4}],
+        user_email: [
+          {required: true, message: '请输入用户邮箱', trigger: 'blur'},
+          {pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/, message: '邮箱格式错误', trigger: 'blur'}
+        ],
+        user_role: [{required: true, message: '请选择用户角色', trigger: 'blur'}]
       },
       roleList: []
+    }
+  },
+  created () {
+    this.getRoleList()
+    bus.$on('showEditUserForm', () => {
+      this.dialogVisible = true
+    })
+  },
+  watch: {
+    user_data (newValue) {
+      this.form = JSON.parse(JSON.stringify(newValue))
     }
   },
   methods: {
     closeEvent () {
       this.dialogVisible = false
       this.$refs.form.resetFields()
+    },
+    async getRoleList () {
+      try {
+        let res = await axios.get('/api/role/select')
+        if (res.data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.roleList = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e.message)
+      }
     },
     async save () {
       await this.$refs.form.validate(async valid => {
