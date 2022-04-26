@@ -14,7 +14,7 @@
           <span>{{ form.form_name }}</span>
         </template>
       </el-form-item>
-      <el-form-item label="新增权限" prop="add">
+      <el-form-item label="新增权限" prop="addAuth">
         <el-select v-model="form.addAuth" placeholder="请选择新增权限">
           <el-option
             v-for="item in addList"
@@ -44,7 +44,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="修改权限" prop="edit">
+      <el-form-item label="修改权限" prop="editAuth">
         <el-select v-model="form.editAuth" placeholder="请选择修改权限">
           <el-option
             v-for="item in editList"
@@ -135,14 +135,14 @@ export default {
         try {
           const updateRecords = getUpdate(this.form_data, this.form)
           let res = await axios.post('/api/auth/edit', {
-            role_name: this.form.role,
+            role_name: this.form.role_name,
             form_name: this.form.form_name,
             update: updateRecords
           })
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            this.tableData = res.data.data.reverse()
+            bus.$emit('refreshAuthList', res.data.data.reverse())
             this.closeEvent()
           }
         } catch (e) {

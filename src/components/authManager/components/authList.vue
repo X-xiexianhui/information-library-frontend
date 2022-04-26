@@ -96,6 +96,9 @@ export default {
   },
   created () {
     this.query('')
+    bus.$on('refreshAuthList', (value) => {
+      this.tableData = value
+    })
   },
   methods: {
     async query (val) {
