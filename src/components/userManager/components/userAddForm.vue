@@ -16,14 +16,16 @@
         <el-input v-model="form.user_email" placeholder="请输入用户邮箱"></el-input>
       </el-form-item>
       <el-form-item label="用户角色" prop="user_role">
-        <el-select v-model="form.user_role" placeholder="请选择">
+          <el-select
+            v-model="form.user_role" placeholder="请选择"
+            style="text-align: left">
           <el-option
             v-for="item in roleList"
             :key="item.value"
             :label="item.label"
             :value="item.value">
           </el-option>
-        </el-select>
+          </el-select>
       </el-form-item>
       <el-form-item label="是否禁用" prop="disabled">
         <el-switch
