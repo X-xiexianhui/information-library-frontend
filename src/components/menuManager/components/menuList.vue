@@ -27,7 +27,6 @@
       </template>
     </vxe-grid>
     <edit-menu-form
-      :visible="this.dialogVisible"
       :menu_id="this.form_id"
     ></edit-menu-form>
   </div>
@@ -49,7 +48,6 @@ export default {
         }
       },
       form_name: '',
-      dialogVisible: false,
       form_id: -1,
       searchName: '',
       tablePage: {
@@ -75,7 +73,7 @@ export default {
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          this.tableData = res.data.data.reverse()
+          this.tableData = res.data.data
         }
       } catch (e) {
         error(e)
@@ -99,7 +97,7 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            this.tableData = res.data.data.reverse()
+            this.tableData = res.data.data
           }
         } catch (e) {
           error(e.message)
@@ -117,7 +115,6 @@ export default {
         return error('请先选择需要修改的数据')
       }
       this.form_id = selectRecords.form_id
-      this.dialogVisible = true
     }
   }
 }

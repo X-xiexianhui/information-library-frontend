@@ -95,7 +95,7 @@ export default {
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          this.menuList = res.data.data.reverse()
+          this.menuList = res.data.data
         }
       } catch (e) {
         error(e)
@@ -107,7 +107,7 @@ export default {
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
-          this.formList = res.data.data.reverse()
+          this.formList = res.data.data
         }
       } catch (e) {
         error(e)
@@ -121,11 +121,11 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
-          const res = await axios.post('/api/menu/edit', this.form)
+          const res = await axios.post('/api/menu/add', this.form)
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            this.tableData = res.data.data.reverse()
+            this.tableData = res.data.data
             this.closeEvent()
           }
         } catch (e) {
