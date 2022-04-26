@@ -5,7 +5,7 @@
   >
     <el-form ref="form" :model="form" :rules="formRule" label-width="80px" style="margin: auto;width: 60%">
       <el-form-item label="用户账号" prop="user_id">
-        <span>{{form.user_id}}</span>
+        <div style="text-align: left">{{form.user_id}}</div>
       </el-form-item>
       <el-form-item label="用户名称" prop="user_name">
         <el-input placeholder="请输入角色名称" v-model="form.user_name">
