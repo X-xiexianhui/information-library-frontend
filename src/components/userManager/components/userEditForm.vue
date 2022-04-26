@@ -106,7 +106,7 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
-            bus.$emit('refreshUser', res.data.data.reverse())
+            bus.$emit('refreshUser')
             this.closeEvent()
           }
         } catch (e) {

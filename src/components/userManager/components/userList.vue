@@ -71,8 +71,8 @@ export default {
   },
   created () {
     this.query('')
-    bus.$on('refreshUser', (value) => {
-      this.tableData = value
+    bus.$on('refreshUser', () => {
+      this.query('')
     })
   },
   methods: {
