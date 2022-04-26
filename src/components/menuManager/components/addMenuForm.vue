@@ -3,7 +3,7 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" :model="form" label-width="80px" style="width: 50%;margin: auto">
       <el-form-item label="菜单名称" prop="menu_name">
         <el-input v-model="form.menu_name" placeholder="请输入菜单名称"></el-input>
       </el-form-item>
@@ -38,7 +38,7 @@
         </el-select>
       </el-form-item>
     </el-form>
-    <span slot="footer" class="dialog-footer">
+    <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
