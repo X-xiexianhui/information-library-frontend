@@ -5,13 +5,13 @@
   >
     <el-form ref="form" :model="form" :rules="formRule" label-width="80px">
       <el-form-item label="角色名称" prop="role_name">
-       <template>
-         <span>{{form.role_name}}</span>
-       </template>
+        <template>
+          <span>{{ form.role_name }}</span>
+        </template>
       </el-form-item>
       <el-form-item label="表单名称" prop="form_name">
         <template>
-          <span>{{form.form_name}}</span>
+          <span>{{ form.form_name }}</span>
         </template>
       </el-form-item>
       <el-form-item label="新增权限" prop="add">
@@ -133,8 +133,12 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
-          const data = getUpdate(this.form_data, this.form)
-          let res = await axios.post('/api/auth/edit', data)
+          const updateRecords = getUpdate(this.form_data, this.form)
+          let res = await axios.post('/api/auth/edit', {
+            role_name: this.form.role,
+            form_name: this.form.form_name,
+            update: updateRecords
+          })
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
