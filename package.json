@@ -15,6 +15,7 @@
     "element-ui": "^2.15.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue2-verify": "^1.1.5",
     "vxe-table": "3",
     "xe-utils": "^3.5.4"
   },

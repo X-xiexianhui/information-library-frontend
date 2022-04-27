@@ -7732,6 +7732,13 @@
   "resolved" "https://registry.npmmirror.com/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
 
+"vue2-verify@^1.1.5":
+  "integrity" "sha512-jsp1elCWzYS+GGTzbwoeQJaH5FbADj5truRXM2U0bLgjkiZwWOZUJfMDhpmDNFDowtYy2moemU5Dm/ss2nem9A=="
+  "resolved" "https://registry.npmmirror.com/vue2-verify/-/vue2-verify-1.1.5.tgz"
+  "version" "1.1.5"
+  dependencies:
+    "vue" "^2.5.2"
+
 "vxe-table@3":
   "integrity" "sha512-J4/noB2wJZTXz4x1wW2faUHb8gHqwePy0yt1wsV4Bsl5s0ZVTA7i2qk+AG1Tk1ZJTSw9Pk2DGubtji1icZLiGA=="
   "resolved" "https://registry.npmmirror.com/vxe-table/-/vxe-table-3.5.1.tgz"
