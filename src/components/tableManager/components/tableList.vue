@@ -79,11 +79,11 @@ export default {
   },
   methods: {
     goToAdd () {
-      window.open('/table/add', '_blank')
+      window.open('/#/table/add', '_blank')
     },
     goToEdit () {
       const selectRecords = this.$refs.xTable.getCurrentRecord()
-      const routeData = this.$router.resolve({path: '/table/edit', query: {tb_name: selectRecords.tb_name, db_name: selectRecords.db_name}})
+      const routeData = this.$router.resolve({path: '/#/table/edit', query: {tb_name: selectRecords.tb_name, db_name: selectRecords.db_name}})
       window.open(routeData.href, '_blank')
     },
     // 查询数据表
