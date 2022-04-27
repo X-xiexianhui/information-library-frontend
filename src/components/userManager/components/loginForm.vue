@@ -4,13 +4,13 @@
   <div class="ms-login">
   <el-form :model="form" :rules="rules" ref="ruleForm" label-width="0px">
       <el-form-item prop="user_id">
-        <el-input v-model="form.user_id" placeholder="请输入账号"></el-input>
+        <el-input clearable v-model="form.user_id" placeholder="请输入账号"></el-input>
       </el-form-item>
       <el-form-item prop="user_pwd">
-        <el-input type="password" placeholder="请输入密码" v-model="form.user_pwd" @keyup.enter.native="submitForm"></el-input>
+        <el-input clearable type="password" placeholder="请输入密码" v-model="form.user_pwd" @keyup.enter.native="submitForm"></el-input>
       </el-form-item>
       <el-form-item prop="code" class="verifyCodeItemCss">
-        <el-input class="verify_css" placeholder="请输入4位验证码" v-model="form.code" @keyup.enter.native="submitForm"></el-input>
+        <el-input clearable class="verify_css" placeholder="请输入4位验证码" v-model="form.code" @keyup.enter.native="submitForm"></el-input>
         <div id="v_container"></div>
       </el-form-item>
       <div class="login-btn">
@@ -77,7 +77,7 @@ export default {
 }
 
 .login-wrap {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
 }
@@ -88,7 +88,7 @@ export default {
   margin-top: -230px;
   text-align: center;
   font-size: 30px;
-  color: #fff;
+  color: cadetblue;
 }
 
 .ms-login {
