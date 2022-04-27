@@ -7,6 +7,10 @@ export default new Router({
   // mode: 'history',
   routes: [
     {
+      path: '/',
+      component: () => import('../components/userManager/page/login')
+    },
+    {
       path: '/table/edit',
       component: () => import('../components/tableManager/page/editTable')
     },
