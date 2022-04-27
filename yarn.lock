@@ -1542,6 +1542,27 @@
   "resolved" "https://registry.npmmirror.com/check-types/-/check-types-7.4.0.tgz"
   "version" "7.4.0"
 
+"cheerio-select@*":
+  "integrity" "sha512-eq0GdBvxVFbqWgmCm7M3XGs1I8oLy/nExUnh6oLqmBditPO9AqQJrkslDpMun/hZ0yyTs8L0m85OHp4ho6Qm9g=="
+  "resolved" "https://registry.npmmirror.com/cheerio-select/-/cheerio-select-1.6.0.tgz"
+  "version" "1.6.0"
+  dependencies:
+    "css-select" "^4.3.0"
+    "css-what" "^6.0.1"
+    "domelementtype" "^2.2.0"
+    "domhandler" "^4.3.1"
+    "domutils" "^2.8.0"
+
+"cheerio@~0.10.3":
+  "integrity" "sha512-/rDdcRIPVkXblUMxhRe9r/sANqG5T7App+V3LJby4GkN+0PrWmFwpE1k4FfbFpiJAOAy7vxUzi4sNX5in0nL2w=="
+  "resolved" "https://registry.npmmirror.com/cheerio/-/cheerio-0.10.8.tgz"
+  "version" "0.10.8"
+  dependencies:
+    "cheerio-select" "*"
+    "entities" "0.x"
+    "htmlparser2" "2.x"
+    "underscore" "~1.4"
+
 "chokidar@^2.1.2", "chokidar@^2.1.8":
   "integrity" "sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg=="
   "resolved" "https://registry.npmmirror.com/chokidar/-/chokidar-2.1.8.tgz"
@@ -2045,14 +2066,14 @@
     "domutils" "^1.7.0"
     "nth-check" "^1.0.2"
 
-"css-select@^4.1.3":
-  "integrity" "sha512-/aUslKhzkTNCQUB2qTX84lVmfia9NyjP3WpDGtj/WxhwBzWBYUV3DgUpurHTme8UTPcPlAD1DJ+b0nN/t50zDQ=="
-  "resolved" "https://registry.npmmirror.com/css-select/-/css-select-4.2.1.tgz"
-  "version" "4.2.1"
+"css-select@^4.1.3", "css-select@^4.3.0":
+  "integrity" "sha512-wPpOYtnsVontu2mODhA19JrqWxNsfdatRKd64kmpRbQgh1KtItko5sTnEpPdpSaJszTOhEMlF/RPz28qj4HqhQ=="
+  "resolved" "https://registry.npmmirror.com/css-select/-/css-select-4.3.0.tgz"
+  "version" "4.3.0"
   dependencies:
     "boolbase" "^1.0.0"
-    "css-what" "^5.1.0"
-    "domhandler" "^4.3.0"
+    "css-what" "^6.0.1"
+    "domhandler" "^4.3.1"
     "domutils" "^2.8.0"
     "nth-check" "^2.0.1"
 
@@ -2085,10 +2106,10 @@
   "resolved" "https://registry.npmmirror.com/css-what/-/css-what-3.4.2.tgz"
   "version" "3.4.2"
 
-"css-what@^5.1.0":
-  "integrity" "sha512-arSMRWIIFY0hV8pIxZMEfmMI47Wj3R/aWpZDDxWYCPEiOMv6tfOrnpDtgxBYPEQD4V0Y/958+1TdC3iWTFcUPw=="
-  "resolved" "https://registry.npmmirror.com/css-what/-/css-what-5.1.0.tgz"
-  "version" "5.1.0"
+"css-what@^6.0.1":
+  "integrity" "sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw=="
+  "resolved" "https://registry.npmmirror.com/css-what/-/css-what-6.1.0.tgz"
+  "version" "6.1.0"
 
 "cssesc@^3.0.0":
   "integrity" "sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg=="
@@ -2471,12 +2492,26 @@
   "resolved" "https://registry.npmmirror.com/domelementtype/-/domelementtype-1.3.1.tgz"
   "version" "1.3.1"
 
-"domhandler@^4.0.0", "domhandler@^4.2.0", "domhandler@^4.3.0":
+"domhandler@^4.0.0", "domhandler@^4.2.0":
   "integrity" "sha512-fC0aXNQXqKSFTr2wDNZDhsEYjCiYsDWl3D01kwt25hm1YIPyDGHvvi3rw+PLqHAl/m71MaiF7d5zvBr0p5UB2g=="
   "resolved" "https://registry.npmmirror.com/domhandler/-/domhandler-4.3.0.tgz"
   "version" "4.3.0"
   dependencies:
     "domelementtype" "^2.2.0"
+
+"domhandler@^4.3.1":
+  "integrity" "sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ=="
+  "resolved" "https://registry.npmmirror.com/domhandler/-/domhandler-4.3.1.tgz"
+  "version" "4.3.1"
+  dependencies:
+    "domelementtype" "^2.2.0"
+
+"domhandler@2.0":
+  "integrity" "sha512-D8+qeCUo6LpYvBZsmXWunDJ9zOD8mVg6EwZIdgxmnT+xGWRsReF/TwsZ5EzlIJDipxlE6qJh1dXt9oeplGN3Bg=="
+  "resolved" "https://registry.npmmirror.com/domhandler/-/domhandler-2.0.3.tgz"
+  "version" "2.0.3"
+  dependencies:
+    "domelementtype" "1"
 
 "domutils@^1.7.0":
   "integrity" "sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg=="
@@ -2494,6 +2529,13 @@
     "dom-serializer" "^1.0.1"
     "domelementtype" "^2.2.0"
     "domhandler" "^4.2.0"
+
+"domutils@1.0":
+  "integrity" "sha512-EtnpDnVNvVaRBHmc5PV2lGHlgic4IjrYgS1f3U/M7CjihJIKfsJFvwj6JfAjr7f7wNDcloq3rOb08xAiL622gA=="
+  "resolved" "https://registry.npmmirror.com/domutils/-/domutils-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "domelementtype" "1"
 
 "dot-prop@^5.2.0":
   "integrity" "sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q=="
@@ -2593,6 +2635,11 @@
   "integrity" "sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A=="
   "resolved" "https://registry.npmmirror.com/entities/-/entities-2.2.0.tgz"
   "version" "2.2.0"
+
+"entities@0.x":
+  "integrity" "sha512-T5XQtlzuW+PfeSsGp3uryfYQof820zYbnUnUDEkwUVIAfgYeixIN16c4jh8gs0SqJUTGLU0XD6QsvjEPbmdwzQ=="
+  "resolved" "https://registry.npmmirror.com/entities/-/entities-0.5.0.tgz"
+  "version" "0.5.0"
 
 "errno@^0.1.3", "errno@~0.1.7":
   "integrity" "sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A=="
@@ -3654,6 +3701,15 @@
     "domutils" "^2.5.2"
     "entities" "^2.0.0"
 
+"htmlparser2@2.x":
+  "integrity" "sha512-oR9aps3hDZdU0whPlDjz4HdafpcZclpjrUOwPqDldr+WDubEnVerBNP8I0Wy0VIZO5Mxq/4yALDOYZTWf5Jtog=="
+  "resolved" "https://registry.npmmirror.com/htmlparser2/-/htmlparser2-2.6.0.tgz"
+  "version" "2.6.0"
+  dependencies:
+    "domelementtype" "1"
+    "domhandler" "2.0"
+    "domutils" "1.0"
+
 "http-deceiver@^1.2.7":
   "integrity" "sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw=="
   "resolved" "https://registry.npmmirror.com/http-deceiver/-/http-deceiver-1.2.7.tgz"
@@ -3727,6 +3783,13 @@
   "version" "2.1.0"
   dependencies:
     "postcss" "^6.0.1"
+
+"identify@^0.1.5":
+  "integrity" "sha512-v7+jtJnoG9yeOELu/cs2ZNFzGscC/3XQfR57BDViB+3H3Qmo4k6f+Qc86ADvJ/STkV59PKfjG+tNw/p0J22SdA=="
+  "resolved" "https://registry.npmmirror.com/identify/-/identify-0.1.5.tgz"
+  "version" "0.1.5"
+  dependencies:
+    "cheerio" "~0.10.3"
 
 "ieee754@^1.1.4":
   "integrity" "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
@@ -7487,6 +7550,11 @@
     "has-symbols" "^1.0.2"
     "which-boxed-primitive" "^1.0.2"
 
+"underscore@~1.4":
+  "integrity" "sha512-ZqGrAgaqqZM7LGRzNjLnw5elevWb5M8LEoDMadxIW3OWbcv72wMMgKdwOKpd5Fqxe8choLD8HN3iSj3TUh/giQ=="
+  "resolved" "https://registry.npmmirror.com/underscore/-/underscore-1.4.4.tgz"
+  "version" "1.4.4"
+
 "union-value@^1.0.0":
   "integrity" "sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg=="
   "resolved" "https://registry.npmmirror.com/union-value/-/union-value-1.0.1.tgz"
@@ -7731,13 +7799,6 @@
   "integrity" "sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ=="
   "resolved" "https://registry.npmmirror.com/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
-
-"vue2-verify@^1.1.5":
-  "integrity" "sha512-jsp1elCWzYS+GGTzbwoeQJaH5FbADj5truRXM2U0bLgjkiZwWOZUJfMDhpmDNFDowtYy2moemU5Dm/ss2nem9A=="
-  "resolved" "https://registry.npmmirror.com/vue2-verify/-/vue2-verify-1.1.5.tgz"
-  "version" "1.1.5"
-  dependencies:
-    "vue" "^2.5.2"
 
 "vxe-table@3":
   "integrity" "sha512-J4/noB2wJZTXz4x1wW2faUHb8gHqwePy0yt1wsV4Bsl5s0ZVTA7i2qk+AG1Tk1ZJTSw9Pk2DGubtji1icZLiGA=="
