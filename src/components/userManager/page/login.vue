@@ -1,8 +1,23 @@
 <template>
   <div>
-    <div :class="$style.box">
-      <div><img src="../../../assets/logo.png" :class="$style.logo"></div>
-    </div>
+    <vue-particles
+      class="login-background"
+      color="#97D0F2"
+      :particleOpacity="0.7"
+      :particlesNumber="50"
+      shapeType="circle"
+      :particleSize="4"
+      linesColor="#97D0F2"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.4"
+      :linesDistance="150"
+      :moveSpeed="3"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push">
+    </vue-particles>
   </div>
 </template>
 
@@ -13,21 +28,11 @@ export default {
 </script>
 
 <style module>
-.box {
-  top: 0;
-  position: fixed;
-  margin: 0 0;
-  padding: 0 0;
-  height: auto;
+.login-background {
+  background: linear-gradient(-180deg, #dcf2e6 0%, #ffffff 100%);
   width: 100%;
-  background: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 3;
-}
-.logo {
-  vertical-align: top;
-  height: 50px;
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
+  position: absolute;
 }
 </style>

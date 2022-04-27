@@ -10,6 +10,8 @@ import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
 import './assets/css/backend.css'
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
 Vue.use(VXETable)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
