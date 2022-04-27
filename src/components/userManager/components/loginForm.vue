@@ -101,7 +101,7 @@ export default {
   padding: 40px;
   border-radius: 6%;
   background: #fff;
-  box-shadow: -2px -2px 17px 1px #1e9fff;
+  box-shadow: -2px -2px 17px 1px #dcf2e6;
 }
 .login-btn {
   text-align: center;
