@@ -36,11 +36,22 @@ export default {
       rules: {
         user_id: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
         user_pwd: [{required: true, message: '请输入用户密码', trigger: 'blur'}],
-        code: [{required: true, message: '请输入验证码', trigger: 'blur'}]
+        code: [
+          {required: true, message: '请输入验证码', trigger: 'blur'},
+          { validator: this.checkCode, trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
+    checkCode (rule, value, callback) {
+      const verifyFlag = this.verifyCode.validate(value)
+      if (!verifyFlag) {
+        callback(new Error('验证码不正确'))
+      } else {
+        return callback()
+      }
+    },
     async submitForm () {
       // 获取验证码
       const verifyCode = this.form.code
