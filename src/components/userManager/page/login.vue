@@ -24,11 +24,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
   z-index: 3;
 }
 .logo {
   vertical-align: top;
-  height: 30px;
+  height: 50px;
 }
 </style>
