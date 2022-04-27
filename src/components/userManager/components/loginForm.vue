@@ -53,16 +53,6 @@ export default {
       }
     },
     async submitForm () {
-      // 获取验证码
-      const verifyCode = this.form.code
-      const verifyFlag = this.verifyCode.validate(verifyCode)
-      if (!verifyFlag) {
-        this.$notify.error({
-          title: '系统提示',
-          message: '验证码输入错误'
-        })
-        return
-      }
       await this.$refs.ruleForm.validate(valid => {
         if (valid) {
           // 判断是否登录成功
