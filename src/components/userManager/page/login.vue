@@ -18,12 +18,15 @@
       :clickEffect="true"
       clickMode="push">
     </vue-particles>
+    <login-form></login-form>
   </div>
 </template>
 
 <script>
+import LoginForm from '../components/loginForm'
 export default {
-  name: 'login'
+  name: 'login',
+  components: {LoginForm}
 }
 </script>
 
