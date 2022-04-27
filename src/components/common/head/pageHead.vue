@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.box">
-    <div><img src="../../../assets/logo.png" height="55px"></div>
+    <div><img src="../../../assets/logo.png" height="50px"></div>
     <div :class="$style.headerMenuBox">
       <Menu :class="$style.menu" v-bind="$attrs"></Menu>
     </div>
