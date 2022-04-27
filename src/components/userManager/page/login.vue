@@ -1,7 +1,7 @@
 <template>
   <div>
     <vue-particles
-      id="particles-js"
+      class="login-background"
       color="#97D0F2"
       :particleOpacity="0.7"
       :particlesNumber="50"
@@ -28,9 +28,11 @@ export default {
 </script>
 
 <style scoped>
-#particles-js{
+.login-background {
+  background: linear-gradient(0, #dcf2e6 0%, #ffffff 100%);
   width: 100%;
-  height: calc(100% - 100px);
+  height: 100%; /**宽高100%是为了图片铺满屏幕 */
+  z-index: -1;
   position: absolute;
 }
 </style>
