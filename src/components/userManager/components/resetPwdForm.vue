@@ -37,7 +37,8 @@ export default {
   data () {
     return {
       active: 0,
-      flag: false
+      flag: false,
+      msg: '获取邮箱验证码'
     }
   },
   methods: {
@@ -64,90 +65,85 @@ export default {
 .forgot-password {
 
   .return-page-wr {
-  position: relative;
-  top: 30px;
-  left: 30px;
-  color: #e5525b;
-  font-size: 16px;
-  margin-bottom: 15px;
+    position: relative;
+    top: 30px;
+    left: 30px;
+    color: #e5525b;
+    font-size: 16px;
+    margin-bottom: 15px;
 
-  i {
-  font-size: 20px;
-  vertical-align: middle;
+    i {
+      font-size: 20px;
+      vertical-align: middle;
+    }
+
+  }
+
+  width: 580px;
+  height: 540px;
+  background: #FFFFFF;
+  border-radius: 6px;
+
+  .content {
+    padding: 30px 90px;
+    box-sizing: border-box;
+  }
+
+  /deep/ .el-step.is-horizontal {
+
+    .el-step__line {
+      height: 2px;
+      top: 20px;
+      left: 48px;
+      right: 10px;
+    }
+
+  }
+
+  /deep/ .el-step__icon {
+    width: 42px;
+    height: 42px;
+    color: #dcf2e6;
+    font-size: 18px;
+    border: 2px solid #dcf2e6;
+  }
+
+  /deep/ .el-step__line {
+    background: #dcf2e6;
+  }
+
+  /deep/ .is-process {
+
+    .el-step__icon {
+      background: #dcf2e6;
+      color: #FFFFFF;
+      border: 0;
+
+    }
+
+  }
+
+  /deep/ .el-step__head {
+    margin-bottom: 20px;
+  }
+
+  /deep/ .el-step__title.is-process {
+    color: #dcf2e6;
+  }
+
+  /deep/ .el-form-item__label {
+    width: 100%;
+    text-align: left;
+  }
+
+  /deep/ .el-form-item__content {
+    display: inline-block;
+    width: 100%;
+    margin-left: 0;
   }
 
 }
-width: 580px;
-height: 540px
 
-;
-background: #FFFFFF
-
-;
-border-radius:
-
-6
-px
-
-;
-.content {
-  padding: 30px 90px;
-  box-sizing: border-box;
-}
-
-/deep/ .el-step.is-horizontal {
-
-.el-step__line {
-  height: 2px;
-  top: 20px;
-  left: 48px;
-  right: 10px;
-}
-
-}
-/deep/ .el-step__icon {
-  width: 42px;
-  height: 42px;
-  color: #e6545a;
-  font-size: 18px;
-  border: 2px solid #e6545a;
-}
-
-/deep/ .el-step__line {
-  background: #e6545a;
-}
-
-/deep/ .is-process {
-
-.el-step__icon {
-  background: #e6545a;
-  color: #FFFFFF;
-  border: 0px;
-
-}
-
-}
-/deep/ .el-step__head {
-  margin-bottom: 20px;
-}
-
-/deep/ .el-step__title.is-process {
-  color: #e6545a;
-}
-
-
-/deep/ .el-form-item__label {
-  width: 100%;
-  text-align: left;
-}
-
-/deep/ .el-form-item__content {
-  display: inline-block;
-  width: 100%;
-  margin-left: 0px;
-}
-
-}
 .btn-wr {
   text-align: center;
 }
@@ -168,18 +164,18 @@ px
   text-align: center;
   line-height: 50px;
   margin: 0 auto;
-  background: #e6545a;
+  background: #dcf2e6;
   font-weight: 600;
   font-size: 16px;
   color: #FFFFFF;
   border-radius: 4px;
 
-i {
-  right: -50px;
-  font-size: 27px;
-  position: relative;
-  vertical-align: middle;
-}
+  i {
+    right: -50px;
+    font-size: 27px;
+    position: relative;
+    vertical-align: middle;
+  }
 
 }
 </style>
