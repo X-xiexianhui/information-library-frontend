@@ -33,12 +33,12 @@
         <div v-if="active=== 1">
           <el-form ref="forgotPasswordForm" :model="forgotPasswordForm" :rules="forgotPasswordFormRules">
             <el-form-item prop="user_pwd" label="密码:">
-              <el-input v-model="forgotPasswordForm.user_pwd" type="password" placeholder="6-16位大小写字母+数字组合"
+              <el-input v-model="forgotPasswordForm.pwd" type="password" placeholder="6-16位大小写字母+数字组合"
                         auto-complete="off">
               </el-input>
             </el-form-item>
             <el-form-item prop="confirm_pwd" label="确认密码:">
-              <el-input v-model="forgotPasswordForm.confirm_pwd" placeholder="重复密码" type="password">
+              <el-input v-model="forgotPasswordForm.confirmPwd" placeholder="重复密码" type="password">
               </el-input>
             </el-form-item>
           </el-form>
@@ -67,7 +67,7 @@ export default {
   name: 'resetPwdForm',
   data () {
     let validateConfirmPass = (rule, value, callback) => {
-      if (value !== this.forgotPasswordForm.user_pwd) {
+      if (value !== this.forgotPasswordForm.pwd) {
         callback(new Error('两次输入密码不一致,请重新输入'))
       } else {
         callback()
@@ -82,12 +82,12 @@ export default {
         user_email: ''
       },
       forgotPasswordForm: {
-        user_pwd: '',
-        confirm_pwd: '',
+        pwd: '',
+        confirmPwd: '',
         account: ''
       },
       forgotPasswordFormRules: {
-        user_pwd: [
+        pwd: [
           {required: true, message: '请输入密码', trigger: 'blur'},
           {min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur'},
           {
@@ -96,7 +96,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        confirm_pwd: [
+        confirmPwd: [
           {required: true, message: '请输入确认密码', trigger: 'blur'},
           {validator: validateConfirmPass, trigger: 'blur'},
           {min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur'},
