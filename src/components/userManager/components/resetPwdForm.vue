@@ -231,7 +231,6 @@ export default {
     width: 200px;
     height: 50px;
     text-align: center;
-    line-height: 50px;
     margin: 0 auto;
     background: #67C23A;
     font-weight: 600;
