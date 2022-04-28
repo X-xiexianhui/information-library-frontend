@@ -238,13 +238,6 @@ export default {
     font-size: 16px;
     color: #FFFFFF;
     border-radius: 4px;
-
-    i {
-      right: -50px;
-      font-size: 27px;
-      position: relative;
-      vertical-align: middle;
-    }
   }
 }
 </style>
