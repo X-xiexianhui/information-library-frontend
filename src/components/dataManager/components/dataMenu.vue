@@ -7,7 +7,7 @@
     <template slot="title">
       <span>{{parent.name}}</span>
     </template>
-    <el-menu-item v-for="child in parent.child" :key="child.id">
+    <el-menu-item v-for="child in parent.child" :key="child.menu_id">
       <a :class="$style.menuLink" :href="'/#/home/data?form_id='+child.form_id" target="_blank">
         {{child.child_name}}
       </a>
