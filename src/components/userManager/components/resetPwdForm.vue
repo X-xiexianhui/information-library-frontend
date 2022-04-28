@@ -143,8 +143,8 @@ export default {
     border-radius: 6px;
     .return-page-wr {
       position: relative;
-      top: 30px;
-      left: 0;
+      top: 10px;
+      left: -250px;
       justify-content: left;
       color: #67C23A;
       font-size: 16px;
