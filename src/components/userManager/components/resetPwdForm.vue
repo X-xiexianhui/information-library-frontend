@@ -1,12 +1,12 @@
 <template>
   <div class="page-container">
   <div class="forgot-password">
-    <button type="text" v-show="active>= 1" class="return-page-wr" @click="active--"><i
+    <el-button type="text" v-show="active>= 1" class="return-page-wr" @click="active--"><i
       class="el-icon-arrow-left"></i> 上一步
-    </button>
-    <button type="text" v-show="active=== 0" class="return-page-wr" @click="$router.push({path:'/'})"><i
+    </el-button>
+    <el-button type="text" v-show="active=== 0" class="return-page-wr" @click="$router.push({path:'/'})"><i
       class="el-icon-arrow-left"></i> 返回
-    </button>
+    </el-button>
     <div class="content">
       <el-steps :active="active" finish-status="success">
         <el-step title="账号验证"></el-step>
@@ -129,7 +129,8 @@ export default {
   .return-page-wr {
     position: relative;
     top: 30px;
-    left: 0;
+    text-align: left;
+    justify-content:left;
     color: #67C23A;
     font-size: 16px;
     margin-bottom: 15px;
