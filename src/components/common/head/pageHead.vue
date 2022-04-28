@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style module>
+<style module lang="less">
 .box {
   top: 0;
   position: fixed;
@@ -36,6 +36,10 @@ export default {
   box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
   z-index: 3;
 }
+.logo {
+  vertical-align: top;
+  height: 30px;
+}
 .headerMenuBox {
   display: flex;
   background: #fff;
@@ -47,11 +51,6 @@ h1 {
   font-size: 26px;
   text-transform: uppercase;
   z-index: 10;
-}
-
-.logo {
-  vertical-align: top;
-  height: 30px;
   }
 }
 .menu {
