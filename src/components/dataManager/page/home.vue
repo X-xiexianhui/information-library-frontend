@@ -8,6 +8,7 @@
     </div>
     <el-container>
       <el-aside>
+        <data-menu></data-menu>
       </el-aside>
       <el-main>
           <router-view/>
@@ -18,8 +19,10 @@
 </template>
 
 <script>
+import DataMenu from '../components/dataMenu'
 export default {
-  name: 'home'
+  name: 'home',
+  components: {DataMenu}
 }
 </script>
 <style module>

@@ -22,8 +22,6 @@ import {interceptor} from '../../../api/interctor'
 export default {
   name: 'dataMenu',
   created () {
-    this.form_id = this.$route.params.form_id
-    console.log(this.form_id)
     this.initMenu()
   },
   data () {
@@ -36,6 +34,7 @@ export default {
     async initMenu () {
       try {
         const res = await this.$http.get('api/menu/init')
+        console.log(res.data)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {

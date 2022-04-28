@@ -5,7 +5,7 @@ export function interceptor (res) {
   if (res.code === 401 || res.code === 403) {
     return router.push('/')
   } else {
-    MessageBox.alert(res.message, '警告', {
+    MessageBox.alert(res.msg, '警告', {
       confirmButtonText: '确定',
       callback: () => {
       }
