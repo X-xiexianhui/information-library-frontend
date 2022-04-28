@@ -67,7 +67,7 @@ export default {
   name: 'resetPwdForm',
   data () {
     let validateConfirmPass = (rule, value, callback) => {
-      if (value !== this.forgotPasswordForm.pwd) {
+      if (value !== this.forgotPasswordForm.user_pwd) {
         callback(new Error('两次输入密码不一致,请重新输入'))
       } else {
         callback()
