@@ -32,13 +32,13 @@
         </div>
         <div v-if="active=== 1">
           <el-form ref="forgotPasswordForm" :model="forgotPasswordForm" :rules="forgotPasswordFormRules">
-            <el-form-item prop="user_pwd" label="密码:">
-              <el-input v-model="forgotPasswordForm.pwd" type="password" placeholder="6-16位大小写字母+数字组合"
+            <el-form-item prop="pwd" label="密码:">
+              <el-input clearable v-model="forgotPasswordForm.pwd" type="password" placeholder="6-16位大小写字母+数字组合"
                         auto-complete="off">
               </el-input>
             </el-form-item>
-            <el-form-item prop="confirm_pwd" label="确认密码:">
-              <el-input v-model="forgotPasswordForm.confirmPwd" placeholder="重复密码" type="password">
+            <el-form-item prop="confirmPwd" label="确认密码:">
+              <el-input clearable v-model="forgotPasswordForm.confirmPwd" placeholder="重复密码" type="password">
               </el-input>
             </el-form-item>
           </el-form>
