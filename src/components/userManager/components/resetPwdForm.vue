@@ -47,7 +47,7 @@
           <el-result icon="success" title="修改密码成功" subTitle="请重新登录"></el-result>
         </div>
         <div class="btn-wr">
-          <button type="button" class="login-btn" @click="$router.push({path:'/login'})">登录 <i class="el-icon-arrow-right" ></i></button>
+          <button type="button" class="login-btn" @click="$router.push({path:'/'})">登录 <i class="el-icon-arrow-right" ></i></button>
         </div>
       </div>
     </div>
@@ -100,6 +100,8 @@ export default {
     getAuthCode () {
     },
     checkEmail () {
+      const that = this
+      that.active++
     },
     resetPassword () {
     }
