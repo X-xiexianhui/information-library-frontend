@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
   <div class="forgot-password">
-    <button type="text" v-show="active>='1'" class="return-page-wr" @click="$router.go(-1)"><i
+    <button type="text" v-show="active>='1'" class="return-page-wr" @click="active--"><i
       class="el-icon-arrow-left"></i> 上一步
     </button>
     <button type="text" v-show="active==='0'" class="return-page-wr" @click="$router.push({path:'/'})"><i
@@ -19,9 +19,10 @@
             <el-input></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input>
-              <el-button plain :disabled="flag" @click="getAuthCode">{{ msg }}</el-button>
-            </el-input>
+            <template>
+              <el-input>
+              </el-input><el-button plain :disabled="flag" @click="getAuthCode">{{ msg }}</el-button>
+            </template>
           </el-form-item>
         </el-form>
         <div>
