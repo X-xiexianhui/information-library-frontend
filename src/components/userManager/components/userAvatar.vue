@@ -4,11 +4,9 @@
     下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item>黄金糕</el-dropdown-item>
-      <el-dropdown-item>狮子头</el-dropdown-item>
-      <el-dropdown-item>螺蛳粉</el-dropdown-item>
-      <el-dropdown-item >双皮奶</el-dropdown-item>
-      <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+      <el-dropdown-item>修改个人信息</el-dropdown-item>
+      <el-dropdown-item>修改密码</el-dropdown-item>
+      <el-dropdown-item>退出</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>

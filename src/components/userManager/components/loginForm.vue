@@ -16,6 +16,9 @@
       <div class="login-btn">
         <el-button class="loginBtn" type="primary" @click="submitForm">登录</el-button>
       </div>
+    <div class="tips"  style="float:left;">
+      <el-link type="white" @click="retrievePWD">忘记密码</el-link>
+    </div>
     </el-form>
   </div>
 </div>
@@ -44,6 +47,9 @@ export default {
     }
   },
   methods: {
+    retrievePWD () {
+      this.$router.push({ path: '/pwd/reset' })
+    },
     checkCode (rule, value, callback) {
       const verifyFlag = this.verifyCode.validate(value)
       if (!verifyFlag) {
