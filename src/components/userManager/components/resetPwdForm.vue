@@ -110,10 +110,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-.wid {
-  width: 100%;
-}
-
 .forgot-password {
 
   .return-page-wr {
