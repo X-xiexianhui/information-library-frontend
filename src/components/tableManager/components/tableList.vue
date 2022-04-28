@@ -90,9 +90,8 @@ export default {
     async getTables (param) {
       try {
         const res = await this.$http.get('/api/tb/search', {params: {query_name: param}})
-        console.log(res.data)
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          error(res.data)
         } else {
           this.tableData = res.data.data
         }
