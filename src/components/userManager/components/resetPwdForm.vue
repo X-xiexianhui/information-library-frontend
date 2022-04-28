@@ -58,10 +58,6 @@ export default {
   width: 100%;
 }
 
-.title-img-wr {
-  text-align: center;
-}
-
 .forgot-password {
 
   .return-page-wr {
