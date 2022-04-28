@@ -8,7 +8,7 @@
         class="el-icon-arrow-left"></i> 返回
       </el-button>
       <div class="content">
-        <el-steps :active="active" finish-status="success">
+        <el-steps :active="active" finish-status="success" align-center>
           <el-step title="账号验证"></el-step>
           <el-step title="重置密码"></el-step>
           <el-step title="完成设置"></el-step>
@@ -163,8 +163,8 @@ export default {
       .el-step__line {
         height: 2px;
         top: 20px;
-        left: 48px;
-        right: 10px;
+        left: 80px;
+        right: -50px;
       }
 
     }
