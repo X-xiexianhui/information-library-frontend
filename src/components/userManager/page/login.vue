@@ -31,11 +31,4 @@ export default {
 </script>
 
 <style scoped>
-.login-background {
-  background: linear-gradient(0, #dcf2e6 0%, #ffffff 100%);
-  width: 100%;
-  height: 100%; /**宽高100%是为了图片铺满屏幕 */
-  z-index: -1;
-  position: absolute;
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.box">
-    <div :class="$style.logo"><img src="../../../assets/logo.png" alt="信息库管理系统"></div>
+    <div :class="$style.logo"><img src="../../../assets/logo.png" :class="$style.logo" alt="信息库管理系统"></div>
     <div :class="$style.headerMenuBox">
       <Menu :class="$style.menu" v-bind="$attrs"></Menu>
     </div>
