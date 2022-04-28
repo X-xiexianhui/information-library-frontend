@@ -3,7 +3,7 @@
   text-color="#000000"
   active-text-color="#ffd04b"
 >
-  <el-submenu v-for="(index,parent) in menuList" :index="parent.name" :key="index">
+  <el-submenu v-for="(parent,index) in menuList" :index="parent.name" :key="index">
     <template slot="title">
       <span>{{parent.name}}</span>
     </template>
@@ -28,6 +28,15 @@ export default {
     return {
       menuList: [],
       form_id: 0
+    }
+  },
+  watch: {
+    // 监视搜索词变化
+    '$route.query.form_id': {
+      immediate: true,
+      handler (newValue) {
+        console.log(newValue)
+      }
     }
   },
   methods: {
