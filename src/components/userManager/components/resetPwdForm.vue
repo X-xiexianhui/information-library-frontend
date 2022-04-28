@@ -1,4 +1,5 @@
 <template>
+  <div class="page-container">
   <div class="forgot-password">
     <button type="text" v-show="active>='1'" class="return-page-wr" @click="$router.go(-1)"><i
       class="el-icon-arrow-left"></i> 上一步
@@ -51,6 +52,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -110,17 +112,22 @@ export default {
 </script>
 
 <style scoped lang="less">
+.page-container {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow-y: auto;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wid{
+    width: 100%;
+  }
+  .title-img-wr {
+    text-align: center;
+  }
 .forgot-password {
-  position: absolute;
-  left: 40%;
-  top: 40%;
-  width: 600px;
-  height: 26rem;
-  margin: -150px 0 0 -190px;
-  padding: 40px;
-  border-radius: 6%;
-  background: #fff;
-  box-shadow: -2px -2px 17px 1px #dcf2e6;
   .return-page-wr {
     position: relative;
     top: 30px;
@@ -128,13 +135,15 @@ export default {
     color: #67C23A;
     font-size: 16px;
     margin-bottom: 15px;
-
     i {
       font-size: 20px;
       vertical-align: middle;
     }
   }
-
+  width:580px;
+  height:540px;
+  background: #FFFFFF;
+  border-radius: 6px;
   .content {
     padding: 30px 90px;
     box-sizing: border-box;
@@ -226,7 +235,7 @@ export default {
     font-size: 27px;
     position: relative;
     vertical-align: middle;
+    }
   }
-
 }
 </style>
