@@ -3,12 +3,12 @@
   text-color="#000000"
   active-text-color="#ffd04b"
 >
-  <el-submenu v-for="(index,parent) in menuList" :index="index" :key="index">
+  <el-submenu v-for="(index,parent) in menuList" :index="parent.name" :key="index">
     <template slot="title">
       <span>{{parent.name}}</span>
     </template>
-    <el-menu-item v-for="child in parent.child" :key="child.menu_id">
-      <a :class="$style.menuLink" :href="'/#/home/data?form_id='+child.form_id" target="_blank">
+    <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/#/home/data?form_id='+child.form_id">
+      <a :class="$style.menuLink" :href="'/#/home/data?form_id='+child.form_id">
         {{child.child_name}}
       </a>
     </el-menu-item>
