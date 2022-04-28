@@ -18,12 +18,15 @@
     :clickEffect="true"
     clickMode="push">
   </vue-particles>
+  <reset-pwd-form></reset-pwd-form>
 </div>
 </template>
 
 <script>
+import ResetPwdForm from '../components/resetPwdForm'
 export default {
-  name: 'resetPwd'
+  name: 'resetPwd',
+  components: {ResetPwdForm}
 }
 </script>
 
