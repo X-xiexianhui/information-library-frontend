@@ -26,6 +26,7 @@
 
 <script>
 import {GVerify} from '../../../common/verifyCode'
+import {error} from '../../../api/error'
 
 export default {
   name: 'loginForm',
@@ -59,7 +60,7 @@ export default {
       }
     },
     async submitForm () {
-      await this.$refs.ruleForm.validate(valid => {
+      await this.$refs.ruleForm.validate(async valid => {
         if (valid) {
           // 判断是否登录成功
 
@@ -67,7 +68,16 @@ export default {
             user_id: this.form.user_id,
             user_pwd: this.form.user_pwd
           }
-          console.log(param)
+          try {
+            const res = await this.$http.post('api/user/login', param)
+            if (res.data.code !== 200) {
+              error(res.data.msg)
+            } else {
+              await this.$router.push('/home/date')
+            }
+          } catch (e) {
+            error(e)
+          }
         }
       })
     }
