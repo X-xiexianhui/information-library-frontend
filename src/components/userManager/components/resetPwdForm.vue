@@ -209,7 +209,7 @@ export default {
 
     /deep/ .el-form-item__content {
       display: inline-block;
-      width: 70%;
+      width: 75%;
       margin-left: 0;
     }
 
