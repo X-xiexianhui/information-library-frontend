@@ -1,10 +1,10 @@
 <template>
   <div class="page-container">
   <div class="forgot-password">
-    <button type="text" v-show="active>='1'" class="return-page-wr" @click="active--"><i
+    <button type="text" v-show="active>= 1" class="return-page-wr" @click="active--"><i
       class="el-icon-arrow-left"></i> 上一步
     </button>
-    <button type="text" v-show="active==='0'" class="return-page-wr" @click="$router.push({path:'/'})"><i
+    <button type="text" v-show="active=== 0" class="return-page-wr" @click="$router.push({path:'/'})"><i
       class="el-icon-arrow-left"></i> 返回
     </button>
     <div class="content">
@@ -19,17 +19,16 @@
             <el-input></el-input>
           </el-form-item>
           <el-form-item>
-            <template>
               <el-input>
-              </el-input><el-button plain :disabled="flag" @click="getAuthCode">{{ msg }}</el-button>
-            </template>
+                <el-button plain :disabled="flag" @click="getAuthCode">{{ msg }}</el-button>
+              </el-input>
           </el-form-item>
         </el-form>
         <div>
           <button type="button" class="login-btn" @click="checkEmail">下一步 <i class="el-icon-arrow-right"></i></button>
         </div>
       </div>
-      <div v-if="active==='1'">
+      <div v-if="active=== 1">
         <el-form ref="forgotPasswordForm" :model="forgotPasswordForm" :rules="forgotPasswordFormRules">
           <el-form-item prop="pwd" label ="密码:">
             <el-input v-model="forgotPasswordForm.user_pwd" type="password" placeholder="6-16位大小写字母+数字组合" auto-complete="off" >
@@ -44,12 +43,15 @@
           <button type="button" class="login-btn" @click.prevent="resetPassword">确认 <i class="el-icon-arrow-right" ></i></button>
         </div>
       </div>
-      <div v-if="active==='2'">
+      <div v-if="active=== 2">
         <div class="reset-success">
-          <el-result icon="success" title="修改密码成功" subTitle="请重新登录"></el-result>
-        </div>
-        <div class="btn-wr">
-          <button type="button" class="login-btn" @click="$router.push({path:'/'})">登录 <i class="el-icon-arrow-right" ></i></button>
+          <el-result icon="success" title="修改密码成功" subTitle="请重新登录">
+            <template slot="extra">
+              <div class="btn-wr">
+                <button type="button" class="login-btn" @click="$router.push({path:'/'})">登录 <i class="el-icon-arrow-right" ></i></button>
+              </div>
+            </template>
+          </el-result>
         </div>
       </div>
     </div>
@@ -107,6 +109,7 @@ export default {
       that.active++
     },
     resetPassword () {
+      this.active++
     }
   }
 }
@@ -122,17 +125,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  .wid{
-    width: 100%;
-  }
-  .title-img-wr {
-    text-align: center;
-  }
 .forgot-password {
   .return-page-wr {
     position: relative;
     top: 30px;
-    left: 30px;
+    left: 0;
     color: #67C23A;
     font-size: 16px;
     margin-bottom: 15px;
@@ -193,13 +190,13 @@ export default {
   }
 
   /deep/ .el-form-item__label {
-    width: 100%;
+    width: 25%;
     text-align: left;
   }
 
   /deep/ .el-form-item__content {
     display: inline-block;
-    width: 100%;
+    width: 70%;
     margin-left: 0;
   }
 
@@ -211,7 +208,7 @@ export default {
 
 .reset-success {
   text-align: center;
-  margin: 60px 0;
+  margin: auto;
 }
 
 .set-success {
