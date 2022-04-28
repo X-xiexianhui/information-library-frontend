@@ -18,7 +18,7 @@
     :clickEffect="true"
     clickMode="push">
   </vue-particles>
-  <reset-pwd-form></reset-pwd-form>
+  <reset-pwd-form class="pwd-form"></reset-pwd-form>
 </div>
 </template>
 

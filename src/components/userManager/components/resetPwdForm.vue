@@ -111,12 +111,21 @@ export default {
 
 <style scoped lang="less">
 .forgot-password {
-
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  width: 600px;
+  height: 26rem;
+  margin: -150px 0 0 -190px;
+  padding: 40px;
+  border-radius: 6%;
+  background: #fff;
+  box-shadow: -2px -2px 17px 1px #dcf2e6;
   .return-page-wr {
     position: relative;
     top: 30px;
     left: 30px;
-    color: #dcf2e6;
+    color: #67C23A;
     font-size: 16px;
     margin-bottom: 15px;
 
@@ -124,13 +133,7 @@ export default {
       font-size: 20px;
       vertical-align: middle;
     }
-
   }
-
-  width: 580px;
-  height: 540px;
-  background: #FFFFFF;
-  border-radius: 6px;
 
   .content {
     padding: 30px 90px;
@@ -151,19 +154,19 @@ export default {
   /deep/ .el-step__icon {
     width: 42px;
     height: 42px;
-    color: #dcf2e6;
+    color: #67C23A;
     font-size: 18px;
-    border: 2px solid #dcf2e6;
+    border: 2px solid #67C23A;
   }
 
   /deep/ .el-step__line {
-    background: #dcf2e6;
+    background: #67C23A;
   }
 
   /deep/ .is-process {
 
     .el-step__icon {
-      background: #dcf2e6;
+      background: #67C23A;
       color: #FFFFFF;
       border: 0;
 
@@ -176,7 +179,7 @@ export default {
   }
 
   /deep/ .el-step__title.is-process {
-    color: #dcf2e6;
+    color: #67C23A;
   }
 
   /deep/ .el-form-item__label {
@@ -212,7 +215,7 @@ export default {
   text-align: center;
   line-height: 50px;
   margin: 0 auto;
-  background: #dcf2e6;
+  background: #67C23A;
   font-weight: 600;
   font-size: 16px;
   color: #FFFFFF;
