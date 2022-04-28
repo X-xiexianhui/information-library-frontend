@@ -47,7 +47,7 @@ export default {
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
-          this.menuList = res.data.data.reverse()
+          this.menuList = res.data.data
         }
       } catch (e) {
         error(e.message)
