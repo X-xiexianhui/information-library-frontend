@@ -120,7 +120,7 @@ export default {
           }
         })
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          error(res.data)
         } else {
           this.$message.success(res.data.msg)
           await this.getTables('')
@@ -146,7 +146,7 @@ export default {
           new_name: this.inputForm.new_name
         })
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          error(res.data)
         } else {
           this.$message.success(res.data.msg)
           this.isVisible = false
