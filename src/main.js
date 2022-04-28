@@ -16,6 +16,7 @@ Vue.use(VXETable)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
 axios.defaults.baseURL = 'http://localhost:80'
+axios.defaults.withCredentials = true
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
