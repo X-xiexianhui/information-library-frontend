@@ -87,21 +87,21 @@ export default {
         account: ''
       },
       forgotPasswordFormRules: {
-        pwd: [
+        user_pwd: [
           {required: true, message: '请输入密码', trigger: 'blur'},
           {min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur'},
           {
-            pattern: new RegExp('^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$'),
+            pattern: /^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$/,
             message: '密码为6-16位大小写字母+数字组合，请重新输入',
             trigger: 'blur'
           }
         ],
-        confirmPwd: [
+        confirm_pwd: [
           {required: true, message: '请输入确认密码', trigger: 'blur'},
           {validator: validateConfirmPass, trigger: 'blur'},
           {min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur'},
           {
-            pattern: new RegExp('^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$'),
+            pattern: /^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$/,
             message: '密码为6-16位大小写字母+数字组合，请重新输入',
             trigger: 'blur'
           }
