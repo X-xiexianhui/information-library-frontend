@@ -20,7 +20,9 @@
             </el-form-item>
             <el-form-item>
               <el-input>
-                <el-button plain :disabled="flag" @click="getAuthCode">{{ msg }}</el-button>
+                <template slot="append">
+                  <el-button size="small" plain :disabled="flag" @click="getAuthCode" style="width: 120px">{{ msg }}</el-button>
+                </template>
               </el-input>
             </el-form-item>
           </el-form>
