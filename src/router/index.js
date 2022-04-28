@@ -57,6 +57,10 @@ export default new Router({
         path: 'data',
         component: () => import('../components/dataManager/components/dataForm')
       }]
+    },
+    {
+      path: '/pwd/reset',
+      component: () => import('../components/userManager/page/resetPwd')
     }
   ]
 })
