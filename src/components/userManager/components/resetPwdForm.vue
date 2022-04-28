@@ -13,7 +13,7 @@
         <el-step title="完成设置"></el-step>
       </el-steps>
       <div v-if="active === 0">
-        <el-form>
+        <el-form :model="emailForm">
           <el-form-item>
             <el-input></el-input>
           </el-form-item>
@@ -27,6 +27,21 @@
           <button type="button" class="login-btn" @click="checkEmail">下一步 <i class="el-icon-arrow-right"></i></button>
         </div>
       </div>
+      <div v-if="active==='1'">
+        <el-form ref="forgotPasswordForm" :model="forgotPasswordForm" :rules="forgotPasswordFormRules">
+          <el-form-item prop="pwd" label ="密码:">
+            <el-input v-model="forgotPasswordForm.user_pwd" type="password" placeholder="6-16位大小写字母+数字组合" auto-complete="off" >
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="confirmPwd" label ="确认密码:">
+            <el-input v-model="forgotPasswordForm.confirm_pwd" placeholder="重复密码" type="password">
+            </el-input>
+          </el-form-item>
+        </el-form>
+        <div class="btn-wr">
+          <button type="button" class="login-btn" @click.prevent="resetPassword">确认 <i class="el-icon-arrow-right" ></i></button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,10 +50,39 @@
 export default {
   name: 'resetPwdForm',
   data () {
+    let validateConfirmPass = (rule, value, callback) => {
+      if (value !== this.forgotPasswordForm.pwd) {
+        callback(new Error('两次输入密码不一致,请重新输入'))
+      } else {
+        callback()
+      }
+    }
     return {
       active: 0,
       flag: false,
-      msg: '获取邮箱验证码'
+      msg: '获取邮箱验证码',
+      emailForm: {
+        user_id: '',
+        user_email: ''
+      },
+      forgotPasswordForm: {
+        user_pwd: '',
+        confirm_pwd: '',
+        account: ''
+      },
+      forgotPasswordFormRules: {
+        pwd: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur' },
+          { pattern: new RegExp('^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$'), message: '密码为6-16位大小写字母+数字组合，请重新输入', trigger: 'blur' }
+        ],
+        confirmPwd: [
+          { required: true, message: '请输入确认密码', trigger: 'blur' },
+          { validator: validateConfirmPass, trigger: 'blur' },
+          { min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur' },
+          { pattern: new RegExp('^(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,16}$'), message: '密码为6-16位大小写字母+数字组合，请重新输入', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
@@ -48,6 +92,8 @@ export default {
     getAuthCode () {
     },
     checkEmail () {
+    },
+    resetPassword () {
     }
   }
 }
@@ -64,7 +110,7 @@ export default {
     position: relative;
     top: 30px;
     left: 30px;
-    color: #e5525b;
+    color: #dcf2e6;
     font-size: 16px;
     margin-bottom: 15px;
 
