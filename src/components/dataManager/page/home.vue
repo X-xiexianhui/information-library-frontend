@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div :class="$style.box">
-      <div></div>
+      <div :class="$style.logo"><img src="../../../assets/logo.png" :class="$style.logo" alt="信息库管理系统"></div>
       <div :class="$style.btn">
         <slot></slot>
       </div>
@@ -36,6 +36,10 @@ export default {
   align-items: center;
   box-shadow: 0 0 8px 1px rgba(0,0,0,.3);
   z-index: 3;
+}
+.logo {
+  vertical-align: top;
+  height: 60px;
 }
 .btn{
 }
