@@ -11,4 +11,6 @@ axios.interceptors.response.use(response => {
       path: '/'
     })
   }
+}, err => {
+  return Promise.reject(err)
 })
