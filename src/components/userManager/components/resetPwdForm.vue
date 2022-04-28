@@ -25,7 +25,7 @@
             </el-form-item>
           </el-form>
           <div>
-            <button type="button" class="login-btn" @click="checkEmail">下一步</button>
+            <el-button type="success" class="login-btn" @click="checkEmail">下一步</el-button>
           </div>
         </div>
         <div v-if="active=== 1">
@@ -41,7 +41,7 @@
             </el-form-item>
           </el-form>
           <div class="btn-wr">
-            <button type="button" class="login-btn" @click.prevent="resetPassword">确定</button>
+            <el-button type="success" class="login-btn" @click.prevent="resetPassword">确定</el-button>
           </div>
         </div>
         <div v-if="active=== 2">
@@ -49,7 +49,7 @@
             <el-result icon="success" title="修改密码成功" subTitle="请重新登录">
               <template slot="extra">
                 <div class="btn-wr">
-                  <button type="button" class="login-btn" @click="$router.push({path:'/'})">登录</button>
+                  <el-button type="success" class="login-btn" @click="$router.push({path:'/'})">登录</el-button>
                 </div>
               </template>
             </el-result>
