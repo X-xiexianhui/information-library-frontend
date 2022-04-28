@@ -42,6 +42,14 @@
           <button type="button" class="login-btn" @click.prevent="resetPassword">确认 <i class="el-icon-arrow-right" ></i></button>
         </div>
       </div>
+      <div v-if="active==='2'">
+        <div class="reset-success">
+          <el-result icon="success" title="修改密码成功" subTitle="请重新登录"></el-result>
+        </div>
+        <div class="btn-wr">
+          <button type="button" class="login-btn" @click="$router.push({path:'/login'})">登录 <i class="el-icon-arrow-right" ></i></button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
