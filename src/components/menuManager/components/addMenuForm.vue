@@ -80,7 +80,7 @@ export default {
   methods: {
     async getMenuSelect () {
       try {
-        const res = await this.$http.get('/api/menu/select')
+        const res = await this.$http.get('api/menu/select')
         if (res.data.code !== 200) {
           error(res.data.msg)
         } else {
