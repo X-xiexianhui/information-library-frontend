@@ -79,12 +79,12 @@ export default {
       // 读取附件
       $grid.readFile({
         multiple: false,
-        types: ['xlsx', 'csv', 'pdf', 'txt'],
+        types: ['xlsx', 'csv', 'pdf', 'txt', 'rar'],
         message: true
       }).then(params => {
         const { files } = params
         console.log(files)
-        row.value = files.name
+        row.value = files[0].name
       })
     },
     closeEvent () {
