@@ -58,8 +58,7 @@ export default {
       },
       tableColumn: [],
       tableData: [],
-      currentData: [],
-      formData: this.tableColumn
+      currentData: []
     }
   },
   created () {
@@ -110,7 +109,7 @@ export default {
     },
     addEvent () {
       this.is_add = true
-      bus.$emit('showDataForm', this.formData)
+      bus.$emit('showDataForm', this.tableColumn)
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage

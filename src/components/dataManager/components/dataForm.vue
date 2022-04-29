@@ -52,7 +52,7 @@ export default {
   },
   created () {
     bus.$on('showDataForm', (value) => {
-      this.formData = JSON.parse(JSON.stringify(value))
+      this.formData = value
       console.log(this.formData)
       this.dialogVisible = true
     })
