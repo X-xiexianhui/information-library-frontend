@@ -27,6 +27,10 @@
       </vxe-pager>
     </template>
   </vxe-grid>
+  <data-form
+    :id_add="is_add"
+    :form_id="Number($route.query.form_id)"
+  ></data-form>
 </div>
 </template>
 
@@ -35,9 +39,11 @@ import bus from '../../../common/bus'
 import {error} from '../../../api/error'
 import axios from 'axios'
 import {interceptor} from '../../../api/interctor'
+import DataForm from '../components/dataForm'
 
 export default {
   name: 'dataList',
+  components: {DataForm},
   data () {
     return {
       toolBarConfig: {
@@ -45,6 +51,7 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
+      is_add: true,
       tablePage: {
         currentPage: 1,
         pageSize: 10
@@ -102,6 +109,7 @@ export default {
       }
     },
     addEvent () {
+      this.is_add = true
       bus.$emit('showDataForm', this.formData)
     },
     handlePageChange ({currentPage, pageSize}) {
