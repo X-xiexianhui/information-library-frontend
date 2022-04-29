@@ -31,6 +31,7 @@
 import bus from '../../../common/bus'
 import {error} from '../../../api/error'
 import axios from 'axios'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'dataList',
@@ -60,13 +61,23 @@ export default {
       immediate: true,
       handler (newValue) {
         console.log(newValue)
+        this.getTableColumn(newValue)
       }
     }
   },
   methods: {
     // eslint-disable-next-line camelcase
     async getTableColumn (form_id) {
-      console.log(form_id)
+      try {
+        const res = await this.$http.get('api/data/column', {params: {form_id: form_id}})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.tableColumn = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e.message)
+      }
     },
     addEvent () {
       const value = {
