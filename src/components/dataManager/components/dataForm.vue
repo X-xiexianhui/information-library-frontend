@@ -128,6 +128,8 @@ export default {
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
+          bus.$emit('refreshTable')
+          this.closeEvent()
         }
       } catch (e) {
         error(e)
@@ -141,6 +143,7 @@ export default {
           interceptor(res.data)
         } else {
           bus.$emit('refreshTable')
+          this.closeEvent()
         }
       } catch (e) {
         error(e)
