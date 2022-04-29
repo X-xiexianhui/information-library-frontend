@@ -51,7 +51,8 @@ export default {
       },
       tableColumn: [],
       tableData: [],
-      currentData: []
+      currentData: [],
+      formData: this.tableColumn
     }
   },
   created () {
