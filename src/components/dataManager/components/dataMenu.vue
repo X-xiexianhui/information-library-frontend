@@ -42,7 +42,6 @@ export default {
     async initMenu () {
       try {
         const res = await this.$http.get('api/menu/init')
-        console.log(res.data)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
