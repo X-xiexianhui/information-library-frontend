@@ -7,7 +7,7 @@
     :toolbar-config="toolBarConfig"
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
-    :data="tableData">
+    :data="currentData">
     <template #toolbar_buttons>
       <vxe-button status="success" @click="addEvent">新增</vxe-button>
       <vxe-button status="success" @click="editEvent">修改</vxe-button>
@@ -47,7 +47,8 @@ export default {
         pageSize: 10
       },
       tableColumn: [],
-      tableData: []
+      tableData: [],
+      currentData: []
     }
   },
   created () {
@@ -74,6 +75,20 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data.reverse()
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    // eslint-disable-next-line camelcase
+    async getTableData (form_id) {
+      try {
+        const res = await this.$http.get('api/data/table', {params: {form_id: form_id}})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.tableData = res.data.data.reverse()
+          this.page()
         }
       } catch (e) {
         error(e.message)
