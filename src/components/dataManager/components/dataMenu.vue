@@ -30,15 +30,6 @@ export default {
       form_id: 0
     }
   },
-  watch: {
-    // 监视搜索词变化
-    '$route.query.form_id': {
-      immediate: true,
-      handler (newValue) {
-        console.log(newValue)
-      }
-    }
-  },
   methods: {
     async initMenu () {
       try {
