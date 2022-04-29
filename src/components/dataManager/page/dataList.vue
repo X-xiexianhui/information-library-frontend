@@ -56,17 +56,9 @@ export default {
     bus.$on('refreshData', (value) => {
       this.tableData = value
     })
-  },
-  watch: {
-    // 监视搜索词变化
-    '$route.query.form_id': {
-      handler (newValue) {
-        console.log(newValue)
-        if (newValue !== '' || newValue !== undefined) {
-          this.getTableColumn(newValue)
-        }
-      }
-    }
+    bus.$on('changeRouterEvent', (value) => {
+      this.getTableColumn(value)
+    })
   },
   methods: {
     // eslint-disable-next-line camelcase

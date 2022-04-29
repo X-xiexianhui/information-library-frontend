@@ -73,7 +73,7 @@ export default {
             if (res.data.code !== 200) {
               error(res.data.msg)
             } else {
-              await this.$router.push('/home/data')
+              await this.$router.push('/home')
             }
           } catch (e) {
             error(e)
