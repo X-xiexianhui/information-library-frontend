@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :close-on-click-modal="false"
-    :modal-append-to-body='false'
+    :modal-append-to-body="false"
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
@@ -47,6 +47,7 @@
        <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
+         <el-button @click="submitFile">上传</el-button>
       </span>
     </div>
   </el-dialog>
@@ -166,7 +167,8 @@ export default {
       }
       try {
         let form = new FormData()
-        form.append('file', this.fileList[0].file)
+        console.log(this.fileList[0])
+        form.append('file', this.fileList[0])
         form.append('name', this.fileList[0].name)
         const res = await this.$http.post('api/file/add', form, {headers: {'Content-Type': 'multipart/form-data'}})
         if (res.data.code !== 200) {
