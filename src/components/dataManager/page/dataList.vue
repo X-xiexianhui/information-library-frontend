@@ -42,6 +42,7 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
+      form_id: '',
       tablePage: {
         currentPage: 1,
         pageSize: 10
@@ -59,10 +60,11 @@ export default {
   watch: {
     // 监视搜索词变化
     '$route.query.form_id': {
-      immediate: true,
       handler (newValue) {
         console.log(newValue)
-        this.getTableColumn(newValue)
+        if (newValue !== '' || newValue !== undefined) {
+          this.getTableColumn(newValue)
+        }
       }
     }
   },
@@ -71,6 +73,7 @@ export default {
     async getTableColumn (form_id) {
       try {
         const res = await this.$http.get('api/data/column', {params: {form_id: form_id}})
+        // console.log(res.data)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
@@ -85,6 +88,7 @@ export default {
     async getTableData (form_id) {
       try {
         const res = await this.$http.get('api/data/get', {params: {form_id: form_id}})
+        console.log(res.data)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
