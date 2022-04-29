@@ -77,11 +77,6 @@ export default {
       }
     }
   },
-  watch: {
-    formData (newValue) {
-      this.tableData = JSON.parse(JSON.stringify(newValue))
-    }
-  },
   methods: {
     closeEvent () {
       this.dialogVisible = false
