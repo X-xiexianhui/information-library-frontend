@@ -112,6 +112,10 @@ export default {
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
     removeEvent () {
+      const selectRecords = this.$refs.dataTable.getCurrentRecord()
+      if (!selectRecords) {
+        return error('请先选择需要修改的数据')
+      }
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
