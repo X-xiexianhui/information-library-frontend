@@ -78,6 +78,7 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data.reverse()
+          this.tableColumn.push({filed: 'filed', title: '附件'})
           await this.getTableData(form_id)
         }
       } catch (e) {
