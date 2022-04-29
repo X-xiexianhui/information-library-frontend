@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import bus from '../../../common/bus'
+
 export default {
   name: 'dataForm',
   props: {
@@ -51,6 +53,11 @@ export default {
       type: Boolean,
       default: true
     }
+  },
+  created () {
+    bus.$on('showDataForm', () => {
+      this.dialogVisible = true
+    })
   },
   data () {
     return {
