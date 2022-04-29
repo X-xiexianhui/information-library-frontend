@@ -161,6 +161,9 @@ export default {
       return data
     },
     async submitFile () {
+      if (this.fileList.length === 0) {
+        return
+      }
       try {
         let form = new FormData()
         form.append('file', this.fileList[0].file)
