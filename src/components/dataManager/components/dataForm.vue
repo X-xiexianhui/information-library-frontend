@@ -57,6 +57,11 @@ export default {
         ]
       }
     }
+  },
+  watch: {
+    formData (newValue) {
+      this.tableData = JSON.parse(JSON.stringify(newValue))
+    }
   }
 }
 </script>
