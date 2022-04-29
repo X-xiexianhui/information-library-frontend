@@ -11,11 +11,10 @@
         keep-source
         ref="dataForm"
         :edit-rules="validRules"
-        :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
-        :row-config="{isCurrent: true}"
+        :edit-config="{trigger: 'click', mode: 'cell'}"
         :data="formData"
       >
-        <vxe-column field="title" title="数据表字段名称">
+        <vxe-column field="title" title="数据表字段名称" :edit-render="{}">
           <template #default="{ row }">
             <span>{{ row.title }}</span>
           </template>
@@ -23,7 +22,7 @@
             <span>{{ row.title }}</span>
           </template>
         </vxe-column>
-        <vxe-column field="value" title="数据">
+        <vxe-column field="value" title="数据" :edit-render="{}">
           <template #default="{ row }">
             <span>{{ row.value }}}</span>
           </template>
@@ -65,10 +64,6 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      tableColumn: [
-        {field: 'title', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
-        {field: 'value', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
-      ],
       formData: [],
       validRules: {
         value: [
