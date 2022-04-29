@@ -86,7 +86,6 @@ export default {
         } else {
           this.tableColumn = res.data.data.reverse()
           this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
-          console.log(this.tableColumn)
           await this.getTableData(form_id)
         }
       } catch (e) {
@@ -101,6 +100,7 @@ export default {
           interceptor(res.data)
         } else {
           this.tableData = res.data.data.reverse()
+          console.log(this.tableData)
           this.page()
         }
       } catch (e) {
@@ -156,11 +156,17 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      bus.$emit('showEditForm', selectRecords)
+      this.is_add = false
+      let res = []
+      bus.$emit('showDataForm', res)
     },
     page () {
       const pageSize = this.tablePage.pageSize
       this.currentData = this.tableData.slice(0, pageSize)
+    },
+    getEditData (selectData, tableColumn) {
+      const keys = Object.keys(selectData)
+      console.log(keys)
     }
   }
 }
