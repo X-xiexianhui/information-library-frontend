@@ -10,6 +10,7 @@
         resizable
         keep-source
         ref="dataForm"
+        size="mini"
         :edit-rules="validRules"
         :edit-config="{trigger: 'click', mode: 'cell'}"
         :data="formData"
@@ -24,10 +25,11 @@
         </vxe-column>
         <vxe-column field="value" title="数据" :edit-render="{}">
           <template #default="{ row }">
-            <span>{{ row.value }}}</span>
+            <span>{{ row.value }}</span>
           </template>
-          <template #edit="{ row }">
-            <vxe-input v-model="row.value" type="text"></vxe-input>
+          <template #edit="{row}">
+            <vxe-button v-if="row.field === 'file'" prefix="success">上传附件</vxe-button>
+            <vxe-input v-else v-model="row.value" type="text"></vxe-input>
           </template>
         </vxe-column>
       </vxe-table>
