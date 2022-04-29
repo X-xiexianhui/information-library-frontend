@@ -5,42 +5,44 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-      <vxe-table
-        border
-        resizable
-        keep-source
-        ref="dataForm"
-        size="mini"
-        :edit-rules="validRules"
-        :edit-config="{trigger: 'click', mode: 'cell'}"
-        :data="formData"
-      >
-        <vxe-column field="title" title="数据表字段名称" :edit-render="{}">
-          <template #default="{ row }">
-            <span>{{ row.title }}</span>
-          </template>
-          <template #edit="{ row }">
-            <span>{{ row.title }}</span>
-          </template>
-        </vxe-column>
-        <vxe-column field="value" title="数据" :edit-render="{}">
-          <template #default="{ row }">
-            <vxe-switch v-if="row.data_type === 'boolean'"></vxe-switch>
-            <div v-else>
-              <span>{{ row.value }}</span>
-              <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
-            </div>
-          </template>
-          <template #edit="{row}">
-            <vxe-switch v-if="row.data_type === 'boolean'"></vxe-switch>
-            <div v-else-if="row.field === 'file'">
-                <span>{{ row.value }}</span>
-                <vxe-button style="right: 0" v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
-            </div>
-            <vxe-input v-else v-model="row.value" type="text"></vxe-input>
-          </template>
-        </vxe-column>
-      </vxe-table>
+    <vxe-table
+      border
+      resizable
+      keep-source
+      ref="dataForm"
+      size="mini"
+      :edit-rules="validRules"
+      :edit-config="{trigger: 'click', mode: 'cell'}"
+      :data="formData"
+    >
+      <vxe-column field="title" title="数据表字段名称" :edit-render="{}">
+        <template #default="{ row }">
+          <span>{{ row.title }}</span>
+        </template>
+        <template #edit="{ row }">
+          <span>{{ row.title }}</span>
+        </template>
+      </vxe-column>
+      <vxe-column field="value" title="数据" :edit-render="{}">
+        <template #default="{ row }">
+          <vxe-switch v-if="row.data_type === 'boolean'"></vxe-switch>
+          <div v-else>
+            <span>{{ row.value }}</span>
+            <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
+          </div>
+        </template>
+        <template #edit="{row}">
+          <vxe-switch v-if="row.data_type === 'boolean'"></vxe-switch>
+          <div v-else-if="row.field === 'file'">
+            <span>{{ row.value }}</span>
+            <vxe-button style="right: 0" v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">
+              上传附件
+            </vxe-button>
+          </div>
+          <vxe-input v-else v-model="row.value" type="text"></vxe-input>
+        </template>
+      </vxe-column>
+    </vxe-table>
     <div style="margin-top: 10px">
        <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
@@ -54,6 +56,7 @@
 import bus from '../../../common/bus'
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
+
 export default {
   name: 'dataForm',
   props: {
@@ -102,7 +105,7 @@ export default {
         types: ['xlsx', 'csv', 'pdf', 'txt', 'rar'],
         message: true
       }).then(params => {
-        const { files } = params
+        const {files} = params
         console.log(files)
         row.value = files[0].name
       })
@@ -126,7 +129,12 @@ export default {
     },
     async edit () {
       try {
-
+        const res = await this.$http.post('api/data/add', {form_id: this.form_id, data: this.formData})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          bus.$emit('refreshTable')
+        }
       } catch (e) {
         error(e)
       }

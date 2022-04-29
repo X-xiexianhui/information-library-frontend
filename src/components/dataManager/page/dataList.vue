@@ -63,7 +63,7 @@ export default {
   },
   created () {
     this.getTableColumn(this.$route.query.form_id)
-    bus.$on('refreshData', () => {
+    bus.$on('refreshTable', () => {
       this.getTableData(this.$route.query.form_id)
     })
   },
