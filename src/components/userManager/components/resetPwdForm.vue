@@ -16,10 +16,10 @@
         <div v-if="active === 0">
           <el-form :model="emailForm">
             <el-form-item>
-              <el-input></el-input>
+              <el-input v-model="emailForm.user_id" placeholder="请输入账号"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input>
+              <el-input v-model="emailForm.user_email" placeholder="邮箱验证码">
                 <template slot="append">
                   <el-button size="small" plain :disabled="flag" @click="getAuthCode" style="width: 120px">{{ msg }}</el-button>
                 </template>
