@@ -3,7 +3,7 @@
     <div :class="$style.box">
       <div :class="$style.logo"><img src="../../../assets/logo.png" :class="$style.logo" alt="信息库管理系统"></div>
       <div :class="$style.btn">
-        <slot></slot>
+        <user-avatar></user-avatar>
       </div>
     </div>
     <el-container>
@@ -20,9 +20,10 @@
 
 <script>
 import DataMenu from '../components/dataMenu'
+import userAvatar from '../../userManager/components/userAvatar'
 export default {
   name: 'home',
-  components: {DataMenu}
+  components: {DataMenu, userAvatar}
 }
 </script>
 <style module>
@@ -45,5 +46,6 @@ export default {
   height: 60px;
 }
 .btn{
+  margin-right: 20px;
 }
 </style>

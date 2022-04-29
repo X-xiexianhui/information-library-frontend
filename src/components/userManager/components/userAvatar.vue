@@ -1,7 +1,7 @@
 <template>
   <el-dropdown>
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+    <el-avatar size="mini" :src="circleUrl"></el-avatar>
   </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item>修改个人信息</el-dropdown-item>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  name: 'userAvatar'
+  name: 'userAvatar',
+  data () {
+    return {
+      circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+    }
+  }
 }
 </script>
 
