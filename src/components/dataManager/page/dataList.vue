@@ -75,6 +75,7 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data.reverse()
+          await this.getTableData(form_id)
         }
       } catch (e) {
         error(e.message)
