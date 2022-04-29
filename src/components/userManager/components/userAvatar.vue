@@ -4,9 +4,9 @@
     <el-avatar size="mini" :src="circleUrl"></el-avatar>
   </span>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item>修改个人信息</el-dropdown-item>
+      <el-dropdown-item>修改信息</el-dropdown-item>
       <el-dropdown-item>修改密码</el-dropdown-item>
-      <el-dropdown-item>退出</el-dropdown-item>
+      <el-dropdown-item>退出登录</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
