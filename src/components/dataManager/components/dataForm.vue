@@ -124,9 +124,11 @@ export default {
     },
     async add () {
       try {
+        const data = this.getInsertData(this.formData)
+        console.log(data)
         const res = await this.$http.post('api/data/add', {
           form_id: this.form_id,
-          insert: this.getInsertData(this.formData)
+          insert: data
         })
         await this.submitFile()
         if (res.data.code !== 200) {
