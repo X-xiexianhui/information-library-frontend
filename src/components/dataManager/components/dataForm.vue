@@ -10,12 +10,12 @@
     :row-config="{isCurrent: true}"
     :data="tableData"
   >
-    <vxe-column field="label_name" title="数据表字段名称">
+    <vxe-column field="title" title="数据表字段名称">
       <template #default="{ row }">
-        <span>{{ row.label_name }}</span>
+        <span>{{ row.title }}</span>
       </template>
       <template #edit="{ row }">
-        <span>{{ row.label_name }}</span>
+        <span>{{ row.title }}</span>
       </template>
     </vxe-column>
     <vxe-column field="value" title="数据">
@@ -55,8 +55,8 @@ export default {
         }
       },
       tableColumn: [
-        {field: 'label_name', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
-        {field: 'data', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
+        {field: 'title', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
+        {field: 'value', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
       ],
       tableData: [],
       validRules: {

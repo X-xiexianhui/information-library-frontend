@@ -74,6 +74,7 @@ export default {
       if (form_id === -1 || form_id === undefined) return
       try {
         const res = await this.$http.get('api/data/column', {params: {form_id: form_id}})
+        console.log(res.data.data)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
