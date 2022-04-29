@@ -42,7 +42,6 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      form_id: -1,
       tablePage: {
         currentPage: 1,
         pageSize: 10
@@ -53,13 +52,9 @@ export default {
     }
   },
   created () {
-    this.getTableColumn(this.form_id)
+    this.getTableColumn(this.$route.query.form_id)
     bus.$on('refreshData', (value) => {
       this.tableData = value
-    })
-    bus.$on('changeRouterEvent', (value) => {
-      this.form_id = value
-      this.getTableColumn(value)
     })
   },
   methods: {

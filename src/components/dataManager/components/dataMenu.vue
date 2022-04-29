@@ -34,7 +34,6 @@ export default {
   methods: {
     // eslint-disable-next-line camelcase
     changeRouter (form_id) {
-      bus.$emit('changeRouterEvent', form_id)
       this.$router.push({path: '/home/data', query: {form_id: form_id}})
     },
     async initMenu () {
