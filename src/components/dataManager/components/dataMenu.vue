@@ -19,6 +19,7 @@
 <script>
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
+import bus from '../../../common/bus'
 export default {
   name: 'dataMenu',
   created () {
@@ -33,7 +34,7 @@ export default {
   methods: {
     // eslint-disable-next-line camelcase
     changeRouter (form_id) {
-
+      bus.$emit('changeRouterEvent', form_id)
     },
     async initMenu () {
       try {
