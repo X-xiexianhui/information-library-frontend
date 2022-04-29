@@ -7,7 +7,6 @@
     >
       <el-submenu v-for="(parent,index) in menuList" :index="parent.name" :key="index">
         <template slot="title">
-          <i class="el-icon-menu"></i>
           <span class="submenu">{{ parent.name }}</span>
         </template>
         <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/#/home/data?form_id='+child.form_id">
