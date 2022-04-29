@@ -1,5 +1,5 @@
-body {
-
+body,html,#app {
+  height: 100%;
   margin: 0;
 
 }
@@ -10,10 +10,10 @@ body {
     position: fixed;
 }
 .el-aside{
-    width: 200px;
-    height:calc(100vh);
-    overflow-y: scroll;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+  width: 100px;
+  height:calc(100vh);
+  overflow-y: scroll;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
 }
 .el-container{
     margin-top: 60px;

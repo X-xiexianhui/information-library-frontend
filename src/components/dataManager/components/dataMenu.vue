@@ -1,25 +1,28 @@
 <template>
-<el-menu
-  text-color="#000000"
-  active-text-color="#ffd04b"
->
-  <el-submenu v-for="(parent,index) in menuList" :index="parent.name" :key="index">
-    <template slot="title">
-      <span>{{parent.name}}</span>
-    </template>
-    <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/#/home/data?form_id='+child.form_id">
-      <a :class="$style.menuLink" @click="changeRouter(child.form_id)">
-        {{child.child_name}}
-      </a>
-    </el-menu-item>
-  </el-submenu>
-</el-menu>
+  <div class="menu">
+    <el-menu
+      background-color="#545c64"
+      text-color="#409EFF"
+      active-text-color="#ffd04b"
+    >
+      <el-submenu v-for="(parent,index) in menuList" :index="parent.name" :key="index">
+        <template slot="title">
+          <span class="submenu">{{ parent.name }}</span>
+        </template>
+        <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/#/home/data?form_id='+child.form_id">
+          <a class="menuLink" @click="changeRouter(child.form_id)">
+            {{ child.child_name }}
+          </a>
+        </el-menu-item>
+      </el-submenu>
+    </el-menu>
+  </div>
 </template>
 
 <script>
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
-import bus from '../../../common/bus'
+
 export default {
   name: 'dataMenu',
   created () {
@@ -53,10 +56,23 @@ export default {
 }
 </script>
 
-<style module>
+<style scoped>
 .menuLink {
-  display: flex;
+  display: block;
   align-items: center;
   text-decoration: none;
+  text-align: center;
+}
+.submenu {
+  display: block;
+  text-align: left;
+  overflow-y: auto;
+}
+.menu{
+  height: 100%;
+}
+.el-menu {
+  width: 200px;
+  height: 100%;
 }
 </style>
