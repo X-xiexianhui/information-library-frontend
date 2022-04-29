@@ -60,6 +60,13 @@ export default {
       this.tableData = value
     })
   },
+  watch: {
+    '$route.query.form_id': {
+      handler (newValue) {
+        this.getTableColumn(newValue)
+      }
+    }
+  },
   methods: {
     // eslint-disable-next-line camelcase
     async getTableColumn (form_id) {
