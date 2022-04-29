@@ -52,7 +52,7 @@ export default {
   },
   created () {
     bus.$on('showDataForm', (value) => {
-      this.formData = value
+      this.formData = JSON.parse(JSON.stringify(value))
       this.dialogVisible = true
     })
   },
