@@ -95,9 +95,5 @@ export default {
 </script>
 
 <style scoped>
-.dataForm {
-  margin-top: 10%;
-  margin-left: 20%;
-  width: 60%;
-}
+
 </style>
