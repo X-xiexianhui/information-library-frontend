@@ -25,8 +25,7 @@
         </vxe-column>
         <vxe-column field="value" title="数据" :edit-render="{}">
           <template #default="{ row }">
-            <span v-if="row.field === 'file'">{{ formatFile(row) }}</span>
-            <span v-else>{{ row.value }}</span>
+            <span>{{ row.value }}</span>
           </template>
           <template #edit="{row}">
             <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
@@ -59,6 +58,7 @@ export default {
   },
   data () {
     return {
+      fileLise: [],
       dialogVisible: false,
       toolBarConfig: {
         slots: {
@@ -79,19 +79,13 @@ export default {
       // 读取附件
       $grid.readFile({
         multiple: false,
-        types: ['xlsx', 'csv', 'pdf', 'txt']
+        types: ['xlsx', 'csv', 'pdf', 'txt'],
+        message: true
       }).then(params => {
         const { files } = params
         console.log(files)
-        row.value = files
+        row.value = files.name
       })
-    },
-    formatFile (row) {
-      let res = ''
-      if (row.value[0]) {
-        res = row.value[0].name
-      }
-      return res
     },
     closeEvent () {
       this.dialogVisible = false
