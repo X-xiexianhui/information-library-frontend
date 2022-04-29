@@ -37,6 +37,14 @@ export default {
     formData: {
       type: Object,
       default: () => ({})
+    },
+    form_id: {
+      type: Number,
+      default: -1
+    },
+    id_add: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
