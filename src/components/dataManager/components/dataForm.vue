@@ -124,7 +124,10 @@ export default {
     },
     async add () {
       try {
-        const res = await this.$http.post('api/data/add', {form_id: this.form_id, insert: this.formData})
+        const res = await this.$http.post('api/data/add', {
+          form_id: this.form_id,
+          insert: this.getInsertData(this.formData)
+        })
         await this.submitFile()
         if (res.data.code !== 200) {
           interceptor(res.data)
@@ -176,6 +179,13 @@ export default {
       } catch (e) {
         error(e)
       }
+    },
+    getInsertData (data) {
+      let res = []
+      for (const d of data) {
+        res.push({col_name: d.field, value: d.value})
+      }
+      return res
     }
   }
 }
