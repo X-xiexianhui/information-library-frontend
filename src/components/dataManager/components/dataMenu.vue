@@ -8,7 +8,7 @@
       <span>{{parent.name}}</span>
     </template>
     <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/#/home/data?form_id='+child.form_id">
-      <a :class="$style.menuLink" :href="'/#/home/data?form_id='+child.form_id" @click="changeRouter(child.form_id)">
+      <a :class="$style.menuLink" @click="changeRouter(child.form_id)">
         {{child.child_name}}
       </a>
     </el-menu-item>
@@ -35,6 +35,7 @@ export default {
     // eslint-disable-next-line camelcase
     changeRouter (form_id) {
       bus.$emit('changeRouterEvent', form_id)
+      this.$router.push({path: '/home/data', query: {form_id: form_id}})
     },
     async initMenu () {
       try {

@@ -42,7 +42,7 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
-      form_id: '',
+      form_id: -1,
       tablePage: {
         currentPage: 1,
         pageSize: 10
@@ -53,16 +53,20 @@ export default {
     }
   },
   created () {
+    this.getTableColumn(this.form_id)
     bus.$on('refreshData', (value) => {
       this.tableData = value
     })
     bus.$on('changeRouterEvent', (value) => {
+      this.form_id = value
       this.getTableColumn(value)
     })
   },
   methods: {
     // eslint-disable-next-line camelcase
     async getTableColumn (form_id) {
+      // eslint-disable-next-line camelcase
+      if (form_id === -1 || form_id === undefined) return
       try {
         const res = await this.$http.get('api/data/column', {params: {form_id: form_id}})
         console.log(res.data)
