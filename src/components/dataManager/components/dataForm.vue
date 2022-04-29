@@ -115,6 +115,11 @@ export default {
       this.$refs.dataForm.reloadData([])
     },
     save () {
+      if (this.is_add) {
+        this.add()
+      } else {
+        this.edit()
+      }
     },
     async add () {
       try {
