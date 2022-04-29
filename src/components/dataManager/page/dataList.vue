@@ -85,7 +85,7 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data.reverse()
-          this.tableColumn.push({field: 'file', title: '附件', value: ''})
+          this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
           // console.log(this.tableColumn)
           await this.getTableData(form_id)
         }

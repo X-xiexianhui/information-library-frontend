@@ -154,6 +154,19 @@ export default {
         }
       }
       return data
+    },
+    async submitFile () {
+      try {
+        const data = this.getUpdateData(this.formData, this.oldData)
+        const res = await this.$http.post('api/file/add', {form_id: this.form_id, data: data})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          bus.$emit('refreshTable')
+        }
+      } catch (e) {
+        error(e)
+      }
     }
   }
 }
