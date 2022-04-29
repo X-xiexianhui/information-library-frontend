@@ -156,8 +156,7 @@ export default {
         return error('请先选择需要修改的数据')
       }
       this.is_add = false
-      let res = []
-      bus.$emit('showDataForm', res)
+      bus.$emit('showDataForm', this.getEditData(selectRecords))
     },
     page () {
       const pageSize = this.tablePage.pageSize
