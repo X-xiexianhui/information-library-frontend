@@ -125,6 +125,7 @@ export default {
     async add () {
       try {
         const res = await this.$http.post('api/data/add', {form_id: this.form_id, data: this.formData})
+        await this.submitFile()
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
