@@ -47,7 +47,6 @@
        <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
-         <el-button @click="submitFile">上传</el-button>
       </span>
     </div>
   </el-dialog>
