@@ -41,7 +41,7 @@
       </el-menu-item>
       <el-menu-item index="8">
         <a :class="$style.menuLink" href="/#/home" target="_blank">
-          <i class="el-icon-setting" :class="$style.menuIcon"></i>进入数据管理
+          <i class="el-icon-setting" :class="$style.menuIcon"></i>数据管理
         </a>
       </el-menu-item>
     </el-menu>
