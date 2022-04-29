@@ -79,7 +79,7 @@ export default {
       // 读取附件
       $grid.readFile({
         multiple: false,
-        types: ['xlsx', 'csv', 'html']
+        types: ['xlsx', 'csv', 'pdf', 'txt']
       }).then(params => {
         const { files } = params
         console.log(files)
