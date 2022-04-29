@@ -100,7 +100,6 @@ export default {
           interceptor(res.data)
         } else {
           this.tableData = res.data.data.reverse()
-          console.log(this.tableData)
           this.page()
         }
       } catch (e) {
@@ -177,6 +176,8 @@ export default {
           }
         }
       }
+      console.log(res)
+      return res
     }
   }
 }
