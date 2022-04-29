@@ -84,7 +84,7 @@ export default {
     // eslint-disable-next-line camelcase
     async getTableData (form_id) {
       try {
-        const res = await this.$http.get('api/data/table', {params: {form_id: form_id}})
+        const res = await this.$http.get('api/data/get', {params: {form_id: form_id}})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
@@ -116,7 +116,7 @@ export default {
       }).then(async () => {
         try {
           const selectRecords = this.$refs.dataTable.getCurrentRecord()
-          const res = await axios.post('/api/role/delete', {
+          const res = await axios.post('/api/data/delete', {
             role_id: selectRecords.role_id
           })
           if (res.data.code !== 200) {
