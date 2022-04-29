@@ -1,33 +1,38 @@
 <template>
-  <div  class="dataForm">
-  <vxe-table
-    border
-    resizable
-    keep-source
-    ref="dataForm"
-    :edit-rules="validRules"
-    :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
-    :row-config="{isCurrent: true}"
-    :data="tableData"
+  <el-dialog
+    :visible.sync="dialogVisible"
+    :before-close="closeEvent"
   >
-    <vxe-column field="title" title="数据表字段名称">
-      <template #default="{ row }">
-        <span>{{ row.title }}</span>
-      </template>
-      <template #edit="{ row }">
-        <span>{{ row.title }}</span>
-      </template>
-    </vxe-column>
-    <vxe-column field="value" title="数据">
-      <template #default="{ row }">
-        <span>{{row.value}}}</span>
-      </template>
-      <template #edit="{ row }">
-        <vxe-input v-model="row.value" type="text"></vxe-input>
-      </template>
-    </vxe-column>
-  </vxe-table>
-  </div>
+    <div class="dataForm">
+      <vxe-table
+        border
+        resizable
+        keep-source
+        ref="dataForm"
+        :edit-rules="validRules"
+        :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
+        :row-config="{isCurrent: true}"
+        :data="tableData"
+      >
+        <vxe-column field="title" title="数据表字段名称">
+          <template #default="{ row }">
+            <span>{{ row.title }}</span>
+          </template>
+          <template #edit="{ row }">
+            <span>{{ row.title }}</span>
+          </template>
+        </vxe-column>
+        <vxe-column field="value" title="数据">
+          <template #default="{ row }">
+            <span>{{ row.value }}}</span>
+          </template>
+          <template #edit="{ row }">
+            <vxe-input v-model="row.value" type="text"></vxe-input>
+          </template>
+        </vxe-column>
+      </vxe-table>
+    </div>
+  </el-dialog>
 </template>
 
 <script>
@@ -49,6 +54,7 @@ export default {
   },
   data () {
     return {
+      dialogVisible: false,
       toolBarConfig: {
         slots: {
           buttons: 'toolbar_buttons'
@@ -70,12 +76,17 @@ export default {
     formData (newValue) {
       this.tableData = JSON.parse(JSON.stringify(newValue))
     }
+  },
+  methods: {
+    closeEvent () {
+      this.dialogVisible = false
+    }
   }
 }
 </script>
 
 <style scoped>
-.dataForm{
+.dataForm {
   margin-top: 10%;
   margin-left: 20%;
   width: 60%;
