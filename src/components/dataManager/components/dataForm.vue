@@ -34,9 +34,9 @@
 export default {
   name: 'dataForm',
   props: {
-    record_id: {
-      type: Number,
-      default: -1
+    formData: {
+      type: Object,
+      default: () => ({})
     }
   },
   data () {
