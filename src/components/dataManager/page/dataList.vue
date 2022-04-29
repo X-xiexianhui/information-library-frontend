@@ -65,7 +65,7 @@ export default {
     async getTableColumn (form_id) {
       try {
         const res = await this.$http.get('api/data/column', {params: {form_id: form_id}})
-        // console.log(res.data)
+        console.log(res.data)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
