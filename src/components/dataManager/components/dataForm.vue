@@ -1,9 +1,10 @@
 <template>
   <el-dialog
+    :close-on-click-modal="false"
+    :modal-append-to-body='false'
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <div class="dataForm">
       <vxe-table
         border
         resizable
@@ -31,7 +32,6 @@
           </template>
         </vxe-column>
       </vxe-table>
-    </div>
   </el-dialog>
 </template>
 
