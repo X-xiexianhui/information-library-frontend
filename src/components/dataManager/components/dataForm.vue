@@ -28,7 +28,7 @@
             <span>{{ row.value }}</span>
           </template>
           <template #edit="{row}">
-            <vxe-button v-if="row.field === 'file'" prefix="success">上传附件</vxe-button>
+            <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
             <vxe-input v-else v-model="row.value" type="text"></vxe-input>
           </template>
         </vxe-column>
@@ -38,7 +38,6 @@
 
 <script>
 import bus from '../../../common/bus'
-
 export default {
   name: 'dataForm',
   props: {
@@ -54,7 +53,6 @@ export default {
   created () {
     bus.$on('showDataForm', (value) => {
       this.formData = value
-      console.log(this.formData)
       this.dialogVisible = true
     })
   },
@@ -75,6 +73,18 @@ export default {
     }
   },
   methods: {
+    uploadFileEvent (row) {
+      const $grid = this.$refs.dataForm
+      // 读取附件
+      $grid.readFile({
+        multiple: false,
+        types: ['xlsx', 'csv', 'html']
+      }).then(params => {
+        const { files } = params
+        console.log(files)
+        row.value = files
+      })
+    },
     closeEvent () {
       this.dialogVisible = false
     }
