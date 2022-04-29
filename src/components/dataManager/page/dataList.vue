@@ -7,13 +7,16 @@
     :toolbar-config="toolBarConfig"
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
-    :data="currentData">
-    <template #toolbar_buttons>
-      <vxe-button status="success" @click="addEvent">新增</vxe-button>
-      <vxe-button status="success" @click="editEvent">修改</vxe-button>
-      <vxe-button status="success" @click="removeEvent">删除</vxe-button>
-      <vxe-button @click="$refs.dataTable.exportData()">导出</vxe-button>
-    </template>
+    :data="currentData"
+    class="dataList">
+      <template #toolbar_buttons >
+        <div style="text-align: left">
+        <vxe-button status="success" @click="addEvent">新增</vxe-button>
+        <vxe-button status="success" @click="editEvent">修改</vxe-button>
+        <vxe-button status="success" @click="removeEvent">删除</vxe-button>
+        <vxe-button @click="$refs.dataTable.exportData()">导出</vxe-button>
+        </div>
+      </template>
     <template #pager>
       <vxe-pager
         :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
@@ -144,5 +147,8 @@ export default {
 </script>
 
 <style scoped>
-
+.dataList{
+  width: 80%;
+  margin: auto;
+}
 </style>
