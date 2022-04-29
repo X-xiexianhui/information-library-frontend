@@ -13,7 +13,7 @@
         :edit-rules="validRules"
         :edit-config="{trigger: 'click', mode: 'cell', showStatus: true}"
         :row-config="{isCurrent: true}"
-        :data="tableData"
+        :data="formData"
       >
         <vxe-column field="title" title="数据表字段名称">
           <template #default="{ row }">
@@ -69,7 +69,6 @@ export default {
         {field: 'value', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
       ],
       formData: [],
-      tableData: [],
       validRules: {
         value: [
           {required: true, message: '数据必填'}
