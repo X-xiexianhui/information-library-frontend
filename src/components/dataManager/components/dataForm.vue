@@ -41,10 +41,6 @@ import bus from '../../../common/bus'
 export default {
   name: 'dataForm',
   props: {
-    formData: {
-      type: Object,
-      default: () => ({})
-    },
     form_id: {
       type: Number,
       default: -1
@@ -55,7 +51,8 @@ export default {
     }
   },
   created () {
-    bus.$on('showDataForm', () => {
+    bus.$on('showDataForm', (value) => {
+      this.formData = value
       this.dialogVisible = true
     })
   },
@@ -71,6 +68,7 @@ export default {
         {field: 'title', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
         {field: 'value', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
       ],
+      formData: [],
       tableData: [],
       validRules: {
         value: [

@@ -102,12 +102,7 @@ export default {
       }
     },
     addEvent () {
-      const value = {
-        role_id: -1,
-        role_name: '',
-        role_description: ''
-      }
-      bus.$emit('showEditForm', value)
+      bus.$emit('showDataForm', this.formData)
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
