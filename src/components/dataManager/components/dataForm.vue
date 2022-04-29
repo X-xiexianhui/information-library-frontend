@@ -80,7 +80,7 @@ export default {
   },
   data () {
     return {
-      fileLise: [],
+      fileList: [],
       dialogVisible: false,
       toolBarConfig: {
         slots: {
@@ -106,7 +106,8 @@ export default {
         message: true
       }).then(params => {
         const {files} = params
-        console.log(files)
+        // console.log(files)
+        this.fileList = files
         row.value = files[0].name
       })
     },
@@ -157,8 +158,10 @@ export default {
     },
     async submitFile () {
       try {
-        const data = this.getUpdateData(this.formData, this.oldData)
-        const res = await this.$http.post('api/file/add', {form_id: this.form_id, data: data})
+        let form = new FormData()
+        form.append('file', this.fileList[0].file)
+        form.append('name', this.fileList[0].name)
+        const res = await this.$http.post('api/file/add', {})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
