@@ -55,7 +55,7 @@ export default new Router({
       component: () => import('../components/dataManager/page/home'),
       children: [{
         path: 'data',
-        component: () => import('../components/dataManager/components/dataForm')
+        component: () => import('../components/dataManager/page/dataList')
       }]
     },
     {
