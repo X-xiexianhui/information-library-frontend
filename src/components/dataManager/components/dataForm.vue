@@ -41,11 +41,19 @@
           </template>
         </vxe-column>
       </vxe-table>
+    <div style="margin-top: 10px">
+       <span style="margin: auto">
+        <el-button @click="closeEvent">取 消</el-button>
+        <el-button type="primary" @click="save">确 定</el-button>
+      </span>
+    </div>
   </el-dialog>
 </template>
 
 <script>
 import bus from '../../../common/bus'
+import {error} from '../../../api/error'
+import {interceptor} from '../../../api/interctor'
 export default {
   name: 'dataForm',
   props: {
@@ -53,7 +61,7 @@ export default {
       type: Number,
       default: -1
     },
-    id_add: {
+    is_add: {
       type: Boolean,
       default: true
     }
@@ -61,6 +69,9 @@ export default {
   created () {
     bus.$on('showDataForm', (value) => {
       this.formData = value
+      for (const column of value) {
+        this.oldData.push(JSON.parse(JSON.stringify(column)))
+      }
       this.dialogVisible = true
     })
   },
@@ -74,6 +85,7 @@ export default {
         }
       },
       formData: [],
+      oldData: [],
       validRules: {
         value: [
           {required: true, message: '数据必填'}
@@ -98,7 +110,28 @@ export default {
     closeEvent () {
       this.dialogVisible = false
       this.$refs.dataForm.reloadData([])
+    },
+    save () {
+    },
+    async add () {
+      try {
+        const res = await this.$http.post('api/data/add', {form_id: this.form_id, data: this.formData})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+        }
+      } catch (e) {
+        error(e)
+      }
+    },
+    async edit () {
+      try {
+
+      } catch (e) {
+        error(e)
+      }
     }
+
   }
 }
 </script>

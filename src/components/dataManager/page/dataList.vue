@@ -28,7 +28,7 @@
     </template>
   </vxe-grid>
   <data-form
-    :id_add="is_add"
+    :is_add="is_add"
     :form_id="Number($route.query.form_id)"
   ></data-form>
 </div>
@@ -63,8 +63,8 @@ export default {
   },
   created () {
     this.getTableColumn(this.$route.query.form_id)
-    bus.$on('refreshData', (value) => {
-      this.tableData = value
+    bus.$on('refreshData', () => {
+      this.getTableData(this.$route.query.form_id)
     })
   },
   watch: {
