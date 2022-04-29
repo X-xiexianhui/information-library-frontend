@@ -167,9 +167,7 @@ export default {
       }
       try {
         let form = new FormData()
-        console.log(this.fileList[0])
         form.append('file', this.fileList[0])
-        form.append('name', this.fileList[0].name)
         const res = await this.$http.post('api/file/add', form, {headers: {'Content-Type': 'multipart/form-data'}})
         if (res.data.code !== 200) {
           interceptor(res.data)
