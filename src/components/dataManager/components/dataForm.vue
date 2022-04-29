@@ -134,7 +134,8 @@ export default {
     },
     async edit () {
       try {
-        const res = await this.$http.post('api/data/add', {form_id: this.form_id, data: this.formData})
+        const data = this.getUpdateData(this.formData, this.oldData)
+        const res = await this.$http.post('api/data/add', {form_id: this.form_id, data: data})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
@@ -143,8 +144,17 @@ export default {
       } catch (e) {
         error(e)
       }
+    },
+    getUpdateData (newValue, oldValue) {
+      const keys = Object.keys(oldValue)
+      let data = []
+      for (const key of keys) {
+        if (newValue[key].value !== oldValue[key].value) {
+          data.push({col_name: newValue[key].field, value: newValue[key].value})
+        }
+      }
+      return data
     }
-
   }
 }
 </script>
