@@ -164,9 +164,19 @@ export default {
       const pageSize = this.tablePage.pageSize
       this.currentData = this.tableData.slice(0, pageSize)
     },
-    getEditData (selectData, tableColumn) {
+    getEditData (selectData) {
+      let res = []
+      for (const column of this.tableColumn) {
+        res.push(JSON.parse(JSON.stringify(column)))
+      }
       const keys = Object.keys(selectData)
-      console.log(keys)
+      for (let i = 0; i < res.length; i++) {
+        for (const key of keys) {
+          if (res[i].field === key) {
+            res[i].value = selectData[key]
+          }
+        }
+      }
     }
   }
 }
