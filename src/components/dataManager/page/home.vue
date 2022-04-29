@@ -7,7 +7,7 @@
       </div>
     </div>
     <el-container>
-      <el-aside>
+      <el-aside width="200px">
         <data-menu></data-menu>
       </el-aside>
       <el-main>
