@@ -109,7 +109,11 @@ export default {
     },
     addEvent () {
       this.is_add = true
-      bus.$emit('showDataForm', this.tableColumn)
+      let res = []
+      for (const column of this.tableColumn) {
+        res.push(JSON.parse(JSON.stringify(column)))
+      }
+      bus.$emit('showDataForm', res)
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage

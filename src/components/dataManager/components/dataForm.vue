@@ -97,7 +97,7 @@ export default {
     },
     closeEvent () {
       this.dialogVisible = false
-      this.formData = []
+      this.$refs.dataForm.reloadData([])
     }
   }
 }
