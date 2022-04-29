@@ -25,10 +25,18 @@
         </vxe-column>
         <vxe-column field="value" title="数据" :edit-render="{}">
           <template #default="{ row }">
-            <span>{{ row.value }}</span>
+            <vxe-switch v-if="row.data_type === 'boolean'"></vxe-switch>
+            <div v-else>
+              <span>{{ row.value }}</span>
+              <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
+            </div>
           </template>
           <template #edit="{row}">
-            <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
+            <vxe-switch v-if="row.data_type === 'boolean'"></vxe-switch>
+            <div v-else-if="row.field === 'file'">
+                <span>{{ row.value }}</span>
+                <vxe-button style="right: 0" v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
+            </div>
             <vxe-input v-else v-model="row.value" type="text"></vxe-input>
           </template>
         </vxe-column>
@@ -89,6 +97,7 @@ export default {
     },
     closeEvent () {
       this.dialogVisible = false
+      this.formData = []
     }
   }
 }
