@@ -86,7 +86,7 @@ export default {
         } else {
           this.tableColumn = res.data.data.reverse()
           this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
-          // console.log(this.tableColumn)
+          console.log(this.tableColumn)
           await this.getTableData(form_id)
         }
       } catch (e) {
