@@ -47,7 +47,7 @@ export default {
         }
       },
       tableColumn: [
-        {field: 'col_name', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
+        {field: 'label_name', title: '数据表字段', editRender: {}, slots: {edit: 'labelName_edit'}},
         {field: 'data', title: '数据', editRender: {}, slots: {edit: 'data_edit'}}
       ],
       tableData: [],
