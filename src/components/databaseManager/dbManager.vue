@@ -50,6 +50,7 @@
 
 <script>
 import {error} from '../../api/error'
+import {interceptor} from '../../api/interctor'
 
 export default {
   name: 'dbManager',
@@ -97,7 +98,7 @@ export default {
         const selectRecord = this.$refs.xTable.getCurrentRecord()
         const res = await this.$http.delete('/api/db/delete', {params: {db_name: selectRecord.db_name}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.$message.success(res.data.msg)
           await this.init()
@@ -111,7 +112,7 @@ export default {
         const res = await this.$http.post('/api/db/add', null, {params: {db_name: this.inputForm.Name}})
         this.isShow = false
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.$message.success(res.data.msg)
           await this.init()
@@ -125,7 +126,7 @@ export default {
       try {
         const res = await this.$http.get('/api/db/get', {params: {db_name: this.queryForm.query}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.$message.success(res.data.msg)
           this.tableData = res.data.data
