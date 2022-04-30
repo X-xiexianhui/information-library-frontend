@@ -3,7 +3,7 @@
     <page-head class="nav"></page-head>
     <el-container>
       <el-card>
-        <menu-list></menu-list>
+        <menu-list style="width: 80%;margin: auto"></menu-list>
       </el-card>
     </el-container>
   </div>
