@@ -53,6 +53,7 @@
 <script>
 import {error} from '../../../api/error'
 import {VXETable} from 'vxe-table'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'tableList',
@@ -91,7 +92,7 @@ export default {
       try {
         const res = await this.$http.get('/api/tb/search', {params: {query_name: param}})
         if (res.data.code !== 200) {
-          error(res.data)
+          interceptor(res.data)
         } else {
           this.tableData = res.data.data
         }
@@ -120,7 +121,7 @@ export default {
           }
         })
         if (res.data.code !== 200) {
-          error(res.data)
+          interceptor(res.data)
         } else {
           this.$message.success(res.data.msg)
           await this.getTables('')
@@ -146,7 +147,7 @@ export default {
           new_name: this.inputForm.new_name
         })
         if (res.data.code !== 200) {
-          error(res.data)
+          interceptor(res.data)
         } else {
           this.$message.success(res.data.msg)
           this.isVisible = false

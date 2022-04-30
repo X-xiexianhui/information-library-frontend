@@ -55,6 +55,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import {Message} from 'element-ui'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'EditIndex',
@@ -111,7 +112,7 @@ export default {
       try {
         const res = await axios.post('/api/index/alter', data)
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           Message.success(res.data.msg)
           ref.reloadData(res.data.data.reverse())
@@ -134,7 +135,7 @@ export default {
         try {
           const res = await this.$http.get('/api/index/column', {params: {db_name: val.db_name, tb_name: val.tb_name}})
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.fieldList = res.data.data.reverse()
           }
@@ -153,7 +154,7 @@ export default {
             }
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data.reverse()
           }

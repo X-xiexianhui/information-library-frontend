@@ -90,6 +90,7 @@ import axios from 'axios'
 import {error} from '../../../api/error'
 import {Message} from 'element-ui'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'EditField',
@@ -164,7 +165,7 @@ export default {
             }
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data.reverse()
             this.oldData = JSON.parse(JSON.stringify(this.tableData))
@@ -226,7 +227,7 @@ export default {
       try {
         const res = await axios.post('/api/tb/add', data)
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           Message.success(res.data.msg)
           bus.$emit('setShowTbFormEvent', false)
@@ -258,7 +259,7 @@ export default {
       try {
         const res = await axios.post('/api/tb/alter', data)
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           Message.success(res.data.msg)
           bus.$emit('getFieldsEvent')

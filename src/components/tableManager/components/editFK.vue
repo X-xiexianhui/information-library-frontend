@@ -64,6 +64,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import {Message} from 'element-ui'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'EditFk',
@@ -121,7 +122,7 @@ export default {
       try {
         const res = await axios.post('/api/fk/alter', data)
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           Message.success(res.data.msg)
           ref.reloadData(res.data.data.reverse())
@@ -143,7 +144,7 @@ export default {
             }
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.columnList = res.data.data.reverse()
           }
@@ -159,7 +160,7 @@ export default {
           tb_name: this.tableForm.tb_name
         }})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.refTableList = res.data.data.ref_table
           this.refColumnList = res.data.data.ref_column
@@ -178,7 +179,7 @@ export default {
             }
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             console.log(res.data)
             this.tableData = res.data.data.reverse()
