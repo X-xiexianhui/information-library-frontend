@@ -37,6 +37,7 @@ import axios from 'axios'
 import EditMenuForm from './editMenuForm'
 import bus from '../../../common/bus'
 import AddMenuForm from './addMenuForm'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'menuList',
@@ -75,7 +76,7 @@ export default {
       try {
         const res = await this.$http.get('/api/menu/query', {params: {menu_name: val}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data.msg)
         } else {
           this.tableData = res.data.data
         }
@@ -102,7 +103,7 @@ export default {
             menu_id: selectRecords.menu_id
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data
           }
