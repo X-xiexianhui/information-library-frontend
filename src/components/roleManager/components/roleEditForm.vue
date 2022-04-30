@@ -63,7 +63,7 @@ export default {
         if (!valid) return
         try {
           let res
-          if (this.old.role_id === -1) {
+          if (this.form.role_id === -1) {
             res = await axios.post('/api/role/add', this.form)
           } else {
             const data = getUpdate(this.old, this.form)
