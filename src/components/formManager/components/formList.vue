@@ -29,6 +29,7 @@
       title="请输入表单新名称"
       :visible.sync="dialogVisible"
       :before-close="closeEvent"
+      style="width: 70%;margin: auto"
     >
       <el-input v-model="form_name" placeholder="请输入表单名称，支持中英文"></el-input>
       <span slot="footer" class="dialog-footer">

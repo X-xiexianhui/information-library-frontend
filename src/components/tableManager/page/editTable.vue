@@ -13,18 +13,21 @@
                         <edit-field
                             ref="field"
                             :table-form="tbForm"
+                            class="field"
                         ></edit-field>
                     </el-tab-pane>
                     <el-tab-pane label="外键设置" name="FK">
                         <edit-fk
                             ref="FK"
                             :table-form="tbForm"
+                            class="field"
                         ></edit-fk>
                     </el-tab-pane>
                     <el-tab-pane label="索引设置" name="index">
                         <edit-index
                             ref="index"
                             :table-form="tbForm"
+                            class="field"
                         ></edit-index>
                     </el-tab-pane>
                 </el-tabs>
@@ -80,4 +83,8 @@ export default {
 }
 </script>
 <style scoped>
+.field {
+  margin-left: 0;;
+  width: 80%;
+}
 </style>
