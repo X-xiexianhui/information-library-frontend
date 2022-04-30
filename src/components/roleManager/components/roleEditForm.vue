@@ -72,6 +72,7 @@ export default {
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
+            this.$message.success('操作成功')
             bus.$emit('refreshData', res.data.data.reverse())
             this.closeEvent()
           }
