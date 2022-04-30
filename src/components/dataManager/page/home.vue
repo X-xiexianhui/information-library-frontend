@@ -59,10 +59,6 @@ export default {
 }
 .btn{
   margin-right: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 10%;
 }
 .text-btn{
   margin-right: 10px;
