@@ -109,6 +109,7 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
+            this.$message.success('删除成功')
             this.tableData = res.data.data
             this.page()
           }
