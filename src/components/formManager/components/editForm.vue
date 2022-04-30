@@ -35,6 +35,7 @@
 <script>
 import axios from 'axios'
 import {error} from '../../../api/error'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'editForm',
@@ -84,7 +85,7 @@ export default {
       try {
         const res = await axios.get('/api/form/struct', {params: {form_id: val}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.tableData = res.data.data.reverse()
           const pageSize = this.tablePage.pageSize
@@ -108,7 +109,7 @@ export default {
       try {
         const res = await axios.post('/api/form/edit', {update: this.update, form_id: this.$route.query.form_id})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.$message.success('修改成功')
           this.update = []
