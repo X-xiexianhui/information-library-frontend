@@ -35,6 +35,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import RoleEditForm from './roleEditForm'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'roleList',
@@ -77,7 +78,7 @@ export default {
       try {
         const res = await this.$http.get('/api/role/query', {params: {role_name: val}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.tableData = res.data.data
           this.page()
@@ -106,7 +107,7 @@ export default {
             role_id: selectRecords.role_id
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data
             this.page()
