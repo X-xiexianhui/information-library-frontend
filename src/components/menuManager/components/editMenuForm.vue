@@ -49,6 +49,7 @@
 import axios from 'axios'
 import {error} from '../../../api/error'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'editMenuForm',
@@ -85,7 +86,7 @@ export default {
       try {
         const res = await this.$http.get('/api/menu/select')
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.menuList = res.data.data.reverse()
         }
@@ -97,7 +98,7 @@ export default {
       try {
         const res = await this.$http.get('/api/menu/form')
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.formList = res.data.data.reverse()
         }
@@ -115,7 +116,7 @@ export default {
         try {
           const res = await axios.post('/api/menu/edit', this.form)
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data.reverse()
             this.closeEvent()

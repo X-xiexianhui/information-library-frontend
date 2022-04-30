@@ -49,6 +49,7 @@
 import axios from 'axios'
 import {error} from '../../../api/error'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'addMenuForm',
@@ -82,7 +83,7 @@ export default {
       try {
         const res = await this.$http.get('api/menu/select')
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.menuList = res.data.data
         }
@@ -94,7 +95,7 @@ export default {
       try {
         const res = await this.$http.get('/api/menu/form')
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.formList = res.data.data
         }
@@ -112,7 +113,7 @@ export default {
         try {
           const res = await axios.post('/api/menu/add', this.form)
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.datas)
           } else {
             this.tableData = res.data.data
             this.closeEvent()
