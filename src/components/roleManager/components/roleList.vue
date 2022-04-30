@@ -92,13 +92,16 @@ export default {
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
     removeEvent () {
+      const selectRecords = this.$refs.roleTable.getCurrentRecord()
+      if (selectRecords.role_name === '系统管理员') {
+        return error('系统管理员不可删除')
+      }
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
         try {
-          const selectRecords = this.$refs.roleTable.getCurrentRecord()
           const res = await axios.post('/api/role/delete', {
             role_id: selectRecords.role_id
           })
@@ -122,6 +125,9 @@ export default {
       const selectRecords = this.$refs.roleTable.getCurrentRecord()
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
+      }
+      if (selectRecords.role_name === '系统管理员') {
+        return error('系统管理员不可修改')
       }
       bus.$emit('showEditForm', selectRecords)
     },
