@@ -44,7 +44,7 @@ export default {
   position: fixed;
   margin: 0 0;
   padding: 0 0;
-  height: auto;
+  height: 60px;
   width: 100%;
   background: #fff;
   display: flex;
@@ -55,7 +55,7 @@ export default {
 }
 .logo {
   vertical-align: top;
-  height: 60px;
+  height: 50px;
 }
 .btn{
   margin-right: 20px;

@@ -40,7 +40,7 @@ export default {
 }
 .logo {
   vertical-align: top;
-  height: 30px;
+  height: 50px;
 }
 .headerMenuBox {
   display: flex;
