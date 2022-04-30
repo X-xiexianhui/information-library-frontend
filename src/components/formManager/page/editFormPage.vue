@@ -3,7 +3,7 @@
     <page-head class="nav"></page-head>
     <el-container>
       <el-card>
-        <edit-form></edit-form>
+        <edit-form style="width: 80%;margin: auto"></edit-form>
       </el-card>
     </el-container>
   </div>
