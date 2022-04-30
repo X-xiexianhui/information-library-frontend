@@ -29,6 +29,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import bus from '../../../common/bus'
 import {getUpdate} from '../../../common/getUpdate'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'roleEditForm',
@@ -70,7 +71,7 @@ export default {
             res = await axios.post('/api/role/edit', data)
           }
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.$message.success('操作成功')
             bus.$emit('refreshData', res.data.data.reverse())
