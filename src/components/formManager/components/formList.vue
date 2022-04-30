@@ -100,7 +100,7 @@ export default {
       this.form_name = ''
     },
     async save () {
-      if (this.new_name === '') {
+      if (this.form_name === '') {
         return error('请输入表单名称')
       }
       try {
