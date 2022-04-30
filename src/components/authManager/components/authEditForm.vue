@@ -68,6 +68,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import {getUpdate} from '../../../common/getUpdate'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'authEditForm',
@@ -141,7 +142,7 @@ export default {
             update: updateRecords
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             bus.$emit('refreshAuthList', res.data.data.reverse())
             this.closeEvent()

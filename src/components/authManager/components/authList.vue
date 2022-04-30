@@ -46,6 +46,7 @@
 import {error} from '../../../api/error'
 import AuthEditForm from './authEditForm'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'authList',
@@ -105,7 +106,7 @@ export default {
       try {
         const res = await this.$http.get('api/auth/query', {params: {role_name: val}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.tableData = res.data.data
           this.page()
