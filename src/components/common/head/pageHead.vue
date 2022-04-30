@@ -5,18 +5,20 @@
       <Menu :class="$style.menu" v-bind="$attrs"></Menu>
     </div>
     <div :class="$style.btn">
-      <slot></slot>
+      <user-avatar></user-avatar>
     </div>
   </div>
 </template>
 
 <script>
 import Menu from './Menu'
+import userAvatar from '../../userManager/components/userAvatar'
 
 export default {
   name: 'pageHead',
   components: {
-    Menu
+    Menu,
+    userAvatar
   }
 }
 </script>
@@ -58,5 +60,6 @@ h1 {
   background: #ffffff;
 }
 .btn{
+  margin-right: 20px;
 }
 </style>
