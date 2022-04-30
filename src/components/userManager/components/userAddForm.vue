@@ -39,6 +39,7 @@
 import {error} from '../../../api/error'
 import axios from 'axios'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'userAddForm',
@@ -78,7 +79,7 @@ export default {
       try {
         let res = await axios.get('/api/role/select')
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.roleList = res.data.data.reverse()
         }
@@ -92,7 +93,7 @@ export default {
         try {
           let res = await axios.post('/api/user/add', this.form)
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             bus.$emit('refreshUser')
             this.closeEvent()

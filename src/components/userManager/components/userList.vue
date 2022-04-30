@@ -41,6 +41,7 @@ import axios from 'axios'
 import UserEditForm from './userEditForm'
 import UserAddForm from './userAddForm'
 import bus from '../../../common/bus'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'userList',
@@ -82,7 +83,7 @@ export default {
       try {
         const res = await this.$http.get('/api/user/get', {params: {user_name: val}})
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.tableData = res.data.data.reverse()
           this.page()
@@ -106,7 +107,7 @@ export default {
           const selectRecords = this.$refs.userTable.getCurrentRecord()
           const res = await axios.post('/api/user/delete', {}, {params: {user_id: selectRecords.user_id}})
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data.reverse()
             this.page()

@@ -37,6 +37,7 @@ import {error} from '../../../api/error'
 import axios from 'axios'
 import bus from '../../../common/bus'
 import {getUpdate} from '../../../common/getUpdate'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'userEditForm',
@@ -86,7 +87,7 @@ export default {
       try {
         let res = await axios.get('/api/role/select')
         if (res.data.code !== 200) {
-          error(res.data.msg)
+          interceptor(res.data)
         } else {
           this.roleList = res.data.data.reverse()
         }
@@ -104,7 +105,7 @@ export default {
             update: data
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data)
           } else {
             bus.$emit('refreshUser')
             this.closeEvent()
