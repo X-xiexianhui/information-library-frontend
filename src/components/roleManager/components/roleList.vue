@@ -26,7 +26,7 @@
         </vxe-pager>
       </template>
     </vxe-grid>
-    <role-edit-form></role-edit-form>
+    <role-edit-form style="width: 80%;margin: auto;"></role-edit-form>
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {field: 'role_name', title: '角色名称'},
+        {field: 'role_name', title: '角色名称', width: '200px'},
         {field: 'role_description', title: '角色描述'}
       ],
       tableData: []
