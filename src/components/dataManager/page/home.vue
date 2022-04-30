@@ -55,7 +55,7 @@ export default {
 }
 .logo {
   vertical-align: top;
-  height: 40px;
+  height: 50px;
 }
 .btn{
   margin-right: 20px;
