@@ -13,7 +13,7 @@
         <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="addEvent">新增</vxe-button>
         <vxe-button status="success" @click="editEvent">修改</vxe-button>
-        <vxe-button status="success" @click="editEvent">重置密码</vxe-button>
+        <vxe-button status="success" @click="resetPwd">重置密码</vxe-button>
         <vxe-button status="success" @click="removeEvent">删除</vxe-button>
         <vxe-button @click="$refs.userTable.exportData()">导出</vxe-button>
       </template>
@@ -135,6 +135,9 @@ export default {
       }
       this.user_data = selectRecords
       bus.$emit('showEditUserForm')
+    },
+    resetPwd () {
+      this.$message.success('已重置为初始密码')
     },
     page () {
       const currentPage = this.tablePage.currentPage
