@@ -233,7 +233,7 @@ export default {
           bus.$emit('setShowTbFormEvent', false)
           bus.$emit('getFieldsEvent')
           bus.$emit('getFkColumnEvent')
-          ref.reloadData(res.data.data.reverse())
+          ref.reloadData(res.data.data)
         }
       } catch (e) {
         error(e.message)
