@@ -138,7 +138,7 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data.msg)
           } else {
-            this.tableData = res.data.data.reverse()
+            await this.getTableData()
             this.page()
           }
         } catch (e) {
