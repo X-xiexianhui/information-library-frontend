@@ -202,8 +202,8 @@ export default {
           return '时间'
         case 'datetime':
           return '日期时间'
-        default:
-          return ''
+        case 'tinyint':
+          return '布尔类型'
       }
     },
     async createTable () {
