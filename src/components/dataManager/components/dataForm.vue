@@ -75,6 +75,8 @@ export default {
       // eslint-disable-next-line camelcase
       this.record_id = record_id
       this.formData = value
+      console.log(value)
+      console.log(record_id)
       for (const column of value) {
         this.oldData.push(JSON.parse(JSON.stringify(column)))
       }
