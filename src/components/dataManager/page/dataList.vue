@@ -132,7 +132,8 @@ export default {
         try {
           const selectRecords = this.$refs.dataTable.getCurrentRecord()
           const res = await axios.post('/api/data/delete', {
-            role_id: selectRecords.role_id
+            record_id: selectRecords.record_id,
+            form_id: this.$route.query.form_id
           })
           if (res.data.code !== 200) {
             error(res.data.msg)
