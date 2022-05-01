@@ -98,13 +98,16 @@ export default {
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
     removeEvent () {
+      const selectRecords = this.$refs.userTable.getCurrentRecord()
+      if (selectRecords.user_id === 'admin') {
+        return error('不允许删除admin账号')
+      }
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
         try {
-          const selectRecords = this.$refs.userTable.getCurrentRecord()
           const res = await axios.post('/api/user/delete', {}, {params: {user_id: selectRecords.user_id}})
           if (res.data.code !== 200) {
             interceptor(res.data)
@@ -124,6 +127,9 @@ export default {
     },
     editEvent () {
       const selectRecords = this.$refs.userTable.getCurrentRecord()
+      if (selectRecords.user_id === 'admin') {
+        return error('不允许在此处修改admin账号')
+      }
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
