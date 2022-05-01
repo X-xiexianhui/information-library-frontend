@@ -1,7 +1,7 @@
 <template>
   <el-dropdown>
   <span class="el-dropdown-link">
-    <el-avatar size="mini" :src="circleUrl"></el-avatar>
+    <el-avatar :size="40" :src="circleUrl"></el-avatar>
   </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item>修改信息</el-dropdown-item>
