@@ -58,7 +58,11 @@ export default {
       },
       tableColumn: [],
       tableData: [],
-      currentData: []
+      currentData: [],
+      queryList: {
+        form_id: this.$route.query.form_id,
+        columns: []
+      }
     }
   },
   created () {
@@ -95,7 +99,7 @@ export default {
     // eslint-disable-next-line camelcase
     async getTableData (form_id) {
       try {
-        const res = await this.$http.get('api/data/get', {params: {form_id: form_id}})
+        const res = await this.$http.post('api/data/query', this.queryList)
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
