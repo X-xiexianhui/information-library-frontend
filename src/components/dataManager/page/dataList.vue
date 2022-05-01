@@ -22,7 +22,8 @@
           <span style="margin-right: 20px">
             <vxe-button status="primary" @click="getTableData">查询</vxe-button>
             <vxe-button @click="resetForm">重置</vxe-button>
-            <el-button type="text" @click="showMoreFunc"><i class="el-icon-arrow-down"></i>展开</el-button>
+            <el-button v-if="!showMore" type="text" @click="showMoreFunc"><i class="el-icon-arrow-down"></i>展开</el-button>
+            <el-button v-else type="text" @click="showMoreFunc"><i class="el-icon-arrow-up"></i>收起</el-button>
           </span>
           <vxe-button status="success" @click="addEvent">新增</vxe-button>
           <vxe-button status="success" @click="editEvent">修改</vxe-button>
