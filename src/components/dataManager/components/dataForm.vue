@@ -149,7 +149,11 @@ export default {
     async edit () {
       try {
         const data = this.getUpdateData(this.formData, this.oldData)
-        const res = await this.$http.post('api/data/add', {form_id: this.form_id,record_id: this.record_id, update: data})
+        const res = await this.$http.post('api/data/add', {
+          form_id: this.form_id,
+          record_id: this.record_id,
+          update: data
+        })
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
