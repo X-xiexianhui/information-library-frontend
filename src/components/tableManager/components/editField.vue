@@ -167,7 +167,7 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
-            this.tableData = res.data.data.reverse()
+            this.tableData = res.data.data
             this.oldData = JSON.parse(JSON.stringify(this.tableData))
           }
         } catch (e) {
@@ -222,7 +222,7 @@ export default {
       let data = {
         db_name: this.tableForm.db_name,
         tb_name: this.tableForm.tb_name,
-        column: insertRecords
+        column: insertRecords.reverse()
       }
       try {
         const res = await axios.post('/api/tb/add', data)

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-form v-model="queryForm"></el-form>
     <vxe-grid
       border
       resizable
@@ -10,7 +11,7 @@
       :data="currentData"
       class="dataList">
       <template #toolbar_buttons>
-        <div style="text-align: left">
+        <div style="text-align: right">
           <vxe-button status="success" @click="addEvent">新增</vxe-button>
           <vxe-button status="success" @click="editEvent">修改</vxe-button>
           <vxe-button status="success" @click="removeEvent">删除</vxe-button>
@@ -59,7 +60,8 @@ export default {
       tableColumn: [],
       tableData: [],
       currentData: [],
-      columns: []
+      columns: [],
+      queryForm: {}
     }
   },
   created () {
@@ -86,6 +88,7 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data.reverse()
+          console.log(this.tableColumn)
           this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
           await this.getTableData(form_id)
         }
