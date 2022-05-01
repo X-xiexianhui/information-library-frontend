@@ -1,37 +1,37 @@
 <template>
-<div>
-  <vxe-grid
-    border
-    resizable
-    ref="dataTable"
-    :toolbar-config="toolBarConfig"
-    :row-config="{isCurrent: true}"
-    :columns="tableColumn"
-    :data="currentData"
-    class="dataList">
-      <template #toolbar_buttons >
+  <div>
+    <vxe-grid
+      border
+      resizable
+      ref="dataTable"
+      :toolbar-config="toolBarConfig"
+      :row-config="{isCurrent: true}"
+      :columns="tableColumn"
+      :data="currentData"
+      class="dataList">
+      <template #toolbar_buttons>
         <div style="text-align: left">
-        <vxe-button status="success" @click="addEvent">新增</vxe-button>
-        <vxe-button status="success" @click="editEvent">修改</vxe-button>
-        <vxe-button status="success" @click="removeEvent">删除</vxe-button>
-        <vxe-button @click="$refs.dataTable.exportData()">导出</vxe-button>
+          <vxe-button status="success" @click="addEvent">新增</vxe-button>
+          <vxe-button status="success" @click="editEvent">修改</vxe-button>
+          <vxe-button status="success" @click="removeEvent">删除</vxe-button>
+          <vxe-button @click="$refs.dataTable.exportData()">导出</vxe-button>
         </div>
       </template>
-    <template #pager>
-      <vxe-pager
-        :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
-        :current-page.sync="tablePage.currentPage"
-        :page-size.sync="tablePage.pageSize"
-        :total="tableData.length"
-        @page-change="handlePageChange">
-      </vxe-pager>
-    </template>
-  </vxe-grid>
-  <data-form
-    :is_add="is_add"
-    :form_id="Number($route.query.form_id)"
-  ></data-form>
-</div>
+      <template #pager>
+        <vxe-pager
+          :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
+          :current-page.sync="tablePage.currentPage"
+          :page-size.sync="tablePage.pageSize"
+          :total="tableData.length"
+          @page-change="handlePageChange">
+        </vxe-pager>
+      </template>
+    </vxe-grid>
+    <data-form
+      :is_add="is_add"
+      :form_id="Number($route.query.form_id)"
+    ></data-form>
+  </div>
 </template>
 
 <script>
@@ -59,10 +59,7 @@ export default {
       tableColumn: [],
       tableData: [],
       currentData: [],
-      queryList: {
-        form_id: this.$route.query.form_id,
-        columns: []
-      }
+      columns: []
     }
   },
   created () {
@@ -99,7 +96,7 @@ export default {
     // eslint-disable-next-line camelcase
     async getTableData (form_id) {
       try {
-        const res = await this.$http.post('api/data/query', this.queryList)
+        const res = await this.$http.post('api/data/query', {form_id: form_id, columns: this.columns})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
@@ -187,7 +184,7 @@ export default {
 </script>
 
 <style scoped>
-.dataList{
+.dataList {
   width: 80%;
   margin: auto;
 }
