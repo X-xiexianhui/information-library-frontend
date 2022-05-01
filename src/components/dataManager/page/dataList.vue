@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list-body">
     <el-form :model="queryForm" :inline="true">
       <el-form-item v-for="(item,index) in tableColumn.slice(0,3)"
                     :prop="item.field"
@@ -19,6 +19,7 @@
       class="dataList">
       <template #toolbar_buttons>
         <div style="text-align: right">
+          <vxe-button status="primary" @click="getTableData">查询</vxe-button>
           <vxe-button status="success" @click="addEvent">新增</vxe-button>
           <vxe-button status="success" @click="editEvent">修改</vxe-button>
           <vxe-button status="success" @click="removeEvent">删除</vxe-button>
@@ -197,5 +198,8 @@ export default {
 .dataList {
   width: 80%;
   margin: auto;
+}
+.list-body{
+  margin-top: 5%;
 }
 </style>
