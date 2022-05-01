@@ -1,6 +1,6 @@
 <template>
   <div class="list-body">
-    <el-form :model="queryForm" :inline="true" ref="queryForm" label-width="80px">
+    <el-form :model="queryForm" :inline="true" ref="queryForm"  style="width: 75%;text-align: center">
       <el-form-item v-for="(item,index) in tableColumn.slice(0,len)"
                     :prop="item.field"
                     :label="item.title"
