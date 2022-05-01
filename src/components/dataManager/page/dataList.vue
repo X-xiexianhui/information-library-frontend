@@ -112,7 +112,7 @@ export default {
       for (const column of this.tableColumn) {
         res.push(JSON.parse(JSON.stringify(column)))
       }
-      bus.$emit('showDataForm', res)
+      bus.$emit('showDataForm', res, -1)
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
@@ -156,7 +156,7 @@ export default {
         return error('请先选择需要修改的数据')
       }
       this.is_add = false
-      bus.$emit('showDataForm', this.getEditData(selectRecords))
+      bus.$emit('showDataForm', this.getEditData(selectRecords), selectRecords.record_id)
     },
     page () {
       const pageSize = this.tablePage.pageSize

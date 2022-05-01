@@ -70,7 +70,10 @@ export default {
     }
   },
   created () {
-    bus.$on('showDataForm', (value) => {
+    // eslint-disable-next-line camelcase
+    bus.$on('showDataForm', (value, record_id) => {
+      // eslint-disable-next-line camelcase
+      this.record_id = record_id
       this.formData = value
       for (const column of value) {
         this.oldData.push(JSON.parse(JSON.stringify(column)))
@@ -81,6 +84,7 @@ export default {
   data () {
     return {
       fileList: [],
+      record_id: -1,
       dialogVisible: false,
       toolBarConfig: {
         slots: {
