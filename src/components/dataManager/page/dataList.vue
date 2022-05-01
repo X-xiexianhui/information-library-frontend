@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-form v-model="queryForm"></el-form>
+    <el-form :model="queryForm" :inline="true">
+      <el-form-item v-for="(item,index) in tableColumn.slice(0,3)" :prop="item.field" :label="item.title" :key="index"></el-form-item>
+    </el-form>
     <vxe-grid
       border
       resizable
