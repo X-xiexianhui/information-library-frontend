@@ -75,7 +75,6 @@ export default {
       // eslint-disable-next-line camelcase
       this.record_id = record_id
       this.formData = value
-      console.log(value)
       console.log(record_id)
       for (const column of value) {
         this.oldData.push(JSON.parse(JSON.stringify(column)))
@@ -150,7 +149,7 @@ export default {
     async edit () {
       try {
         const data = this.getUpdateData(this.formData, this.oldData)
-        const res = await this.$http.post('api/data/add', {form_id: this.form_id, update: data})
+        const res = await this.$http.post('api/data/add', {form_id: this.form_id,record_id: this.record_id, update: data})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
