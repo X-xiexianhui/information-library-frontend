@@ -2,7 +2,7 @@ import router from '../router'
 import {MessageBox} from 'element-ui'
 
 export function interceptor (res) {
-  if (res.code === 401 || res.code === 403) {
+  if (res.code === 401 || res.code === 402) {
     return router.push('/')
   } else {
     MessageBox.alert(res.msg, '警告', {
