@@ -7,6 +7,14 @@
                     :key="index">
         <el-input v-model="queryForm[item.field]"></el-input>
       </el-form-item>
+      <template v-if="showMore">
+        <el-form-item v-for="(item,index) in tableColumn.slice(3,)"
+                      :prop="item.field"
+                      :label="item.title"
+                      :key="index">
+          <el-input v-model="queryForm[item.field]"></el-input>
+        </el-form-item>
+      </template>
     </el-form>
     <vxe-grid
       border
@@ -19,7 +27,11 @@
       class="dataList">
       <template #toolbar_buttons>
         <div style="text-align: right">
-          <vxe-button status="primary" @click="getTableData">查询</vxe-button>
+          <span style="margin-right: 20px">
+            <vxe-button status="primary" @click="getTableData">查询</vxe-button>
+            <vxe-button @click="resetForm">重置</vxe-button>
+            <el-button type="text" @click="showMore=-showMore"><i class="el-icon-arrow-down"></i>展开</el-button>
+          </span>
           <vxe-button status="success" @click="addEvent">新增</vxe-button>
           <vxe-button status="success" @click="editEvent">修改</vxe-button>
           <vxe-button status="success" @click="removeEvent">删除</vxe-button>
@@ -55,6 +67,7 @@ export default {
   components: {DataForm},
   data () {
     return {
+      showMore: false,
       toolBarConfig: {
         slots: {
           buttons: 'toolbar_buttons'
