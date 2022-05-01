@@ -136,7 +136,7 @@ export default {
             form_id: this.$route.query.form_id
           })
           if (res.data.code !== 200) {
-            error(res.data.msg)
+            interceptor(res.data.msg)
           } else {
             this.tableData = res.data.data.reverse()
             this.page()
