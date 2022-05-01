@@ -264,7 +264,7 @@ export default {
           Message.success(res.data.msg)
           bus.$emit('getFieldsEvent')
           bus.$emit('getFkColumnEvent')
-          ref.reloadData(res.data.data.reverse())
+          ref.reloadData(res.data.data)
         }
       } catch (e) {
         error(e)
