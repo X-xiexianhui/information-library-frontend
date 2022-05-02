@@ -94,7 +94,7 @@ export default {
       forgotPasswordForm: {
         pwd: '',
         confirmPwd: '',
-        account: ''
+        user_id: this.emailForm.user_id
       },
       forgotPasswordFormRules: {
         pwd: [
