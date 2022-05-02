@@ -5,7 +5,7 @@
                     :prop="item.field"
                     :label="item.title"
                     :key="index">
-        <el-input v-model="queryForm[item.field]"></el-input>
+        <el-input v-model="queryForm[item.field]" clearable></el-input>
       </el-form-item>
     </el-form>
     <vxe-grid
@@ -204,6 +204,19 @@ export default {
         }
       }
       return res
+    },
+    async getQueryList () {
+      let res = []
+      const keys = Object.keys(this.queryForm)
+      for (const key of keys) {
+        if (this.queryForm[key] !== '' && this.queryForm[key] !== null && this.queryForm[key] !== undefined) {
+          res.push({col_name: key, value: this.queryForm[key]})
+        }
+      }
+    },
+    resetForm () {
+      this.$refs.queryForm.resetFields()
+      this.$message.success('重置查询表单已重置')
     }
   }
 }
