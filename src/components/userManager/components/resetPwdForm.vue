@@ -138,6 +138,9 @@ export default {
                 time--
               }
             }, 1000)
+            if (res.data.code === 200) {
+              this.$message.success('验证码已发送')
+            }
           }).catch(e => {
             error(e.message)
           })
