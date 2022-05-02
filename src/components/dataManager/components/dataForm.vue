@@ -75,7 +75,6 @@ export default {
       // eslint-disable-next-line camelcase
       this.record_id = record_id
       this.formData = value
-      console.log(record_id)
       for (const column of value) {
         this.oldData.push(JSON.parse(JSON.stringify(column)))
       }
@@ -111,7 +110,6 @@ export default {
         message: true
       }).then(params => {
         const {files} = params
-        // console.log(files)
         this.fileList = files
         row.value = files[0].name
       })
@@ -130,7 +128,6 @@ export default {
     async add () {
       try {
         const data = this.getInsertData(this.formData)
-        console.log(data)
         const res = await this.$http.post('api/data/add', {
           form_id: this.form_id,
           insert: data
