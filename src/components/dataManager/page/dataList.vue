@@ -211,7 +211,6 @@ export default {
           res.push({col_name: key, value: this.queryForm[key]})
         }
       }
-      console.log(res)
       return res
     },
     resetForm () {
