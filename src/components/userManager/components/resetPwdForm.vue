@@ -93,8 +93,7 @@ export default {
       },
       forgotPasswordForm: {
         pwd: '',
-        confirmPwd: '',
-        user_id: ''
+        confirmPwd: ''
       },
       forgotPasswordFormRules: {
         pwd: [
@@ -176,7 +175,10 @@ export default {
           return false
         }
         try {
-          const res = await this.$http.post('api/pwd/reset', this.forgotPasswordForm)
+          const res = await this.$http.post('api/pwd/reset', {
+            user_id: this.emailForm.user_id,
+            user_pwd: this.forgotPasswordForm.pwd
+          })
           if ((await res).data.code !== 200) {
             error(res.data.msg)
           } else {
