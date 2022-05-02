@@ -123,31 +123,30 @@ export default {
       // 对输入的账号进行校验
       this.$refs.emailForm.validateField('user_id', (valid) => {
         if (!valid) {
-          this.$http.post('api/user/check').then(res => {
-            // 获取验证码按钮倒计时功能的实现
-            const _this = this// ！！坑！setInterval中的this指向问题
-            this.flag = true // ！按钮不可重复点击
-            let time = 150// 定义时间变量 150s
-            let timer = null // 定义定时器
-            timer = setInterval(function () {
-              if (time === 0) {
-                _this.msg = '重新获取验证码'
-                _this.flag = false
-                clearInterval(timer)// 清除定时器
-              } else {
-                _this.msg = time + '秒后重新获取'
-                time--
-              }
-            }, 1000)
-            if (res.data.code === 200) {
-              this.$message.success('验证码已发送')
-            }
-          }).catch(e => {
-            error(e.message)
-          })
-        } else {
           return false
         }
+        this.$http.post('api/user/check').then(res => {
+          // 获取验证码按钮倒计时功能的实现
+          const _this = this// ！！坑！setInterval中的this指向问题
+          this.flag = true // ！按钮不可重复点击
+          let time = 150// 定义时间变量 150s
+          let timer = null // 定义定时器
+          timer = setInterval(function () {
+            if (time === 0) {
+              _this.msg = '重新获取验证码'
+              _this.flag = false
+              clearInterval(timer)// 清除定时器
+            } else {
+              _this.msg = time + '秒后重新获取'
+              time--
+            }
+          }, 1000)
+          if (res.data.code === 200) {
+            this.$message.success('验证码已发送')
+          }
+        }).catch(e => {
+          error(e.message)
+        })
       })
     },
     checkEmail () {
