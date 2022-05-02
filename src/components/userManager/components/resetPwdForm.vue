@@ -78,7 +78,8 @@ export default {
     return {
       active: 0,
       emailFormRules: {
-        user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}]
+        user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
+        user_email: [{required: true, min: 4, max: 4, message: '请输入验证码'}]
       },
       flag: false,
       msg: '获取邮箱验证码',
