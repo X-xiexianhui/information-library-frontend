@@ -14,11 +14,11 @@
           <el-step title="完成设置"></el-step>
         </el-steps>
         <div v-if="active === 0">
-          <el-form :model="emailForm">
-            <el-form-item>
+          <el-form :model="emailForm" :rules="emailFormRules">
+            <el-form-item prop="user_id">
               <el-input v-model="emailForm.user_id" placeholder="请输入账号"></el-input>
             </el-form-item>
-            <el-form-item>
+            <el-form-item prop="user_email">
               <el-input v-model="emailForm.user_email" placeholder="邮箱验证码">
                 <template slot="append">
                   <el-button size="small" plain :disabled="flag" @click="getAuthCode" style="width: 120px">{{ msg }}</el-button>
@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import {error} from '../../../api/error'
+
 export default {
   name: 'resetPwdForm',
   data () {
@@ -75,6 +77,9 @@ export default {
     }
     return {
       active: 0,
+      emailFormRules: {
+        user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}]
+      },
       flag: false,
       msg: '获取邮箱验证码',
       emailForm: {
@@ -113,7 +118,31 @@ export default {
     next () {
       if (this.active++ > 2) this.active = 0
     },
-    getAuthCode () {
+    async getAuthCode () {
+      // 对输入的账号进行校验
+      await this.$refs.forgotPasswordForm.validate((valid) => {
+        if (valid) {
+          this.$http.post('api/user/check').then(res => {
+            // 获取验证码按钮倒计时功能的实现
+            const _this = this// ！！坑！setInterval中的this指向问题
+            this.flag = true // ！按钮不可重复点击
+            let time = 150// 定义时间变量 150s
+            let timer = null // 定义定时器
+            timer = setInterval(function () {
+              if (time === 0) {
+                _this.msg = '重新获取验证码'
+                _this.flag = false
+                clearInterval(timer)// 清除定时器
+              } else {
+                _this.msg = time + '秒后重新获取'
+                time--
+              }
+            }, 1000)
+          }).catch(e => {
+            error(e.message)
+          })
+        }
+      })
     },
     checkEmail () {
       const that = this
