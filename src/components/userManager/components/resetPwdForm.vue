@@ -170,17 +170,22 @@ export default {
         }
       })
     },
-    async resetPassword () {
-      try {
-        const res = await this.$http.post('api/pwd/reset')
-        if ((await res).data.code !== 200) {
-          error(res.data.msg)
-        } else {
-          this.active++
+    resetPassword () {
+      this.$refs.forgotPasswordForm.validate(async (valid) => {
+        if (!valid) {
+          return false
         }
-      } catch (e) {
-        error(e.message)
-      }
+        try {
+          const res = await this.$http.post('api/pwd/reset', this.forgotPasswordForm)
+          if ((await res).data.code !== 200) {
+            error(res.data.msg)
+          } else {
+            this.active++
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      })
     }
   }
 }
