@@ -18,8 +18,8 @@
             <el-form-item prop="user_id">
               <el-input v-model="emailForm.user_id" placeholder="请输入账号"></el-input>
             </el-form-item>
-            <el-form-item prop="user_email">
-              <el-input v-model="emailForm.user_email" placeholder="邮箱验证码">
+            <el-form-item prop="auth_code">
+              <el-input v-model="emailForm.auth_code" placeholder="邮箱验证码">
                 <template slot="append">
                   <el-button size="small" plain :disabled="flag" @click="getAuthCode" style="width: 120px">{{
                       msg
@@ -83,13 +83,13 @@ export default {
       active: 0,
       emailFormRules: {
         user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
-        user_email: [{required: true, min: 4, max: 4, message: '请输入4位验证码'}]
+        auth_code: [{required: true, min: 4, max: 4, message: '请输入4位验证码'}]
       },
       flag: false,
       msg: '获取邮箱验证码',
       emailForm: {
         user_id: '',
-        user_email: ''
+        auth_code: ''
       },
       forgotPasswordForm: {
         pwd: '',
