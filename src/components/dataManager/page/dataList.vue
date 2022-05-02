@@ -122,7 +122,7 @@ export default {
     // eslint-disable-next-line camelcase
     async getTableData (form_id) {
       try {
-        const res = await this.$http.post('api/data/query', {form_id: form_id, columns: this.columns})
+        const res = await this.$http.post('api/data/query', {form_id: form_id, columns: this.getQueryList()})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
