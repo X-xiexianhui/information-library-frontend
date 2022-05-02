@@ -79,7 +79,7 @@ export default {
       active: 0,
       emailFormRules: {
         user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
-        user_email: [{required: true, min: 4, max: 4, message: '请输入验证码'}]
+        user_email: [{required: true, min: 4, max: 4, message: '请输入4位验证码'}]
       },
       flag: false,
       msg: '获取邮箱验证码',
@@ -125,7 +125,7 @@ export default {
         if (!valid) {
           return false
         }
-        this.$http.post('api/user/check').then(res => {
+        this.$http.post('api/user/check', {}, {params: {user_id: this.emailForm.user_id}}).then(res => {
           // 获取验证码按钮倒计时功能的实现
           const _this = this// ！！坑！setInterval中的this指向问题
           this.flag = true // ！按钮不可重复点击
