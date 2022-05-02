@@ -82,7 +82,7 @@ export default {
     return {
       active: 0,
       emailFormRules: {
-        user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
+        user_id: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
         auth_code: [{required: true, min: 4, max: 4, message: '请输入4位验证码', trigger: 'blur'}]
       },
       flag: false,
@@ -125,9 +125,8 @@ export default {
     },
     getAuthCode () {
       // 对输入的账号进行校验
-      this.$refs.emailForm.validateField('user_id', (valid) => {
-        console.log(valid)
-        if (!valid) {
+      this.$refs.emailForm.validateField('user_id', valid => {
+        if (valid) {
           return false
         }
         this.$http.post('api/user/check', {}, {params: {user_id: this.emailForm.user_id}}).then(res => {
