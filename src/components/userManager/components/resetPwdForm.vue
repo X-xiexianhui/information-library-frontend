@@ -159,10 +159,7 @@ export default {
           return false
         }
         try {
-          const res = await this.$http.post('api/email/check', {
-            user_id: this.emailForm.user_id,
-            user_pwd: this.forgotPasswordForm.pwd
-          })
+          const res = await this.$http.post('api/email/check', this.emailForm)
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
