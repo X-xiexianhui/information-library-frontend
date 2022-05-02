@@ -21,7 +21,10 @@
             <el-form-item prop="user_email">
               <el-input v-model="emailForm.user_email" placeholder="邮箱验证码">
                 <template slot="append">
-                  <el-button size="small" plain :disabled="flag" @click="getAuthCode" style="width: 120px">{{ msg }}</el-button>
+                  <el-button size="small" plain :disabled="flag" @click="getAuthCode" style="width: 120px">{{
+                      msg
+                    }}
+                  </el-button>
                 </template>
               </el-input>
             </el-form-item>
@@ -31,7 +34,8 @@
           </div>
         </div>
         <div v-if="active=== 1">
-          <el-form key="resetForm" ref="forgotPasswordForm" :model="forgotPasswordForm" :rules="forgotPasswordFormRules">
+          <el-form key="resetForm" ref="forgotPasswordForm" :model="forgotPasswordForm"
+                   :rules="forgotPasswordFormRules">
             <el-form-item key="0" prop="pwd" label="密码:">
               <el-input clearable v-model="forgotPasswordForm.pwd" type="password" placeholder="6-16位大写字母+小写字母+数字组合"
                         auto-complete="off">
@@ -183,11 +187,13 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
   .forgot-password {
     width: 580px;
     height: 540px;
     background: #FFFFFF;
     border-radius: 6px;
+
     .return-page-wr {
       position: relative;
       top: 10px;
@@ -202,6 +208,7 @@ export default {
         vertical-align: middle;
       }
     }
+
     .content {
       padding: 30px 90px;
       box-sizing: border-box;
