@@ -151,8 +151,21 @@ export default {
       })
     },
     checkEmail () {
-      const that = this
-      that.active++
+      this.$refs.forgotPasswordForm.validate(async (valid) => {
+        if (!valid) {
+          return false
+        }
+        try {
+          const res = await this.$http.post('api/email/check')
+          if (res.data.code !== 200) {
+            error('验证码错误')
+          } else {
+            this.active++
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      })
     },
     resetPassword () {
       this.active++
