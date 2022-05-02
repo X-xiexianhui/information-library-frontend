@@ -144,6 +144,8 @@ export default {
           }).catch(e => {
             error(e.message)
           })
+        } else {
+          return false
         }
       })
     },
