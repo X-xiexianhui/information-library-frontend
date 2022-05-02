@@ -14,7 +14,7 @@
           <el-step title="完成设置"></el-step>
         </el-steps>
         <div v-if="active === 0">
-          <el-form :model="emailForm" :rules="emailFormRules">
+          <el-form :model="emailForm" :rules="emailFormRules" ref="emailForm">
             <el-form-item prop="user_id">
               <el-input v-model="emailForm.user_id" placeholder="请输入账号"></el-input>
             </el-form-item>
@@ -121,7 +121,7 @@ export default {
     },
     getAuthCode () {
       // 对输入的账号进行校验
-      this.$refs.forgotPasswordForm.validateField('user_id', (valid) => {
+      this.$refs.emailForm.validateField('user_id', (valid) => {
         if (!valid) {
           this.$http.post('api/user/check').then(res => {
             // 获取验证码按钮倒计时功能的实现
@@ -151,7 +151,7 @@ export default {
       })
     },
     checkEmail () {
-      this.$refs.forgotPasswordForm.validate(async (valid) => {
+      this.$refs.emailForm.validate(async (valid) => {
         if (!valid) {
           return false
         }
