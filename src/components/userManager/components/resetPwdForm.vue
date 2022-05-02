@@ -118,10 +118,10 @@ export default {
     next () {
       if (this.active++ > 2) this.active = 0
     },
-    async getAuthCode () {
+    getAuthCode () {
       // 对输入的账号进行校验
-      await this.$refs.forgotPasswordForm.validateField('user_id', (valid) => {
-        if (valid) {
+      this.$refs.forgotPasswordForm.validateField('user_id', (valid) => {
+        if (!valid) {
           this.$http.post('api/user/check').then(res => {
             // 获取验证码按钮倒计时功能的实现
             const _this = this// ！！坑！setInterval中的this指向问题
