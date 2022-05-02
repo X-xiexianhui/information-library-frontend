@@ -5,7 +5,7 @@
   >
     <el-form ref="form" :model="form" :rules="formRule" label-width="80px" style="margin: auto;width: 60%">
       <el-form-item label="用户账号" prop="user_id">
-        <div style="text-align: left">{{form.user_id}}</div>
+        <div style="text-align: left">{{ form.user_id }}</div>
       </el-form-item>
       <el-form-item label="用户名称" prop="user_name">
         <el-input placeholder="请输入角色名称" v-model="form.user_name">
@@ -57,10 +57,18 @@ export default {
       form: JSON.parse(JSON.stringify(this.user_data)),
       dialogVisible: false,
       formRule: {
+        user_id: [
+          {required: true, message: '请输入用户账号', trigger: 'blur'},
+          {min: 4, max: 18, message: '请输入4-18位账号'}
+        ],
         user_name: [{required: true, message: '请输入用户名称', trigger: 'blur'}],
         user_email: [
           {required: true, message: '请输入用户邮箱', trigger: 'blur'},
-          {pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/, message: '邮箱格式错误', trigger: 'blur'}
+          {
+            pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/,
+            message: '邮箱格式错误',
+            trigger: 'blur'
+          }
         ],
         user_role: [{required: true, message: '请选择用户角色', trigger: 'blur'}]
       },
