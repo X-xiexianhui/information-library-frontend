@@ -105,9 +105,8 @@ export default {
         {label: '允许删除全部数据', value: 'd2'}
       ],
       searchList: [
-        {label: '不允许查询', value: 's0'},
-        {label: '仅允许查询所填数据', value: 's1'},
-        {label: '允许查询全部数据', value: 's2'}
+        {label: '仅允许查询所填数据', value: 's0'},
+        {label: '允许查询全部数据', value: 's1'}
       ],
       editList: [
         {label: '不允许修改', value: 'u0'},
