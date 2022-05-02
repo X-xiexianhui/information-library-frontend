@@ -227,6 +227,6 @@ export default {
   margin: auto;
 }
 .list-body{
-  margin-top: 5%;
+  margin-top: 2%;
 }
 </style>
