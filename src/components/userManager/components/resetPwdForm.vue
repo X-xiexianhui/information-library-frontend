@@ -83,7 +83,7 @@ export default {
       active: 0,
       emailFormRules: {
         user_is: [{required: true, message: '请输入用户账号', trigger: 'blur'}],
-        auth_code: [{required: true, min: 4, max: 4, message: '请输入4位验证码'}]
+        auth_code: [{required: true, min: 4, max: 4, message: '请输入4位验证码', trigger: 'blur'}]
       },
       flag: false,
       msg: '获取邮箱验证码',
@@ -94,7 +94,7 @@ export default {
       forgotPasswordForm: {
         pwd: '',
         confirmPwd: '',
-        user_id: this.emailForm.user_id
+        user_id: ''
       },
       forgotPasswordFormRules: {
         pwd: [
@@ -126,6 +126,7 @@ export default {
     getAuthCode () {
       // 对输入的账号进行校验
       this.$refs.emailForm.validateField('user_id', (valid) => {
+        console.log(valid)
         if (!valid) {
           return false
         }
@@ -159,7 +160,10 @@ export default {
           return false
         }
         try {
-          const res = await this.$http.post('api/email/check', this.emailForm)
+          const res = await this.$http.post('api/email/check', {
+            user_id: this.emailForm.user_id,
+            user_pwd: this.forgotPasswordForm.pwd
+          })
           if (res.data.code !== 200) {
             error(res.data.msg)
           } else {
