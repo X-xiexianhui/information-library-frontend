@@ -215,7 +215,7 @@ export default {
     },
     resetForm () {
       this.$refs.queryForm.resetFields()
-      this.$message.success('重置查询表单已重置')
+      this.$message.success('查询表单已重置')
     }
   }
 }
