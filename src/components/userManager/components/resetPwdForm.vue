@@ -170,8 +170,17 @@ export default {
         }
       })
     },
-    resetPassword () {
-      this.active++
+    async resetPassword () {
+      try {
+        const res = await this.$http.post('api/pwd/reset')
+        if ((await res).data.code !== 200) {
+          error(res.data.msg)
+        } else {
+          this.active++
+        }
+      } catch (e) {
+        error(e.message)
+      }
     }
   }
 }
