@@ -111,7 +111,6 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data.reverse()
-          console.log(this.tableColumn)
           this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
           await this.getTableData(form_id)
         }
@@ -122,7 +121,7 @@ export default {
     // eslint-disable-next-line camelcase
     async getTableData (form_id) {
       try {
-        const res = await this.$http.post('api/data/query', {form_id: form_id, columns: this.getQueryList()})
+        const res = await this.$http.post('api/data/query', {form_id: form_id, columns: this.columns})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
@@ -213,6 +212,7 @@ export default {
           res.push({col_name: key, value: this.queryForm[key]})
         }
       }
+      return res
     },
     resetForm () {
       this.$refs.queryForm.resetFields()
