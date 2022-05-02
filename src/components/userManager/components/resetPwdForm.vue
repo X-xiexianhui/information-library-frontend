@@ -120,7 +120,7 @@ export default {
     },
     async getAuthCode () {
       // 对输入的账号进行校验
-      await this.$refs.forgotPasswordForm.validate((valid) => {
+      await this.$refs.forgotPasswordForm.validateField('user_id', (valid) => {
         if (valid) {
           this.$http.post('api/user/check').then(res => {
             // 获取验证码按钮倒计时功能的实现
