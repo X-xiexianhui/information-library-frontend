@@ -161,7 +161,7 @@ export default {
         try {
           const res = await this.$http.post('api/email/check', this.emailForm)
           if (res.data.code !== 200) {
-            error('验证码错误')
+            error(res.data.msg)
           } else {
             this.active++
           }
