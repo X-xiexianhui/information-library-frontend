@@ -11,8 +11,8 @@ import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
 import './assets/css/backend.css'
 import VueParticles from 'vue-particles'
-import cookies from 'vue-cookies'
-Vue.use(cookies)
+import VueCookies from "vue-cookies"
+Vue.use(VueCookies)
 Vue.use(VueParticles)
 Vue.use(VXETable)
 Vue.prototype.$http = axios
