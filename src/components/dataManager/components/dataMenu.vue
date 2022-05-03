@@ -18,6 +18,9 @@
       <el-menu-item  index='/home/data/statistics'>
         <a style="text-align: left;display: block" @click="$router.push('/home/statistics')">数据统计</a>
       </el-menu-item>
+      <el-menu-item  index='/db'>
+        <a style="text-align: left;display: block" @click="$router.push('/db')">管理后台</a>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -34,7 +37,8 @@ export default {
   data () {
     return {
       menuList: [],
-      form_id: 0
+      form_id: 0,
+      is_admin: false
     }
   },
   methods: {
@@ -44,7 +48,8 @@ export default {
     },
     async initMenu () {
       try {
-        console.log(this.$cookies.get('login_cookie'))
+        const cookies = this.$cookies.get('login_cookie').split('_')
+        this.is_admin = cookies[1] === '系统管理员'
         const res = await this.$http.get('api/menu/init')
         if (res.data.code !== 200) {
           interceptor(res.data)
