@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%;height: 100%">
-    <el-form :model="form" ref="pictureForm" label-width="80" :inline="true">
+    <el-form :model="form" ref="pictureForm" label-width="80" :inline="true" size="mini">
       <el-form-item label="数据源" b prop="form_id">
         <el-select v-model="form.form_id" placeholder="请选择数据源">
           <el-option
@@ -52,7 +52,7 @@
         </el-select>
       </el-form-item>
     </el-form>
-    <div style="width: 60%; height: 60%;margin: auto" ref="chart"></div>
+    <div class="chart" ref="chart"></div>
   </div>
 </template>
 
@@ -133,6 +133,15 @@ export default {
 <style scoped>
 .el-form{
   width: 80%;
-  margin-top: 1%;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.chart{
+  width: 60%;
+  height: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
 }
 </style>
