@@ -70,7 +70,12 @@ export default {
         error(e.message)
       }
     },
-    dump () {
+    async dump () {
+      try {
+        await this.$http.post('api/data/dump')
+      } catch (e) {
+        error(e.message)
+      }
     },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
