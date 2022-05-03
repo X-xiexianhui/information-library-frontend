@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :close-on-click-modal="false"
-    :modal-append-to-body="false"
+    :modal-append-to-body='false'
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
