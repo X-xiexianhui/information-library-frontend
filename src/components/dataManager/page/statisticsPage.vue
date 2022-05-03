@@ -92,14 +92,6 @@ export default {
       this.chart.resize()
     })
   },
-  watch: {
-    'form.pictureType' (newValue) {
-      this.option.series.type = newValue
-      this.chart.clear()
-      console.log(this.option.series.type)
-      this.chart.setOption(this.option, true)
-    }
-  },
   methods: {
     init () {
       // 2.初始化
