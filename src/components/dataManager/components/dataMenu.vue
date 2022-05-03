@@ -9,7 +9,7 @@
         <template slot="title">
           <span class="submenu">{{ parent.name }}</span>
         </template>
-        <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/#/home/data?form_id='+child.form_id">
+        <el-menu-item v-for="child in parent.child" :key="child.menu_id" :index="'/home/data?form_id='+child.form_id">
           <a class="menuLink" @click="changeRouter(child.form_id)">
             {{ child.child_name }}
           </a>
