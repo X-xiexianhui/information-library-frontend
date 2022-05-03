@@ -22,9 +22,19 @@
         </el-select>
       </el-form-item>
       <el-form-item label="分组字段" prop="group_field">
-        <el-select v-model="form.group_field" placeholder="请选择统计字段">
+        <el-select v-model="form.group_field" placeholder="请选择分组字段">
           <el-option
             v-for="item in group_fieldList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="数据范围" prop="onlyUser">
+        <el-select v-model="form.onlyUser" placeholder="请选择数据范围字段">
+          <el-option
+            v-for="item in onlyUserSelect"
             :key="item.value"
             :label="item.label"
             :value="item.value">
@@ -47,13 +57,17 @@ export default {
       formList: [],
       fieldList: [],
       group_fieldList: [],
+      onlyUserSelect: [
+        {label: '统计个人数据', value: true},
+        {label: '统计全部数据', value: false}
+      ],
       form: {
         form_id: '',
         field: '',
         group_field: '',
         option: '',
         pictureType: 'bar',
-        onlyUser: Boolean
+        onlyUser: true
       }
     }
   },
