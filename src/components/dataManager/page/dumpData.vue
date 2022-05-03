@@ -87,10 +87,20 @@ export default {
       this.tablePage.pageSize = pageSize
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
-    rollBack () {
+    async rollBack () {
       const selectRecords = this.$refs.dumpTable.getCurrentRecord()
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
+      }
+      try {
+        const res = await this.$http.post('api/data/roll')
+        this.MessageBox.alert(res.data, '恢复结果', {
+          confirmButtonText: '确定',
+          callback: () => {
+          }
+        }).then(() => {})
+      } catch (e) {
+        error(e.message)
       }
     },
     page () {
