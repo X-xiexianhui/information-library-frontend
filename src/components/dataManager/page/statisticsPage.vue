@@ -51,7 +51,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="统计图类型" prop="picturn">
+      <el-form-item label="统计图类型" prop="pictureType">
         <el-select v-model="form.pictureType" placeholder="请选择统计图类型">
           <el-option
             v-for="item in pictureTypeList"
@@ -91,6 +91,22 @@ export default {
         {label: '柱状图', value: 'bar'},
         {label: '散点图', value: 'scatter'}
       ],
+      option: {
+        title: {
+          text: 'ECharts 入门示例',
+          left: 'center'
+        },
+        tooltip: {},
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['销量']
+        },
+        xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
+        yAxis: { type: 'value' }, // Y轴
+        // eslint-disable-next-line standard/object-curly-even-spacing
+        series: [{ data: [120, 200, 150, 80, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
+      },
       form: {
         form_id: '',
         field: '',
@@ -112,22 +128,23 @@ export default {
       // 2.初始化
       this.chart = Echarts.init(this.$refs.chart)
       // 3.配置数据
-      let option = {
-        title: {
-          text: 'ECharts 入门示例',
-          left: 'center'
-        },
-        tooltip: {},
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: ['销量']
-        },
-        xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
-        yAxis: { type: 'value' }, // Y轴
-        // eslint-disable-next-line standard/object-curly-even-spacing
-        series: [{ data: [120, 200, 150, 80, 70, 110, 130], type: this.form.pictureType, name: '销量'}] // 配置项
-      }
+      // let option = {
+      //   title: {
+      //     text: 'ECharts 入门示例',
+      //     left: 'center'
+      //   },
+      //   tooltip: {},
+      //   legend: {
+      //     orient: 'vertical',
+      //     left: 'left',
+      //     data: ['销量']
+      //   },
+      //   xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
+      //   yAxis: { type: 'value' }, // Y轴
+      //   // eslint-disable-next-line standard/object-curly-even-spacing
+      //   series: [{ data: [120, 200, 150, 80, 70, 110, 130], type: this.form.pictureType, name: '销量'}] // 配置项
+      // }
+      let option = this.option
       // 4.传入数据
       this.chart.setOption(option)
     }
