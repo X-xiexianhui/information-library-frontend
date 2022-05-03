@@ -104,7 +104,6 @@ export default {
   methods: {
     uploadFileEvent (row) {
       this.oldData[this.oldData.length - 1].value = '无附件'
-      console.log(this.oldData)
       const $grid = this.$refs.dataForm
       // 读取附件
       $grid.readFile({
