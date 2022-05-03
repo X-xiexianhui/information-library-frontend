@@ -1,5 +1,37 @@
 <template>
   <div style="width: 100%;height: 100%">
+    <el-form :model="form" ref="pictureForm" label-width="80" :inline="true">
+      <el-form-item label="数据源" b prop="form_id">
+        <el-select v-model="form.form_id" placeholder="请选择数据源">
+          <el-option
+            v-for="item in formList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="统计字段" prop="field">
+        <el-select v-model="form.field" placeholder="请选择统计字段">
+          <el-option
+            v-for="item in fieldList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="分组字段" prop="group_field">
+        <el-select v-model="form.group_field" placeholder="请选择统计字段">
+          <el-option
+            v-for="item in group_fieldList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
     <div style="width: 60%; height: 60%;margin: auto" ref="chart"></div>
   </div>
 </template>
@@ -12,8 +44,11 @@ export default {
   data () {
     return {
       chart: null,
+      formList: [],
+      fieldList: [],
+      group_fieldList: [],
       form: {
-        form_id: Number,
+        form_id: '',
         field: '',
         group_field: '',
         option: '',
@@ -57,5 +92,7 @@ export default {
 </script>
 
 <style scoped>
-
+.el-form{
+  margin-top: 1%;
+}
 </style>
