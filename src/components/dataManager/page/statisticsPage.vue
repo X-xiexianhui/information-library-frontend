@@ -51,16 +51,6 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="统计图类型" prop="pictureType">
-        <el-select v-model="form.pictureType" placeholder="请选择统计图类型">
-          <el-option
-            v-for="item in pictureTypeList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </el-form-item>
     </el-form>
     <div style="width: 60%; height: 60%;margin: auto" ref="chart"></div>
   </div>
@@ -86,27 +76,6 @@ export default {
         {label: '求和', value: 'sum'},
         {label: '求均值', value: 'avg'}
       ],
-      pictureTypeList: [
-        {label: '折线图', value: 'line'},
-        {label: '柱状图', value: 'bar'},
-        {label: '散点图', value: 'scatter'}
-      ],
-      option: {
-        title: {
-          text: 'ECharts 入门示例',
-          left: 'center'
-        },
-        tooltip: {},
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: ['销量']
-        },
-        xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
-        yAxis: { type: 'value' }, // Y轴
-        // eslint-disable-next-line standard/object-curly-even-spacing
-        series: [{ data: [120, 200, 150, 80, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
-      },
       form: {
         form_id: '',
         field: '',
@@ -123,13 +92,47 @@ export default {
       this.chart.resize()
     })
   },
+  watch: {
+    'form.pictureType' (newValue) {
+      this.option.series.type = newValue
+      this.chart.clear()
+      console.log(this.option.series.type)
+      this.chart.setOption(this.option, true)
+    }
+  },
   methods: {
     init () {
       // 2.初始化
       this.chart = Echarts.init(this.$refs.chart)
       // 3.配置数据
+      let option = {
+        title: {
+          text: 'ECharts 入门示例',
+          left: 'center'
+        },
+        toolbox: {// 添加一个toolbox配置
+          show: true,
+          feature: {
+            magicType: {// 配置可以动态切换的类型：
+              type: ['line', 'bar', 'scatter']
+            },
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        tooltip: {},
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['销量']
+        },
+        xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
+        yAxis: { type: 'value' }, // Y轴
+        // eslint-disable-next-line standard/object-curly-even-spacing
+        series: [{ data: [120, 200, 150, 80, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
+      }
       // 4.传入数据
-      this.chart.setOption(this.option)
+      this.chart.setOption(option)
     }
   }
 }
