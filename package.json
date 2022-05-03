@@ -17,6 +17,7 @@
     "identify": "^0.1.5",
     "less-loader": "^5.0.0",
     "vue": "^2.5.2",
+    "vue-cookies": "^1.8.1",
     "vue-router": "^3.0.1",
     "vxe-table": "3",
     "xe-utils": "^3.5.4"
