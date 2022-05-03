@@ -44,6 +44,7 @@ export default {
     },
     async initMenu () {
       try {
+        console.log(this.$cookies.get('login_cookie'))
         const res = await this.$http.get('api/menu/init')
         if (res.data.code !== 200) {
           interceptor(res.data)
