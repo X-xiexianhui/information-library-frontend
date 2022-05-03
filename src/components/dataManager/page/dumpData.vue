@@ -7,7 +7,7 @@
     :row-config="{isCurrent: true}"
     :columns="tableColumn"
     :data="currentData"
-    class="dataList">
+    class="dumpList">
     <template #toolbar_buttons>
       <div style="text-align: right">
         <vxe-input v-model="searchName" placeholder="请输入数据表名称" clearable></vxe-input>
@@ -47,8 +47,8 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {filed: 'file_name', title: '文件名', width: '100'},
-        {field: 'dump_time', title: '备份时间', width: '100'}
+        {filed: 'file_name', title: '文件名', width: '50%'},
+        {field: 'dump_time', title: '备份时间', width: '50%'}
       ],
       tableData: [],
       currentData: []
@@ -112,5 +112,8 @@ export default {
 </script>
 
 <style scoped>
-
+.dumpList{
+  width: 60%;
+  margin: auto;
+}
 </style>
