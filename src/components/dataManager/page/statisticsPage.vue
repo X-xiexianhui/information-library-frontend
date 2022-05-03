@@ -112,7 +112,7 @@ export default {
         field: '',
         group_field: '',
         option: '',
-        pictureType: 'bar',
+        pictureType: '',
         onlyUser: true
       }
     }
