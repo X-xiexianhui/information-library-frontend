@@ -41,6 +41,26 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="统计方式" prop="onlyUser">
+        <el-select v-model="form.option" placeholder="请选择统计方式">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="统计图类型" prop="picturn">
+        <el-select v-model="form.pictureType" placeholder="请选择统计图类型">
+          <el-option
+            v-for="item in pictureTypeList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
     <div style="width: 60%; height: 60%;margin: auto" ref="chart"></div>
   </div>
@@ -60,6 +80,16 @@ export default {
       onlyUserSelect: [
         {label: '统计个人数据', value: true},
         {label: '统计全部数据', value: false}
+      ],
+      options: [
+        {label: '计数', value: 'count'},
+        {label: '求和', value: 'sum'},
+        {label: '求均值', value: 'avg'}
+      ],
+      pictureTypeList: [
+        {label: '折线图', value: 'line'},
+        {label: '柱状图', value: 'bar'},
+        {label: '散点图', value: 'scatter'}
       ],
       form: {
         form_id: '',
@@ -107,6 +137,7 @@ export default {
 
 <style scoped>
 .el-form{
+  width: 80%;
   margin-top: 1%;
 }
 </style>
