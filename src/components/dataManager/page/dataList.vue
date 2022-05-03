@@ -156,14 +156,14 @@ export default {
       }).then(async () => {
         try {
           const selectRecords = this.$refs.dataTable.getCurrentRecord()
-          const res = await axios.post('/api/data/delete', {
+          const res = await axios.post('api/data/delete', {
             record_id: selectRecords.record_id,
             form_id: this.$route.query.form_id
           })
           if (res.data.code !== 200) {
             interceptor(res.data.msg)
           } else {
-            await this.getTableData()
+            await this.getTableData(this.$route.query.form_id)
             this.page()
           }
         } catch (e) {
