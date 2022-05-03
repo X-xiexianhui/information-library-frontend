@@ -31,7 +31,6 @@
 <script>
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
-import {MessageBox} from 'element-ui'
 
 export default {
   name: 'dumpData',
