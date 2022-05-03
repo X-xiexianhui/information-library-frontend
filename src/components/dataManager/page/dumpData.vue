@@ -43,8 +43,8 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {filed: 'file_name', title: '文件名'},
-        {field: 'dump_time', title: '备份时间'}
+        {filed: 'file_name', title: '文件名', width: '100'},
+        {field: 'dump_time', title: '备份时间', width: '100'}
       ],
       tableData: [],
       currentData: []
