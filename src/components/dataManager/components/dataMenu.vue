@@ -15,8 +15,8 @@
           </a>
         </el-menu-item>
       </el-submenu>
-      <el-menu-item v-for="child in parent.child" :key="child.menu_id" index='/home/data/statistics'>
-        <a class="menuLink" @click="$router.push('/home/statistics')">数据统计</a>
+      <el-menu-item  index='/home/data/statistics'>
+        <a style="text-align: left;display: block" @click="$router.push('/home/statistics')">数据统计</a>
       </el-menu-item>
     </el-menu>
   </div>
