@@ -67,7 +67,7 @@ export default new Router({
           component: () => import('../components/dataManager/page/statisticsPage')
         },
         {
-          path: '/dump',
+          path: 'dump',
           component: () => import('../components/dataManager/page/dumpData')
         }
       ]
