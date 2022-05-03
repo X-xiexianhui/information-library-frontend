@@ -31,7 +31,6 @@
 <script>
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
-import {MessageBox} from 'element-ui'
 
 export default {
   name: 'dumpData',
@@ -76,11 +75,8 @@ export default {
     async dump () {
       try {
         const res = await this.$http.post('api/data/dump')
-        MessageBox.alert(res.data, '备份结果', {
-          confirmButtonText: '确定',
-          callback: () => {
-          }
-        }).then(() => {})
+        this.$message.success(res.data)
+        await this.getDumpList('')
       } catch (e) {
         error(e.message)
       }
