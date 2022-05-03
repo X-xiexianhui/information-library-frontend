@@ -3,11 +3,6 @@
     <div :class="$style.box">
       <div :class="$style.logo"><img src="../../../assets/logo.png" :class="$style.logo" alt="信息库管理系统"></div>
       <div :class="$style.btn">
-        <div class="text-btn">
-          <el-button type="text" @click="goToBack">
-            <i class="el-icon-arrow-left"></i>进入管理后台
-          </el-button>
-        </div>
        <div>
          <user-avatar></user-avatar>
        </div>
@@ -58,14 +53,7 @@ export default {
   height: 40px;
 }
 .btn{
-  margin-right: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 10%;
-}
-.text-btn{
-  margin-right: 10px;
+  margin-right: 1%;
 }
 
 </style>
