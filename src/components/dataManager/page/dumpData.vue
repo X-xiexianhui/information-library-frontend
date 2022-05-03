@@ -30,6 +30,7 @@
 
 <script>
 import {error} from '../../../api/error'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'dumpData',
@@ -59,7 +60,12 @@ export default {
   methods: {
     async getDumpList (value) {
       try {
-        const res = this.$http.get('api/dump/get', {params: {dump_time: this.dump_time}})
+        const res = await this.$http.get('api/dump/get', {params: {dump_time: this.dump_time}})
+        if ((await res).data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.tableData = res.data.data
+        }
       } catch (e) {
         error(e.message)
       }
