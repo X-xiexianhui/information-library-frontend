@@ -104,7 +104,6 @@ export default {
   methods: {
     uploadFileEvent (row) {
       this.oldData[this.oldData.length - 1].value = '无附件'
-      row.value = '无附件'
       console.log(this.oldData)
       const $grid = this.$refs.dataForm
       // 读取附件
@@ -158,6 +157,7 @@ export default {
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
+          await this.submitFile()
           bus.$emit('refreshTable')
           this.closeEvent()
         }
