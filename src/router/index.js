@@ -57,10 +57,12 @@ export default new Router({
     {
       path: '/home',
       component: () => import('../components/dataManager/page/home'),
-      children: [{
-        path: 'data',
-        component: () => import('../components/dataManager/page/dataList')
-      }]
+      children: [
+        {
+          path: 'data',
+          component: () => import('../components/dataManager/page/dataList')
+        }
+      ]
     },
     {
       path: '/pwd/reset',
