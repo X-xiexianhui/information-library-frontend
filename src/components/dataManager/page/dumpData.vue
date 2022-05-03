@@ -10,7 +10,7 @@
     class="dumpList">
     <template #toolbar_buttons>
       <div style="text-align: right">
-        <vxe-input v-model="searchName" placeholder="请输入数据表名称" clearable></vxe-input>
+        <vxe-input v-model="searchName" placeholder="请输入文件备份时间" clearable></vxe-input>
         <vxe-button status="primary" @click="getDumpList(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="dump">备份数据</vxe-button>
         <vxe-button status="success" @click="rollBack">还原数据</vxe-button>
@@ -31,6 +31,7 @@
 <script>
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
+import {MessageBox} from 'element-ui'
 
 export default {
   name: 'dumpData',
@@ -47,7 +48,7 @@ export default {
         pageSize: 10
       },
       tableColumn: [
-        {filed: 'file_name', title: '文件名', width: '50%'},
+        {field: 'file_name', title: '文件名', width: '50%'},
         {field: 'dump_time', title: '备份时间', width: '50%'}
       ],
       tableData: [],
@@ -61,10 +62,12 @@ export default {
     async getDumpList (value) {
       try {
         const res = await this.$http.get('api/dump/get', {params: {dump_time: value}})
-        if ((await res).data.code !== 200) {
+        if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
+          console.log(res.data)
           this.tableData = res.data.data
+          this.page()
         }
       } catch (e) {
         error(e.message + 'get')
@@ -73,7 +76,7 @@ export default {
     async dump () {
       try {
         const res = await this.$http.post('api/data/dump')
-        this.MessageBox.alert(res.data, '备份结果', {
+        MessageBox.alert(res.data, '备份结果', {
           confirmButtonText: '确定',
           callback: () => {
           }
