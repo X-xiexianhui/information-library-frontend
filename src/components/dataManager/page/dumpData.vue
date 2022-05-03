@@ -42,7 +42,10 @@ export default {
         currentPage: 1,
         pageSize: 10
       },
-      tableColumn: [],
+      tableColumn: [
+        {filed: 'file_name', title: '文件名'},
+        {field: 'dump_time', title: '备份时间'}
+      ],
       tableData: [],
       currentData: []
     }
