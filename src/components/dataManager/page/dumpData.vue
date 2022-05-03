@@ -67,7 +67,7 @@ export default {
           this.tableData = res.data.data
         }
       } catch (e) {
-        error(e.message)
+        error(e.message + 'get')
       }
     },
     async dump () {
