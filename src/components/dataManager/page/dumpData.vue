@@ -50,7 +50,12 @@ export default {
       currentData: []
     }
   },
+  created () {
+    this.getDumpList()
+  },
   methods: {
+    getDumpList () {
+    },
     dump () {
     },
     handlePageChange ({currentPage, pageSize}) {
