@@ -10,6 +10,8 @@
     class="dataList">
     <template #toolbar_buttons>
       <div style="text-align: right">
+        <vxe-input v-model="searchName" placeholder="请输入数据表名称" clearable></vxe-input>
+        <vxe-button status="primary" @click="query(searchName)">搜索</vxe-button>
         <vxe-button status="success" @click="dump">备份数据</vxe-button>
         <vxe-button status="success" @click="rollBack">还原数据</vxe-button>
       </div>
@@ -38,6 +40,7 @@ export default {
           buttons: 'toolbar_buttons'
         }
       },
+      searchName: '',
       tablePage: {
         currentPage: 1,
         pageSize: 10
