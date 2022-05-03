@@ -60,7 +60,7 @@ export default {
   methods: {
     async getDumpList (value) {
       try {
-        const res = await this.$http.get('api/dump/get', {params: {dump_time: this.dump_time}})
+        const res = await this.$http.get('api/dump/get', {params: {dump_time: value}})
         if ((await res).data.code !== 200) {
           interceptor(res.data)
         } else {
