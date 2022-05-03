@@ -61,6 +61,10 @@ export default new Router({
         {
           path: 'data',
           component: () => import('../components/dataManager/page/dataList')
+        },
+        {
+          path: 'statistics',
+          component: () => import('../components/dataManager/page/statisticsPage')
         }
       ]
     },

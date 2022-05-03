@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "echarts": "^5.3.2",
     "element-ui": "^2.15.6",
     "identify": "^0.1.5",
     "less-loader": "^5.0.0",
