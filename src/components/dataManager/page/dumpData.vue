@@ -54,10 +54,15 @@ export default {
     }
   },
   created () {
-    this.getDumpList()
+    this.getDumpList('')
   },
   methods: {
-    getDumpList (value) {
+    async getDumpList (value) {
+      try {
+        const res = this.$http.get('api/dump/get', {params: {dump_time: this.dump_time}})
+      } catch (e) {
+        error(e.message)
+      }
     },
     dump () {
     },
