@@ -1,13 +1,16 @@
 <template>
   <div class="list-body">
-    <el-form :model="queryForm" :inline="true" ref="queryForm"  style="width: 75%;text-align: center">
-      <el-form-item v-for="(item,index) in tableColumn.slice(0,len)"
-                    :prop="item.field"
-                    :label="item.title"
-                    :key="index">
-        <el-input v-model="queryForm[item.field]" clearable></el-input>
-      </el-form-item>
-    </el-form>
+    <el-row>
+      <el-form :model="queryForm" ref="queryForm" label-width="50px">
+        <el-col :span="8" v-for="(item,index) in tableColumn.slice(0,len)" :key="index">
+          <el-form-item
+            :prop="item.field"
+            :label="item.title">
+            <el-input v-model="queryForm[item.field]" clearable></el-input>
+          </el-form-item>
+        </el-col>
+      </el-form>
+    </el-row>
     <vxe-grid
       border
       resizable
@@ -22,7 +25,8 @@
           <span style="margin-right: 20px">
             <vxe-button status="primary" @click="getTableData($route.query.form_id)">查询</vxe-button>
             <vxe-button @click="resetForm">重置</vxe-button>
-            <el-button v-if="!showMore" type="text" @click="showMoreFunc"><i class="el-icon-arrow-down"></i>展开</el-button>
+            <el-button v-if="!showMore" type="text" @click="showMoreFunc"><i
+              class="el-icon-arrow-down"></i>展开</el-button>
             <el-button v-else type="text" @click="showMoreFunc"><i class="el-icon-arrow-up"></i>收起</el-button>
           </span>
           <vxe-button status="success" @click="addEvent">新增</vxe-button>
@@ -226,7 +230,13 @@ export default {
   width: 80%;
   margin: auto;
 }
-.list-body{
+
+.list-body {
   margin-top: 2%;
+}
+.el-form{
+  width: 75%;
+  text-align: center;
+  margin: auto;
 }
 </style>
