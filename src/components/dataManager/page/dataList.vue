@@ -234,4 +234,9 @@ export default {
 .list-body {
   margin-top: 2%;
 }
+.el-form{
+  width: 75%;
+  text-align: center;
+  margin: auto;
+}
 </style>
