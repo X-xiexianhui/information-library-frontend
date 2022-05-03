@@ -75,6 +75,7 @@ export default {
       // eslint-disable-next-line camelcase
       this.record_id = record_id
       this.formData = value
+      this.oldData = []
       for (const column of value) {
         this.oldData.push(JSON.parse(JSON.stringify(column)))
       }
@@ -102,6 +103,9 @@ export default {
   },
   methods: {
     uploadFileEvent (row) {
+      this.oldData[this.oldData.length - 1].value = '无附件'
+      row.value = '无附件'
+      console.log(this.oldData)
       const $grid = this.$refs.dataForm
       // 读取附件
       $grid.readFile({
