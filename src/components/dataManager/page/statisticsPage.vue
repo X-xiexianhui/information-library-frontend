@@ -122,7 +122,6 @@ export default {
           interceptor(res.data)
         } else {
           this.formList = res.data.data
-          console.log(this.formList)
         }
       } catch (e) {
         error(e.message)
