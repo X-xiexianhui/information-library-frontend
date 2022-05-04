@@ -31,6 +31,7 @@
 <script>
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
+import {MessageBox} from 'element-ui'
 
 export default {
   name: 'dumpData',
@@ -92,8 +93,8 @@ export default {
         return error('请先选择需要修改的数据')
       }
       try {
-        const res = await this.$http.post('api/data/roll')
-        this.MessageBox.alert(res.data, '恢复结果', {
+        const res = await this.$http.post('api/data/roll', {}, {params: {file_name: selectRecords.file_name}})
+        MessageBox.alert(res.data, '恢复结果', {
           confirmButtonText: '确定',
           callback: () => {
           }
