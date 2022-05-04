@@ -67,7 +67,7 @@ export default {
   },
   created () {
     this.query('')
-    bus.$on('refresh', () => {
+    bus.$on('refreshMenu', () => {
       this.query('')
     })
   },

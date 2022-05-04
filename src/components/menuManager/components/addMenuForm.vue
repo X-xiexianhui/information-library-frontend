@@ -115,7 +115,7 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
-            this.tableData = res.data.data
+            bus.$emit('refreshMenu')
             this.closeEvent()
           }
         } catch (e) {
