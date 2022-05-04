@@ -113,7 +113,7 @@ export default {
         try {
           const res = await axios.post('/api/menu/add', this.form)
           if (res.data.code !== 200) {
-            interceptor(res.datas)
+            interceptor(res.data)
           } else {
             this.tableData = res.data.data
             this.closeEvent()
