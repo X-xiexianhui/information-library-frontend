@@ -187,11 +187,11 @@ export default {
               legend: {
                 orient: 'vertical',
                 left: 'left',
-                data: ['销量']
+                data: ['统计结果']
               },
               xAxis: {type: 'category', data: res.data.data.col_name},
               yAxis: {type: 'value', name: 'y'},
-              series: [{data: res.data.data.result, type: 'line', name: '销量'}]
+              series: [{data: res.data.data.result, type: 'line', name: '统计结果'}]
             }, true)
           }
         } catch (e) {
