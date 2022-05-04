@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%;height: 100%">
     <el-row>
-      <el-form :model="form" ref="pictureForm" label-width="80" :inline="true" size="mini">
+      <el-form :model="form" :rules="rules" ref="pictureForm" label-width="80" :inline="true" size="mini">
         <el-col :span="8">
           <el-form-item label="数据源" prop="form_id">
             <el-select v-model="form.form_id" placeholder="请选择数据源">
@@ -131,6 +131,17 @@ export default {
       this.$refs.pictureForm.resetFields()
     },
     yes () {
+      this.$refs.pictureForm.validate(async valid => {
+        if (!valid) return
+        try {
+          const res = await this.$http.post('api/data/statistics', this.form)
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {}
+        } catch (e) {
+          error(e.message)
+        }
+      })
     },
     async getForm () {
       try {
