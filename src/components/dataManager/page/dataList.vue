@@ -113,7 +113,7 @@ export default {
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
-          this.tableColumn = res.data.data.reverse()
+          this.tableColumn = res.data.data
           this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
           await this.getTableData(form_id)
         }
