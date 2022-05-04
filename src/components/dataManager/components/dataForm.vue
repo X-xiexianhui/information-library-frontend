@@ -138,6 +138,8 @@ export default {
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
+          await this.submitFile()
+          this.$message.success('添加成功')
           bus.$emit('refreshTable')
           this.closeEvent()
         }
@@ -157,6 +159,7 @@ export default {
           interceptor(res.data)
         } else {
           await this.submitFile()
+          this.$message.success('修改成功')
           bus.$emit('refreshTable')
           this.closeEvent()
         }
