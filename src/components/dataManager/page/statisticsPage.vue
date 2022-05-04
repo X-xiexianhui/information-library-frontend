@@ -19,9 +19,9 @@
             <el-select v-model="form.field" placeholder="请选择统计字段">
               <el-option
                 v-for="item in fieldList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item.form_id"
+                :label="item.form_name"
+                :value="item.form_id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -55,9 +55,9 @@
             <el-select v-model="form.option" placeholder="请选择统计方式">
               <el-option
                 v-for="item in options"
-                :key="item.form_id"
-                :label="item.form_name"
-                :value="item.form_id">
+                :key="item.label"
+                :label="item.label"
+                :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
