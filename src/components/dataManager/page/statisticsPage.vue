@@ -31,9 +31,9 @@
             <el-select v-model="form.group_field" placeholder="请选择分组字段">
               <el-option
                 v-for="item in group_fieldList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item.label_name"
+                :label="item.label_name"
+                :value="item.col_name">
               </el-option>
             </el-select>
           </el-form-item>
@@ -55,9 +55,9 @@
             <el-select v-model="form.option" placeholder="请选择统计方式">
               <el-option
                 v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item.form_id"
+                :label="item.form_name"
+                :value="item.form_id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -70,6 +70,8 @@
 
 <script>
 import * as Echarts from 'echarts'
+import {error} from '../../../api/error'
+import {interceptor} from '../../../api/interctor'
 
 export default {
   name: 'statisticsPage',
@@ -98,13 +100,47 @@ export default {
       }
     }
   },
+  created () {
+    this.getForm()
+  },
   mounted () {
     this.init()
     window.addEventListener('resize', () => {
       this.chart.resize()
     })
   },
+  watch: {
+    'form.form_id' (newValue) {
+
+    }
+  },
   methods: {
+    async getForm () {
+      try {
+        const res = await this.$http.get('api/form/list', {params: {tb_name: ''}})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.formList = res.data.data
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    // eslint-disable-next-line camelcase
+    async getField (form_id) {
+      try {
+        const res = await this.$http.get('api/form/struct', {params: {form_id: form_id}})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.group_fieldList = res.data.data
+          this.fieldList = res.data.data
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
     init () {
       // 2.初始化
       this.chart = Echarts.init(this.$refs.chart)
