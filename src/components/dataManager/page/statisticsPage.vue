@@ -3,7 +3,7 @@
     <el-row>
       <el-form :model="form" ref="pictureForm" label-width="80" :inline="true" size="mini">
         <el-col :span="8">
-          <el-form-item label="数据源" b prop="form_id">
+          <el-form-item label="数据源" prop="form_id">
             <el-select v-model="form.form_id" placeholder="请选择数据源">
               <el-option
                 v-for="item in formList"
@@ -51,7 +51,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="统计方式" prop="onlyUser">
+          <el-form-item label="统计方式" prop="option">
             <el-select v-model="form.option" placeholder="请选择统计方式">
               <el-option
                 v-for="item in options"
@@ -130,7 +130,7 @@ export default {
     closeEvent () {
       this.$refs.pictureForm.resetFields()
     },
-    async yes () {
+    yes () {
     },
     async getForm () {
       try {
