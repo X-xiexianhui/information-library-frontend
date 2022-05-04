@@ -111,7 +111,7 @@ export default {
   },
   watch: {
     'form.form_id' (newValue) {
-
+      this.getField(newValue)
     }
   },
   methods: {
