@@ -99,7 +99,7 @@ export default {
       }).then(async () => {
         try {
           const selectRecords = this.$refs.menuTable.getCurrentRecord()
-          const res = await axios.post('/api/menu/delete', {
+          const res = await axios.post('api/menu/delete', {
             menu_id: selectRecords.menu_id
           })
           if (res.data.code !== 200) {
