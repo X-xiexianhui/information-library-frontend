@@ -19,9 +19,9 @@
             <el-select v-model="form.field" placeholder="请选择统计字段">
               <el-option
                 v-for="item in fieldList"
-                :key="item.form_id"
-                :label="item.form_name"
-                :value="item.form_id">
+                :key="item.col_name"
+                :label="item.label_name"
+                :value="item.col_name">
               </el-option>
             </el-select>
           </el-form-item>
@@ -136,6 +136,7 @@ export default {
         } else {
           this.group_fieldList = res.data.data
           this.fieldList = res.data.data
+          console.log(this.fieldList)
         }
       } catch (e) {
         error(e.message)
