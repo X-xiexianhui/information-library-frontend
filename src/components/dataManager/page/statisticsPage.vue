@@ -83,7 +83,6 @@ export default {
   name: 'statisticsPage',
   data () {
     return {
-      chart: null,
       formList: [],
       fieldList: [],
       group_fieldList: [],
@@ -110,42 +109,14 @@ export default {
         option: [{required: true, message: '请选择统计方式', trigger: 'blur'}],
         onlyUser: [{required: true, message: '请选择统计范围', trigger: 'blur'}]
       },
-      opts: {
-        title: {
-          text: 'ECharts 入门示例',
-          left: 'center'
-        },
-        toolbox: {// 添加一个toolbox配置
-          show: true,
-          feature: {
-            magicType: {// 配置可以动态切换的类型：
-              type: ['line', 'bar', 'scatter']
-            },
-            restore: {},
-            saveAsImage: {}
-          }
-        },
-        tooltip: {},
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: ['销量']
-        },
-        xAxis: {type: 'category',
-          name: 'x',
-          data: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
-        },
-        yAxis: {type: 'value', name: 'y'}, // Y轴
-        // eslint-disable-next-line standard/object-curly-even-spacing
-        series: [{data: [120, 200, 150, 70, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
-      }
+      chart: null
     }
   },
   created () {
     this.getForm()
   },
   mounted () {
-    this.init()
+    this.chart = Echarts.init(this.$refs.chart)
     window.addEventListener('resize', () => {
       this.chart.resize()
     })
@@ -198,7 +169,7 @@ export default {
                 left: 'left',
                 data: ['统计结果']
               },
-              xAxis: {type: 'category', data: res.data.data.col_name},
+              xAxis: {type: 'category', name: 'x', data: res.data.data.col_name},
               yAxis: {type: 'value', name: 'y'},
               series: [{data: res.data.data.result, type: 'line', name: '统计结果'}]
             }, true)
@@ -233,42 +204,6 @@ export default {
       } catch (e) {
         error(e.message)
       }
-    },
-    init () {
-      // 2.初始化
-      this.chart = Echarts.init(this.$refs.chart)
-      // 3.配置数据
-      // 4.传入数据
-      let option = {
-        title: {
-          text: 'ECharts 入门示例',
-          left: 'center'
-        },
-        toolbox: {// 添加一个toolbox配置
-          show: true,
-          feature: {
-            magicType: {// 配置可以动态切换的类型：
-              type: ['line', 'bar', 'scatter']
-            },
-            restore: {},
-            saveAsImage: {}
-          }
-        },
-        tooltip: {},
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: ['销量']
-        },
-        xAxis: {type: 'category',
-          name: 'x',
-          data: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
-        },
-        yAxis: {type: 'value', name: 'y'}, // Y轴
-        // eslint-disable-next-line standard/object-curly-even-spacing
-        series: [{data: [120, 200, 150, 70, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
-      }
-      this.chart.setOption(option)
     }
   }
 }
