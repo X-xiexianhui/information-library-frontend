@@ -146,7 +146,7 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
-            this.columnList = res.data.data.reverse()
+            this.columnList = res.data.data
           }
         } catch (e) {
           error(e.message)
@@ -182,7 +182,7 @@ export default {
             interceptor(res.data)
           } else {
             console.log(res.data)
-            this.tableData = res.data.data.reverse()
+            this.tableData = res.data.data
           }
         } catch (e) {
           error(e.message)
