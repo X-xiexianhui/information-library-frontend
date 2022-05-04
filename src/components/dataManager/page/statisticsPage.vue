@@ -156,6 +156,15 @@ export default {
     }
   },
   methods: {
+    // eslint-disable-next-line camelcase
+    getLabel (list, col_name) {
+      for (const listElement of list) {
+        // eslint-disable-next-line camelcase
+        if (listElement['col_name'] === col_name) {
+          return listElement.form_name
+        }
+      }
+    },
     closeEvent () {
       this.$refs.pictureForm.resetFields()
     },
