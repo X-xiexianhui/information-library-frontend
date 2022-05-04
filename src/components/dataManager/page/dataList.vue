@@ -1,7 +1,7 @@
 <template>
   <div class="list-body">
     <el-row>
-      <el-form :model="queryForm" ref="queryForm" label-width="50px" size="small">
+      <el-form :model="queryForm" ref="queryForm" label-width="80px" size="small">
         <el-col :span="8" v-for="(item,index) in tableColumn.slice(0,len)" :key="index">
           <el-form-item
             :prop="item.field"
