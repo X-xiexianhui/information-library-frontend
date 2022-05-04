@@ -62,6 +62,12 @@
             </el-select>
           </el-form-item>
         </el-col>
+        <el-col :span="8">
+           <span style="margin-right: 0">
+              <el-button size="mini" @click="closeEvent">清空条件</el-button>
+              <el-button size="mini" type="primary" @click="yes">进行统计</el-button>
+          </span>
+        </el-col>
       </el-form>
     </el-row>
     <div class="chart" ref="chart"></div>
@@ -115,6 +121,11 @@ export default {
     }
   },
   methods: {
+    closeEvent () {
+      this.$refs.pictureForm.resetFields()
+    },
+    async yes () {
+    },
     async getForm () {
       try {
         const res = await this.$http.get('api/form/list', {params: {tb_name: ''}})
@@ -166,10 +177,10 @@ export default {
           left: 'left',
           data: ['销量']
         },
-        xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
-        yAxis: { type: 'value' }, // Y轴
+        xAxis: {type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}, // X轴
+        yAxis: {type: 'value'}, // Y轴
         // eslint-disable-next-line standard/object-curly-even-spacing
-        series: [{ data: [120, 200, 150, 70, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
+        series: [{data: [120, 200, 150, 70, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
       }
       // 4.传入数据
       this.chart.setOption(option)
@@ -179,13 +190,14 @@ export default {
 </script>
 
 <style scoped>
-.el-form{
+.el-form {
   width: 80%;
   margin-top: 2%;
   margin-left: auto;
   margin-right: auto;
 }
-.chart{
+
+.chart {
   width: 60%;
   height: 60%;
   margin-left: auto;
