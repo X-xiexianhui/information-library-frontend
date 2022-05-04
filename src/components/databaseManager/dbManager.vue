@@ -32,6 +32,7 @@
       <vxe-column field="tables" title="表数量"></vxe-column>
     </vxe-table>
     <el-dialog
+      class="dialog"
       @close="dispatch"
       :close-on-click-modal = "false"
       :visible.sync="isShow">
@@ -147,5 +148,9 @@ export default {
   .tableBody{
     width: 100%;
     margin-left: auto;
+  }
+  .dialog{
+    width: 60%;
+    margin: auto;
   }
 </style>
