@@ -115,9 +115,9 @@ export default {
       let data = {
         db_name: this.tableForm.db_name,
         tb_name: this.tableForm.tb_name,
-        insert: insertRecords,
-        remove: removeRecords,
-        update: updateRecords
+        insert: insertRecords.reverse(),
+        remove: removeRecords.reverse(),
+        update: updateRecords.reverse()
       }
       try {
         const res = await axios.post('/api/fk/alter', data)
