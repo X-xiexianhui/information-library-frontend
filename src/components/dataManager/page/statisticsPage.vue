@@ -2,7 +2,7 @@
   <div style="width: 100%;height: 100%">
     <el-row>
       <el-form :model="form" ref="pictureForm" label-width="80" :inline="true" size="mini">
-        <el-col :span="7">
+        <el-col :span="8">
           <el-form-item label="数据源" b prop="form_id">
             <el-select v-model="form.form_id" placeholder="请选择数据源">
               <el-option
@@ -14,7 +14,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="7">
+        <el-col :span="8">
           <el-form-item label="统计字段" prop="field">
             <el-select v-model="form.field" placeholder="请选择统计字段">
               <el-option
@@ -26,7 +26,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="7">
+        <el-col :span="8">
           <el-form-item label="分组字段" prop="group_field">
             <el-select v-model="form.group_field" placeholder="请选择分组字段">
               <el-option
@@ -38,7 +38,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="7">
+        <el-col :span="8">
           <el-form-item label="数据范围" prop="onlyUser">
             <el-select v-model="form.onlyUser" placeholder="请选择数据范围字段">
               <el-option
@@ -50,7 +50,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="7">
+        <el-col :span="8">
           <el-form-item label="统计方式" prop="onlyUser">
             <el-select v-model="form.option" placeholder="请选择统计方式">
               <el-option
@@ -136,7 +136,6 @@ export default {
         } else {
           this.group_fieldList = res.data.data
           this.fieldList = res.data.data
-          console.log(this.fieldList)
         }
       } catch (e) {
         error(e.message)
@@ -170,7 +169,7 @@ export default {
         xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }, // X轴
         yAxis: { type: 'value' }, // Y轴
         // eslint-disable-next-line standard/object-curly-even-spacing
-        series: [{ data: [120, 200, 150, 80, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
+        series: [{ data: [120, 200, 150, 70, 70, 110, 130], type: 'line', name: '销量'}] // 配置项
       }
       // 4.传入数据
       this.chart.setOption(option)
