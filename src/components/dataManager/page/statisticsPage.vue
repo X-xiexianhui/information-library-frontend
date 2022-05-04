@@ -7,9 +7,9 @@
             <el-select v-model="form.form_id" placeholder="请选择数据源">
               <el-option
                 v-for="item in formList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                :key="item.form_id"
+                :label="item.form_name"
+                :value="item.form_id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -122,6 +122,7 @@ export default {
           interceptor(res.data)
         } else {
           this.formList = res.data.data
+          console.log(this.formList)
         }
       } catch (e) {
         error(e.message)
