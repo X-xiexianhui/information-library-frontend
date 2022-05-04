@@ -87,7 +87,7 @@ export default {
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
-          this.tableData = res.data.data.reverse()
+          this.tableData = res.data.data
           const pageSize = this.tablePage.pageSize
           this.currentData = this.tableData.slice(0, pageSize)
         }
