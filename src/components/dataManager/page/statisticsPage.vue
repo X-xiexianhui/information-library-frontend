@@ -31,7 +31,7 @@
             <el-select v-model="form.group_field" placeholder="请选择分组字段">
               <el-option
                 v-for="item in group_fieldList"
-                :key="item.label_name"
+                :key="item.col_name"
                 :label="item.label_name"
                 :value="item.col_name">
               </el-option>
