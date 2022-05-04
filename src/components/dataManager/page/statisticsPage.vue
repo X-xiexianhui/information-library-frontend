@@ -101,8 +101,14 @@ export default {
         field: '',
         group_field: '',
         option: '',
-        pictureType: '',
         onlyUser: true
+      },
+      rules: {
+        form_id: [{required: true, message: '请选择数据源', trigger: 'blur'}],
+        field: [{required: true, message: '请选择统计字段', trigger: 'blur'}],
+        group_field: [{required: true, message: '请选择分组字段', trigger: 'blur'}],
+        option: [{required: true, message: '请选择统计方式', trigger: 'blur'}],
+        onlyUser: [{required: true, message: '请选择统计范围', trigger: 'blur'}]
       }
     }
   },
