@@ -55,7 +55,7 @@
             <el-select v-model="form.option" placeholder="请选择统计方式">
               <el-option
                 v-for="item in options"
-                :key="item.label"
+                :key="item.value"
                 :label="item.label"
                 :value="item.value">
               </el-option>
