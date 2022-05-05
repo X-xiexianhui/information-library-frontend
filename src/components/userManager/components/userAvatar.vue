@@ -94,6 +94,7 @@ export default {
     save () {
       this.dialogVisible = false
       this.logout()
+      this.$message.success('修改密码成功，请重新登录')
     }
   }
 }
