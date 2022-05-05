@@ -6,7 +6,7 @@
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item>修改信息</el-dropdown-item>
       <el-dropdown-item>修改密码</el-dropdown-item>
-      <el-dropdown-item>退出登录</el-dropdown-item>
+      <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -17,6 +17,12 @@ export default {
   data () {
     return {
       circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+    }
+  },
+  methods: {
+    logout () {
+      this.$cookies.set('login_cookie', null)
+      this.$router.push('/')
     }
   }
 }
