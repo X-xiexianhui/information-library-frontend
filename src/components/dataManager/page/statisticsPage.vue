@@ -150,7 +150,7 @@ export default {
             this.chart.clear()
             this.chart.setOption({
               title: {
-                text: 'ECharts 入门示例',
+                text: '数据统计结果图',
                 left: 'center'
               },
               toolbox: {// 添加一个toolbox配置
@@ -171,7 +171,7 @@ export default {
               },
               xAxis: {type: 'category', name: 'x', data: res.data.data.col_name},
               yAxis: {type: 'value', name: 'y'},
-              series: [{data: res.data.data.result, type: 'line', name: '统计结果'}]
+              series: [{data: res.data.data.result, type: 'bar', name: '统计结果'}]
             }, true)
           }
         } catch (e) {
