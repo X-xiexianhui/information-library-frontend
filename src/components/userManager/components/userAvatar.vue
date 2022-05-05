@@ -1,13 +1,13 @@
 <template>
 <div>
-  <el-dropdown>
+  <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
     <el-avatar :size="40" :src="circleUrl"></el-avatar>
   </span>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item>修改信息</el-dropdown-item>
-      <el-dropdown-item @click="dialogVisible=true">修改密码</el-dropdown-item>
-      <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+      <el-dropdown-item command="a">修改信息</el-dropdown-item>
+      <el-dropdown-item command="b">修改密码</el-dropdown-item>
+      <el-dropdown-item command="c">退出登录</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
   <el-dialog
@@ -17,7 +17,7 @@
     :before-close="closeEvent"
   >
     <el-form key="resetForm" ref="forgotPasswordForm" :model="forgotPasswordForm"
-             :rules="forgotPasswordFormRules">
+             :rules="forgotPasswordFormRules" label-width="100px" style="width: 70%;margin: auto">
       <el-form-item key="0" prop="old_pwd" label="旧密码:">
         <el-input clearable v-model="forgotPasswordForm.old_pwd" type="password" placeholder="请输入旧密码"
                   auto-complete="off">
@@ -61,6 +61,7 @@ export default {
         confirmPwd: ''
       },
       forgotPasswordFormRules: {
+        old_pwd: [{required: true, message: '请输入密码', trigger: 'blur'}],
         pwd: [
           {required: true, message: '请输入密码', trigger: 'blur'},
           {min: 6, max: 16, message: '长度在6-16位之间', trigger: 'blur'},
@@ -90,6 +91,16 @@ export default {
     },
     closeEvent () {
       this.dialogVisible = false
+    },
+    handleCommand (command) {
+      switch (command) {
+        case 'a':console.log(command)
+          break
+        case 'b':this.dialogVisible = true
+          break
+        case 'c':this.logout()
+          break
+      }
     },
     save () {
       this.dialogVisible = false
