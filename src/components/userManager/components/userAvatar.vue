@@ -18,12 +18,17 @@
   >
     <el-form key="resetForm" ref="forgotPasswordForm" :model="forgotPasswordForm"
              :rules="forgotPasswordFormRules">
-      <el-form-item key="0" prop="pwd" label="密码:">
+      <el-form-item key="0" prop="old_pwd" label="旧密码:">
+        <el-input clearable v-model="forgotPasswordForm.old_pwd" type="password" placeholder="请输入旧密码"
+                  auto-complete="off">
+        </el-input>
+      </el-form-item>
+      <el-form-item key="1" prop="pwd" label="新密码:">
         <el-input clearable v-model="forgotPasswordForm.pwd" type="password" placeholder="6-16位大写字母+小写字母+数字组合"
                   auto-complete="off">
         </el-input>
       </el-form-item>
-      <el-form-item key="1" prop="confirmPwd" label="确认密码:">
+      <el-form-item key="2" prop="confirmPwd" label="确认密码:">
         <el-input clearable v-model="forgotPasswordForm.confirmPwd" placeholder="重复密码" type="password">
         </el-input>
       </el-form-item>
@@ -51,6 +56,7 @@ export default {
       dialogVisible: false,
       circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
       forgotPasswordForm: {
+        old_pwd: '',
         pwd: '',
         confirmPwd: ''
       },
