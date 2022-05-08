@@ -41,10 +41,10 @@
   <el-dialog
     :close-on-click-modal="false"
     :modal-append-to-body='false'
-    :visible.sync="dialogVisible"
+    :visible.sync="userDialogVisible"
     :before-close="closeEvent"
   >
-    <el-form>
+    <el-form :model="user_form" ref="userForm" :rules="userRules">
     </el-form>
   </el-dialog>
 </div>
@@ -64,6 +64,7 @@ export default {
       }
     }
     return {
+      userDialogVisible: false,
       dialogVisible: false,
       circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
       forgotPasswordForm: {
@@ -73,7 +74,11 @@ export default {
       },
       user_form: {
         user_email: '',
-        user_name: '',
+        user_name: ''
+      },
+      userRules: {
+        user_email: [],
+        user_name: []
       },
       forgotPasswordFormRules: {
         old_pwd: [{required: true, message: '请输入密码', trigger: 'blur'}],
