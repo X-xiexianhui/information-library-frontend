@@ -38,6 +38,15 @@
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
   </el-dialog>
+  <el-dialog
+    :close-on-click-modal="false"
+    :modal-append-to-body='false'
+    :visible.sync="dialogVisible"
+    :before-close="closeEvent"
+  >
+    <el-form>
+    </el-form>
+  </el-dialog>
 </div>
 </template>
 
@@ -61,6 +70,10 @@ export default {
         old_pwd: '',
         pwd: '',
         confirmPwd: ''
+      },
+      user_form: {
+        user_email: '',
+        user_name: '',
       },
       forgotPasswordFormRules: {
         old_pwd: [{required: true, message: '请输入密码', trigger: 'blur'}],
