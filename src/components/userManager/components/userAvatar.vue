@@ -77,8 +77,14 @@ export default {
         user_name: ''
       },
       userRules: {
-        user_email: [],
-        user_name: []
+        user_email: [
+          {required: true, message: '请输入用户邮箱', trigger: 'blur'},
+          {
+            pattern: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/,
+            message: '邮箱格式错误',
+            trigger: 'blur'
+          }],
+        user_name: [{required: true, message: '请输入用户名称', trigger: 'blur'}]
       },
       forgotPasswordFormRules: {
         old_pwd: [{required: true, message: '请输入密码', trigger: 'blur'}],
