@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import {interceptor} from '../../../api/interctor'
+
 export default {
   name: 'userAvatar',
   data () {
@@ -102,10 +104,15 @@ export default {
           break
       }
     },
-    save () {
-      this.dialogVisible = false
-      this.logout()
-      this.$message.success('修改密码成功，请重新登录')
+    async save () {
+      const res = await this.$http.post('api/pwd/edit', this.forgotPasswordForm)
+      if (res.data.code !== 200) {
+        interceptor(res.data)
+      } else {
+        this.dialogVisible = false
+        this.logout()
+        this.$message.success('修改密码成功，请重新登录')
+      }
     }
   }
 }
