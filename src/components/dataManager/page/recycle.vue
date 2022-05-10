@@ -53,6 +53,7 @@ export default {
       form_id: '',
       len: 3,
       showMore: false,
+      formList: [],
       toolBarConfig: {
         slots: {
           buttons: 'toolbar_buttons'
@@ -72,6 +73,18 @@ export default {
   created () {
   },
   methods: {
+    async getFormList () {
+      try {
+        const res = await this.$http.get('/api/menu/form')
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.formList = res.data.data
+        }
+      } catch (e) {
+        error(e)
+      }
+    },
     showMoreFunc () {
       this.showMore = !this.showMore
       if (this.showMore) {
