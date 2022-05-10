@@ -73,6 +73,10 @@ export default new Router({
         {
           path: 'welcome',
           component: () => import('../components/dataManager/page/welcome')
+        },
+        {
+          path: 'recycle',
+          component: () => import('../components/dataManager/page/recycle')
         }
       ]
     },
