@@ -136,8 +136,21 @@ export default {
       this.user_data = selectRecords
       bus.$emit('showEditUserForm')
     },
-    resetPwd () {
-      this.$message.success('已重置为初始密码')
+    async resetPwd () {
+      const selectRecords = this.$refs.userTable.getCurrentRecord()
+      if (!selectRecords) {
+        return error('请先选择需要修改的数据')
+      }
+      try {
+        const res = await this.$http.post('api/pwd/recover', {}, {params: {user_id: selectRecords.user_id}})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.$message.success('重置密码成功')
+        }
+      } catch (e) {
+        error(e.message)
+      }
     },
     page () {
       const currentPage = this.tablePage.currentPage
