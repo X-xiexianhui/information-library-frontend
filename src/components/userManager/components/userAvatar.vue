@@ -165,7 +165,7 @@ export default {
     },
     async showUserEdit () {
       this.userDialogVisible = true
-      const res = await this.$http.get('api/uer/query')
+      const res = await this.$http.get('api/user/query')
       if (res.data.code !== 200) {
         interceptor(res.data)
       } else {
