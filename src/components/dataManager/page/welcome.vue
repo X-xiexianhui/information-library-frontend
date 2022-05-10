@@ -37,10 +37,4 @@ export default {
   font-size: 30px;
   color: cadetblue;
 }
-.description{
-  width: 60%;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-}
 </style>
