@@ -1,12 +1,6 @@
 <template>
   <div style="margin-top: 20px">
     <div class="ms-title">欢迎使用信息库管理系统</div>
-      <el-descriptions title="用户信息" class="description" :column="2">
-        <el-descriptions-item label="用户账号">{{user_form.user_id}}</el-descriptions-item>
-        <el-descriptions-item label="用户名">{{user_form.user_name}}</el-descriptions-item>
-        <el-descriptions-item label="用户邮箱">{{user_form.user_email}}</el-descriptions-item>
-        <el-descriptions-item label="用户角色">{{user_form.user_role}}</el-descriptions-item>
-      </el-descriptions>
   </div>
 </template>
 
