@@ -156,6 +156,10 @@ export default {
       })
     },
     async showUserEdit () {
+      const res = await this.$http.get('api/uer/query')
+      if (res.data.code !== 200) {
+        interceptor(res.data)
+      }
       this.user_data = JSON.parse(JSON.stringify(this.user_form))
     },
     saveUser () {
