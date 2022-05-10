@@ -45,6 +45,12 @@
     :before-close="closeUser"
   >
     <el-form :model="user_form" ref="userForm" :rules="userRules">
+      <el-form-item label="用户名" prop="user_name">
+        <el-input v-model="user_form.user_name"></el-input>
+      </el-form-item>
+      <el-form-item label="用户邮箱" prop="user_email">
+        <el-input v-model="user_form.user_email"></el-input>
+      </el-form-item>
     </el-form>
     <span style="margin: auto">
         <el-button @click="closeUser">取 消</el-button>
@@ -156,6 +162,7 @@ export default {
       })
     },
     async showUserEdit () {
+      this.userDialogVisible = true
       const res = await this.$http.get('api/uer/query')
       if (res.data.code !== 200) {
         interceptor(res.data)
