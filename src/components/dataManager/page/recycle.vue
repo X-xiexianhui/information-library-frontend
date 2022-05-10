@@ -71,6 +71,7 @@ export default {
     }
   },
   created () {
+    this.getFormList()
   },
   methods: {
     async getFormList () {
