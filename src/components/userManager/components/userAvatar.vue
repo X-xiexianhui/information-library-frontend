@@ -13,6 +13,7 @@
   <el-dialog
     :close-on-click-modal="false"
     :modal-append-to-body='false'
+    append-to-body
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
@@ -41,6 +42,7 @@
   <el-dialog
     :close-on-click-modal="false"
     :modal-append-to-body='false'
+    append-to-body
     :visible.sync="userDialogVisible"
     :before-close="closeUser"
   >
