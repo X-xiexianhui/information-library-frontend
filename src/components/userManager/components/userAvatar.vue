@@ -14,11 +14,13 @@
     :close-on-click-modal="false"
     :modal-append-to-body='false'
     append-to-body
+    width="40%"
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form key="resetForm" ref="forgotPasswordForm" :model="forgotPasswordForm"
-             :rules="forgotPasswordFormRules" label-width="100px" style="width: 70%;margin: auto">
+    <div style="text-align: center">
+      <el-form key="resetForm" ref="forgotPasswordForm" :model="forgotPasswordForm"
+      :rules="forgotPasswordFormRules" label-width="100px" style="width: 70%;margin: auto">
       <el-form-item key="0" prop="old_pwd" label="旧密码:">
         <el-input clearable v-model="forgotPasswordForm.old_pwd" type="password" placeholder="请输入旧密码"
                   auto-complete="off">
@@ -33,31 +35,35 @@
         <el-input clearable v-model="forgotPasswordForm.confirmPwd" placeholder="重复密码" type="password">
         </el-input>
       </el-form-item>
-    </el-form>
-    <span style="margin: auto">
+      </el-form>
+      <span style="margin: auto">
         <el-button @click="closeEvent">取 消</el-button>
         <el-button type="primary" @click="save">确 定</el-button>
       </span>
+    </div>
   </el-dialog>
   <el-dialog
     :close-on-click-modal="false"
     :modal-append-to-body='false'
     append-to-body
+    width="40%"
     :visible.sync="userDialogVisible"
     :before-close="closeUser"
   >
-    <el-form :model="user_form" ref="userForm" :rules="userRules">
-      <el-form-item label="用户名" prop="user_name">
-        <el-input v-model="user_form.user_name"></el-input>
-      </el-form-item>
-      <el-form-item label="用户邮箱" prop="user_email">
-        <el-input v-model="user_form.user_email"></el-input>
-      </el-form-item>
-    </el-form>
-    <span style="margin: auto">
+    <div style="text-align: center">
+      <el-form :model="user_form" ref="userForm" :rules="userRules" style="width: 70%;margin: auto">
+        <el-form-item label="用户名" prop="user_name">
+          <el-input v-model="user_form.user_name"></el-input>
+        </el-form-item>
+        <el-form-item label="用户邮箱" prop="user_email">
+          <el-input v-model="user_form.user_email"></el-input>
+        </el-form-item>
+      </el-form>
+      <span style="margin: auto">
         <el-button @click="closeUser">取 消</el-button>
         <el-button type="primary" @click="saveUser">确 定</el-button>
       </span>
+    </div>
   </el-dialog>
 </div>
 </template>
@@ -186,7 +192,7 @@ export default {
             interceptor(res.data)
           } else {
             bus.$emit('refreshUser')
-            this.closeEvent()
+            this.closeUser()
           }
         } catch (e) {
           error(e.message)
