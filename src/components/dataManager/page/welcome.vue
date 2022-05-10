@@ -48,6 +48,5 @@ export default {
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: #2c3e50;
 }
 </style>
