@@ -73,6 +73,11 @@ export default {
   created () {
     this.getFormList()
   },
+  watch: {
+    form_id (newValue) {
+      this.getTableColumn(newValue)
+    }
+  },
   methods: {
     async getFormList () {
       try {
