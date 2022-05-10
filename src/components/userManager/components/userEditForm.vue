@@ -103,8 +103,8 @@ export default {
         error(e.message)
       }
     },
-    async save () {
-      await this.$refs.form.validate(async valid => {
+    save () {
+      this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
           const data = getUpdate(this.user_data, this.form)

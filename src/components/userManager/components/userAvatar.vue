@@ -42,16 +42,24 @@
     :close-on-click-modal="false"
     :modal-append-to-body='false'
     :visible.sync="userDialogVisible"
-    :before-close="closeEvent"
+    :before-close="closeUser"
   >
     <el-form :model="user_form" ref="userForm" :rules="userRules">
     </el-form>
+    <span style="margin: auto">
+        <el-button @click="closeUser">取 消</el-button>
+        <el-button type="primary" @click="saveUser">确 定</el-button>
+      </span>
   </el-dialog>
 </div>
 </template>
 
 <script>
 import {interceptor} from '../../../api/interctor'
+import {getUpdate} from '../../../common/getUpdate'
+import axios from 'axios'
+import bus from '../../../common/bus'
+import {error} from '../../../api/error'
 
 export default {
   name: 'userAvatar',
@@ -72,6 +80,7 @@ export default {
         pwd: '',
         confirmPwd: ''
       },
+      user_data: {},
       user_form: {
         user_email: '',
         user_name: ''
@@ -117,10 +126,15 @@ export default {
     },
     closeEvent () {
       this.dialogVisible = false
+      this.$refs.forgotPasswordForm.resetFields()
+    },
+    closeUser () {
+      this.userDialogVisible = false
+      this.$refs.userForm.resetFields()
     },
     handleCommand (command) {
       switch (command) {
-        case 'a':console.log(command)
+        case 'a':this.showUserEdit()
           break
         case 'b':this.dialogVisible = true
           break
@@ -137,6 +151,29 @@ export default {
         this.logout()
         this.$message.success('修改密码成功，请重新登录')
       }
+    },
+    async showUserEdit () {
+      this.user_data = JSON.parse(JSON.stringify(this.user_form))
+    },
+    saveUser () {
+      this.$refs.userForm.validate(async valid => {
+        if (!valid) return
+        try {
+          const data = getUpdate(this.user_data, this.user_form)
+          let res = await axios.post('/api/user/edit', {
+            user_id: this.user_data.user_id,
+            update: data
+          })
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            bus.$emit('refreshUser')
+            this.closeEvent()
+          }
+        } catch (e) {
+          error(e.message)
+        }
+      })
     }
   }
 }
