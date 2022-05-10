@@ -159,8 +159,10 @@ export default {
       const res = await this.$http.get('api/uer/query')
       if (res.data.code !== 200) {
         interceptor(res.data)
+      } else {
+        this.user_data = JSON.parse(JSON.stringify(res.data.data))
+        this.user_form = res.data.data
       }
-      this.user_data = JSON.parse(JSON.stringify(this.user_form))
     },
     saveUser () {
       this.$refs.userForm.validate(async valid => {
