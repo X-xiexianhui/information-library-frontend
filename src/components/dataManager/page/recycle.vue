@@ -109,7 +109,7 @@ export default {
           interceptor(res.data)
         } else {
           this.tableColumn = res.data.data
-          this.tableColumn.push({field: 'file', title: '附件', value: '无附件'})
+          this.tableColumn.push({field: 'file', title: '附件', value: ''})
           await this.getTableData(form_id)
         }
       } catch (e) {
