@@ -142,15 +142,18 @@ export default {
           break
       }
     },
-    async save () {
-      const res = await this.$http.post('api/pwd/edit', this.forgotPasswordForm)
-      if (res.data.code !== 200) {
-        interceptor(res.data)
-      } else {
-        this.dialogVisible = false
-        this.logout()
-        this.$message.success('修改密码成功，请重新登录')
-      }
+    save () {
+      this.$refs.forgotPasswordForm.validate(async valid => {
+        if (!valid) return
+        const res = await this.$http.post('api/pwd/edit', this.forgotPasswordForm)
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.dialogVisible = false
+          this.logout()
+          this.$message.success('修改密码成功，请重新登录')
+        }
+      })
     },
     async showUserEdit () {
       this.user_data = JSON.parse(JSON.stringify(this.user_form))
