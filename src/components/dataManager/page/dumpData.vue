@@ -92,7 +92,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      this.$confirm('此操作不可逆, 是否继续?', '提示', {
+      this.$confirm('此操作会抹除部分数据, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
