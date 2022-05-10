@@ -18,16 +18,16 @@
           </vxe-option>
         </vxe-select>
         <span style="margin-right: 20px">
-            <vxe-button status="primary" @click="getTableData($route.query.form_id)">查询</vxe-button>
+            <vxe-button status="primary" @click="getTableData(form_id)">查询</vxe-button>
             <vxe-button @click="resetForm">重置</vxe-button>
             <el-button v-if="!showMore" type="text" @click="showMoreFunc"><i
               class="el-icon-arrow-down"></i>展开</el-button>
             <el-button v-else type="text" @click="showMoreFunc"><i class="el-icon-arrow-up"></i>收起</el-button>
           </span>
-        <vxe-button status="success" @click="addEvent">新增</vxe-button>
-        <vxe-button status="success" @click="editEvent">修改</vxe-button>
-        <vxe-button status="success" @click="removeEvent">删除</vxe-button>
-        <vxe-button @click="$refs.dataTable.exportData()">导出</vxe-button>
+        <vxe-button status="success" @click="clear">彻底删除</vxe-button>
+        <vxe-button status="success" @click="clearAll">全部清空</vxe-button>
+        <vxe-button status="success" @click="recover">恢复数据</vxe-button>
+        <vxe-button status="success" @click="recoverAll">全部恢复</vxe-button>
       </div>
     </template>
     <template #pager>
@@ -45,8 +45,6 @@
 <script>
 import {interceptor} from '../../../api/interctor'
 import {error} from '../../../api/error'
-import bus from '../../../common/bus'
-import axios from 'axios'
 
 export default {
   name: 'recycle',
@@ -70,6 +68,8 @@ export default {
       currentData: [],
       queryForm: {}
     }
+  },
+  created () {
   },
   methods: {
     showMoreFunc () {
@@ -111,77 +111,14 @@ export default {
         error(e.message)
       }
     },
-    addEvent () {
-      this.is_add = true
-      let res = []
-      for (const column of this.tableColumn) {
-        res.push(JSON.parse(JSON.stringify(column)))
-      }
-      bus.$emit('showDataForm', res, -1)
-    },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
-    removeEvent () {
-      const selectRecords = this.$refs.dataTable.getCurrentRecord()
-      if (!selectRecords) {
-        return error('请先选择需要删除的数据')
-      }
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async () => {
-        try {
-          const selectRecords = this.$refs.dataTable.getCurrentRecord()
-          const res = await axios.post('api/data/delete', {
-            record_id: selectRecords.record_id,
-            form_id: this.$route.query.form_id
-          })
-          if (res.data.code !== 200) {
-            interceptor(res.data.msg)
-          } else {
-            await this.getTableData(this.$route.query.form_id)
-            this.page()
-          }
-        } catch (e) {
-          error(e.message)
-        }
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
-      })
-    },
-    editEvent () {
-      const selectRecords = this.$refs.dataTable.getCurrentRecord()
-      if (!selectRecords) {
-        return error('请先选择需要修改的数据')
-      }
-      this.is_add = false
-      bus.$emit('showDataForm', this.getEditData(selectRecords), selectRecords.record_id)
-    },
     page () {
       const pageSize = this.tablePage.pageSize
       this.currentData = this.tableData.slice(0, pageSize)
-    },
-    getEditData (selectData) {
-      let res = []
-      for (const column of this.tableColumn) {
-        res.push(JSON.parse(JSON.stringify(column)))
-      }
-      const keys = Object.keys(selectData)
-      for (let i = 0; i < res.length; i++) {
-        for (const key of keys) {
-          if (res[i].field === key) {
-            res[i].value = selectData[key]
-          }
-        }
-      }
-      return res
     },
     getQueryList () {
       let res = []
