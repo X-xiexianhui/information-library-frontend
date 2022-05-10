@@ -51,7 +51,13 @@
     :before-close="closeUser"
   >
     <div style="text-align: center">
-      <el-form :model="user_form" ref="userForm" :rules="userRules" style="width: 70%;margin: auto">
+      <el-form :model="user_form"
+               ref="userForm"
+               :rules="userRules"
+               style="width: 70%;margin: auto"
+               label-width="80px"
+               label-position="left"
+      >
         <template>
           <el-descriptions title="用户信息" class="description" :column="1">
             <el-descriptions-item label="用户账号">{{user_form.user_id}}</el-descriptions-item>
