@@ -92,16 +92,22 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
       }
-      try {
-        const res = await this.$http.post('api/data/roll', {}, {params: {file_name: selectRecords.file_name}})
-        MessageBox.alert(res.data, '恢复结果', {
-          confirmButtonText: '确定',
-          callback: () => {
-          }
-        }).then(() => {})
-      } catch (e) {
-        error(e.message)
-      }
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          const res = await this.$http.post('api/data/roll', {}, {params: {file_name: selectRecords.file_name}})
+          MessageBox.alert(res.data, '恢复结果', {
+            confirmButtonText: '确定',
+            callback: () => {
+            }
+          }).then(() => {})
+        } catch (e) {
+          error(e.message)
+        }
+      })
     },
     page () {
       const pageSize = this.tablePage.pageSize
