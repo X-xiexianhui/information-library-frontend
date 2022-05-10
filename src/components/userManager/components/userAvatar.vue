@@ -52,6 +52,12 @@
   >
     <div style="text-align: center">
       <el-form :model="user_form" ref="userForm" :rules="userRules" style="width: 70%;margin: auto">
+        <template>
+          <el-descriptions title="用户信息" class="description" :column="1">
+            <el-descriptions-item label="用户账号">{{user_form.user_id}}</el-descriptions-item>
+            <el-descriptions-item label="用户角色">{{user_form.user_role}}</el-descriptions-item>
+          </el-descriptions>
+        </template>
         <el-form-item label="用户名" prop="user_name">
           <el-input v-model="user_form.user_name"></el-input>
         </el-form-item>
