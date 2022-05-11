@@ -240,7 +240,7 @@ export default {
     formatData (tableData) {
       for (let tableDatum of tableData) {
         const data = JSON.parse(JSON.stringify(tableDatum['data']))
-        delete tableDatum.data()
+        delete tableDatum.data
         tableDatum = Object.assign(tableData, data)
       }
       return tableData
