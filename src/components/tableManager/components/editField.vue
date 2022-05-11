@@ -202,7 +202,7 @@ export default {
           return '时间'
         case 'datetime':
           return '日期时间'
-        case 'tinyint':
+        case 'bool':
           return '布尔类型'
       }
     },
