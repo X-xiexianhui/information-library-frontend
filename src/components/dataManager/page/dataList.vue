@@ -235,6 +235,7 @@ export default {
   margin-top: 2%;
 }
 .el-form{
+  width: 75%;
   text-align: center;
   margin: auto;
 }
