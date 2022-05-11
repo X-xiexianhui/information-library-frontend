@@ -23,7 +23,9 @@ body,html,#app {
     overflow-y: scroll;
     height: calc(100vh);
 }
-
+.el-message{
+  margin-top: 100px !important;
+}
 .login-background {
   background: linear-gradient(0, #dcf2e6 0%, #ffffff 100%);
   width: 100%;
