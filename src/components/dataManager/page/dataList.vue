@@ -243,5 +243,6 @@ export default {
 .data-form{
   width: 125%;
   margin: auto;
+  text-align: center;
 }
 </style>
