@@ -228,7 +228,7 @@ export default {
         type: 'warning'
       }).then(async () => {
         try {
-          const res = await this.$http.post('api/recycle/clear')
+          const res = await this.$http.post('api/recycle/clear', {}, {params: {form_id: this.form_id}})
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
