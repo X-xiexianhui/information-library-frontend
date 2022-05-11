@@ -177,7 +177,7 @@ export default {
         }
         const record = this.copyData.filter(item => item.del_id === select.del_id)[0]
         console.log(record)
-        const res = await this.$http.post('api/recycle/restore', {form_id: this.form_id, data: record.data})
+        const res = await this.$http.post('api/recycle/restore', {form_id: this.form_id, del_id: record.del_id, data: record.data})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
