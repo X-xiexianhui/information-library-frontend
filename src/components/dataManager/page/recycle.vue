@@ -168,7 +168,7 @@ export default {
       this.$refs.queryForm.resetFields()
       this.$message.success('查询表单已重置')
     },
-    async restore () {
+    async recover () {
       try {
         const select = this.$refs.recycleTable.getCurrentRecord()
         if (!select) {
@@ -185,7 +185,7 @@ export default {
         error(e.message)
       }
     },
-    async restoreAll () {
+    async recoverAll () {
       try {
         const res = await this.$http.post('api/recycle/restore/all', {}, {params: {form_id: this.form_id}})
         if (res.data.code !== 200) {
@@ -243,6 +243,7 @@ export default {
         delete tableDatum.data
         tableDatum = Object.assign(tableData, data)
       }
+      console.log(tableData)
       return tableData
     }
   }
