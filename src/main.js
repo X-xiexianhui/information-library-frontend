@@ -17,7 +17,15 @@ Vue.use(VueParticles)
 Vue.use(VXETable)
 Vue.prototype.$http = axios
 Vue.use(ElementUI)
-axios.defaults.baseURL = 'http://127.0.0.1:80'
+let protocol = window.location.protocol
+let host = window.location.host
+let reg = /^127.0.0.1+/
+if (reg.test(host)) {
+  axios.defaults.baseURL = 'http://127.0.0.1:80'
+} else {
+  axios.defaults.baseURL = protocol + '//' + host + '80'
+}
+
 axios.defaults.withCredentials = true
 /* eslint-disable no-new */
 new Vue({
