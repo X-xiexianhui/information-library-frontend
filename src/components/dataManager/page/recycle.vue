@@ -178,6 +178,18 @@ export default {
       } catch (e) {
         error(e.message)
       }
+    },
+    async clearAll () {
+      try {
+        const res = await this.$http.post('api/recycle/clear')
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          await this.queryRecycleData(this.form_id)
+        }
+      } catch (e) {
+        error(e.message)
+      }
     }
   }
 }
