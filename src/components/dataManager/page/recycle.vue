@@ -187,7 +187,7 @@ export default {
     },
     async restoreAll () {
       try {
-        const res = await this.$http.post('api/recycle/restore/ALL', {}, {params: {form_id: this.form_id}})
+        const res = await this.$http.post('api/recycle/restore/all', {}, {params: {form_id: this.form_id}})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
