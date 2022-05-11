@@ -120,7 +120,7 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
-            this.tableData = res.data.data.reverse()
+            this.$message.success('修改表单成功')
             this.closeEvent()
           }
         } catch (e) {
