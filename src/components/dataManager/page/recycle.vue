@@ -90,7 +90,9 @@ export default {
   },
   watch: {
     form_id (newValue) {
-      this.getTableColumn(newValue)
+      if (newValue) {
+        this.getTableColumn(newValue)
+      }
     }
   },
   methods: {
