@@ -14,7 +14,7 @@
     <vxe-grid
       border
       resizable
-      ref="dataTable"
+      ref="recycleTable"
       :toolbar-config="toolBarConfig"
       :row-config="{isCurrent: true}"
       :columns="tableColumn"
@@ -165,6 +165,19 @@ export default {
     resetForm () {
       this.$refs.queryForm.resetFields()
       this.$message.success('查询表单已重置')
+    },
+    async clear () {
+      try {
+        const select = this.$refs.recycleTable.getCurrentRecord()
+        const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.id}})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          await this.queryRecycleData(this.form_id)
+        }
+      } catch (e) {
+        error(e.message)
+      }
     }
   }
 }
