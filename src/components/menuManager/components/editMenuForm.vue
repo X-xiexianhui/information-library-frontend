@@ -50,6 +50,7 @@ import axios from 'axios'
 import {error} from '../../../api/error'
 import bus from '../../../common/bus'
 import {interceptor} from '../../../api/interctor'
+import {getUpdate} from '../../../common/getUpdate'
 
 export default {
   name: 'editMenuForm',
@@ -114,7 +115,8 @@ export default {
       await this.$refs.form.validate(async valid => {
         if (!valid) return
         try {
-          const res = await axios.post('/api/menu/edit', this.form)
+          const update = getUpdate(this.old, this.form)
+          const res = await axios.post('/api/menu/edit', {menu_id: this.form.menu_id, update: update})
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
