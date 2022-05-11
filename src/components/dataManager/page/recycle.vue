@@ -175,7 +175,8 @@ export default {
         if (!select) {
           return error('请选择要恢复的数据')
         }
-        const record = this.copyData.filter(item => item.id === select.id)
+        const record = this.copyData.filter(item => item.del_id === select.del_id)
+        console.log(record)
         const res = await this.$http.post('api/recycle/restore', {form_id: this.form_id, data: record.data})
         if (res.data.code !== 200) {
           interceptor(res.data)
