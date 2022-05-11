@@ -19,6 +19,7 @@ Vue.prototype.$http = axios
 Vue.use(ElementUI)
 let protocol = window.location.protocol
 let host = window.location.host
+console.log(host)
 let reg = /^127.0.0.1+/
 if (reg.test(host)) {
   axios.defaults.baseURL = 'http://127.0.0.1:80'
