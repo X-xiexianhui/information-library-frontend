@@ -241,6 +241,7 @@ export default {
   margin: auto;
 }
 .data-form{
-  width: 75%;
+  width: 125%;
+  margin: auto;
 }
 </style>
