@@ -22,11 +22,12 @@
       class="dataList">
       <template #toolbar_buttons>
         <div style="text-align: right">
-          <vxe-select v-model="form_id" clearable transfer>
+          <vxe-select v-model="form_id" clearable transfer placeholder="请选择要查看的表单">
             <vxe-option v-for="item in formList"
                         :key="item.value"
                         :value="item.value"
-                        :label="item.label">
+                        :label="item.label"
+                        >
             </vxe-option>
           </vxe-select>
           <span style="margin-right: 20px">
