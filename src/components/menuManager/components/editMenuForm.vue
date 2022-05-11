@@ -120,8 +120,9 @@ export default {
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
-            this.$message.success('修改表单成功')
             this.closeEvent()
+            bus.$emit('refreshMenu')
+            this.$message.success('修改表单成功')
           }
         } catch (e) {
           error(e.message)
