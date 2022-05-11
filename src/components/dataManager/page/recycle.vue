@@ -143,6 +143,20 @@ export default {
         error(e.message)
       }
     },
+    // eslint-disable-next-line camelcase
+    async queryRecycleData (form_id) {
+      try {
+        const res = await this.$http.post('api/recycle/query', {form_id: form_id, columns: this.getQueryList()})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          this.tableData = res.data.data
+          this.page()
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
     handlePageChange ({currentPage, pageSize}) {
       this.tablePage.currentPage = currentPage
       this.tablePage.pageSize = pageSize
