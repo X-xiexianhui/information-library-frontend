@@ -171,8 +171,23 @@ export default {
     async restore () {
       try {
         const select = this.$refs.recycleTable.getCurrentRecord()
+        if (!select) {
+          return error('请选择要恢复的数据')
+        }
         const record = this.copyData.filter(item => item.id === select.id)
         const res = await this.$http.post('api/recycle/restore', {form_id: this.form_id, data: record.data})
+        if (res.data.code !== 200) {
+          interceptor(res.data)
+        } else {
+          await this.queryRecycleData(this.form_id)
+        }
+      } catch (e) {
+        error(e.message)
+      }
+    },
+    async restoreAll () {
+      try {
+        const res = await this.$http.post('api/recycle/restore/ALL', {}, {params: {form_id: this.form_id}})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
