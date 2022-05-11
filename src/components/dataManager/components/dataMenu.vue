@@ -15,8 +15,11 @@
           </a>
         </el-menu-item>
       </el-submenu>
-      <el-menu-item  index='/home/data/statistics'>
+      <el-menu-item  index='/home/statistics'>
         <a style="text-align: left;display: block" @click="$router.push('/home/statistics')">数据统计</a>
+      </el-menu-item>
+      <el-menu-item  index='/home/recycle'>
+        <a style="text-align: left;display: block" @click="$router.push('/home/recycle')">数据统计</a>
       </el-menu-item>
       <el-menu-item v-if="is_admin"  index='/home/dump'>
         <a style="text-align: left;display: block" @click="$router.push('/home/dump')">备份数据</a>
