@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list-body">
     <el-row>
       <el-form :model="queryForm" ref="queryForm" label-width="80px" size="small">
         <el-col :span="8" v-for="(item,index) in tableColumn.slice(0,len)" :key="index">
@@ -261,5 +261,8 @@ export default {
 .dataList {
   width: 80%;
   margin: auto;
+}
+.list-body {
+  margin-top: 2%;
 }
 </style>
