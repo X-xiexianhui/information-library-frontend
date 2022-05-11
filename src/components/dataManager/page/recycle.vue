@@ -171,7 +171,8 @@ export default {
     async restore () {
       try {
         const select = this.$refs.recycleTable.getCurrentRecord()
-        const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.id}})
+        const record = this.copyData.filter(item => item.id === select.id)
+        const res = await this.$http.post('api/recycle/restore', {form_id: this.form_id, data: record.data})
         if (res.data.code !== 200) {
           interceptor(res.data)
         } else {
