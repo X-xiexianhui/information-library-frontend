@@ -30,7 +30,7 @@
             </vxe-option>
           </vxe-select>
           <span style="margin-right: 20px">
-            <vxe-button status="primary" @click="getTableData(form_id)">查询</vxe-button>
+            <vxe-button status="primary" @click="queryRecycleData(form_id)">查询</vxe-button>
             <vxe-button @click="resetForm">重置</vxe-button>
             <el-button v-if="!showMore" type="text" @click="showMoreFunc"><i
               class="el-icon-arrow-down"></i>展开</el-button>
