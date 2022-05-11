@@ -79,6 +79,7 @@ export default {
       },
       tableColumn: [],
       tableData: [],
+      copyData: [],
       currentData: [],
       queryForm: {}
     }
@@ -189,6 +190,13 @@ export default {
         }
       } catch (e) {
         error(e.message)
+      }
+    },
+    formatData (tableData) {
+      for (let tableDatum of tableData) {
+        const data = JSON.parse(JSON.stringify(tableDatum['data']))
+        delete tableDatum.data()
+        tableDatum = Object.assign(tableData, data)
       }
     }
   }
