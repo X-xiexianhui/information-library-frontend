@@ -139,6 +139,7 @@ export default {
         } else {
           this.copyData = res.data.data
           this.tableData = this.formatData(JSON.parse(JSON.stringify(res.data.data)))
+          console.log(this.tableData)
           this.page()
         }
       } catch (e) {
@@ -238,13 +239,13 @@ export default {
       })
     },
     formatData (tableData) {
+      let res = []
       for (let tableDatum of tableData) {
         const data = JSON.parse(JSON.stringify(tableDatum['data']))
         delete tableDatum.data
-        tableDatum = Object.assign(tableData, data)
+        res.push(Object.assign(tableDatum, data))
       }
-      console.log(tableData)
-      return tableData
+      return res
     }
   }
 }
