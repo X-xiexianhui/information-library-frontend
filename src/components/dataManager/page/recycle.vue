@@ -123,21 +123,7 @@ export default {
         } else {
           this.tableColumn = res.data.data
           this.tableColumn.push({field: 'file', title: '附件', value: ''})
-          await this.getTableData(form_id)
-        }
-      } catch (e) {
-        error(e.message)
-      }
-    },
-    // eslint-disable-next-line camelcase
-    async getTableData (form_id) {
-      try {
-        const res = await this.$http.post('api/recycle/get', {}, {params: {form_id: form_id}})
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          this.tableData = res.data.data
-          this.page()
+          await this.queryRecycleData(form_id)
         }
       } catch (e) {
         error(e.message)
