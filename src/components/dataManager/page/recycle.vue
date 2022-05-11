@@ -250,5 +250,13 @@ export default {
 </script>
 
 <style scoped>
-
+.el-form{
+  width: 75%;
+  text-align: center;
+  margin: auto;
+}
+.dataList {
+  width: 80%;
+  margin: auto;
+}
 </style>
