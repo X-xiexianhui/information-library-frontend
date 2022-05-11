@@ -197,33 +197,45 @@ export default {
         error(e.message)
       }
     },
-    async clear () {
-      try {
-        const select = this.$refs.recycleTable.getCurrentRecord()
-        if (!select) {
-          return error('请选择要删除的记录')
+    clear () {
+      this.$confirm('此操作会彻底删除数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          const select = this.$refs.recycleTable.getCurrentRecord()
+          if (!select) {
+            return error('请选择要删除的记录')
+          }
+          const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.id}})
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            await this.queryRecycleData(this.form_id)
+          }
+        } catch (e) {
+          error(e.message)
         }
-        const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.id}})
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          await this.queryRecycleData(this.form_id)
-        }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
-    async clearAll () {
-      try {
-        const res = await this.$http.post('api/recycle/clear')
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          await this.queryRecycleData(this.form_id)
+    clearAll () {
+      this.$confirm('此操作会彻底删除数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          const res = await this.$http.post('api/recycle/clear')
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            await this.queryRecycleData(this.form_id)
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
     formatData (tableData) {
       for (let tableDatum of tableData) {
