@@ -47,6 +47,7 @@
     </vxe-grid>
     <data-form
       :is_add="is_add"
+      class="data-form"
       :form_id="Number($route.query.form_id)"
     ></data-form>
   </div>
@@ -238,5 +239,8 @@ export default {
   width: 75%;
   text-align: center;
   margin: auto;
+}
+.data-form{
+  width: 75%;
 }
 </style>
