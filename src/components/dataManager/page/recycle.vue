@@ -1,45 +1,58 @@
 <template>
-  <vxe-grid
-    border
-    resizable
-    ref="dataTable"
-    :toolbar-config="toolBarConfig"
-    :row-config="{isCurrent: true}"
-    :columns="tableColumn"
-    :data="currentData"
-    class="dataList">
-    <template #toolbar_buttons>
-      <div style="text-align: right">
-        <vxe-select v-model="form_id" clearable transfer>
-          <vxe-option v-for="item in formList"
-                      :key="item.value"
-                      :value="item.value"
-                      :label="item.label">
-          </vxe-option>
-        </vxe-select>
-        <span style="margin-right: 20px">
+  <div>
+    <el-row>
+      <el-form :model="queryForm" ref="queryForm" label-width="80px" size="small">
+        <el-col :span="8" v-for="(item,index) in tableColumn.slice(0,len)" :key="index">
+          <el-form-item
+            :prop="item.field"
+            :label="item.title">
+            <el-input v-model="queryForm[item.field]" clearable></el-input>
+          </el-form-item>
+        </el-col>
+      </el-form>
+    </el-row>
+    <vxe-grid
+      border
+      resizable
+      ref="dataTable"
+      :toolbar-config="toolBarConfig"
+      :row-config="{isCurrent: true}"
+      :columns="tableColumn"
+      :data="currentData"
+      class="dataList">
+      <template #toolbar_buttons>
+        <div style="text-align: right">
+          <vxe-select v-model="form_id" clearable transfer>
+            <vxe-option v-for="item in formList"
+                        :key="item.value"
+                        :value="item.value"
+                        :label="item.label">
+            </vxe-option>
+          </vxe-select>
+          <span style="margin-right: 20px">
             <vxe-button status="primary" @click="getTableData(form_id)">查询</vxe-button>
             <vxe-button @click="resetForm">重置</vxe-button>
             <el-button v-if="!showMore" type="text" @click="showMoreFunc"><i
               class="el-icon-arrow-down"></i>展开</el-button>
             <el-button v-else type="text" @click="showMoreFunc"><i class="el-icon-arrow-up"></i>收起</el-button>
           </span>
-        <vxe-button status="success" @click="clear">彻底删除</vxe-button>
-        <vxe-button status="success" @click="clearAll">全部清空</vxe-button>
-        <vxe-button status="success" @click="recover">恢复数据</vxe-button>
-        <vxe-button status="success" @click="recoverAll">全部恢复</vxe-button>
-      </div>
-    </template>
-    <template #pager>
-      <vxe-pager
-        :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
-        :current-page.sync="tablePage.currentPage"
-        :page-size.sync="tablePage.pageSize"
-        :total="tableData.length"
-        @page-change="handlePageChange">
-      </vxe-pager>
-    </template>
-  </vxe-grid>
+          <vxe-button status="success" @click="clear">彻底删除</vxe-button>
+          <vxe-button status="success" @click="clearAll">全部清空</vxe-button>
+          <vxe-button status="success" @click="recover">恢复数据</vxe-button>
+          <vxe-button status="success" @click="recoverAll">全部恢复</vxe-button>
+        </div>
+      </template>
+      <template #pager>
+        <vxe-pager
+          :layouts="['Sizes', 'PrevJump', 'PrevPage', 'Number', 'NextPage', 'NextJump', 'FullJump', 'Total']"
+          :current-page.sync="tablePage.currentPage"
+          :page-size.sync="tablePage.pageSize"
+          :total="tableData.length"
+          @page-change="handlePageChange">
+        </vxe-pager>
+      </template>
+    </vxe-grid>
+  </div>
 </template>
 
 <script>
