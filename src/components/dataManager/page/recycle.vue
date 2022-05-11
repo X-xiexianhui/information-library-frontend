@@ -210,7 +210,7 @@ export default {
           if (!select) {
             return error('请选择要删除的记录')
           }
-          const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.id}})
+          const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.del_id}})
           if (res.data.code !== 200) {
             interceptor(res.data)
           } else {
