@@ -260,14 +260,15 @@ export default {
         const blob = new Blob([res.data])
         const fileName = selectRecords.file
         if ('download' in document.createElement('a')) { // 非IE下载
-          const elink = document.createElement('a')// 创建一个a标签通过a标签的点击事件区下载文件
-          elink.download = fileName
-          elink.style.display = 'none'
-          elink.href = URL.createObjectURL(blob)// 使用blob创建一个指向类型数组的URL
-          document.body.appendChild(elink)
-          elink.click()
-          URL.revokeObjectURL(elink.href) // 释放URL 对象
-          document.body.removeChild(elink)
+          // eslint-disable-next-line camelcase
+          const e_link = document.createElement('a')// 创建一个a标签通过a标签的点击事件区下载文件
+          e_link.download = fileName
+          e_link.style.display = 'none'
+          e_link.href = URL.createObjectURL(blob)// 使用blob创建一个指向类型数组的URL
+          document.body.appendChild(e_link)
+          e_link.click()
+          URL.revokeObjectURL(e_link.href) // 释放URL 对象
+          document.body.removeChild(e_link)
         } else { // IE10+下载
           navigator.msSaveBlob(blob, fileName)
         }
