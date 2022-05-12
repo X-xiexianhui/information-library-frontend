@@ -32,6 +32,7 @@
           <vxe-button status="success" @click="addEvent">新增</vxe-button>
           <vxe-button status="success" @click="editEvent">修改</vxe-button>
           <vxe-button status="success" @click="removeEvent">删除</vxe-button>
+          <vxe-button status="success" @click="downloadFile">下载附件</vxe-button>
           <vxe-button @click="$refs.dataTable.exportData()">导出</vxe-button>
         </div>
       </template>
@@ -245,6 +246,22 @@ export default {
     resetForm () {
       this.$refs.queryForm.resetFields()
       this.$message.success('查询表单已重置')
+    },
+    downloadFile () {
+      const selectRecords = this.$refs.dataTable.getCurrentRecord()
+      console.log(selectRecords)
+      if (!selectRecords) {
+        return error('请先选择需要下载的附件')
+      }
+      if (selectRecords.file === '无附件') {
+        return error('没有可以下载的附件')
+      }
+      try {
+        this.$http.get('api/file/download')
+      } catch (e) {
+        console.log(e)
+        error('下载文件失败，请稍后再试。')
+      }
     }
   }
 }
