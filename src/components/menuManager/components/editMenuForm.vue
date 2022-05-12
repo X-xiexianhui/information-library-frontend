@@ -3,7 +3,7 @@
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
-    <el-form ref="form" :model="form" label-width="80px" style="width: 50%;margin: auto">
+    <el-form ref="form" :model="form" :rules="menuRule" label-width="80px" style="width: 50%;margin: auto">
       <el-form-item label="菜单名称" prop="menu_name">
         <el-input v-model="form.menu_name" placeholder="请输入菜单名称"></el-input>
       </el-form-item>
@@ -79,7 +79,11 @@ export default {
         {label: '二级菜单', value: '二级菜单'}
       ],
       menuList: [],
-      formList: []
+      formList: [],
+      menuRule: {
+        menu_name: [{required: true, message: '请输入菜单名称', trigger: 'blur'}],
+        menu_level: [{required: true, message: '请选择菜单级别', trigger: 'blur'}]
+      }
     }
   },
   methods: {
