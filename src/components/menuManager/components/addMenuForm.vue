@@ -61,6 +61,22 @@ export default {
     })
   },
   data () {
+    const fatherValid = (rule, value, callback) => {
+      if (value === '一级菜单' && this.form.father_menu !== '') {
+        return callback(new Error('一级菜单没有父菜单'))
+      } else if (value === '二级菜单' && this.form.father_menu === '') {
+        return callback(new Error('请选择父菜单'))
+      }
+      callback()
+    }
+    const contextValid = (rule, value, callback) => {
+      if (value === '一级菜单' && this.form.context_form !== '') {
+        return callback(new Error('一级菜单没有关联表单'))
+      } else if (value === '二级菜单' && this.form.father_menu === '') {
+        return callback(new Error('请选择关联'))
+      }
+      callback()
+    }
     return {
       form: {
         menu_id: -1,
@@ -78,7 +94,9 @@ export default {
       formList: [],
       menuRule: {
         menu_name: [{required: true, message: '请输入菜单名称', trigger: 'blur'}],
-        menu_level: [{required: true, message: '请选择菜单级别', trigger: 'blur'}]
+        menu_level: [{required: true, message: '请选择菜单级别', trigger: 'blur'}],
+        father_menu: [{validator: fatherValid, trigger: 'blur'}],
+        context_form: [{validator: contextValid, trigger: 'blur'}]
       }
     }
   },
