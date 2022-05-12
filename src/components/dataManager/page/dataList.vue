@@ -270,7 +270,7 @@ export default {
           URL.revokeObjectURL(e_link.href) // 释放URL 对象
           document.body.removeChild(e_link)
         } else { // IE10+下载
-          navigator.msSaveBlob(blob, fileName)
+          window.navigator.msSaveBlob(blob, fileName)
         }
       } catch (e) {
         console.log(e)
