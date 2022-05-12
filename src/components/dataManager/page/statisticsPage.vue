@@ -1,7 +1,7 @@
 <template>
   <div style="width: 100%;height: 100%">
     <el-row>
-      <el-form :model="form" :rules="rules" ref="pictureForm" label-width="150" :inline="true" size="mini">
+      <el-form :model="form" :rules="rules" ref="pictureForm" label-width="150" :inline="true" size="small">
         <el-col :span="8">
           <el-form-item label="数据源" prop="form_id">
             <el-select v-model="form.form_id" placeholder="请选择数据源">
