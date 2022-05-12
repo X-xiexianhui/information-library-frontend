@@ -249,7 +249,6 @@ export default {
     },
     async downloadFile () {
       const selectRecords = this.$refs.dataTable.getCurrentRecord()
-      console.log(selectRecords)
       if (!selectRecords) {
         return error('请先选择需要下载的附件')
       }
@@ -257,7 +256,21 @@ export default {
         return error('没有可以下载的附件')
       }
       try {
-        await this.$http.post('api/file/download', {file_name: selectRecords.file})
+        const res = await this.$http.post('api/file/download', {file_name: selectRecords.file}, {responseType: 'blob'})
+        const blob = new Blob([res.data])
+        const fileName = selectRecords.file
+        if ('download' in document.createElement('a')) { // 非IE下载
+          const elink = document.createElement('a')// 创建一个a标签通过a标签的点击事件区下载文件
+          elink.download = fileName
+          elink.style.display = 'none'
+          elink.href = URL.createObjectURL(blob)// 使用blob创建一个指向类型数组的URL
+          document.body.appendChild(elink)
+          elink.click()
+          URL.revokeObjectURL(elink.href) // 释放URL 对象
+          document.body.removeChild(elink)
+        } else { // IE10+下载
+          navigator.msSaveBlob(blob, fileName)
+        }
       } catch (e) {
         console.log(e)
         error('下载文件失败，请稍后再试。')
