@@ -62,18 +62,18 @@ export default {
   },
   data () {
     const fatherValid = (rule, value, callback) => {
-      if (value === '一级菜单' && this.form.father_menu !== '') {
+      if (value !== '' && this.form.menu_level === '一级菜单') {
         return callback(new Error('一级菜单没有父菜单'))
-      } else if (value === '二级菜单' && this.form.father_menu === '') {
+      } else if (value === '' && this.form.menu_level === '二级菜单') {
         return callback(new Error('请选择父菜单'))
       }
       callback()
     }
     const contextValid = (rule, value, callback) => {
-      if (value === '一级菜单' && this.form.context_form !== '') {
+      if (value !== '' && this.form.menu_level === '一级菜单') {
         return callback(new Error('一级菜单没有关联表单'))
-      } else if (value === '二级菜单' && this.form.father_menu === '') {
-        return callback(new Error('请选择关联'))
+      } else if (value === '' && this.form.menu_level === '二级菜单') {
+        return callback(new Error('请选择关联表单'))
       }
       callback()
     }
