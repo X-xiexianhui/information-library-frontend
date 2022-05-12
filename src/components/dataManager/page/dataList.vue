@@ -143,7 +143,7 @@ export default {
       if (cookie) {
         user = cookie.split('_')[1]
       }
-      const response = await this.$http.post('api/auth/check', {user: user, option: 'add'})
+      const response = await this.$http.post('api/auth/check', {user: user, option: 'add', form_id: this.$route.query.form_id})
       if (response.data.code !== 200) {
         return interceptor(response.data)
       }
@@ -164,13 +164,7 @@ export default {
       if (!selectRecords) {
         return error('请先选择需要删除的数据')
       }
-      const cookie = this.$cookies.get('login_cookie')
-      // eslint-disable-next-line no-unused-vars
-      let user = ''
-      if (cookie) {
-        user = cookie.split('_')[1]
-      }
-      const response = await this.$http.post('api/auth/check', {user: user, option: 'del'})
+      const response = await this.$http.post('api/auth/check', {user: selectRecords.user, option: 'del', form_id: this.$route.query.form_id})
       if (response.data.code !== 200) {
         return interceptor(response.data)
       }
@@ -212,7 +206,7 @@ export default {
       if (cookie) {
         user = cookie.split('_')[1]
       }
-      const response = await this.$http.post('api/auth/check', {user: user, option: 'edit'})
+      const response = await this.$http.post('api/auth/check', {user: selectRecords.user, option: 'edit', form_id: this.$route.query.form_id})
       if (response.data.code !== 200) {
         return interceptor(response.data)
       }
