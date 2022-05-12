@@ -247,7 +247,7 @@ export default {
       this.$refs.queryForm.resetFields()
       this.$message.success('查询表单已重置')
     },
-    downloadFile () {
+    async downloadFile () {
       const selectRecords = this.$refs.dataTable.getCurrentRecord()
       console.log(selectRecords)
       if (!selectRecords) {
@@ -257,7 +257,7 @@ export default {
         return error('没有可以下载的附件')
       }
       try {
-        this.$http.get('api/file/download', {params: {file_name: selectRecords.file}})
+        await this.$http.post('api/file/download', {file_name: selectRecords.file})
       } catch (e) {
         console.log(e)
         error('下载文件失败，请稍后再试。')
