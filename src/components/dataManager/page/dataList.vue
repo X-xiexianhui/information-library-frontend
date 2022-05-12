@@ -143,7 +143,7 @@ export default {
       if (cookie) {
         user = cookie.split('_')[1]
       }
-      const response = await this.$http.post('api/auth/check', {user: user, option: 'add', form_id: this.$route.query.form_id})
+      const response = await this.$http.post('api/auth/check', {user: user, option: 'addAuth', form_id: this.$route.query.form_id})
       if (response.data.code !== 200) {
         return interceptor(response.data)
       }
@@ -206,7 +206,7 @@ export default {
       if (cookie) {
         user = cookie.split('_')[1]
       }
-      const response = await this.$http.post('api/auth/check', {user: selectRecords.user, option: 'edit', form_id: this.$route.query.form_id})
+      const response = await this.$http.post('api/auth/check', {user: selectRecords.user, option: 'editAuth', form_id: this.$route.query.form_id})
       if (response.data.code !== 200) {
         return interceptor(response.data)
       }
