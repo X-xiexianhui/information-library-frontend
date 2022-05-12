@@ -257,7 +257,7 @@ export default {
         return error('没有可以下载的附件')
       }
       try {
-        this.$http.get('api/file/download')
+        this.$http.get('api/file/download', {params: {file_name: selectRecords.file}})
       } catch (e) {
         console.log(e)
         error('下载文件失败，请稍后再试。')
