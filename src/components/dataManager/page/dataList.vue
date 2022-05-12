@@ -136,7 +136,17 @@ export default {
         error(e.message)
       }
     },
-    addEvent () {
+    async addEvent () {
+      const cookie = this.$cookies.get('login_cookie')
+      // eslint-disable-next-line no-unused-vars
+      let user = ''
+      if (cookie) {
+        user = cookie.split('_')[1]
+      }
+      const response = await this.$http.post('api/auth/check', {user: user, option: 'add'})
+      if (response.data.code !== 200) {
+        return interceptor(response.data)
+      }
       this.is_add = true
       let res = []
       for (const column of this.tableColumn) {
@@ -149,10 +159,20 @@ export default {
       this.tablePage.pageSize = pageSize
       this.currentData = this.tableData.slice((currentPage - 1) * pageSize, pageSize * currentPage)
     },
-    removeEvent () {
+    async removeEvent () {
       const selectRecords = this.$refs.dataTable.getCurrentRecord()
       if (!selectRecords) {
         return error('请先选择需要删除的数据')
+      }
+      const cookie = this.$cookies.get('login_cookie')
+      // eslint-disable-next-line no-unused-vars
+      let user = ''
+      if (cookie) {
+        user = cookie.split('_')[1]
+      }
+      const response = await this.$http.post('api/auth/check', {user: user, option: 'del'})
+      if (response.data.code !== 200) {
+        return interceptor(response.data)
       }
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -181,10 +201,20 @@ export default {
         })
       })
     },
-    editEvent () {
+    async editEvent () {
       const selectRecords = this.$refs.dataTable.getCurrentRecord()
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
+      }
+      const cookie = this.$cookies.get('login_cookie')
+      // eslint-disable-next-line no-unused-vars
+      let user = ''
+      if (cookie) {
+        user = cookie.split('_')[1]
+      }
+      const response = await this.$http.post('api/auth/check', {user: user, option: 'edit'})
+      if (response.data.code !== 200) {
+        return interceptor(response.data)
       }
       this.is_add = false
       bus.$emit('showDataForm', this.getEditData(selectRecords), selectRecords.record_id)
