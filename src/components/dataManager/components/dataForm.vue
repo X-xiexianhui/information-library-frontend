@@ -58,7 +58,6 @@
 import bus from '../../../common/bus'
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
-import {VXETable} from 'vxe-table'
 
 export default {
   name: 'dataForm',
@@ -86,11 +85,6 @@ export default {
     })
   },
   data () {
-    const valueValid = ({ cellValue }) => {
-      if (cellValue === '') {
-        return new Error('数据必填')
-      }
-    }
     return {
       fileList: [],
       record_id: -1,
@@ -103,10 +97,7 @@ export default {
       formData: [],
       oldData: [],
       dataValidRules: {
-        value: [
-          {required: true, message: '数据必填', trigger: 'blur'},
-          {validator: valueValid}
-        ]
+        value: [{required: true, message: '数据必填', trigger: 'blur'}]
       }
     }
   },
@@ -137,12 +128,9 @@ export default {
       }
     },
     async add () {
+      const errMap = await this.$refs.dataForm.validate(true).catch(errMap => errMap)
+      if (errMap) return
       try {
-        let err = await this.fullValidEvent(this.$refs.dataForm)
-        console.log(err)
-        if (err) {
-          return
-        }
         const data = this.getInsertData(this.formData)
         let it = data.filter(item => item.value === '')
         for (const itElement of it) {
@@ -166,11 +154,9 @@ export default {
       }
     },
     async edit () {
-      const err = await this.fullValidEvent(this.$refs.dataForm)
-      console.log(err)
-      if (err) {
-        return
-      }
+      const errMap = await this.$refs.dataForm.validate(true).catch(errMap => errMap)
+      console.log(errMap)
+      if (errMap) return
       try {
         const data = this.getUpdateData(this.formData, this.oldData)
         const res = await this.$http.post('api/data/edit', {
@@ -223,36 +209,6 @@ export default {
         res.push({col_name: d.field, value: d.value})
       }
       return res
-    },
-    async fullValidEvent () {
-      const errMap = await this.$refs.dataForm.fullValidate().catch(errMap => errMap)
-      console.log(errMap)
-      if (errMap) {
-        const msgList = []
-        Object.values(errMap).forEach(errList => {
-          errList.forEach(params => {
-            const { rowIndex, column, rules } = params
-            rules.forEach(rule => {
-              msgList.push(`第 ${rowIndex + 1} 行 ${column.title} 校验错误：${rule.message}`)
-            })
-          })
-        })
-        await VXETable.modal.message({
-          status: 'error',
-          slots: {
-            default () {
-              return [
-                <div class="red" style="max-height: 400px;overflow: auto;">
-                  {
-                    msgList.map(msg => <div>{msg}</div>)
-                  }
-                </div>
-              ]
-            }
-          }
-        })
-      }
-      return errMap
     }
   }
 }

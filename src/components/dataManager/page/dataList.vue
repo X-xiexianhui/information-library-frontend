@@ -151,8 +151,12 @@ export default {
       this.is_add = true
       let res = []
       for (const column of this.tableColumn) {
+        if (column.data_type === 'bool') {
+          column.value = false
+        }
         res.push(JSON.parse(JSON.stringify(column)))
       }
+      console.log(res)
       bus.$emit('showDataForm', res, -1)
     },
     handlePageChange ({currentPage, pageSize}) {
