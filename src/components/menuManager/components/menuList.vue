@@ -92,13 +92,14 @@ export default {
       this.tablePage.pageSize = pageSize
     },
     removeEvent () {
+      const selectRecords = this.$refs.menuTable.getCurrentRecord()
+      if (!selectRecords) return error('请选择要删除的菜单')
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
         try {
-          const selectRecords = this.$refs.menuTable.getCurrentRecord()
           const res = await axios.post('api/menu/delete', {
             menu_id: selectRecords.menu_id
           })
