@@ -135,28 +135,30 @@ export default {
       this.getTables(this.queryForm.query)
     },
     renameTable () {
-      if (this.row.length === 0) {
-        return error('请先选择一行数据')
-      }
+      const selectRecords = this.$refs.xTable.getCurrentRecord()
+      if (!selectRecords) return error('请先要修改的选择数据表')
       this.isVisible = true
     },
-    async onSubmit () {
-      try {
-        const res = await this.$http.post('api/tb/rename', {
-          db_name: this.row.db_name,
-          tb_name: this.row.tb_name,
-          new_name: this.inputForm.new_name
-        })
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          this.$message.success(res.data.msg)
-          this.isVisible = false
-          await this.getTables('')
+    onSubmit () {
+      this.$refs.ruleForm.validate(async valid => {
+        if (!valid) return
+        try {
+          const res = await this.$http.post('api/tb/rename', {
+            db_name: this.row.db_name,
+            tb_name: this.row.tb_name,
+            new_name: this.inputForm.new_name
+          })
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            this.$message.success(res.data.msg)
+            this.isVisible = false
+            await this.getTables('')
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
     dispatch () {
       this.$refs.ruleForm.resetFields()
