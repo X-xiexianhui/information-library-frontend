@@ -3,6 +3,7 @@
     :close-on-click-modal="false"
     :modal-append-to-body='false'
     append-to-body
+    style="height: 100%"
     :visible.sync="dialogVisible"
     :before-close="closeEvent"
   >
@@ -11,8 +12,7 @@
       resizable
       keep-source
       ref="dataForm"
-      size="mini"
-      :edit-rules="validRules"
+      :edit-rules="dataValidRules"
       :edit-config="{trigger: 'click', mode: 'cell'}"
       :data="formData"
     >
@@ -58,7 +58,7 @@
 import bus from '../../../common/bus'
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
-import {fullValidEvent} from '../../../api/tableManager/tableManager'
+import {VXETable} from 'vxe-table'
 
 export default {
   name: 'dataForm',
@@ -86,6 +86,11 @@ export default {
     })
   },
   data () {
+    const valueValid = ({ cellValue }) => {
+      if (cellValue === '') {
+        return new Error('数据必填')
+      }
+    }
     return {
       fileList: [],
       record_id: -1,
@@ -97,9 +102,10 @@ export default {
       },
       formData: [],
       oldData: [],
-      validRules: {
+      dataValidRules: {
         value: [
-          {required: true, message: '数据必填'}
+          {required: true, message: '数据必填', trigger: 'blur'},
+          {validator: valueValid}
         ]
       }
     }
@@ -131,13 +137,17 @@ export default {
       }
     },
     async add () {
-      if (await fullValidEvent(this.$refs.dataForm)) {
-        return
-      }
       try {
+        let err = await this.fullValidEvent(this.$refs.dataForm)
+        console.log(err)
+        if (err) {
+          return
+        }
         const data = this.getInsertData(this.formData)
-        let it = data.filter(item => item.value === '')[0]
-        it.value = false
+        let it = data.filter(item => item.value === '')
+        for (const itElement of it) {
+          itElement.value = false
+        }
         const res = await this.$http.post('api/data/add', {
           form_id: this.form_id,
           insert: data
@@ -156,7 +166,8 @@ export default {
       }
     },
     async edit () {
-      const err = await fullValidEvent(this.$refs.dataForm)
+      const err = await this.fullValidEvent(this.$refs.dataForm)
+      console.log(err)
       if (err) {
         return
       }
@@ -212,6 +223,36 @@ export default {
         res.push({col_name: d.field, value: d.value})
       }
       return res
+    },
+    async fullValidEvent () {
+      const errMap = await this.$refs.dataForm.fullValidate().catch(errMap => errMap)
+      console.log(errMap)
+      if (errMap) {
+        const msgList = []
+        Object.values(errMap).forEach(errList => {
+          errList.forEach(params => {
+            const { rowIndex, column, rules } = params
+            rules.forEach(rule => {
+              msgList.push(`第 ${rowIndex + 1} 行 ${column.title} 校验错误：${rule.message}`)
+            })
+          })
+        })
+        await VXETable.modal.message({
+          status: 'error',
+          slots: {
+            default () {
+              return [
+                <div class="red" style="max-height: 400px;overflow: auto;">
+                  {
+                    msgList.map(msg => <div>{msg}</div>)
+                  }
+                </div>
+              ]
+            }
+          }
+        })
+      }
+      return errMap
     }
   }
 }
