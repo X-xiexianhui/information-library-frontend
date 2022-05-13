@@ -99,6 +99,7 @@ export default {
     },
     removeEvent () {
       const selectRecords = this.$refs.userTable.getCurrentRecord()
+      if (!selectRecords) return error('请先选择要删除的账号')
       if (selectRecords.user_id === 'admin') {
         return error('不允许删除admin账号')
       }
