@@ -20,7 +20,7 @@
             v-for="item in roleList"
             :key="item.value"
             :label="item.label"
-            :value="item.label">
+            :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
