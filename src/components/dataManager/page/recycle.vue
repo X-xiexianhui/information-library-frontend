@@ -203,16 +203,16 @@ export default {
       }
     },
     clear () {
+      const select = this.$refs.recycleTable.getCurrentRecord()
+      if (!select) {
+        return error('请选择要删除的记录')
+      }
       this.$confirm('此操作会彻底删除数据, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
         try {
-          const select = this.$refs.recycleTable.getCurrentRecord()
-          if (!select) {
-            return error('请选择要删除的记录')
-          }
           const res = await this.$http.post('api/recycle/delete', {}, {params: {id: select.del_id}})
           if (res.data.code !== 200) {
             interceptor(res.data)
