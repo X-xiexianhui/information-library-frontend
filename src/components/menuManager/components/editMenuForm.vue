@@ -23,7 +23,7 @@
             v-for="item in menuList"
             :key="item.value"
             :label="item.label"
-            :value="item.label">
+            :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
@@ -33,7 +33,7 @@
             v-for="item in formList"
             :key="item.value"
             :label="item.label"
-            :value="item.label">
+            :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>
