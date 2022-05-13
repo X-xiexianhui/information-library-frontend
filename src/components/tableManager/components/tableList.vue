@@ -143,9 +143,10 @@ export default {
       this.$refs.ruleForm.validate(async valid => {
         if (!valid) return
         try {
+          const selectRecords = this.$refs.xTable.getCurrentRecord()
           const res = await this.$http.post('api/tb/rename', {
-            db_name: this.row.db_name,
-            tb_name: this.row.tb_name,
+            db_name: selectRecords.db_name,
+            tb_name: selectRecords.tb_name,
             new_name: this.inputForm.new_name
           })
           if (res.data.code !== 200) {
