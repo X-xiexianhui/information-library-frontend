@@ -26,7 +26,7 @@
       </vxe-column>
       <vxe-column field="value" title="数据" :edit-render="{}">
         <template #default="{ row }">
-          <vxe-switch v-model="row.value" v-if="row.data_type === 'bool'" open-label="是" close-label="否"></vxe-switch>
+          <vxe-switch v-model="row.value" v-if="row.data_type === 'bool'" open-label="是" close-label="否" :close-value="false"></vxe-switch>
           <div v-else>
             <span>{{ row.value }}</span>
             <vxe-button v-if="row.field === 'file'" status="primary" @click="uploadFileEvent(row)">上传附件</vxe-button>
@@ -132,6 +132,8 @@ export default {
     async add () {
       try {
         const data = this.getInsertData(this.formData)
+        let it = data.filter(item => item.value === '')[0]
+        it.value = false
         const res = await this.$http.post('api/data/add', {
           form_id: this.form_id,
           insert: data
