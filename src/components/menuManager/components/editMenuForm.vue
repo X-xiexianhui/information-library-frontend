@@ -138,6 +138,15 @@ export default {
         if (!valid) return
         try {
           const update = getUpdate(this.old, this.form)
+          for (const updateElement of update) {
+            if (updateElement.col_name === 'father_menu' && updateElement.value === '') {
+              updateElement.value = 0
+            }
+            if (updateElement.col_name === 'context_form' && updateElement.value === '') {
+              updateElement.value = 0
+            }
+          }
+          console.log(update)
           const res = await axios.post('/api/menu/edit', {menu_id: this.form.menu_id, update: update})
           if (res.data.code !== 200) {
             interceptor(res.data)
