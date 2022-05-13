@@ -135,21 +135,27 @@ export default {
       this.user_data = selectRecords
       bus.$emit('showEditUserForm')
     },
-    async resetPwd () {
+    resetPwd () {
       const selectRecords = this.$refs.userTable.getCurrentRecord()
       if (!selectRecords) {
-        return error('请先选择需要修改的数据')
+        return error('请先选择需要重置密码的账号')
       }
-      try {
-        const res = await this.$http.post('api/pwd/recover', {}, {params: {user_id: selectRecords.user_id}})
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          this.$message.success('重置密码成功')
+      this.$confirm('是否确定重置该账号密码?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          const res = await this.$http.post('api/pwd/recover', {}, {params: {user_id: selectRecords.user_id}})
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            this.$message.success('重置密码成功')
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
     page () {
       const currentPage = this.tablePage.currentPage
