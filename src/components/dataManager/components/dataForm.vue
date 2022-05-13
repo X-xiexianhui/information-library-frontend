@@ -58,6 +58,7 @@
 import bus from '../../../common/bus'
 import {error} from '../../../api/error'
 import {interceptor} from '../../../api/interctor'
+import {fullValidEvent} from '../../../api/tableManager/tableManager'
 
 export default {
   name: 'dataForm',
@@ -130,6 +131,9 @@ export default {
       }
     },
     async add () {
+      if (await fullValidEvent(this.$refs.dataForm)) {
+        return
+      }
       try {
         const data = this.getInsertData(this.formData)
         let it = data.filter(item => item.value === '')[0]
@@ -152,6 +156,9 @@ export default {
       }
     },
     async edit () {
+      if (await fullValidEvent(this.$refs.dataForm)) {
+        return
+      }
       try {
         const data = this.getUpdateData(this.formData, this.oldData)
         const res = await this.$http.post('api/data/edit', {
