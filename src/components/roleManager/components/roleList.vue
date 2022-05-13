@@ -94,6 +94,7 @@ export default {
     },
     removeEvent () {
       const selectRecords = this.$refs.roleTable.getCurrentRecord()
+      if (!selectRecords) return error('请先选择要删除的角色')
       if (selectRecords.role_name === '系统管理员') {
         return error('系统管理员不可删除')
       }
