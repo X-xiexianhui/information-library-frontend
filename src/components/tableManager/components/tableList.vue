@@ -84,6 +84,7 @@ export default {
     },
     goToEdit () {
       const selectRecords = this.$refs.xTable.getCurrentRecord()
+      if (!selectRecords) return error('请先要修改的选择数据表')
       const routeData = this.$router.resolve({path: '/table/edit', query: {tb_name: selectRecords.tb_name, db_name: selectRecords.db_name}})
       window.open(routeData.href, '_blank')
     },
