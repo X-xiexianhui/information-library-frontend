@@ -97,6 +97,7 @@ export default {
     async removeEvent () {
       try {
         const selectRecord = this.$refs.xTable.getCurrentRecord()
+        if (!selectRecord) return error('请选择要删除的数据库')
         const res = await this.$http.delete('/api/db/delete', {params: {db_name: selectRecord.db_name}})
         if (res.data.code !== 200) {
           interceptor(res.data)
