@@ -156,7 +156,8 @@ export default {
       }
     },
     async edit () {
-      if (await fullValidEvent(this.$refs.dataForm)) {
+      const err = await fullValidEvent(this.$refs.dataForm)
+      if (err) {
         return
       }
       try {
