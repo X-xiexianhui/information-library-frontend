@@ -95,19 +95,25 @@ export default {
       this.isShow = true
     },
     async removeEvent () {
-      try {
-        const selectRecord = this.$refs.xTable.getCurrentRecord()
-        if (!selectRecord) return error('请选择要删除的数据库')
-        const res = await this.$http.delete('/api/db/delete', {params: {db_name: selectRecord.db_name}})
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          this.$message.success(res.data.msg)
-          await this.init()
+      const selectRecord = this.$refs.xTable.getCurrentRecord()
+      if (!selectRecord) return error('请选择要删除的数据库')
+      this.$confirm('此操作将永久删除数据库,是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          const res = await this.$http.delete('/api/db/delete', {params: {db_name: selectRecord.db_name}})
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            this.$message.success(res.data.msg)
+            await this.init()
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
     onSubmit () {
       this.$refs.ruleForm.validate(async valid => {
