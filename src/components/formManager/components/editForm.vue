@@ -96,6 +96,9 @@ export default {
       }
     },
     async save () {
+      const errMap = await this.$refs.formStruct.validate(true).catch(errMap => errMap)
+      console.log(errMap)
+      if (errMap) return
       const ref = this.$refs.formStruct
       const {insertRecords, removeRecords, updateRecords} = ref.getRecordset()
       insertRecords.reverse()
