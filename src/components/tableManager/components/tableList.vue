@@ -105,12 +105,12 @@ export default {
     async deleteSubmit () {
       const selectRecords = this.$refs.xTable.getCurrentRecord()
       if (selectRecords) {
-        const type = await VXETable.modal.confirm('您确定要删除选中的数据吗?')
+        const type = await VXETable.modal.confirm('您确定要删除选中的数据表吗?')
         if (type === 'confirm') {
           await this.deleteTable(selectRecords)
         }
       } else {
-        await VXETable.modal.message({content: '请至少选择一条数据', status: 'error'})
+        if (!selectRecords) return error('请选择要删除的数据表')
       }
     },
     async deleteTable (data) {
