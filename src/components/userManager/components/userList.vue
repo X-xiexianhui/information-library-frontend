@@ -127,11 +127,10 @@ export default {
     },
     editEvent () {
       const selectRecords = this.$refs.userTable.getCurrentRecord()
-      if (selectRecords.user_id === 'admin') {
-        return error('不允许在此处修改admin账号')
-      }
       if (!selectRecords) {
         return error('请先选择需要修改的数据')
+      } else if (selectRecords.user_id === 'admin') {
+        return error('不允许在此处修改admin账号')
       }
       this.user_data = selectRecords
       bus.$emit('showEditUserForm')
