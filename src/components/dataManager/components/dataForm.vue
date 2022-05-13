@@ -12,6 +12,7 @@
       resizable
       keep-source
       ref="dataForm"
+      width="90%"
       :edit-rules="dataValidRules"
       :edit-config="{trigger: 'click', mode: 'cell'}"
       :data="formData"
