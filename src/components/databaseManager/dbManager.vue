@@ -108,20 +108,23 @@ export default {
         error(e.message)
       }
     },
-    async onSubmit () {
-      try {
-        const res = await this.$http.post('/api/db/add', null, {params: {db_name: this.inputForm.Name}})
-        this.isShow = false
-        if (res.data.code !== 200) {
-          interceptor(res.data)
-        } else {
-          this.$message.success(res.data.msg)
-          await this.init()
-          this.inputForm.Name = ''
+    onSubmit () {
+      this.$refs.ruleForm.validate(async valid => {
+        if (!valid) return
+        try {
+          const res = await this.$http.post('/api/db/add', null, {params: {db_name: this.inputForm.Name}})
+          this.isShow = false
+          if (res.data.code !== 200) {
+            interceptor(res.data)
+          } else {
+            this.$message.success(res.data.msg)
+            await this.init()
+            this.inputForm.Name = ''
+          }
+        } catch (e) {
+          error(e.message)
         }
-      } catch (e) {
-        error(e.message)
-      }
+      })
     },
     async onQuery () {
       try {
